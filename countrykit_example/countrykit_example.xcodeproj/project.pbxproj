@@ -13,6 +13,26 @@
 		B2567BFF2B187BAF004E51D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2567BFD2B187BAF004E51D8 /* Main.storyboard */; };
 		B2567C012B187BB1004E51D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2567C002B187BB1004E51D8 /* Assets.xcassets */; };
 		B2567C042B187BB1004E51D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2567C022B187BB1004E51D8 /* LaunchScreen.storyboard */; };
+		B276E2E62B23E93F00E6565F /* CountryKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2E02B23E93E00E6565F /* CountryKit.swift */; };
+		B276E2E72B23E93F00E6565F /* AddressComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2E12B23E93E00E6565F /* AddressComponent.swift */; };
+		B276E2E82B23E93F00E6565F /* String+Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2E22B23E93E00E6565F /* String+Localize.swift */; };
+		B276E2E92B23E93F00E6565F /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2E32B23E93E00E6565F /* Country.swift */; };
+		B276E2EA2B23E93F00E6565F /* CountryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2E42B23E93E00E6565F /* CountryProvider.swift */; };
+		B276E2EB2B23E93F00E6565F /* AddressLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2E52B23E93E00E6565F /* AddressLabel.swift */; };
+		B276E2ED2B23F03F00E6565F /* CountrySelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2EC2B23F03F00E6565F /* CountrySelectionPresenter.swift */; };
+		B276E2EF2B23F07400E6565F /* CountrySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2EE2B23F07400E6565F /* CountrySection.swift */; };
+		B276E2F12B24AFDE00E6565F /* TextHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2F02B24AFDE00E6565F /* TextHighlighter.swift */; };
+		B276E2F32B24B02300E6565F /* CountrySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2F22B24B02300E6565F /* CountrySelectionViewModel.swift */; };
+		B276E2F52B24B06F00E6565F /* UserInteractionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2F42B24B06F00E6565F /* UserInteractionStatus.swift */; };
+		B276E2F72B24B11100E6565F /* CountrySelectionConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2F62B24B11100E6565F /* CountrySelectionConfig.swift */; };
+		B276E2FA2B24B56800E6565F /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E2F82B24B56800E6565F /* CountryCell.swift */; };
+		B276E2FB2B24B56800E6565F /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B276E2F92B24B56800E6565F /* CountryCell.xib */; };
+		B276E2FF2B24B66600E6565F /* FlagKit in Frameworks */ = {isa = PBXBuildFile; productRef = B276E2FE2B24B66600E6565F /* FlagKit */; };
+		B276E3022B24B6A600E6565F /* FlagKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E3012B24B6A600E6565F /* FlagKit+Extensions.swift */; };
+		B276E3052B24BD7E00E6565F /* FooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E3032B24BD7E00E6565F /* FooterCell.swift */; };
+		B276E3062B24BD7E00E6565F /* FooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B276E3042B24BD7E00E6565F /* FooterCell.xib */; };
+		B276E3092B24BDE200E6565F /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E3082B24BDE200E6565F /* NibLoadable.swift */; };
+		B276E30B2B24BF1F00E6565F /* FooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E30A2B24BF1F00E6565F /* FooterViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +44,25 @@
 		B2567C002B187BB1004E51D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2567C032B187BB1004E51D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B2567C052B187BB1004E51D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B276E2E02B23E93E00E6565F /* CountryKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryKit.swift; sourceTree = "<group>"; };
+		B276E2E12B23E93E00E6565F /* AddressComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressComponent.swift; sourceTree = "<group>"; };
+		B276E2E22B23E93E00E6565F /* String+Localize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localize.swift"; sourceTree = "<group>"; };
+		B276E2E32B23E93E00E6565F /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		B276E2E42B23E93E00E6565F /* CountryProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryProvider.swift; sourceTree = "<group>"; };
+		B276E2E52B23E93E00E6565F /* AddressLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressLabel.swift; sourceTree = "<group>"; };
+		B276E2EC2B23F03F00E6565F /* CountrySelectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionPresenter.swift; sourceTree = "<group>"; };
+		B276E2EE2B23F07400E6565F /* CountrySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySection.swift; sourceTree = "<group>"; };
+		B276E2F02B24AFDE00E6565F /* TextHighlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextHighlighter.swift; sourceTree = "<group>"; };
+		B276E2F22B24B02300E6565F /* CountrySelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewModel.swift; sourceTree = "<group>"; };
+		B276E2F42B24B06F00E6565F /* UserInteractionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInteractionStatus.swift; sourceTree = "<group>"; };
+		B276E2F62B24B11100E6565F /* CountrySelectionConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionConfig.swift; sourceTree = "<group>"; };
+		B276E2F82B24B56800E6565F /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
+		B276E2F92B24B56800E6565F /* CountryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
+		B276E3012B24B6A600E6565F /* FlagKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlagKit+Extensions.swift"; sourceTree = "<group>"; };
+		B276E3032B24BD7E00E6565F /* FooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCell.swift; sourceTree = "<group>"; };
+		B276E3042B24BD7E00E6565F /* FooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterCell.xib; sourceTree = "<group>"; };
+		B276E3082B24BDE200E6565F /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		B276E30A2B24BF1F00E6565F /* FooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B276E2FF2B24B66600E6565F /* FlagKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +80,7 @@
 		B2567BEB2B187BAF004E51D8 = {
 			isa = PBXGroup;
 			children = (
+				B276E2DE2B23E93E00E6565F /* Sources */,
 				B2567BF62B187BAF004E51D8 /* countrykit_example */,
 				B2567BF52B187BAF004E51D8 /* Products */,
 			);
@@ -56,6 +97,9 @@
 		B2567BF62B187BAF004E51D8 /* countrykit_example */ = {
 			isa = PBXGroup;
 			children = (
+				B276E3072B24BDD600E6565F /* shared */,
+				B276E3002B24B69900E6565F /* flag */,
+				B276E2FC2B24B5C400E6565F /* country */,
 				B2567BF72B187BAF004E51D8 /* AppDelegate.swift */,
 				B2567BF92B187BAF004E51D8 /* SceneDelegate.swift */,
 				B2567BFB2B187BAF004E51D8 /* ViewController.swift */,
@@ -65,6 +109,62 @@
 				B2567C052B187BB1004E51D8 /* Info.plist */,
 			);
 			path = countrykit_example;
+			sourceTree = "<group>";
+		};
+		B276E2DE2B23E93E00E6565F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B276E2DF2B23E93E00E6565F /* CountryKit */,
+			);
+			name = Sources;
+			path = ../Sources;
+			sourceTree = "<group>";
+		};
+		B276E2DF2B23E93E00E6565F /* CountryKit */ = {
+			isa = PBXGroup;
+			children = (
+				B276E2E02B23E93E00E6565F /* CountryKit.swift */,
+				B276E2E12B23E93E00E6565F /* AddressComponent.swift */,
+				B276E2E22B23E93E00E6565F /* String+Localize.swift */,
+				B276E2E32B23E93E00E6565F /* Country.swift */,
+				B276E2E42B23E93E00E6565F /* CountryProvider.swift */,
+				B276E2E52B23E93E00E6565F /* AddressLabel.swift */,
+			);
+			path = CountryKit;
+			sourceTree = "<group>";
+		};
+		B276E2FC2B24B5C400E6565F /* country */ = {
+			isa = PBXGroup;
+			children = (
+				B276E2F82B24B56800E6565F /* CountryCell.swift */,
+				B276E2F92B24B56800E6565F /* CountryCell.xib */,
+				B276E2F62B24B11100E6565F /* CountrySelectionConfig.swift */,
+				B276E2F22B24B02300E6565F /* CountrySelectionViewModel.swift */,
+				B276E2EE2B23F07400E6565F /* CountrySection.swift */,
+				B276E2EC2B23F03F00E6565F /* CountrySelectionPresenter.swift */,
+			);
+			path = country;
+			sourceTree = "<group>";
+		};
+		B276E3002B24B69900E6565F /* flag */ = {
+			isa = PBXGroup;
+			children = (
+				B276E3012B24B6A600E6565F /* FlagKit+Extensions.swift */,
+			);
+			path = flag;
+			sourceTree = "<group>";
+		};
+		B276E3072B24BDD600E6565F /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				B276E3082B24BDE200E6565F /* NibLoadable.swift */,
+				B276E2F02B24AFDE00E6565F /* TextHighlighter.swift */,
+				B276E2F42B24B06F00E6565F /* UserInteractionStatus.swift */,
+				B276E3032B24BD7E00E6565F /* FooterCell.swift */,
+				B276E3042B24BD7E00E6565F /* FooterCell.xib */,
+				B276E30A2B24BF1F00E6565F /* FooterViewModel.swift */,
+			);
+			path = shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +183,9 @@
 			dependencies = (
 			);
 			name = countrykit_example;
+			packageProductDependencies = (
+				B276E2FE2B24B66600E6565F /* FlagKit */,
+			);
 			productName = countrykit_example;
 			productReference = B2567BF42B187BAF004E51D8 /* countrykit_example.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +214,9 @@
 				Base,
 			);
 			mainGroup = B2567BEB2B187BAF004E51D8;
+			packageReferences = (
+				B276E2FD2B24B66600E6565F /* XCRemoteSwiftPackageReference "FlagKit" */,
+			);
 			productRefGroup = B2567BF52B187BAF004E51D8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,7 +231,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B276E2FB2B24B56800E6565F /* CountryCell.xib in Resources */,
 				B2567C042B187BB1004E51D8 /* LaunchScreen.storyboard in Resources */,
+				B276E3062B24BD7E00E6565F /* FooterCell.xib in Resources */,
 				B2567C012B187BB1004E51D8 /* Assets.xcassets in Resources */,
 				B2567BFF2B187BAF004E51D8 /* Main.storyboard in Resources */,
 			);
@@ -138,9 +246,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B276E2FA2B24B56800E6565F /* CountryCell.swift in Sources */,
+				B276E2F12B24AFDE00E6565F /* TextHighlighter.swift in Sources */,
+				B276E2E92B23E93F00E6565F /* Country.swift in Sources */,
+				B276E2EB2B23E93F00E6565F /* AddressLabel.swift in Sources */,
+				B276E3052B24BD7E00E6565F /* FooterCell.swift in Sources */,
+				B276E2EF2B23F07400E6565F /* CountrySection.swift in Sources */,
 				B2567BFC2B187BAF004E51D8 /* ViewController.swift in Sources */,
+				B276E2F52B24B06F00E6565F /* UserInteractionStatus.swift in Sources */,
+				B276E3092B24BDE200E6565F /* NibLoadable.swift in Sources */,
 				B2567BF82B187BAF004E51D8 /* AppDelegate.swift in Sources */,
+				B276E2ED2B23F03F00E6565F /* CountrySelectionPresenter.swift in Sources */,
 				B2567BFA2B187BAF004E51D8 /* SceneDelegate.swift in Sources */,
+				B276E2E72B23E93F00E6565F /* AddressComponent.swift in Sources */,
+				B276E2E62B23E93F00E6565F /* CountryKit.swift in Sources */,
+				B276E2F72B24B11100E6565F /* CountrySelectionConfig.swift in Sources */,
+				B276E2F32B24B02300E6565F /* CountrySelectionViewModel.swift in Sources */,
+				B276E3022B24B6A600E6565F /* FlagKit+Extensions.swift in Sources */,
+				B276E2E82B23E93F00E6565F /* String+Localize.swift in Sources */,
+				B276E2EA2B23E93F00E6565F /* CountryProvider.swift in Sources */,
+				B276E30B2B24BF1F00E6565F /* FooterViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +395,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -358,6 +483,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B276E2FD2B24B66600E6565F /* XCRemoteSwiftPackageReference "FlagKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/madebybowtie/FlagKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B276E2FE2B24B66600E6565F /* FlagKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B276E2FD2B24B66600E6565F /* XCRemoteSwiftPackageReference "FlagKit" */;
+			productName = FlagKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B2567BEC2B187BAF004E51D8 /* Project object */;
 }
