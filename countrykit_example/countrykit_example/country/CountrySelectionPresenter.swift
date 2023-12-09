@@ -30,7 +30,10 @@ class CountrySelectionPresenter: NSObject {
     private var dataSource: UITableViewDiffableDataSource<CountrySelection, AnyHashable>?
     
     private let reloadDataRelay = PassthroughSubject<Bool, Never>()
-    let countrySelectionSubject = PassthroughSubject<(IndexPath, Bool), Never>()
+    private let viewRestorationRelay = PassthroughSubject<Void, Never>()
+    private let tableSelectionRelay = PassthroughSubject<IndexPath, Never>()
+    private let tableDeselectionRelay = PassthroughSubject<IndexPath, Never>()
+    let countrySelectionRelay = PassthroughSubject<(IndexPath, Bool), Never>()
     var isInSearchMode = false
     let dismissView = PassthroughSubject<Bool, Error>()
     
@@ -46,7 +49,7 @@ class CountrySelectionPresenter: NSObject {
     }
     
     func configureBindings() {
-        Just.init(true)
+        Just(true)
         .receive(on: presenterQueue)
         .sink(receiveValue: {  [weak self] _ in
             guard let strongSelf = self else { return }
@@ -95,6 +98,42 @@ class CountrySelectionPresenter: NSObject {
             .sink { [weak self] searchText in
                 self?.apply(searchQuery: searchText)
             }.store(in: &cancellables)
+        
+        tableSelectionRelay.receive(on: presenterQueue)
+            .sink { [weak self] selectedIndexPath in
+                guard let strongSelf = self else { return }
+                let countrySection = CountrySelection(rawValue: selectedIndexPath.section)!
+                switch countrySection {
+                case .worldwide:
+                    strongSelf.didSelect(country: Country.Worldwide)
+                case .allCountries:
+                    let selectedCountry = strongSelf.filteredCountryList[selectedIndexPath.row]
+                    strongSelf.didSelect(country: selectedCountry.country)
+                default:
+                    break
+                }
+            }.store(in: &cancellables)
+        
+        tableDeselectionRelay.receive(on: presenterQueue)
+            .sink { [weak self] selectedIndexPath in
+                guard let strongSelf = self else { return }
+                let countrySection = CountrySelection(rawValue: selectedIndexPath.section)!
+                switch countrySection {
+                case .worldwide:
+                    strongSelf.didDeselect(country: Country.Worldwide)
+                case .allCountries:
+                    let deselectedCountry = strongSelf.filteredCountryList[selectedIndexPath.row]
+                    strongSelf.didDeselect(country: deselectedCountry.country)
+                default:
+                    break
+                }
+            }.store(in: &cancellables)
+        
+        viewRestorationRelay.receive(on: presenterQueue)
+            .sink { [weak self] _ in
+                guard let strongSelf = self else { return }
+                strongSelf.restoreCellSelectionsAfterReload()
+            }.store(in: &cancellables)
     }
     
     func configureDataSource(with tableView: UITableView) {
@@ -123,7 +162,7 @@ class CountrySelectionPresenter: NSObject {
         
         guard let configuredDataSource = dataSource else { return }
         configuredDataSource.apply(snapshot, animatingDifferences: shouldAnimate, completion: { [weak self] in
-            //self?.viewRestorationRelay.accept(true)
+            self?.viewRestorationRelay.send(())
         })
     }
     
@@ -230,7 +269,7 @@ class CountrySelectionPresenter: NSObject {
         switch cell {
         case let countryCell as CountryCell:
             if let vm = viewModel as? CountrySelectionViewModel {
-                countryCell.configure(with: vm, delegate: self)
+                countryCell.configure(with: vm)
             }
         case let footerCell as FooterCell:
             if let vm = viewModel as? FooterViewModel {
@@ -238,6 +277,25 @@ class CountrySelectionPresenter: NSObject {
             }
         default:
             break
+        }
+    }
+    
+    private func restoreCellSelectionsAfterReload() {
+        
+        if formSelectedCountries.count > 0 {
+            var numberOfRestoredSelections = 0
+            for (index, eachCounty) in filteredCountryList.enumerated() {
+                if formSelectedCountries.contains(eachCounty.country) {
+                    let indexPathToRestore = IndexPath(row: index, section: CountrySelection.allCountries.rawValue)
+                    countrySelectionRelay.send((indexPathToRestore, true))
+                    numberOfRestoredSelections += 1
+                }
+                
+                if formSelectedCountries.count == numberOfRestoredSelections {
+                    //no need to keep enumerating if we already restored all selections
+                    break
+                }
+            }
         }
     }
 }
@@ -257,6 +315,36 @@ extension CountrySelectionPresenter: UITableViewDelegate {
             return UITableView.automaticDimension
         }
     }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        let countrySection = CountrySelection(rawValue: indexPath.section)!
+        switch countrySection {
+        case .worldwideExplanation, .rosterExplanation:
+            //explanation cells are not selectable
+            return nil
+        default:
+            return indexPath
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        let currentSection = CountrySelection(rawValue: indexPath.section)!
+        switch currentSection {
+        case .worldwideExplanation, .rosterExplanation:
+            //explanation cells are not selectable
+            return false
+        default:
+            return true
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableSelectionRelay.send(indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableDeselectionRelay.send(indexPath)
+    }
 }
 
 // MARK: SingleCountrySelectionDelegate
@@ -271,7 +359,7 @@ extension CountrySelectionPresenter: SingleCountrySelectionDelegate {
                 //user selected another country
                 if formSelectedCountries.contains(Country.Worldwide) {
                     //but previously worldwide was selected, so clear everything
-                    //and select
+                    //and select the new country
                     clearPreviousAnd(selectThis: country)
                 } else {
                     formSelectedCountries.insert(country)
@@ -309,7 +397,7 @@ extension CountrySelectionPresenter: SingleCountrySelectionDelegate {
                     section = CountrySelection.worldwide.rawValue
                     row = 0
                     let indexPathToDeselect = IndexPath(row: row, section: section)
-                    countrySelectionSubject.send((indexPathToDeselect, false))
+                    countrySelectionRelay.send((indexPathToDeselect, false))
                 }
             } else {
                 if let indexOfPreviouslySelectedCountry = filteredCountryList.firstIndex (where: { $0.country == eachSelectedCountry }) {
@@ -324,7 +412,7 @@ extension CountrySelectionPresenter: SingleCountrySelectionDelegate {
                         row = indexOfPreviouslySelectedCountry
                     }
                     let indexPathToDeselect = IndexPath(row: row, section: section)
-                    countrySelectionSubject.send((indexPathToDeselect, false))
+                    countrySelectionRelay.send((indexPathToDeselect, false))
                 }
             }
         }
