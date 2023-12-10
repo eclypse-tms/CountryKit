@@ -12,7 +12,6 @@
 		B2567BFF2B187BAF004E51D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2567BFD2B187BAF004E51D8 /* Main.storyboard */; };
 		B2567C012B187BB1004E51D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2567C002B187BB1004E51D8 /* Assets.xcassets */; };
 		B2567C042B187BB1004E51D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2567C022B187BB1004E51D8 /* LaunchScreen.storyboard */; };
-		B276E3022B24B6A600E6565F /* FlagKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276E3012B24B6A600E6565F /* FlagKit+Extensions.swift */; };
 		B276E3152B2549BE00E6565F /* CountryKit in Frameworks */ = {isa = PBXBuildFile; productRef = B276E3142B2549BE00E6565F /* CountryKit */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +23,6 @@
 		B2567C002B187BB1004E51D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2567C032B187BB1004E51D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B2567C052B187BB1004E51D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B276E3012B24B6A600E6565F /* FlagKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlagKit+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +56,6 @@
 		B2567BF62B187BAF004E51D8 /* countrykit_example */ = {
 			isa = PBXGroup;
 			children = (
-				B276E3002B24B69900E6565F /* flag */,
 				B2567BF72B187BAF004E51D8 /* AppDelegate.swift */,
 				B2567BF92B187BAF004E51D8 /* SceneDelegate.swift */,
 				B2567BFD2B187BAF004E51D8 /* Main.storyboard */,
@@ -67,14 +64,6 @@
 				B2567C052B187BB1004E51D8 /* Info.plist */,
 			);
 			path = countrykit_example;
-			sourceTree = "<group>";
-		};
-		B276E3002B24B69900E6565F /* flag */ = {
-			isa = PBXGroup;
-			children = (
-				B276E3012B24B6A600E6565F /* FlagKit+Extensions.swift */,
-			);
-			path = flag;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,7 +145,6 @@
 			files = (
 				B2567BF82B187BAF004E51D8 /* AppDelegate.swift in Sources */,
 				B2567BFA2B187BAF004E51D8 /* SceneDelegate.swift in Sources */,
-				B276E3022B24B6A600E6565F /* FlagKit+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,8 +368,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eclypse-tms/CountryKit";
 			requirement = {
-				branch = main_functionality;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

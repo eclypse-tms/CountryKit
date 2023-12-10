@@ -18,21 +18,6 @@ extension Flag {
         }
     }
     
-    /*
-    class func rectImage(with language: KnownLanguage) -> UIImage {
-        if let validAlpha2Code = language.countryCode {
-            if let countryWithKnownFlag = rectImage(with: validAlpha2Code) {
-                return countryWithKnownFlag
-            } else {
-                return UIImage(imageLiteralResourceName: "icon_missing_country_rectangle")
-                //return rectImage(with: language.baseLanguage.primaryCountry)
-            }
-        } else {
-            return rectImage(with: language.baseLanguage.primaryCountry)
-        }
-    }
-    */
-    
     class func rectImage(with alpha2Code: String) -> UIImage? {
         if let specialCountryFlag = handleExceptions(alpha2Code: alpha2Code, flagStyle: .roundedRect) {
             return specialCountryFlag
