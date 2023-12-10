@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "countrykit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/eclypse-tms/CountryKit",
+      "state" : {
+        "branch" : "main_functionality",
+        "revision" : "566ef592d7236dcf3988637b7304268a927f67a0"
+      }
+    }
+  ],
+  "version" : 2
+}
