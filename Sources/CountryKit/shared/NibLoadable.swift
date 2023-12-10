@@ -8,22 +8,22 @@
 import Foundation
 import UIKit
 
-protocol NibLoadable: AnyObject {
+public protocol NibLoadable: AnyObject {
     static var nibName: String { get }
     static var nibBundle: Bundle { get }
 }
 
 extension NibLoadable {
     
-    static var nibName: String {
+    public static var nibName: String {
         return String(describing: self.self)
     }
     
-    static var nibBundle: Bundle {
+    public static var nibBundle: Bundle {
         return Bundle(for: self.self)
     }
     
-    static var nib: UINib {
+    public static var nib: UINib {
         return UINib(nibName: nibName, bundle: nibBundle)
     }
     
@@ -31,7 +31,7 @@ extension NibLoadable {
 
 extension NibLoadable where Self: UIView {
     
-    static var fromNib: Self {
+    public static var fromNib: Self {
         return nib.instantiate(withOwner: nil, options: nil).first as! Self
     }
     
@@ -39,7 +39,7 @@ extension NibLoadable where Self: UIView {
 
 extension NibLoadable where Self: UIViewController {
     
-    static var fromNib: Self {
+    public static var fromNib: Self {
         return Self(nibName: self.nibName, bundle: nil)
     }
     
@@ -51,7 +51,7 @@ extension NibLoadable where Self: UIViewController {
     ///
     /// - Parameter nibName: Optional nib name
     /// - Returns: An instance of the view controller loaded from the nib
-    static func fromNib(_ nibName: String? = nil) -> Self {
+    public static func fromNib(_ nibName: String? = nil) -> Self {
         let nibName = nibName ?? self.nibName
         let viewController = Self(nibName: nibName, bundle: nil)
         return viewController

@@ -8,7 +8,7 @@
 import UIKit
 
 /// You use TextHighlighter to highlight search query within the target text
-protocol TextHighlighter: AnyObject {
+public protocol TextHighlighter: AnyObject {
     /// returns an attributed text where each search component is highlighted if found within the text
     func highlightedText(sourceText: String, searchComponents: [String]) -> NSAttributedString
     
@@ -19,12 +19,12 @@ protocol TextHighlighter: AnyObject {
     func highlightEntireText(sourceText: String, using color: UIColor?) -> NSAttributedString
 }
 
-class TextHighlighterImpl: TextHighlighter {
-    func highlightedText(sourceAttributedText: NSAttributedString, searchComponents: [String]) -> NSAttributedString {
+open class TextHighlighterImpl: TextHighlighter {
+    public func highlightedText(sourceAttributedText: NSAttributedString, searchComponents: [String]) -> NSAttributedString {
         return highlightedText(sourceText: sourceAttributedText.string, searchComponents: searchComponents)
     }
     
-    func highlightEntireText(sourceText: String, using color: UIColor?) -> NSAttributedString {
+    public func highlightEntireText(sourceText: String, using color: UIColor?) -> NSAttributedString {
         let attributedSourceText = NSMutableAttributedString(string: sourceText)
         let highlightColor = (color ?? UIColor(named: "color_primary_blue")?.withAlphaComponent(0.1)) ?? .systemBlue
         let textRange = NSRange(sourceText.startIndex ..< sourceText.endIndex, in: sourceText)
@@ -34,7 +34,7 @@ class TextHighlighterImpl: TextHighlighter {
         return attributedSourceText
     }
         
-    func highlightedText(sourceText: String, searchComponents: [String]) -> NSAttributedString {
+    public func highlightedText(sourceText: String, searchComponents: [String]) -> NSAttributedString {
         
         let attributedSourceText = NSMutableAttributedString(string: sourceText)
         let highlightColor = UIColor(named: "color_search_text_background") ?? UIColor.systemGreen

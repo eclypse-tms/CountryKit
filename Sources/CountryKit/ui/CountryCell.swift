@@ -25,7 +25,7 @@ class CountryCell: UITableViewCell, NibLoadable {
         countryName.attributedText = nil
     }
     
-    func configure(with viewModel: CountrySelectionViewModel) {
+    func configure(with viewModel: CountryViewModel) {
         countryFlag.image = Flag.rectImage(with: viewModel.country)
         if let validHighlightedText = viewModel.highlightedText {
             countryName.attributedText = validHighlightedText

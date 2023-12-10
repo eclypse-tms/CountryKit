@@ -24,7 +24,7 @@ let package = Package(
         .target(
             name: "CountryKit",
             dependencies: ["FlagKit"],
-            exclude: ["Example/", "Package.resolved"]),
+            exclude: []),
         .testTarget(
             name: "CountryKitTests",
             dependencies: ["CountryKit", "FlagKit"]),

@@ -8,21 +8,33 @@
 import UIKit
 import Combine
 
-class CountrySelectionViewController: UIViewController {
+open class CountrySelectionViewController: UIViewController {
     
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var mainView: UITableView!
     @IBOutlet private weak var countrySelectionDirections: UILabel!
-    private var _presenterQueue: DispatchQueue!
 
-    private var presenter: CountrySelectionPresenter!
+    open var presenter: CountrySelectionPresenter!
     private var cancellables: Set<AnyCancellable> = []
-    var countrySelectionObserver: PassthroughSubject<[Country], Error>?
     
-    override func viewDidLoad() {
+    /// this relay gets fired everytime user makes a selection in the UI. true value
+    /// indicates that selection was made whereas false value indicates a deselection was made.
+    var singleCountrySelectionRelay = PassthroughSubject<(Country, Bool), Never>()
+    
+    /// this relay gets fired right before this view controller is dismissed with all the selected countries.
+    var bulkCountrySelectionRelay = PassthroughSubject<[Country], Never>()
+    
+    /// get notified everytime user makes a selection or deselection
+    var singleCountrySelectionDelegate: SingleCountrySelectionDelegate?
+    
+    /// get notified of all selections when user finishes making their selections
+    var bulkCountrySelectionDelegate: BulkCountrySelectionDelegate?
+    
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        configureNavBarButtons()
         performDelayedInitialization()
         configureMainView()
         configureSearchBar()
@@ -34,11 +46,14 @@ class CountrySelectionViewController: UIViewController {
         presenter.tearDown()
     }
     
+    private func configureNavBarButtons() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
+    }
+    
     private func performDelayedInitialization() {
         let textHighlighter = TextHighlighterImpl()
         let countryProvider = CountryProviderImpl()
-        let presenterQueue = DispatchQueue(label: "queue.presenter")
-        self._presenterQueue = presenterQueue
+        let presenterQueue = DispatchQueue(label: "countrykit.queue.presenter")
         presenter = CountrySelectionPresenter(countryProvider: countryProvider,
                                               textHighlighter: textHighlighter,
                                               presenterQueue: presenterQueue)
@@ -54,13 +69,24 @@ class CountrySelectionViewController: UIViewController {
         
         presenter.countrySelectionRelay
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] (eachIndexPath, selected) in
+            .sink(receiveValue: { [weak self] cellSelectionMeta in
                 guard let strongSelf = self else { return }
-                if selected {
-                    strongSelf.mainView.selectRow(at: eachIndexPath, animated: false, scrollPosition: .none)
-                } else {
-                    strongSelf.mainView.deselectRow(at: eachIndexPath, animated: false)
+                if cellSelectionMeta.performCellSelection {
+                    if cellSelectionMeta.isSelected {
+                        strongSelf.mainView.selectRow(at: cellSelectionMeta.indexPath, animated: false, scrollPosition: .none)
+                    } else {
+                        strongSelf.mainView.deselectRow(at: cellSelectionMeta.indexPath, animated: false)
+                    }
                 }
+                
+                if cellSelectionMeta.isSelected {
+                    strongSelf.singleCountrySelectionDelegate?.didSelect(country: cellSelectionMeta.country)
+                    strongSelf.singleCountrySelectionRelay.send((cellSelectionMeta.country, true))
+                } else {
+                    strongSelf.singleCountrySelectionDelegate?.didDeselect(country: cellSelectionMeta.country)
+                    strongSelf.singleCountrySelectionRelay.send((cellSelectionMeta.country, false))
+                }
+                
             }).store(in: &cancellables)
         
         presenter.configureBindings()
@@ -85,31 +111,36 @@ class CountrySelectionViewController: UIViewController {
         searchBar.delegate = self
     }
     
-    func didSelectDone() {
-        countrySelectionObserver?.send(presenter.getSelectedCountries())
+    @objc
+    open func didSelectDone(_ sender: Any?) {
+        let selectedCountries = Array(presenter.formSelectedCountries)
+        bulkCountrySelectionRelay.send(selectedCountries)
+        bulkCountrySelectionDelegate?.didFinishSelecting(countries: selectedCountries)
+        
+        navigationController?.popViewController(animated: true)
     }
     
     ///register a config file to change the behavior of this country selection interface
-    func register(countrySelectionConfig: CountrySelectionConfig) {
+    open func register(countrySelectionConfig: CountrySelectionConfig) {
         presenter.register(config: countrySelectionConfig)
     }
 }
 
 extension CountrySelectionViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter.searchBarRelay.send(searchText)
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.view.endEditing(false)
     }
 
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         presenter.searchBarRelay.send("")
         self.view.endEditing(false)
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.view.endEditing(true)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 /// Address Label is used to localize different address components. While addresses in the UK
 /// uses town or township label, the addresses in the US uses city label for the same address
 /// component.
-enum AddressLabel: String, Hashable, Codable {
+public enum AddressLabel: String, Hashable, Codable {
     ///address line 1 - street level
     case street1
      
@@ -80,7 +80,7 @@ enum AddressLabel: String, Hashable, Codable {
     
     ///an arbitrary integer value that indicates the relative geographic size of each field.
     ///smaller values indicate an address field with smaller geographic span.
-    var geographicSize: Int {
+    public var geographicSize: Int {
         switch self {
         case .street1: return 1
         case .street2: return 1
@@ -109,7 +109,7 @@ enum AddressLabel: String, Hashable, Codable {
     
     /// indicates the component this label belongs to.
     /// @see AddressComponent
-    var addressComponent: AddressComponent {
+    public var addressComponent: AddressComponent {
         switch self {
         case .street1, .street2:
             return .street
@@ -129,20 +129,20 @@ enum AddressLabel: String, Hashable, Codable {
     }
     
     ///list of fields to use when which fields are not known
-    static var defaultList: [AddressLabel] {
+    public static var defaultList: [AddressLabel] {
         return [.street1, .street2, .city, .province, .postalCode]
     }
     
-    static var cityOnly: [AddressLabel] {
+    public static var cityOnly: [AddressLabel] {
         return [.street1, .street2, .city]
     }
     
-    static var cityAndPostal: [AddressLabel] {
+    public static var cityAndPostal: [AddressLabel] {
         return [.street1, .street2, .city, .postalCode]
     }
     
     /// address style used in
-    static var usStyle: [AddressLabel] {
+    public static var usStyle: [AddressLabel] {
         return [.street1, .street2, .city, .state, .zipCode]
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CountrySelectionViewModel: Hashable {
+struct CountryViewModel: Hashable {
     let country: Country
     let highlightedText: NSAttributedString?
     

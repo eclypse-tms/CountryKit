@@ -8,7 +8,7 @@
 import Foundation
 
 
-protocol CountryProvider {
+public protocol CountryProvider: AnyObject {
     /// a dictionary of all known countries keyed by each countries alpha2 code
     var allKnownCountries: [String: Country] { get }
     
@@ -22,8 +22,8 @@ protocol CountryProvider {
     func find(alpha3Code: String) -> Country
 }
 
-class CountryProviderImpl: CountryProvider {
-    lazy var allKnownCountries: [String: Country] = {
+open class CountryProviderImpl: CountryProvider {
+    lazy public var allKnownCountries: [String: Country] = {
         return [
             Country.United_States.alpha2Code: .United_States,
             Country.Canada.alpha2Code: .Canada,
@@ -277,7 +277,7 @@ class CountryProviderImpl: CountryProvider {
         ]
     }()
     
-    func find(by locale: Locale) -> Country {
+    public func find(by locale: Locale) -> Country {
         if let validRegionCode = locale.regionCode?.uppercased() {
             return allKnownCountries[validRegionCode] ?? .Unknown
         } else {
@@ -285,7 +285,7 @@ class CountryProviderImpl: CountryProvider {
         }
     }
     
-    func find(alpha2Code: String) -> Country {
+    public func find(alpha2Code: String) -> Country {
         let uppercasedAlpha2Code = alpha2Code.uppercased()
         if uppercasedAlpha2Code == Country.Worldwide.alpha2Code {
             return .Worldwide
@@ -296,7 +296,7 @@ class CountryProviderImpl: CountryProvider {
         }
     }
     
-    func find(alpha3Code: String) -> Country {
+    public func find(alpha3Code: String) -> Country {
         if alpha3Code == Country.Worldwide.alpha3Code {
             return .Worldwide
         } else if let matchingCountry = allKnownCountries.first(where: {$1.alpha3Code.uppercased() == alpha3Code.uppercased() }) {

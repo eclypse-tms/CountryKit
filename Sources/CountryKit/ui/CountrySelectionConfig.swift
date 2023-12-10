@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CountrySelectionConfig: Hashable {
+public struct CountrySelectionConfig: Hashable {
     
     ///does country selection interface allows user to select multiple countries
     let canMultiSelect: Bool
