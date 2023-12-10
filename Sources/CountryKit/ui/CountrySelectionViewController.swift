@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class ViewController: UIViewController {
+class CountrySelectionViewController: UIViewController {
     
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var mainView: UITableView!
@@ -25,7 +25,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         performDelayedInitialization()
         configureMainView()
-        configureNavBar()
         configureSearchBar()
         configureBindings()
     }
@@ -48,18 +47,14 @@ class ViewController: UIViewController {
     private func configureBindings() {
         presenter.dismissView
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completed in
-                
-            }, receiveValue: { [weak self] _ in
+            .sink(receiveValue: { [weak self] _ in
                 self?.navigationController?.dismiss(animated: true)
             })
             .store(in: &cancellables)
         
         presenter.countrySelectionRelay
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completed in
-                print(completed)
-            }, receiveValue: { [weak self] (eachIndexPath, selected) in
+            .sink(receiveValue: { [weak self] (eachIndexPath, selected) in
                 guard let strongSelf = self else { return }
                 if selected {
                     strongSelf.mainView.selectRow(at: eachIndexPath, animated: false, scrollPosition: .none)
@@ -100,7 +95,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UISearchBarDelegate {
+extension CountrySelectionViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter.searchBarRelay.send(searchText)
     }

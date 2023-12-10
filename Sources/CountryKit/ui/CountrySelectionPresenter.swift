@@ -35,7 +35,7 @@ class CountrySelectionPresenter: NSObject {
     private let tableDeselectionRelay = PassthroughSubject<IndexPath, Never>()
     let countrySelectionRelay = PassthroughSubject<(IndexPath, Bool), Never>()
     var isInSearchMode = false
-    let dismissView = PassthroughSubject<Bool, Error>()
+    let dismissView = PassthroughSubject<Bool, Never>()
     
     init(countryProvider: CountryProvider, textHighlighter: TextHighlighter, presenterQueue: DispatchQueue) {
         self.countryProvider = countryProvider
@@ -79,7 +79,7 @@ class CountrySelectionPresenter: NSObject {
                 })
 
             strongSelf.filteredCountryList = strongSelf.fullCountryList.map({
-                CountrySelectionViewModel(country: $0, isSelected: false, shouldShowCellSeparator: false)
+                CountrySelectionViewModel(country: $0)
             })
             strongSelf.reloadDataRelay.send(false)
         }).store(in: &cancellables)
@@ -172,8 +172,7 @@ class CountrySelectionPresenter: NSObject {
         case .worldwide:
             if !isInSearchMode {
                 if countrySelectionConfig.shouldShowWorldWide {
-                    let isCountrySelected = formSelectedCountries.contains(Country.Worldwide)
-                    let vm = CountrySelectionViewModel(country: Country.Worldwide, isSelected: isCountrySelected, highlightedText: NSAttributedString(string: Country.Worldwide.localizedName))
+                    let vm = CountrySelectionViewModel(country: Country.Worldwide)
                     vms.append(vm)
                 }
             }
@@ -281,7 +280,6 @@ class CountrySelectionPresenter: NSObject {
     }
     
     private func restoreCellSelectionsAfterReload() {
-        
         if formSelectedCountries.count > 0 {
             var numberOfRestoredSelections = 0
             for (index, eachCounty) in filteredCountryList.enumerated() {

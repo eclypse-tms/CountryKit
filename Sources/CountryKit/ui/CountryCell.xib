@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,40 +18,30 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.down.doc" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D3I-2N-1fw">
-                        <rect key="frame" x="16" y="9.6666666666666661" width="25" height="24.666666666666668"/>
+                        <rect key="frame" x="16" y="9.9999999999999982" width="25" height="24.666666666666668"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="EI5-gz-JgM"/>
                             <constraint firstAttribute="width" constant="25" id="J9C-na-BFm"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aruba" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4g-8I-xw7">
-                        <rect key="frame" x="56" y="0.0" width="45.666666666666657" height="43.666666666666664"/>
+                        <rect key="frame" x="49" y="0.0" width="223" height="44"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJK-8c-KSw" userLabel="CellSeparator">
-                        <rect key="frame" x="16" y="43.666666666666664" width="264" height="0.3333333333333357"/>
-                        <color key="backgroundColor" name="color_cell_seperator"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="0.5" id="zFI-Lc-wa1"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="A4g-8I-xw7" firstAttribute="centerY" secondItem="D3I-2N-1fw" secondAttribute="centerY" id="Cdl-1S-Gzc"/>
-                    <constraint firstItem="A4g-8I-xw7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="JTp-Zg-YF3"/>
-                    <constraint firstItem="RJK-8c-KSw" firstAttribute="top" secondItem="A4g-8I-xw7" secondAttribute="bottom" id="PuZ-Jt-2sz"/>
-                    <constraint firstItem="A4g-8I-xw7" firstAttribute="leading" secondItem="D3I-2N-1fw" secondAttribute="trailing" constant="15" id="SVm-yE-0YW"/>
+                    <constraint firstAttribute="trailing" secondItem="A4g-8I-xw7" secondAttribute="trailing" constant="8" id="9dv-uf-AJK"/>
+                    <constraint firstItem="A4g-8I-xw7" firstAttribute="leading" secondItem="D3I-2N-1fw" secondAttribute="trailing" constant="8" id="SVm-yE-0YW"/>
                     <constraint firstItem="D3I-2N-1fw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="W1x-Vn-wei"/>
-                    <constraint firstAttribute="trailing" secondItem="RJK-8c-KSw" secondAttribute="trailing" id="mEA-tL-JBG"/>
-                    <constraint firstItem="RJK-8c-KSw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="sJq-JP-YWo"/>
-                    <constraint firstAttribute="bottom" secondItem="RJK-8c-KSw" secondAttribute="bottom" id="tnT-rT-pZz"/>
+                    <constraint firstItem="A4g-8I-xw7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="moW-0C-R8B"/>
+                    <constraint firstItem="D3I-2N-1fw" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="n2v-3N-swn"/>
+                    <constraint firstAttribute="bottom" secondItem="A4g-8I-xw7" secondAttribute="bottom" id="oXC-JX-SlP"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="cellSeparator" destination="RJK-8c-KSw" id="rPs-X5-yg7"/>
                 <outlet property="countryFlag" destination="D3I-2N-1fw" id="046-8I-cIb"/>
                 <outlet property="countryName" destination="A4g-8I-xw7" id="Pm4-m3-8UA"/>
             </connections>
@@ -61,8 +50,5 @@
     </objects>
     <resources>
         <image name="arrow.down.doc" catalog="system" width="115" height="128"/>
-        <namedColor name="color_cell_seperator">
-            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>
