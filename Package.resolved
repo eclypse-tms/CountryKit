@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "flagkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/madebybowtie/FlagKit.git",
+      "state" : {
+        "revision" : "f12111d91902d23fd1d9cc7ad9198030b049795d",
+        "version" : "2.4.0"
+      }
+    }
+  ],
+  "version" : 2
+}
