@@ -8,4 +8,4 @@
 
 "country_worldwide" = "Worldwide";
 "country_unknown" = "Unknown Country";
-"info_about_worldwide_selection" = "Select Worldwide to indicate that this feature is available in all countries or regions where your app is available.";
+"info_about_worldwide_selection" = "Selecting Worldwide clears previous country selections and represents a selection of all countries and regions.";

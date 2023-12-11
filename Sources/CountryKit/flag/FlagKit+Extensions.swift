@@ -58,9 +58,9 @@ extension Flag {
             //although the term "Caribbean Netherlands" is sometimes used to refer to all
             //of the islands in the Dutch Caribbean.
             //we are going to use the Bonaire flag to represent all 3 islands
-            return UIImage(named: "flag_bonaire")//?.convertToFlagImage(style: flagStyle)
+            return UIImage(named: "flag_bonaire", in: CountryKit.assetBundle, compatibleWith: nil)//?.convertToFlagImage(style: flagStyle)
         case "EH": //Western Sahara
-            return UIImage(named: "flag_western_sahara", in: Bundle(for: CountryKit.self), with: nil)
+            return UIImage(named: "flag_western_sahara", in: CountryKit.assetBundle, with: nil)
         case "TA": //Tristan de Cunha
             //Tristan de Cunha is constituent part of Saint Helena, Ascension and Tristan da Cunha
             //therefore, it uses the Saint Helena's flag (main island)
