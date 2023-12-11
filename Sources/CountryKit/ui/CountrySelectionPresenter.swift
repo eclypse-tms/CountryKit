@@ -292,14 +292,14 @@ open class CountrySelectionPresenter: NSObject {
                     countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: true, indexPath: indexPath, performCellSelection: false))
                 } else {
                     //user selected Worldwide - deselect everything else
-                    clearPreviousAnd(selectThis: country)
+                    clearPreviousAnd(selectThis: country, at: indexPath)
                 }
             } else {
                 //user selected another country
                 if formSelectedCountries.contains(Country.Worldwide) {
                     //but previously worldwide was selected, so clear everything
                     //and select the new country
-                    clearPreviousAnd(selectThis: country)
+                    clearPreviousAnd(selectThis: country, at: indexPath)
                 } else {
                     formSelectedCountries.insert(country)
                     countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: true, indexPath: indexPath, performCellSelection: false))
@@ -307,7 +307,7 @@ open class CountrySelectionPresenter: NSObject {
             }
         } else {
             //only single selection is allowed
-            clearPreviousAnd(selectThis: country)
+            clearPreviousAnd(selectThis: country, at: indexPath)
         }
         
         if countrySelectionConfig.autoDismiss {
@@ -323,7 +323,7 @@ open class CountrySelectionPresenter: NSObject {
         }
     }
     
-    private func clearPreviousAnd(selectThis: Country) {
+    private func clearPreviousAnd(selectThis: Country, at indexPath: IndexPath) {
         formSelectedCountries.forEach { eachSelectedCountry in
             var section: Int = 0
             var row: Int = 0
@@ -359,6 +359,7 @@ open class CountrySelectionPresenter: NSObject {
         }
         formSelectedCountries.removeAll()
         formSelectedCountries.insert(selectThis)
+        countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: true, indexPath: indexPath, performCellSelection: false))
     }
 }
 
