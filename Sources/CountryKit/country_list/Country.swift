@@ -39,9 +39,11 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
         self.alpha2Code = alpha2Code
         switch alpha2Code {
         case "WW":
-            self.localizedName = "country_worldwide".localized()
+            self.localizedName = "country_worldwide".localize()
+        case "_U":
+            self.localizedName = "country_unknown".localize()
         default:
-            self.localizedName = Locale.autoupdatingCurrent.localizedString(forRegionCode: alpha2Code) ?? "\("country_unknown".localized()) (\(englishName)"
+            self.localizedName = Locale.autoupdatingCurrent.localizedString(forRegionCode: alpha2Code) ?? englishName
         }
         
         if addressLabels.isEmpty {

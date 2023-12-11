@@ -10,55 +10,34 @@ import Foundation
 public struct CountrySelectionConfig: Hashable {
     
     ///does country selection interface allows user to select multiple countries
-    let canMultiSelect: Bool
+    var canMultiSelect: Bool = true
     
     ///should worldwide be a visible option
-    let shouldShowWorldWide: Bool
+    var shouldShowWorldWide: Bool = false
     
     ///restrict the countries to the ones in this list. leave empty to show all the countries
-    let countryRoster: Set<Country>
+    var countryRoster: Set<Country> = Set()
     
     ///if the countries are restricted to a limited set, you provide justification to the user as to why
     ///that is the case
-    let rosterJustification: String
+    var rosterJustification: String = ""
     
-    ///after the user makes the first selection, automatically dismisses the interface
-    let autoDismiss: Bool
+    ///after the user makes the first selection, automatically dismisses the interface. defaults to false.
+    var autoDismiss: Bool = false
     
-    /// the countries on this list are preselected when the view first opens
-    let previouslySelectedCountries: [Country]
+    /// the countries on this list are preselected when the UI first opens
+    var previouslySelectedCountries: [Country] = [Country]()
     
-    init(canMultiSelect: Bool, shouldShowWorldWide: Bool, countryRoster: Set<Country>,
-         rosterJustification: String, autoDismiss: Bool, previouslySelectedCountries: [Country]) {
-        self.canMultiSelect = canMultiSelect
-        self.shouldShowWorldWide = shouldShowWorldWide
-        self.countryRoster = countryRoster
-        self.rosterJustification = rosterJustification
-        self.autoDismiss = autoDismiss
-        self.previouslySelectedCountries = previouslySelectedCountries
-    }
+    /// if your app supports multiple languages, then provide "worldwide" in your target language. defaults to english.
+    /// only needed if your are planning to display worldwide as a selectable option.
+    var localizedWorldWide: String = "country_worldwide".localize()
+
+    /// if your app supports multiple languages, then provide a description in your target language. defaults to english.
+    /// only needed if your are planning to display worldwide as a selectable option.
+    var localizedWorldWideDescription: String = "info_about_worldwide_selection".localize()
     
-    /// initializes a CountrySelectionConfig object with default values and previously selected country list
-    init(withOnly previouslySelectedCountries: [Country], shouldShowWorldWide: Bool) {
-        self.canMultiSelect = true
-        self.shouldShowWorldWide = shouldShowWorldWide
-        self.countryRoster = Set()
-        self.rosterJustification = ""
-        self.autoDismiss = false
-        self.previouslySelectedCountries = previouslySelectedCountries
-    }
     
-    init(countryRoster: Set<Country>, rosterJustification: String, previouslySelectedCountries: [Country],
-         shouldShowWorldWide: Bool) {
-        self.canMultiSelect = true
-        self.shouldShowWorldWide = shouldShowWorldWide
-        self.countryRoster = countryRoster
-        self.rosterJustification = rosterJustification
-        self.autoDismiss = false
-        self.previouslySelectedCountries = previouslySelectedCountries
-    }
-    
-    static let defaultValue: CountrySelectionConfig =
+    static var `default`: CountrySelectionConfig =
         CountrySelectionConfig(canMultiSelect: true,
                                shouldShowWorldWide: true,
                                countryRoster: Set(),

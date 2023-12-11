@@ -47,6 +47,11 @@ open class CountrySelectionPresenter: NSObject {
         self.presenterQueue = presenterQueue
     }
     
+    func register(config: CountrySelectionConfig) {
+        formSelectedCountries = Set(config.previouslySelectedCountries)
+        countrySelectionConfig = config
+    }
+    
     open func tearDown() {
         cancellables.forEach { $0.cancel() }
         dataSource = nil
@@ -183,7 +188,7 @@ open class CountrySelectionPresenter: NSObject {
         case .worldwideExplanation:
             if !isInSearchMode {
                 if countrySelectionConfig.shouldShowWorldWide {
-                    let vm = FooterViewModel(footerText: "info_about_worldwide_selection".localized())
+                    let vm = FooterViewModel(footerText: countrySelectionConfig.localizedWorldWideDescription)
                     vms.append(vm)
                 }
             }
@@ -198,11 +203,6 @@ open class CountrySelectionPresenter: NSObject {
             }
         }
         return vms
-    }
-    
-    func register(config: CountrySelectionConfig) {
-        formSelectedCountries = Set(config.previouslySelectedCountries)
-        countrySelectionConfig = config
     }
     
     private func reuseIdentifier(for indexPath: IndexPath) -> String {
