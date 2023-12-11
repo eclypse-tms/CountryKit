@@ -19,16 +19,16 @@ open class CountrySelectionViewController: UIViewController {
     
     /// this relay gets fired everytime user makes a selection in the UI. true value
     /// indicates that selection was made whereas false value indicates a deselection was made.
-    var countrySelectionRelay = PassthroughSubject<(Country, Bool), Never>()
+    public var countrySelectionRelay = PassthroughSubject<(Country, Bool), Never>()
     
     /// this relay gets fired right before this view controller is dismissed with all the selected countries.
-    var countrySelectionFinishedRelay = PassthroughSubject<[Country], Never>()
+    public var countrySelectionFinishedRelay = PassthroughSubject<[Country], Never>()
     
     /// user canceled country selections by backing out from the UI
-    var countrySelectionWasBackedOut = PassthroughSubject<Void, Never>()
+    public var countrySelectionWasBackedOut = PassthroughSubject<Void, Never>()
     
     /// get notified everytime user makes a selection or deselection
-    var delegate: CountrySelectionDelegate?
+    public var delegate: CountrySelectionDelegate?
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +46,7 @@ open class CountrySelectionViewController: UIViewController {
         presenter.tearDown()
     }
     
-    private func configureNavBarButtons() {
+    open func configureNavBarButtons() {
         let backButtonImage = UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(didSelectBack(_:)))
         navigationItem.leftItemsSupplementBackButton = false
@@ -54,7 +54,7 @@ open class CountrySelectionViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
     }
     
-    private func performDelayedInitialization() {
+    open func performDelayedInitialization() {
         let textHighlighter = TextHighlighterImpl()
         let countryProvider = CountryProviderImpl()
         let presenterQueue = DispatchQueue(label: "countrykit.queue.presenter")
@@ -63,11 +63,11 @@ open class CountrySelectionViewController: UIViewController {
                                               presenterQueue: presenterQueue)
     }
     
-    private func configureBindings() {
+    open func configureBindings() {
         presenter.dismissView
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] _ in
-                self?.navigationController?.dismiss(animated: true)
+                self?.navigationController?.popViewController(animated: true)
             })
             .store(in: &cancellables)
         
@@ -96,7 +96,7 @@ open class CountrySelectionViewController: UIViewController {
         presenter.configureBindings()
     }
     
-    private func configureMainView() {
+    open func configureMainView() {
         presenter.configureDataSource(with: mainView)
         mainView.delegate = presenter
         mainView.register(CountryCell.nib, forCellReuseIdentifier: CountryCell.nibName)
@@ -110,7 +110,7 @@ open class CountrySelectionViewController: UIViewController {
         mainView.rowHeight = UITableView.automaticDimension
     }
     
-    private func configureSearchBar() {
+    open func configureSearchBar() {
         searchBar.returnKeyType = .done
         searchBar.delegate = self
     }

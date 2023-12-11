@@ -125,7 +125,7 @@ extension UIImage {
 }
 
 extension Country {
-    var flagImage: UIImage {
+    public var flagImage: UIImage {
         return Flag.rectImage(with: self)
     }
 }
