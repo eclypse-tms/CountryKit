@@ -58,27 +58,27 @@ extension Flag {
             //although the term "Caribbean Netherlands" is sometimes used to refer to all
             //of the islands in the Dutch Caribbean.
             //we are going to use the Bonaire flag to represent all 3 islands
-            return UIImage(named: "flag_bonaire", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage(style: flagStyle)
+            return UIImage(named: "flag_bonaire", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage2(style: flagStyle)
         case "EH": //Western Sahara
             //According to Wikipedia, both Morocco and Sahrawi Arab Democratic Republic (SADR) claim ownership of Western Sahara
             //Since it is a disputed region, a custom flag is used to represent dual ownership of the area
-            return UIImage(named: "flag_western_sahara", in: CountryKit.assetBundle, with: nil)?.convertToFlagImage(style: flagStyle)
+            return UIImage(named: "flag_western_sahara", in: CountryKit.assetBundle, with: nil)?.convertToFlagImage2(style: flagStyle)
         case "TA": //Tristan de Cunha
             //Tristan de Cunha is constituent part of Saint Helena, Ascension and Tristan da Cunha
             //therefore, it uses the Saint Helena's flag (main island)
             return Flag(countryCode: "SH")?.image(style: flagStyle)
         case "AQ": //Antartica
-            return UIImage(named: "flag_antartica", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage(style: flagStyle)
+            return UIImage(named: "flag_antartica", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage2(style: flagStyle)
         case "001": //Worldwide
-            return UIImage(named: "icon_worldwide", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage(style: flagStyle)
+            return UIImage(named: "icon_worldwide", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage2(style: flagStyle)
         case "150": //Europe
-            return UIImage(named: "flag_europe", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage(style: flagStyle)
+            return UIImage(named: "flag_europe", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage2(style: flagStyle)
         case "003": //North America
             return Flag(countryCode: "US")?.image(style: flagStyle)
         case "419", "EA": //Latin America
             return Flag(countryCode: "ES")?.image(style: flagStyle)
         case "IC": // Canary Islands
-            return UIImage(named: "flag_canary_islands", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage(style: flagStyle)
+            return UIImage(named: "flag_canary_islands", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage2(style: flagStyle)
         case "DG": //Diego Garcia - British Indian Ocean Territory
             return Flag(countryCode: "IO")?.image(style: flagStyle)
         default:
@@ -123,6 +123,32 @@ extension UIImage {
                 path.addClip()
             }
         })
+    }
+    
+    func convertToFlagImage2(style: FlagStyle) -> UIImage {
+        let rect = CGRect(origin:CGPoint(x: 0, y: 0), size: self.size)
+        UIGraphicsBeginImageContextWithOptions(self.size, false, 1)
+        defer {
+            // End context after returning to avoid memory leak
+            UIGraphicsEndImageContext()
+        }
+        
+        switch style {
+        case .none:
+            break
+        case .roundedRect:
+            let path = UIBezierPath(roundedRect: rect, cornerRadius: 2)
+            path.addClip()
+        case .square:
+            let path = UIBezierPath(rect: rect)
+            path.addClip()
+        case .circle:
+            let path = UIBezierPath(roundedRect: rect, cornerRadius: style.size.width)
+            path.addClip()
+        }
+
+        self.draw(in: rect)
+        return UIGraphicsGetImageFromCurrentImageContext() ?? self
     }
 }
 
