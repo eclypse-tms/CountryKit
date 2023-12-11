@@ -121,7 +121,7 @@ open class CountrySelectionViewController: UIViewController {
         countrySelectionFinishedRelay.send(selectedCountries)
         delegate?.didFinishSelecting(countries: selectedCountries)
         
-        navigationController?.popViewController(animated: true)
+        dismissSelf()
     }
     
     @objc
@@ -129,12 +129,38 @@ open class CountrySelectionViewController: UIViewController {
         countrySelectionWasBackedOut.send(())
         delegate?.didBackout()
         
-        navigationController?.popViewController(animated: true)
+        dismissSelf()
+    }
+    
+    
+    /// controls how should this view controller be removed from the view hierarchy.
+    /// override this to control the dismissing behavior.
+    open func dismissSelf() {
+        let isModal: Bool
+        if let index = navigationController?.viewControllers.firstIndex(of: self), index > 0 {
+            isModal = false
+        } else if presentingViewController != nil {
+            isModal = true
+        } else if navigationController?.presentingViewController?.presentedViewController == navigationController {
+            isModal = true
+        } else if tabBarController?.presentingViewController is UITabBarController {
+            isModal = true
+        } else {
+            isModal = false
+        }
+        
+        if isModal {
+            dismiss(animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     ///register a config file to change the behavior of this country selection interface
-    open func register(countrySelectionConfig: CountrySelectionConfig) {
-        presenter.register(config: countrySelectionConfig)
+    open func register(config: CountrySelectionConfig) {
+        presenter.register(config: config)
+        mainView.allowsSelection = config.allowsSelection
+        mainView.allowsMultipleSelection = config.canMultiSelect        
     }
 }
 

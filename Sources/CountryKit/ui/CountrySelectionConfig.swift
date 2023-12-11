@@ -8,12 +8,18 @@
 import Foundation
 
 public struct CountrySelectionConfig: Hashable {
+    /// controls whether country selection interface allows user to select a country
+    var allowsSelection: Bool = true
     
-    ///does country selection interface allows user to select multiple countries
+    /// controls whether country selection interface allows user to select multiple countries
     var canMultiSelect: Bool = true
     
+    /// controls whether country selection interface allows user to highlight the row without actually making a selection
+    /// this option is only considered if allowsSelection is false.
+    var canHighlightWithoutSelecting: Bool = false
+    
     ///should worldwide be a visible option
-    var shouldShowWorldWide: Bool = false
+    var shouldShowWorldWide: Bool = true
     
     ///restrict the countries to the ones in this list. leave empty to show all the countries
     var countryRoster: Set<Country> = Set()
@@ -37,11 +43,5 @@ public struct CountrySelectionConfig: Hashable {
     var localizedWorldWideDescription: String = "info_about_worldwide_selection".localize()
     
     
-    static var `default`: CountrySelectionConfig =
-        CountrySelectionConfig(canMultiSelect: true,
-                               shouldShowWorldWide: true,
-                               countryRoster: Set(),
-                               rosterJustification: "",
-                               autoDismiss: false,
-                               previouslySelectedCountries: [])
+    static var `default`: CountrySelectionConfig = CountrySelectionConfig()
 }
