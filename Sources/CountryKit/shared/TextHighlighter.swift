@@ -1,8 +1,8 @@
 //
 //  TextHighlighter.swift
-//  countrykit_example
+//  CountryKit
 //
-//  Created by Turker Nessa on 12/9/23.
+//  Created by eclypse on 12/9/23.
 //
 
 import UIKit

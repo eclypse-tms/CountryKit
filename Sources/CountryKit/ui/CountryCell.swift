@@ -1,14 +1,14 @@
 //
 //  CountryCell.swift
-//  countrykit_example
+//  CountryKit
 //
-//  Created by Turker Nessa on 12/9/23.
+//  Created by eclypse on 12/9/23.
 //
 
 import UIKit
 import FlagKit
 
-class CountryCell: UITableViewCell, NibLoadable {
+class CountryCell: UITableViewCell, NibLoader {
     @IBOutlet private weak var countryFlag: UIImageView!
     @IBOutlet private weak var countryName: UILabel!
     

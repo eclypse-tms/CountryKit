@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  countrykit_example
+//  CountryKit
 //
-//  Created by Turker Nessa on 11/30/23.
+//  Created by eclypse on 11/30/23.
 //
 
 import UIKit
