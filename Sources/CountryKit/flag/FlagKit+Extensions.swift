@@ -137,18 +137,15 @@ extension UIImage {
         case .none:
             break
         case .roundedRect:
-            let path = UIBezierPath(roundedRect: rect, cornerRadius: 2)
-            path.addClip()
+            UIBezierPath(roundedRect: rect, cornerRadius: 2).addClip()
         case .square:
-            let path = UIBezierPath(rect: rect)
-            path.addClip()
+            UIBezierPath(rect: rect).addClip()
         case .circle:
-            let path = UIBezierPath(roundedRect: rect, cornerRadius: style.size.width)
-            path.addClip()
+            UIBezierPath(roundedRect: rect, cornerRadius: style.size.width).addClip()
         }
 
         self.draw(in: rect)
-        return UIGraphicsGetImageFromCurrentImageContext() ?? self
+        return UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
     }
 }
 
