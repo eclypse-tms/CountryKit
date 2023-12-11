@@ -67,7 +67,8 @@ open class CountrySelectionViewController: UIViewController {
         presenter.dismissView
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
+                guard let strongSelf = self else { return }
+                strongSelf.didSelectDone(strongSelf)
             })
             .store(in: &cancellables)
         
