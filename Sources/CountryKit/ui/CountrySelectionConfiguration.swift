@@ -48,6 +48,7 @@ public struct CountrySelectionConfiguration: Hashable {
     /// only needed if your are planning to display worldwide as a selectable option.
     public var localizedWorldWideDescription: String = "info_about_worldwide_selection".localize()
     
-    
-    static public var `default`: CountrySelectionConfiguration = CountrySelectionConfiguration()
+    static public func `default`() -> CountrySelectionConfiguration {
+        CountrySelectionConfiguration()
+    }
 }
