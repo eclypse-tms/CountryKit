@@ -27,21 +27,21 @@ extension Flag {
         }
     }
     
-    class func roundImage(with country: Country) -> UIImage {
+    class func roundImage(with country: Country) -> UIImage? {
         if let specialCountryFlag = handleExceptions(alpha2Code: country.alpha2Code, flagStyle: .circle) {
             return specialCountryFlag
         } else {
             let countryFlag = Flag(countryCode: country.alpha2Code)
-            return countryFlag?.image(style: .circle) ?? UIImage(imageLiteralResourceName: "icon_missing_country_circle")
+            return countryFlag?.image(style: .circle)
         }
     }
     
-    class func roundImage(with alpha2Code: String) -> UIImage {
+    class func roundImage(with alpha2Code: String) -> UIImage? {
         if let specialCountryFlag = handleExceptions(alpha2Code: alpha2Code, flagStyle: .circle) {
             return specialCountryFlag
         } else {
             let countryFlag = Flag(countryCode: alpha2Code)
-            return countryFlag?.image(style: .circle) ?? UIImage(imageLiteralResourceName: "icon_missing_country_circle")
+            return countryFlag?.image(style: .circle)
         }
     }
     
@@ -58,25 +58,27 @@ extension Flag {
             //although the term "Caribbean Netherlands" is sometimes used to refer to all
             //of the islands in the Dutch Caribbean.
             //we are going to use the Bonaire flag to represent all 3 islands
-            return UIImage(named: "flag_bonaire", in: CountryKit.assetBundle, compatibleWith: nil)//?.convertToFlagImage(style: flagStyle)
+            return UIImage(named: "flag_bonaire", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage(style: flagStyle)
         case "EH": //Western Sahara
-            return UIImage(named: "flag_western_sahara", in: CountryKit.assetBundle, with: nil)
+            //According to Wikipedia, both Morocco and Sahrawi Arab Democratic Republic (SADR) claim ownership of Western Sahara
+            //Since it is a disputed region, a custom flag is used to represent dual ownership of the area
+            return UIImage(named: "flag_western_sahara", in: CountryKit.assetBundle, with: nil)?.convertToFlagImage(style: flagStyle)
         case "TA": //Tristan de Cunha
             //Tristan de Cunha is constituent part of Saint Helena, Ascension and Tristan da Cunha
             //therefore, it uses the Saint Helena's flag (main island)
             return Flag(countryCode: "SH")?.image(style: flagStyle)
         case "AQ": //Antartica
-            return UIImage(named: "flag_antartica", in: CountryKit.assetBundle, compatibleWith: nil)//?.convertToFlagImage(style: flagStyle)
+            return UIImage(named: "flag_antartica", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage(style: flagStyle)
         case "001": //Worldwide
-            return UIImage(named: "icon_worldwide", in: CountryKit.assetBundle, compatibleWith: nil)
+            return UIImage(named: "icon_worldwide", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage(style: flagStyle)
         case "150": //Europe
-            return UIImage(named: "flag_europe", in: CountryKit.assetBundle, compatibleWith: nil)
+            return UIImage(named: "flag_europe", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage(style: flagStyle)
         case "003": //North America
             return Flag(countryCode: "US")?.image(style: flagStyle)
         case "419", "EA": //Latin America
             return Flag(countryCode: "ES")?.image(style: flagStyle)
         case "IC": // Canary Islands
-            return UIImage(named: "flag_canary_islands", in: CountryKit.assetBundle, compatibleWith: nil)
+            return UIImage(named: "flag_canary_islands", in: CountryKit.assetBundle, compatibleWith: nil)?.convertToFlagImage(style: flagStyle)
         case "DG": //Diego Garcia - British Indian Ocean Territory
             return Flag(countryCode: "IO")?.image(style: flagStyle)
         default:
