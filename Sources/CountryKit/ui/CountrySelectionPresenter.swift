@@ -23,7 +23,7 @@ open class CountrySelectionPresenter: NSObject {
     
     //MARK: semi-private properties
     private (set) var formSelectedCountries = Set<Country>()
-    private (set) var countrySelectionConfig: CountrySelectionConfiguration = .default
+    private (set) var countrySelectionConfig: CountrySelectionConfiguration = .default()
     
     //MARK: private properties
     private var fullCountryList = [Country]()
