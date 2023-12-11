@@ -288,6 +288,7 @@ open class CountrySelectionPresenter: NSObject {
                     //there is no previous selection and user clicked on Worldwide
                     //UI should already reflect this selection, however, we need to generate a selection event for
                     //the delegate
+                    formSelectedCountries.insert(country)
                     countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: true, indexPath: indexPath, performCellSelection: false))
                 } else {
                     //user selected Worldwide - deselect everything else
