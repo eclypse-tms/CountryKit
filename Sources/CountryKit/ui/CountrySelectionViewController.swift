@@ -93,6 +93,7 @@ open class CountrySelectionViewController: UIViewController {
                 
             }).store(in: &cancellables)
         
+        presenter.register(config: self.countrySelectionConfiguration)
         presenter.configureBindings()
     }
     
@@ -102,7 +103,8 @@ open class CountrySelectionViewController: UIViewController {
         mainView.register(CountryCell.nib, forCellReuseIdentifier: CountryCell.nibName)
         mainView.register(FooterCell.nib, forCellReuseIdentifier: FooterCell.nibName)
         
-        mainView.allowsMultipleSelection = true
+        mainView.allowsSelection = countrySelectionConfiguration.allowsSelection
+        mainView.allowsMultipleSelection = countrySelectionConfiguration.canMultiSelect
         mainView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 150, right: 0)
         mainView.tableFooterView = UIView()
         mainView.separatorStyle = .singleLine
@@ -157,11 +159,7 @@ open class CountrySelectionViewController: UIViewController {
     }
     
     ///register a config file to change the behavior of this country selection interface
-    open func register(config: CountrySelectionConfiguration) {
-        presenter.register(config: config)
-        mainView.allowsSelection = config.allowsSelection
-        mainView.allowsMultipleSelection = config.canMultiSelect        
-    }
+    open var countrySelectionConfiguration: CountrySelectionConfiguration = .default()
 }
 
 extension CountrySelectionViewController: UISearchBarDelegate {

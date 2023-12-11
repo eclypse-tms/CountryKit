@@ -48,7 +48,7 @@ open class CountrySelectionPresenter: NSObject {
     }
     
     func register(config: CountrySelectionConfiguration) {
-        formSelectedCountries = Set(config.previouslySelectedCountries)
+        formSelectedCountries = config.previouslySelectedCountries
         countrySelectionConfig = config
     }
     
