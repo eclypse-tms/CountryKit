@@ -7,21 +7,21 @@
 
 import UIKit
 
-class FooterCell: UITableViewCell, NibLoadable {
+open class FooterCell: UITableViewCell, NibLoadable {
     @IBOutlet private weak var footerNote: UILabel!
     
-    override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    override func prepareForReuse() {
+    open override func prepareForReuse() {
         super.prepareForReuse()
         
         footerNote.text = nil
     }
     
-    func configure(with viewModel: FooterViewModel) {
-        footerNote.text = viewModel.callout
+    open func configure(with viewModel: FooterViewModel) {
+        footerNote.text = viewModel.footerText
     }
 }

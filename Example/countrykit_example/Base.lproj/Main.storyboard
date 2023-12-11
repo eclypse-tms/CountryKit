@@ -9,67 +9,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Country Selection View Controller-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CountrySelectionViewController" customModule="countrykit_example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VmJ-6t-KLH">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G6d-a4-JcZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Directions on how to select countries" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZF-Vy-Eri">
-                                                <rect key="frame" x="16" y="8" width="361" height="34"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="XZF-Vy-Eri" secondAttribute="trailing" constant="16" id="BgO-tV-GNV"/>
-                                            <constraint firstAttribute="bottom" secondItem="XZF-Vy-Eri" secondAttribute="bottom" constant="8" id="THI-1S-hLU"/>
-                                            <constraint firstItem="XZF-Vy-Eri" firstAttribute="top" secondItem="G6d-a4-JcZ" secondAttribute="top" constant="8" id="fgD-tf-8w0"/>
-                                            <constraint firstItem="XZF-Vy-Eri" firstAttribute="leading" secondItem="G6d-a4-JcZ" secondAttribute="leading" constant="16" id="qV5-2s-RyH"/>
-                                        </constraints>
-                                    </view>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="NS4-Ad-33f">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="56"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="BYZ-38-t0r" id="mX4-8T-1s1"/>
-                                        </connections>
-                                    </searchBar>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wOn-wJ-7aR">
-                                        <rect key="frame" x="0.0" y="106" width="393" height="653"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </tableView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VmJ-6t-KLH" secondAttribute="bottom" id="17X-CD-v7C"/>
-                            <constraint firstItem="VmJ-6t-KLH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RH3-ny-7rG"/>
-                            <constraint firstItem="VmJ-6t-KLH" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="acg-pO-a4z"/>
-                            <constraint firstItem="VmJ-6t-KLH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="xCh-r2-GyU"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="countrySelectionDirections" destination="XZF-Vy-Eri" id="EOj-J9-zvo"/>
-                        <outlet property="mainView" destination="wOn-wJ-7aR" id="iIL-xz-Sdh"/>
-                        <outlet property="searchBar" destination="NS4-Ad-33f" id="jRm-0f-QjB"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-28" y="-6"/>
+            <point key="canvasLocation" x="-28.244274809160306" y="-6.3380281690140849"/>
         </scene>
     </scenes>
     <resources>

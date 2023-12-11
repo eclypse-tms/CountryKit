@@ -8,30 +8,30 @@
 import Foundation
 
 /// a type that represents country
-struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable {
+public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable {
     /// alias for alpha3Code
-    var id: String {
+    public var id: String {
         return alpha3Code
     }
     
     ///non-localized english name of this country
-    let englishName: String
+    public let englishName: String
     
     ///ISO 3166-1 alpha-3 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-    let alpha3Code: String
+    public let alpha3Code: String
     
     ///ISO 3166-1 alpha-2 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-    let alpha2Code: String
+    public let alpha2Code: String
     
     ///localized name
-    let localizedName: String
+    public let localizedName: String
     
     ///returns a list of applicable address fields in this locale
-    let addressLabels: [AddressLabel]
+    public let addressLabels: [AddressLabel]
     
     ///when entering address, some countries like China prefers to present the address fields in a descending scope.
     ///from the largest address units (province) to the smallest address units (street). For most countries, this will be true.
-    let preferesAscendingAddressScope: Bool
+    public let preferesAscendingAddressScope: Bool
     
     init(alpha3Code: String, englishName: String, alpha2Code: String, addressLabels: [AddressLabel] = [], preferesAscendingAddressScope: Bool = true) {
         self.alpha3Code = alpha3Code
@@ -53,7 +53,7 @@ struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable {
         self.preferesAscendingAddressScope = preferesAscendingAddressScope
     }
     
-    var debugDescription: String {
+    public var debugDescription: String {
         return "alpha3Code: \(alpha3Code), name: \(englishName)"
     }
         

@@ -60,7 +60,7 @@ extension Flag {
             //we are going to use the Bonaire flag to represent all 3 islands
             return UIImage(named: "flag_bonaire")//?.convertToFlagImage(style: flagStyle)
         case "EH": //Western Sahara
-            return UIImage(named: "flag_western_sahara")
+            return UIImage(named: "flag_western_sahara", in: Bundle(for: CountryKit.self), with: nil)
         case "TA": //Tristan de Cunha
             //Tristan de Cunha is constituent part of Saint Helena, Ascension and Tristan da Cunha
             //therefore, it uses the Saint Helena's flag (main island)
@@ -121,5 +121,11 @@ extension UIImage {
                 path.addClip()
             }
         })
+    }
+}
+
+extension Country {
+    var flagImage: UIImage {
+        return Flag.rectImage(with: self)
     }
 }

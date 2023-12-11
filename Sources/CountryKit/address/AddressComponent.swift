@@ -12,7 +12,7 @@ import Foundation
 /// Apple's library maps different components of a postal address to one of the below cases.
 /// For example, a postal address that has neighborhood information may map to sublocality,
 /// whereas, a province may map to state.
-enum AddressComponent: String, Hashable {
+public enum AddressComponent: String, Hashable {
     /// combination of address line 1 & address line 2 and separated by “\n”
     case street
      
@@ -37,7 +37,7 @@ enum AddressComponent: String, Hashable {
     ///The ISO country code for the country in a postal address, using the ISO 3166-1 alpha-2 standard.
     case isoCountryCode
     
-    var specificLabels: [AddressLabel] {
+    public var specificLabels: [AddressLabel] {
         switch self {
         case .street:
             return [.street1, .street2]
