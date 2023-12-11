@@ -284,8 +284,15 @@ open class CountrySelectionPresenter: NSObject {
         if countrySelectionConfig.canMultiSelect {
             //multi selection is allowed
             if country == Country.Worldwide {
-                //user selected Worldwide - deselect everything else
-                clearPreviousAnd(selectThis: country)
+                if formSelectedCountries.count == 0 {
+                    //there is no previous selection and user clicked on Worldwide
+                    //UI should already reflect this selection, however, we need to generate a selection event for
+                    //the delegate
+                    countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: true, indexPath: indexPath, performCellSelection: false))
+                } else {
+                    //user selected Worldwide - deselect everything else
+                    clearPreviousAnd(selectThis: country)
+                }
             } else {
                 //user selected another country
                 if formSelectedCountries.contains(Country.Worldwide) {
