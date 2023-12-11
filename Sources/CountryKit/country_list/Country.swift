@@ -9,19 +9,19 @@ import Foundation
 
 /// a type that represents country
 public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable {
-    /// alias for alpha3Code
+    /// alias for alpha2Code
     public var id: String {
-        return alpha3Code
+        return alpha2Code
     }
+    
+    ///ISO 3166-1 alpha-2 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+    public let alpha2Code: String
     
     ///non-localized english name of this country
     public let englishName: String
     
     ///ISO 3166-1 alpha-3 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
     public let alpha3Code: String
-    
-    ///ISO 3166-1 alpha-2 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-    public let alpha2Code: String
     
     ///localized name
     public let localizedName: String
@@ -33,17 +33,20 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     ///from the largest address units (province) to the smallest address units (street). For most countries, this will be true.
     public let preferesAscendingAddressScope: Bool
     
-    init(alpha3Code: String, englishName: String, alpha2Code: String, addressLabels: [AddressLabel] = [], preferesAscendingAddressScope: Bool = true) {
+    public init(alpha3Code: String, englishName: String, alpha2Code: String,
+                addressLabels: [AddressLabel] = [],
+                preferesAscendingAddressScope: Bool = true,
+                localizedNameOverride: String? = nil) {
         self.alpha3Code = alpha3Code
         self.englishName = englishName
         self.alpha2Code = alpha2Code
         switch alpha2Code {
         case "WW":
-            self.localizedName = "country_worldwide".localize()
+            self.localizedName = localizedNameOverride ?? "country_worldwide".localize()
         case "_U":
-            self.localizedName = "country_unknown".localize()
+            self.localizedName = localizedNameOverride ?? "country_unknown".localize()
         default:
-            self.localizedName = Locale.autoupdatingCurrent.localizedString(forRegionCode: alpha2Code) ?? englishName
+            self.localizedName = localizedNameOverride ?? Locale.autoupdatingCurrent.localizedString(forRegionCode: alpha2Code) ?? englishName
         }
         
         if addressLabels.isEmpty {
@@ -309,8 +312,8 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     public static let Zambia = Country(alpha3Code: "ZMB", englishName: "Zambia", alpha2Code: "ZM", addressLabels: AddressLabel.cityAndPostal)
     public static let Zimbabwe = Country(alpha3Code: "ZWE", englishName: "Zimbabwe", alpha2Code: "ZW", addressLabels: AddressLabel.cityOnly)
     
-    
-    public static let Worldwide = Country(alpha3Code: "WWC", englishName: "Worldwide", alpha2Code: "WW")
-    public static let Unknown = Country(alpha3Code: "_UK", englishName: "Unknown Country", alpha2Code: "_U")
+
+    public static var Worldwide = Country(alpha3Code: "WWC", englishName: "Worldwide", alpha2Code: "WW", localizedNameOverride: nil)
+    public static var Unknown = Country(alpha3Code: "_UK", englishName: "Unknown Country", alpha2Code: "_U", localizedNameOverride: nil)
 }
 

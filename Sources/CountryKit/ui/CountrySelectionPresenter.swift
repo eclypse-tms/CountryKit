@@ -41,13 +41,13 @@ open class CountrySelectionPresenter: NSObject {
     let countrySelectionRelay = PassthroughSubject<CellSelectionMeta, Never>()
     let dismissView = PassthroughSubject<Bool, Never>()
     
-    init(countryProvider: CountryProvider, textHighlighter: TextHighlighter, presenterQueue: DispatchQueue) {
+    public init(countryProvider: CountryProvider, textHighlighter: TextHighlighter, presenterQueue: DispatchQueue) {
         self.countryProvider = countryProvider
         self.textHighlighter = textHighlighter
         self.presenterQueue = presenterQueue
     }
     
-    func register(config: CountrySelectionConfiguration) {
+    open func register(config: CountrySelectionConfiguration) {
         formSelectedCountries = config.previouslySelectedCountries
         countrySelectionConfig = config
     }
@@ -181,7 +181,14 @@ open class CountrySelectionPresenter: NSObject {
         case .worldwide:
             if !isInSearchMode {
                 if countrySelectionConfig.shouldShowWorldWide {
-                    let vm = CountryViewModel(country: Country.Worldwide)
+                    var worldWideCountry = Country.Worldwide
+                    if !countrySelectionConfig.localizedWorldWide.isEmpty {
+                        worldWideCountry = Country(alpha3Code: worldWideCountry.alpha3Code,
+                                                   englishName: worldWideCountry.englishName,
+                                                   alpha2Code: worldWideCountry.alpha2Code,
+                                                   localizedNameOverride: countrySelectionConfig.localizedWorldWide)
+                    }
+                    let vm = CountryViewModel(country: worldWideCountry)
                     vms.append(vm)
                 }
             }

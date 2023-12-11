@@ -42,11 +42,13 @@ public struct CountrySelectionConfiguration: Hashable {
     
     /// if your app supports multiple languages, then provide "worldwide" in your target language. defaults to english.
     /// only needed if your are planning to display worldwide as a selectable option.
-    public var localizedWorldWide: String = "country_worldwide".localize()
+    /// for example, in english this property would read "Worlwide"
+    public var localizedWorldWide: String = ""
 
     /// if your app supports multiple languages, then provide a description in your target language. defaults to english.
     /// only needed if your are planning to display worldwide as a selectable option.
-    public var localizedWorldWideDescription: String = "info_about_worldwide_selection".localize()
+    /// for example, in english this property would read something like "Selecting Worldwide clears previous country selections and represents a selection of all countries and regions.
+    public var localizedWorldWideDescription: String = ""
     
     static public func `default`() -> CountrySelectionConfiguration {
         CountrySelectionConfiguration()
