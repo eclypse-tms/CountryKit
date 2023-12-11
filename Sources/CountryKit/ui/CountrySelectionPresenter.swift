@@ -23,7 +23,7 @@ open class CountrySelectionPresenter: NSObject {
     
     //MARK: semi-private properties
     private (set) var formSelectedCountries = Set<Country>()
-    private (set) var countrySelectionConfig: CountrySelectionConfig = .default
+    private (set) var countrySelectionConfig: CountrySelectionConfiguration = .default
     
     //MARK: private properties
     private var fullCountryList = [Country]()
@@ -47,7 +47,7 @@ open class CountrySelectionPresenter: NSObject {
         self.presenterQueue = presenterQueue
     }
     
-    func register(config: CountrySelectionConfig) {
+    func register(config: CountrySelectionConfiguration) {
         formSelectedCountries = Set(config.previouslySelectedCountries)
         countrySelectionConfig = config
     }

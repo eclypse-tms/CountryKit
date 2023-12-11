@@ -157,7 +157,7 @@ open class CountrySelectionViewController: UIViewController {
     }
     
     ///register a config file to change the behavior of this country selection interface
-    open func register(config: CountrySelectionConfig) {
+    open func register(config: CountrySelectionConfiguration) {
         presenter.register(config: config)
         mainView.allowsSelection = config.allowsSelection
         mainView.allowsMultipleSelection = config.canMultiSelect        

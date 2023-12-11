@@ -1,5 +1,5 @@
 //
-//  CountrySelectionConfig.swift
+//  CountrySelectionConfiguration.swift
 //  CountryKit
 //
 //  Created by eclypse on 12/9/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CountrySelectionConfig: Hashable {
+public struct CountrySelectionConfiguration: Hashable {
     /// controls whether country selection interface allows user to select a country
     var allowsSelection: Bool = true
     
@@ -24,9 +24,15 @@ public struct CountrySelectionConfig: Hashable {
     ///restrict the countries to the ones in this list. leave empty to show all the countries
     var countryRoster: Set<Country> = Set()
     
-    ///if the countries are restricted to a limited set, you provide justification to the user as to why
-    ///that is the case
+    ///if the countries are restricted to a limited set, you provide justification to the user as to why that is the case
     var rosterJustification: String = ""
+    
+    /// list of countries that should be excluded from the main list.
+    /// if countryRoster is provided, this property is ignored.
+    var excludedCountries: Set<Country> = Set()
+    
+    ///if some countries are removed the list, you may provide justification to the user as to why that is the case
+    var excludedCountriesJustification: String = ""
     
     ///after the user makes the first selection, automatically dismisses the interface. defaults to false.
     var autoDismiss: Bool = false
@@ -43,5 +49,5 @@ public struct CountrySelectionConfig: Hashable {
     var localizedWorldWideDescription: String = "info_about_worldwide_selection".localize()
     
     
-    static var `default`: CountrySelectionConfig = CountrySelectionConfig()
+    static var `default`: CountrySelectionConfiguration = CountrySelectionConfiguration()
 }
