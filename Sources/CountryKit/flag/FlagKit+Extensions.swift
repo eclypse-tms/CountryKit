@@ -48,7 +48,7 @@ extension Flag {
     private class func handleExceptions(alpha2Code: String, flagStyle: FlagStyle) -> UIImage? {
         switch alpha2Code.uppercased() {
         case Country.Worldwide.alpha2Code:
-            return UIImage(named: "icon_worldwide")
+            return UIImage(named: "icon_worldwide", in: CountryKit.assetBundle, compatibleWith: nil)
         case "AC": //Ascension Island
             //Ascension island is constituent part of Saint Helena, Ascension and Tristan da Cunha
             //therefore, it uses the Saint Helena's flag (main island)
@@ -66,17 +66,17 @@ extension Flag {
             //therefore, it uses the Saint Helena's flag (main island)
             return Flag(countryCode: "SH")?.image(style: flagStyle)
         case "AQ": //Antartica
-            return UIImage(named: "flag_antartica")//?.convertToFlagImage(style: flagStyle)
+            return UIImage(named: "flag_antartica", in: CountryKit.assetBundle, compatibleWith: nil)//?.convertToFlagImage(style: flagStyle)
         case "001": //Worldwide
-            return UIImage(named: "icon_worldwide")
+            return UIImage(named: "icon_worldwide", in: CountryKit.assetBundle, compatibleWith: nil)
         case "150": //Europe
-            return UIImage(named: "flag_europe")
+            return UIImage(named: "flag_europe", in: CountryKit.assetBundle, compatibleWith: nil)
         case "003": //North America
             return Flag(countryCode: "US")?.image(style: flagStyle)
         case "419", "EA": //Latin America
             return Flag(countryCode: "ES")?.image(style: flagStyle)
         case "IC": // Canary Islands
-            return UIImage(named: "flag_canary_islands")
+            return UIImage(named: "flag_canary_islands", in: CountryKit.assetBundle, compatibleWith: nil)
         case "DG": //Diego Garcia - British Indian Ocean Territory
             return Flag(countryCode: "IO")?.image(style: flagStyle)
         default:
