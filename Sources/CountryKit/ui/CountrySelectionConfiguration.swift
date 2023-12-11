@@ -38,7 +38,7 @@ public struct CountrySelectionConfiguration: Hashable {
     public var autoDismiss: Bool = false
     
     /// the countries on this list are preselected when the UI first opens
-    public var previouslySelectedCountries: [Country] = [Country]()
+    public var previouslySelectedCountries: Set<Country> = Set()
     
     /// if your app supports multiple languages, then provide "worldwide" in your target language. defaults to english.
     /// only needed if your are planning to display worldwide as a selectable option.
