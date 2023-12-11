@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "countrykit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/eclypse-tms/CountryKit",
+      "state" : {
+        "revision" : "333dcd4a453f3e9106cfb375ba8a4f73c78aa83d",
+        "version" : "0.1.2"
+      }
+    },
+    {
       "identity" : "flagkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/madebybowtie/FlagKit.git",
