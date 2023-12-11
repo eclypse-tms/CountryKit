@@ -50,6 +50,14 @@ open class CountrySelectionPresenter: NSObject {
     open func register(config: CountrySelectionConfiguration) {
         formSelectedCountries = config.previouslySelectedCountries
         countrySelectionConfig = config
+        
+        let worldWideCountry = Country.Worldwide
+        if !config.localizedWorldWide.isEmpty {
+            Country.Worldwide = Country(alpha3Code: worldWideCountry.alpha3Code,
+                                       englishName: worldWideCountry.englishName,
+                                       alpha2Code: worldWideCountry.alpha2Code,
+                                       localizedNameOverride: countrySelectionConfig.localizedWorldWide)
+        }
     }
     
     open func tearDown() {
@@ -181,14 +189,7 @@ open class CountrySelectionPresenter: NSObject {
         case .worldwide:
             if !isInSearchMode {
                 if countrySelectionConfig.shouldShowWorldWide {
-                    var worldWideCountry = Country.Worldwide
-                    if !countrySelectionConfig.localizedWorldWide.isEmpty {
-                        worldWideCountry = Country(alpha3Code: worldWideCountry.alpha3Code,
-                                                   englishName: worldWideCountry.englishName,
-                                                   alpha2Code: worldWideCountry.alpha2Code,
-                                                   localizedNameOverride: countrySelectionConfig.localizedWorldWide)
-                    }
-                    let vm = CountryViewModel(country: worldWideCountry)
+                    let vm = CountryViewModel(country: Country.Worldwide)
                     vms.append(vm)
                 }
             }
