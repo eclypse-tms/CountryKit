@@ -338,7 +338,7 @@ open class CountrySelectionPresenter: NSObject {
                     section = CountrySelection.worldwide.rawValue
                     row = 0
                     let indexPathToDeselect = IndexPath(row: row, section: section)
-                    countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true))
+                    countrySelectionRelay.send(CellSelectionMeta(country: eachSelectedCountry, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true))
                 }
             } else {
                 if let indexOfPreviouslySelectedCountry = filteredCountryList.firstIndex (where: { $0.country == eachSelectedCountry }) {
@@ -353,7 +353,7 @@ open class CountrySelectionPresenter: NSObject {
                         row = indexOfPreviouslySelectedCountry
                     }
                     let indexPathToDeselect = IndexPath(row: row, section: section)
-                    countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true))
+                    countrySelectionRelay.send(CellSelectionMeta(country: eachSelectedCountry, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true))
                 }
             }
         }
