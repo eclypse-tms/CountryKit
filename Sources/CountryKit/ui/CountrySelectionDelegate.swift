@@ -11,7 +11,7 @@ import Foundation
 /// Conform to this protocol if you want to be notified every time user makes a selection or
 /// a deselection in the UI. The events in this protocol trigger right away after a selection
 /// is made.
-protocol CountrySelectionDelegate: AnyObject {
+public protocol CountrySelectionDelegate: AnyObject {
     /// This event fires when user selects a country
     /// - Parameter country: The country object that was selected
     func didSelect(country: Country)
