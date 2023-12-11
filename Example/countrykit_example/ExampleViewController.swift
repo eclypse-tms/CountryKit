@@ -39,10 +39,25 @@ class ExampleViewController: UIViewController {
             cell.configure(with: viewModel)
             return cell
         }
-    }    
+    }
+
+    @IBAction func didClickOnSelectCountry(_ sender: UIButton) {
+        selectCountryButton.isHidden = true
+        
+        let countrySelectionVC = CountrySelectionViewController()
+        
+        //get notified when user interacts with the country selection ui
+        countrySelectionVC.delegate = self
+        
+        splitViewController?.setViewController(countrySelectionVC, for: .secondary)
+    }
 }
 
-extension ExampleViewController: SingleCountrySelectionDelegate {
+extension ExampleViewController: CountrySelectionDelegate {
+    func didBackout() {
+        selectCountryButton.isHidden = false
+    }
+    
     func didSelect(country: Country) {
         print("selected \(country.localizedName)")
         var currentSnapshot = dataSource.snapshot()
@@ -70,11 +85,10 @@ extension ExampleViewController: SingleCountrySelectionDelegate {
             //nothing to do
         }
     }
-}
-
-extension ExampleViewController: BulkCountrySelectionDelegate {
+    
     func didFinishSelecting(countries: [Country]) {
-        print("user selected the following countries: \(countries)")
+        print("user selected the following countries: \(countries.map { $0.localizedName}.joined(separator: ",") )")
+        selectCountryButton.isHidden = false
     }
 }
 

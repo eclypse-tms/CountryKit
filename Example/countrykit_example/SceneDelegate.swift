@@ -20,20 +20,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let splitVC = UISplitViewController(style: .doubleColumn)
         splitVC.preferredDisplayMode = .oneBesideSecondary
-        splitVC.preferredPrimaryColumnWidthFraction = 0.5
+        splitVC.minimumPrimaryColumnWidth = 300
+        splitVC.maximumPrimaryColumnWidth = 600
+        splitVC.preferredPrimaryColumnWidthFraction = 0.4
+        
         
         let exampleVC = ExampleViewController()
-        
-        let countrySelectionVC = CountrySelectionViewController()
-        
-        // optional. get notified as soon as user interacts with the UI
-        countrySelectionVC.singleCountrySelectionDelegate = exampleVC
-        
-        // optional. get notified after user is finished with interacting the UI
-        countrySelectionVC.bulkCountrySelectionDelegate = exampleVC
+        let emptyVC = InstructionsViewController()
         
         splitVC.setViewController(exampleVC, for: .primary)
-        splitVC.setViewController(countrySelectionVC, for: .secondary)
+        splitVC.setViewController(emptyVC, for: .secondary)
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = splitVC

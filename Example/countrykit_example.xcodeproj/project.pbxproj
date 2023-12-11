@@ -10,7 +10,7 @@
 		B22D4F632B26206500B8F1F9 /* CountrySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D4F492B26206500B8F1F9 /* CountrySection.swift */; };
 		B22D4F642B26206500B8F1F9 /* CountrySelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D4F4A2B26206500B8F1F9 /* CountrySelectionPresenter.swift */; };
 		B22D4F652B26206500B8F1F9 /* CountrySelectionConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D4F4B2B26206500B8F1F9 /* CountrySelectionConfig.swift */; };
-		B22D4F662B26206500B8F1F9 /* SingleCountrySelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D4F4C2B26206500B8F1F9 /* SingleCountrySelectionDelegate.swift */; };
+		B22D4F662B26206500B8F1F9 /* CountrySelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D4F4C2B26206500B8F1F9 /* CountrySelectionDelegate.swift */; };
 		B22D4F672B26206500B8F1F9 /* CountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22D4F4D2B26206500B8F1F9 /* CountryCell.xib */; };
 		B22D4F682B26206500B8F1F9 /* CountrySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D4F4E2B26206500B8F1F9 /* CountrySelectionViewController.swift */; };
 		B22D4F692B26206500B8F1F9 /* CountryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D4F4F2B26206500B8F1F9 /* CountryViewModel.swift */; };
@@ -35,6 +35,8 @@
 		B22D4F822B264EA700B8F1F9 /* SelectedCountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D4F802B264EA700B8F1F9 /* SelectedCountryCell.swift */; };
 		B22D4F832B264EA700B8F1F9 /* SelectedCountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22D4F812B264EA700B8F1F9 /* SelectedCountryCell.xib */; };
 		B22D4F852B265CEB00B8F1F9 /* UIView+RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D4F842B265CEB00B8F1F9 /* UIView+RoundedCorner.swift */; };
+		B22D4F882B26C85700B8F1F9 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D4F862B26C85700B8F1F9 /* InstructionsViewController.swift */; };
+		B22D4F892B26C85700B8F1F9 /* InstructionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22D4F872B26C85700B8F1F9 /* InstructionsViewController.xib */; };
 		B24FD17B2B255B84009CA1BD /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24FD17A2B255B84009CA1BD /* ExampleViewController.swift */; };
 		B24FD17D2B26102D009CA1BD /* ExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B24FD17C2B26102D009CA1BD /* ExampleViewController.xib */; };
 		B24FD1802B261BAE009CA1BD /* Composure in Frameworks */ = {isa = PBXBuildFile; productRef = B24FD17F2B261BAE009CA1BD /* Composure */; };
@@ -49,7 +51,7 @@
 		B22D4F492B26206500B8F1F9 /* CountrySection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountrySection.swift; sourceTree = "<group>"; };
 		B22D4F4A2B26206500B8F1F9 /* CountrySelectionPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountrySelectionPresenter.swift; sourceTree = "<group>"; };
 		B22D4F4B2B26206500B8F1F9 /* CountrySelectionConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountrySelectionConfig.swift; sourceTree = "<group>"; };
-		B22D4F4C2B26206500B8F1F9 /* SingleCountrySelectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleCountrySelectionDelegate.swift; sourceTree = "<group>"; };
+		B22D4F4C2B26206500B8F1F9 /* CountrySelectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountrySelectionDelegate.swift; sourceTree = "<group>"; };
 		B22D4F4D2B26206500B8F1F9 /* CountryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryCell.xib; sourceTree = "<group>"; };
 		B22D4F4E2B26206500B8F1F9 /* CountrySelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewController.swift; sourceTree = "<group>"; };
 		B22D4F4F2B26206500B8F1F9 /* CountryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryViewModel.swift; sourceTree = "<group>"; };
@@ -73,6 +75,8 @@
 		B22D4F802B264EA700B8F1F9 /* SelectedCountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCountryCell.swift; sourceTree = "<group>"; };
 		B22D4F812B264EA700B8F1F9 /* SelectedCountryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedCountryCell.xib; sourceTree = "<group>"; };
 		B22D4F842B265CEB00B8F1F9 /* UIView+RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorner.swift"; sourceTree = "<group>"; };
+		B22D4F862B26C85700B8F1F9 /* InstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
+		B22D4F872B26C85700B8F1F9 /* InstructionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstructionsViewController.xib; sourceTree = "<group>"; };
 		B24FD17A2B255B84009CA1BD /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		B24FD17C2B26102D009CA1BD /* ExampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExampleViewController.xib; sourceTree = "<group>"; };
 		B2567BF42B187BAF004E51D8 /* CountryKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountryKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +134,7 @@
 				B22D4F4E2B26206500B8F1F9 /* CountrySelectionViewController.swift */,
 				B22D4F7C2B26229C00B8F1F9 /* CountrySelectionViewController.xib */,
 				B22D4F4F2B26206500B8F1F9 /* CountryViewModel.swift */,
-				B22D4F4C2B26206500B8F1F9 /* SingleCountrySelectionDelegate.swift */,
+				B22D4F4C2B26206500B8F1F9 /* CountrySelectionDelegate.swift */,
 				B22D4F7E2B26477500B8F1F9 /* CellSelectionMeta.swift */,
 			);
 			path = ui;
@@ -204,6 +208,8 @@
 				B24FD17C2B26102D009CA1BD /* ExampleViewController.xib */,
 				B22D4F802B264EA700B8F1F9 /* SelectedCountryCell.swift */,
 				B22D4F812B264EA700B8F1F9 /* SelectedCountryCell.xib */,
+				B22D4F862B26C85700B8F1F9 /* InstructionsViewController.swift */,
+				B22D4F872B26C85700B8F1F9 /* InstructionsViewController.xib */,
 				B2567BFD2B187BAF004E51D8 /* Main.storyboard */,
 				B2567C002B187BB1004E51D8 /* Assets.xcassets */,
 				B2567C022B187BB1004E51D8 /* LaunchScreen.storyboard */,
@@ -283,6 +289,7 @@
 				B2567C042B187BB1004E51D8 /* LaunchScreen.storyboard in Resources */,
 				B22D4F732B26206500B8F1F9 /* FooterCell.xib in Resources */,
 				B22D4F7D2B26229C00B8F1F9 /* CountrySelectionViewController.xib in Resources */,
+				B22D4F892B26C85700B8F1F9 /* InstructionsViewController.xib in Resources */,
 				B24FD17D2B26102D009CA1BD /* ExampleViewController.xib in Resources */,
 				B2567C012B187BB1004E51D8 /* Assets.xcassets in Resources */,
 				B22D4F832B264EA700B8F1F9 /* SelectedCountryCell.xib in Resources */,
@@ -309,7 +316,7 @@
 				B22D4F852B265CEB00B8F1F9 /* UIView+RoundedCorner.swift in Sources */,
 				B22D4F822B264EA700B8F1F9 /* SelectedCountryCell.swift in Sources */,
 				B22D4F6E2B26206500B8F1F9 /* UserInteractionStatus.swift in Sources */,
-				B22D4F662B26206500B8F1F9 /* SingleCountrySelectionDelegate.swift in Sources */,
+				B22D4F662B26206500B8F1F9 /* CountrySelectionDelegate.swift in Sources */,
 				B22D4F6D2B26206500B8F1F9 /* FooterCell.swift in Sources */,
 				B22D4F6B2B26206500B8F1F9 /* FlagKit+Extensions.swift in Sources */,
 				B22D4F722B26206500B8F1F9 /* TextHighlighter.swift in Sources */,
@@ -321,6 +328,7 @@
 				B22D4F642B26206500B8F1F9 /* CountrySelectionPresenter.swift in Sources */,
 				B22D4F752B26206500B8F1F9 /* AddressComponent.swift in Sources */,
 				B22D4F652B26206500B8F1F9 /* CountrySelectionConfig.swift in Sources */,
+				B22D4F882B26C85700B8F1F9 /* InstructionsViewController.swift in Sources */,
 				B22D4F6C2B26206500B8F1F9 /* CountryKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

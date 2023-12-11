@@ -29,8 +29,7 @@ class SelectedCountryCell: UICollectionViewCell, NibLoadable {
     }
     
     func configure(with country: Country) {
-        self.countryFlag.image = Flag(countryCode: country.alpha2Code)?.image(style: .roundedRect)
+        self.countryFlag.image = country.flagImage
         self.countryName.text = country.localizedName
     }
-
 }

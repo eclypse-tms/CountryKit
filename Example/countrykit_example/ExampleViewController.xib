@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExampleViewController" customModule="CountryKit" customModuleProvider="target">
             <connections>
                 <outlet property="mainView" destination="EIa-o7-S8t" id="6zl-6n-wbY"/>
+                <outlet property="selectCountryButton" destination="pg5-6W-aJT" id="pwF-TB-muI"/>
                 <outlet property="view" destination="iN0-l3-epB" id="P5z-2b-Ih2"/>
             </connections>
         </placeholder>
@@ -20,24 +21,44 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EIa-o7-S8t">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="fd1-nS-TDh">
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GT9-WL-Ru9">
-                        <size key="itemSize" width="128" height="128"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EIa-o7-S8t">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="711"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GT9-WL-Ru9">
+                                <size key="itemSize" width="128" height="128"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pg5-6W-aJT">
+                            <rect key="frame" x="121.66666666666669" y="723" width="150" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="qla-La-Yiv"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Select Countries" cornerStyle="medium"/>
+                            <connections>
+                                <action selector="didClickOnSelectCountry:" destination="-1" eventType="touchUpInside" id="CaE-Xb-psr"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="EIa-o7-S8t" firstAttribute="leading" secondItem="fd1-nS-TDh" secondAttribute="leading" id="Cfn-v2-flQ"/>
+                        <constraint firstAttribute="trailing" secondItem="EIa-o7-S8t" secondAttribute="trailing" id="Z1Z-Nj-TZr"/>
+                    </constraints>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="EIa-o7-S8t" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="KQi-6r-7sb"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="EIa-o7-S8t" secondAttribute="bottom" id="gy6-KC-1B0"/>
-                <constraint firstItem="EIa-o7-S8t" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="jKo-fv-2aa"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="EIa-o7-S8t" secondAttribute="trailing" id="yW3-23-SGO"/>
+                <constraint firstItem="fd1-nS-TDh" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="2wx-25-8Xh"/>
+                <constraint firstItem="fd1-nS-TDh" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="YW6-Ai-805"/>
+                <constraint firstItem="fd1-nS-TDh" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Zdt-BN-hV7"/>
+                <constraint firstItem="fd1-nS-TDh" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="ih5-Ad-40y"/>
             </constraints>
             <point key="canvasLocation" x="-44" y="-11"/>
         </view>

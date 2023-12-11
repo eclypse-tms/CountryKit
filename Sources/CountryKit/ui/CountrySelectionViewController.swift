@@ -19,16 +19,16 @@ open class CountrySelectionViewController: UIViewController {
     
     /// this relay gets fired everytime user makes a selection in the UI. true value
     /// indicates that selection was made whereas false value indicates a deselection was made.
-    var singleCountrySelectionRelay = PassthroughSubject<(Country, Bool), Never>()
+    var countrySelectionRelay = PassthroughSubject<(Country, Bool), Never>()
     
     /// this relay gets fired right before this view controller is dismissed with all the selected countries.
-    var bulkCountrySelectionRelay = PassthroughSubject<[Country], Never>()
+    var countrySelectionFinishedRelay = PassthroughSubject<[Country], Never>()
+    
+    /// user canceled country selections by backing out from the UI
+    var countrySelectionWasBackedOut = PassthroughSubject<Void, Never>()
     
     /// get notified everytime user makes a selection or deselection
-    var singleCountrySelectionDelegate: SingleCountrySelectionDelegate?
-    
-    /// get notified of all selections when user finishes making their selections
-    var bulkCountrySelectionDelegate: BulkCountrySelectionDelegate?
+    var delegate: CountrySelectionDelegate?
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +47,10 @@ open class CountrySelectionViewController: UIViewController {
     }
     
     private func configureNavBarButtons() {
+        let backButtonImage = UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(didSelectBack(_:)))
+        navigationItem.leftItemsSupplementBackButton = false
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
     }
     
@@ -80,11 +84,11 @@ open class CountrySelectionViewController: UIViewController {
                 }
                 
                 if cellSelectionMeta.isSelected {
-                    strongSelf.singleCountrySelectionDelegate?.didSelect(country: cellSelectionMeta.country)
-                    strongSelf.singleCountrySelectionRelay.send((cellSelectionMeta.country, true))
+                    strongSelf.delegate?.didSelect(country: cellSelectionMeta.country)
+                    strongSelf.countrySelectionRelay.send((cellSelectionMeta.country, true))
                 } else {
-                    strongSelf.singleCountrySelectionDelegate?.didDeselect(country: cellSelectionMeta.country)
-                    strongSelf.singleCountrySelectionRelay.send((cellSelectionMeta.country, false))
+                    strongSelf.delegate?.didDeselect(country: cellSelectionMeta.country)
+                    strongSelf.countrySelectionRelay.send((cellSelectionMeta.country, false))
                 }
                 
             }).store(in: &cancellables)
@@ -114,8 +118,16 @@ open class CountrySelectionViewController: UIViewController {
     @objc
     open func didSelectDone(_ sender: Any?) {
         let selectedCountries = Array(presenter.formSelectedCountries)
-        bulkCountrySelectionRelay.send(selectedCountries)
-        bulkCountrySelectionDelegate?.didFinishSelecting(countries: selectedCountries)
+        countrySelectionFinishedRelay.send(selectedCountries)
+        delegate?.didFinishSelecting(countries: selectedCountries)
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    open func didSelectBack(_ sender: Any?) {
+        countrySelectionWasBackedOut.send(())
+        delegate?.didBackout()
         
         navigationController?.popViewController(animated: true)
     }
