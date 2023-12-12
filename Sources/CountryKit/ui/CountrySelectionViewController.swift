@@ -25,10 +25,13 @@ open class CountrySelectionViewController: UIViewController {
     public var countrySelectionFinishedRelay = PassthroughSubject<[Country], Never>()
     
     /// user canceled country selections by backing out from the UI
-    public var countrySelectionWasBackedOut = PassthroughSubject<Void, Never>()
+    public var countrySelectionWasCanceled = PassthroughSubject<Void, Never>()
     
     /// get notified everytime user makes a selection or deselection
     public var delegate: CountrySelectionDelegate?
+    
+    /// storage area for custom actions that need to be executed when the user clicks "Back" or "Done" buttons in the navbar
+    private var additionalBarButtonActions = AdditionalBarButtonActions()
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,9 +50,24 @@ open class CountrySelectionViewController: UIViewController {
     }
     
     open func configureNavBarButtons() {
-        let backButtonImage = UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(didSelectBack(_:)))
-        navigationItem.leftItemsSupplementBackButton = false
+        if let validLeftBarButtonItem = countrySelectionConfiguration.leftBarButton {
+            if let validPrimaryAction = validLeftBarButtonItem.primaryAction {
+                //this bar button was created with the new primary action api
+                additionalBarButtonActions.providedActionForLeftBarButton = validPrimaryAction
+            } else {
+                //this babr button was created with old target/selector api
+                additionalBarButtonActions.providedTargetForLeftBarButton = validLeftBarButtonItem.target
+                additionalBarButtonActions.providedSelectorForLeftBarButton = validLeftBarButtonItem.action
+            }
+            
+            navigationItem.leftBarButtonItem = validLeftBarButtonItem
+            navigationItem.leftItemsSupplementBackButton = false
+        } else {
+            let backButtonImage = UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(didSelectBack(_:)))
+            navigationItem.leftItemsSupplementBackButton = false
+        }
+
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
     }
@@ -129,7 +147,7 @@ open class CountrySelectionViewController: UIViewController {
     
     @objc
     open func didSelectBack(_ sender: Any?) {
-        countrySelectionWasBackedOut.send(())
+        countrySelectionWasCanceled.send(())
         delegate?.didBackout()
         
         dismissSelf()

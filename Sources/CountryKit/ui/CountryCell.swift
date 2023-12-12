@@ -20,13 +20,19 @@ class CountryCell: UITableViewCell, NibLoader {
         accessoryType = .none
     }
     
+    private var cellSelectionStyle: CountrySelectionStyle = .checkMark
+    
     override func prepareForReuse() {
         countryFlag.image = nil
         countryName.attributedText = nil
+        
+        selectionStyle = .none
+        accessoryType = .none
     }
     
-    func configure(with viewModel: CountryViewModel) {
+    func configure(with viewModel: CountryViewModel, cellSelectionStyle: CountrySelectionStyle) {
         countryFlag.image = Flag.rectImage(with: viewModel.country)
+        self.cellSelectionStyle = cellSelectionStyle
         if let validHighlightedText = viewModel.highlightedText {
             countryName.attributedText = validHighlightedText
         } else {
@@ -37,9 +43,17 @@ class CountryCell: UITableViewCell, NibLoader {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
-            accessoryType = .checkmark
+            switch cellSelectionStyle {
+            case .checkMark:
+                accessoryType = .checkmark
+                selectionStyle = .none
+            case .highlight:
+                accessoryType = .none
+                selectionStyle = .default
+            }
         } else {
             accessoryType = .none
+            selectionStyle = .none
         }
     }
 }

@@ -5,7 +5,7 @@
 //  Created by eclypse on 12/9/23.
 //
 
-import Foundation
+import UIKit
 
 public struct CountrySelectionConfiguration: Hashable {
     /// controls whether country selection interface allows user to select a country
@@ -50,7 +50,22 @@ public struct CountrySelectionConfiguration: Hashable {
     /// for example, in english this property would read something like "Selecting Worldwide clears previous country selections and represents a selection of all countries and regions.
     public var localizedWorldWideDescription: String = ""
     
+    /// provide custom bar button item that appears on the left (leading) side of the navigation bar
+    /// to override the chevron.backward icon
+    public var leftBarButton: UIBarButtonItem?
+
+    /// provide custom bar button item that appears on the right (trailing) side of the navigation bar
+    /// to override the Done icon
+    public var rightBarButton: UIBarButtonItem?
+    
+    /// indicates how the cells should look like when they are selected by the user
+    public var cellSelectionStyle: CountrySelectionStyle = .checkMark
+    
+    /// initializes CountrySelectionConfiguration with default parameters
     static public func `default`() -> CountrySelectionConfiguration {
         CountrySelectionConfiguration()
     }
+    
+    /// initializes CountrySelectionConfiguration with default parameters
+    public init() {}
 }

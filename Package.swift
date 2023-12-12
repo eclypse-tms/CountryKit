@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "CountryKit",
     platforms: [
-            .iOS(.v13), .macCatalyst(.v13)
+            .iOS(.v14), .macCatalyst(.v14)
         ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.

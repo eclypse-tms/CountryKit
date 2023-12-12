@@ -269,7 +269,7 @@ open class CountrySelectionPresenter: NSObject {
         switch cell {
         case let countryCell as CountryCell:
             if let vm = viewModel as? CountryViewModel {
-                countryCell.configure(with: vm)
+                countryCell.configure(with: vm, cellSelectionStyle: countrySelectionConfig.cellSelectionStyle)
             }
         case let footerCell as FooterCell:
             if let vm = viewModel as? FooterViewModel {
