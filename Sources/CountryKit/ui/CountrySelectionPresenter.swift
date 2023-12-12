@@ -80,6 +80,14 @@ open class CountrySelectionPresenter: NSObject {
                         return nil
                     }
                 }
+            } else if !strongSelf.countrySelectionConfig.excludedCountries.isEmpty {
+                initialCountryList = strongSelf.countryProvider.allKnownCountries.compactMap { (alpha2Code, eachCountry) -> Country? in
+                    if strongSelf.countrySelectionConfig.excludedCountries.contains(eachCountry) {
+                        return nil
+                    } else {
+                        return eachCountry
+                    }
+                }
             } else {
                 initialCountryList = strongSelf.countryProvider.allKnownCountries.map { $1 }
             }
@@ -204,8 +212,11 @@ open class CountrySelectionPresenter: NSObject {
             vms.append(contentsOf: filteredCountryList)
         case .rosterExplanation:
             if !isInSearchMode {
-                if !countrySelectionConfig.rosterJustification.isEmpty {
+                if !countrySelectionConfig.rosterJustification.isEmpty && !countrySelectionConfig.rosterJustification.isEmpty {
                     let vm = FooterViewModel(footerText: countrySelectionConfig.rosterJustification)
+                    vms.append(vm)
+                } else if !countrySelectionConfig.excludedCountries.isEmpty && !countrySelectionConfig.excludedCountriesJustification.isEmpty {
+                    let vm = FooterViewModel(footerText: countrySelectionConfig.excludedCountriesJustification)
                     vms.append(vm)
                 }
             }

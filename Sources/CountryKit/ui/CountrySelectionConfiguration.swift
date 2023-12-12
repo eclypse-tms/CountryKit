@@ -24,14 +24,14 @@ public struct CountrySelectionConfiguration: Hashable {
     ///restrict the countries to the ones in this list. leave empty to show all the countries
     public var countryRoster: Set<Country> = Set()
     
-    ///if the countries are restricted to a limited set, you provide justification to the user as to why that is the case
+    ///if the countries are restricted to a limited set, you provide justification to the user as to why that is the case. optional.
     public var rosterJustification: String = ""
     
     /// list of countries that should be excluded from the main list.
     /// if countryRoster is provided, this property is ignored.
     public var excludedCountries: Set<Country> = Set()
     
-    ///if some countries are removed the list, you may provide justification to the user as to why that is the case
+    ///if some countries are removed the list, you may provide justification to the user as to why that is the case. optional.
     public var excludedCountriesJustification: String = ""
     
     ///after the user makes the first selection, automatically dismisses the interface. defaults to false.
