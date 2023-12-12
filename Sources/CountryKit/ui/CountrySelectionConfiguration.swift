@@ -50,12 +50,12 @@ public struct CountrySelectionConfiguration: Hashable {
     /// for example, in english this property would read something like "Selecting Worldwide clears previous country selections and represents a selection of all countries and regions.
     public var localizedWorldWideDescription: String = ""
     
-    /// provide custom bar button item that appears on the left (leading) side of the navigation bar
-    /// to override the chevron.backward icon
+    /// provide custom bar button that appears on the left (leading) side of the navigation bar instead of chevron.backward styled back bar button.
+    /// if you provide a custom button, you are responsible for dismissing CountrySelectionViewController yourself.
     public var leftBarButton: UIBarButtonItem?
 
-    /// provide custom bar button item that appears on the right (trailing) side of the navigation bar
-    /// to override the Done icon
+    /// provide custom bar button item that appears on the right (trailing) side of the navigation bar instead of system Done button
+    /// if you provide a custom button, you are responsible for dismissing CountrySelectionViewController yourself.
     public var rightBarButton: UIBarButtonItem?
     
     /// indicates how the cells should look like when they are selected by the user

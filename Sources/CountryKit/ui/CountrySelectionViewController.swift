@@ -30,9 +30,6 @@ open class CountrySelectionViewController: UIViewController {
     /// get notified everytime user makes a selection or deselection
     public var delegate: CountrySelectionDelegate?
     
-    /// storage area for custom actions that need to be executed when the user clicks "Back" or "Done" buttons in the navbar
-    private var additionalBarButtonActions = AdditionalBarButtonActions()
-    
     open override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,15 +48,6 @@ open class CountrySelectionViewController: UIViewController {
     
     open func configureNavBarButtons() {
         if let validLeftBarButtonItem = countrySelectionConfiguration.leftBarButton {
-            if let validPrimaryAction = validLeftBarButtonItem.primaryAction {
-                //this bar button was created with the new primary action api
-                additionalBarButtonActions.providedActionForLeftBarButton = validPrimaryAction
-            } else {
-                //this babr button was created with old target/selector api
-                additionalBarButtonActions.providedTargetForLeftBarButton = validLeftBarButtonItem.target
-                additionalBarButtonActions.providedSelectorForLeftBarButton = validLeftBarButtonItem.action
-            }
-            
             navigationItem.leftBarButtonItem = validLeftBarButtonItem
             navigationItem.leftItemsSupplementBackButton = false
         } else {
@@ -68,8 +56,11 @@ open class CountrySelectionViewController: UIViewController {
             navigationItem.leftItemsSupplementBackButton = false
         }
 
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
+        if let validRightBarButtonItem = countrySelectionConfiguration.rightBarButton {
+            navigationItem.rightBarButtonItem = validRightBarButtonItem
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
+        }
     }
     
     open func performDelayedInitialization() {
@@ -134,6 +125,11 @@ open class CountrySelectionViewController: UIViewController {
     open func configureSearchBar() {
         searchBar.returnKeyType = .done
         searchBar.delegate = self
+    }
+    
+    /// convenience function for obtaining currently selected countries
+    open func getSelectedCountries() -> Set<Country> {
+        return presenter.formSelectedCountries
     }
     
     @objc
