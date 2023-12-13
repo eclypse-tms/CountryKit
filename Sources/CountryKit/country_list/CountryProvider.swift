@@ -21,8 +21,9 @@ public protocol CountryProvider: AnyObject {
     /// get a country for a given ISO 3166-1 alpha 3 code
     func find(alpha3Code: String) -> Country
     
-    /// loads all metadata about countries into memory - call only once per app's lifecycle preferable in a non-main queue.
-    func loadAllMetaData()
+    /// loads all metadata about countries into memory.
+    /// You should call this function only once per app's lifecycle preferable in a non-main queue.
+    func loadAdditionalMetaData()
 }
 
 open class CountryProviderImpl: CountryProvider {
@@ -32,7 +33,11 @@ open class CountryProviderImpl: CountryProvider {
         self.bundleLoader = BundleLoaderImpl(fileManager: FileManager.default, bundle: CountryKit.assetBundle)
     }
     
-    public func loadAllMetaData() {
+    public func loadAdditionalMetaData() {
+        loadAssociatedLocales()
+    }
+    
+    private func loadAssociatedLocales() {
         guard let fileContents = bundleLoader.getFileContents(fileName: "Locales", fileExtension: "csv", encoding: nil) else { return }
         //this is a csv file
         let parsedLocaleList = fileContents.components(separatedBy: CharacterSet.newlines)
