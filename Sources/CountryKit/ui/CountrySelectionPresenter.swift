@@ -63,6 +63,8 @@ open class CountrySelectionPresenter: NSObject {
         .receive(on: presenterQueue)
         .sink(receiveValue: {  [weak self] _ in
             guard let strongSelf = self else { return }
+            
+            strongSelf.countryProvider.loadAllMetaData()
                 
             let initialCountryList: [Country]
             if !strongSelf.countryPickerConfig.countryRoster.isEmpty {

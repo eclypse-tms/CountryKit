@@ -21,7 +21,7 @@ public protocol CountryProvider: AnyObject {
     /// get a country for a given ISO 3166-1 alpha 3 code
     func find(alpha3Code: String) -> Country
     
-    /// loads all metadata about countries into memory - call only once per app's lifecycle.
+    /// loads all metadata about countries into memory - call only once per app's lifecycle preferable in a non-main queue.
     func loadAllMetaData()
 }
 
