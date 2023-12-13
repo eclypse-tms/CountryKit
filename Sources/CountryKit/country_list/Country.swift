@@ -8,7 +8,7 @@
 import Foundation
 
 /// a type that represents country
-public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable {
+public class Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable {
     /// alias for alpha2Code
     public var id: String {
         return alpha2Code
@@ -64,6 +64,14 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     
     public var debugDescription: String {
         return "alpha3Code: \(alpha3Code), name: \(englishName)"
+    }
+    
+    public static func == (lhs: Country, rhs: Country) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
         
     public static let Afghanistan = Country(alpha3Code: "AFG", englishName: "Afghanistan", alpha2Code: "AF", addressLabels: AddressLabel.cityOnly)
