@@ -13,7 +13,7 @@
             <connections>
                 <outlet property="footerDirectionsContainer" destination="Uny-Mn-ayd" id="L2I-3d-CCN"/>
                 <outlet property="headerDirectionsContainer" destination="EGA-px-cvU" id="KAu-AD-tD4"/>
-                <outlet property="mainView" destination="vfn-IK-tGF" id="jZX-g2-Hu6"/>
+                <outlet property="pickerView" destination="vfn-IK-tGF" id="rgZ-iL-ipg"/>
                 <outlet property="pinnedFooterDirections" destination="Dg7-0T-9wJ" id="mYt-74-fpc"/>
                 <outlet property="pinnedHeaderDirections" destination="KwS-jK-QSA" id="X5v-PM-Vtz"/>
                 <outlet property="searchBar" destination="bxp-cU-EnB" id="lft-ph-AB3"/>
