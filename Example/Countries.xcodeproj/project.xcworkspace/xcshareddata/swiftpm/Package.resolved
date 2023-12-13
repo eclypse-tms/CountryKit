@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "composure",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/eclypse-tms/Composure",
+      "state" : {
+        "revision" : "5085526b12744c9dd042c66de26b175ca45b963e",
+        "version" : "1.2.2"
+      }
+    },
+    {
+      "identity" : "countrykit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/eclypse-tms/CountryKit",
+      "state" : {
+        "branch" : "fix_bundling_issues",
+        "revision" : "cfadd4fe5a0cf00bf83e9118035beb4f159805ca"
+      }
+    },
+    {
+      "identity" : "flagkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/madebybowtie/FlagKit.git",
+      "state" : {
+        "revision" : "f12111d91902d23fd1d9cc7ad9198030b049795d",
+        "version" : "2.4.0"
+      }
+    }
+  ],
+  "version" : 2
+}
