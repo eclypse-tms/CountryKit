@@ -33,7 +33,7 @@ public protocol BundleLoader: AnyObject {
 
 open class BundleLoaderImpl: BundleLoader {
     open var bundle: Bundle
-    open let fileManager: FileManager
+    open var fileManager: FileManager
     
     init(fileManager: FileManager, bundle: Bundle) {
         self.fileManager = fileManager
