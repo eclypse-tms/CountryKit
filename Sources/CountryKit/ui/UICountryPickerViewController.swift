@@ -80,7 +80,7 @@ open class UICountryPickerViewController: UIViewController {
         }
         
         if let validFooterText = countryPickerConfiguration.pinnedFooterText {
-            pinnedHeaderDirections.text = validFooterText
+            pinnedFooterDirections.text = validFooterText
             footerDirectionsContainer.isHidden = false
         } else {
             footerDirectionsContainer.isHidden = true
