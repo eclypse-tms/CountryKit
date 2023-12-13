@@ -1,19 +1,12 @@
 //
 //  CountrySelectionPresenter.swift
-//  countrykit_example
+//  CountryKit
 //
-//  Created by Turker Nessa on 12/8/23.
+//  Created by eclypse on 12/8/23.
 //
 
 import UIKit
 import Combine
-
-enum CountrySelection: Int, CaseIterable {
-    case worldwide
-    case worldwideExplanation
-    case allCountries
-    case rosterExplanation
-}
 
 open class CountrySelectionPresenter: NSObject {
     //MARK: Injected properties
@@ -23,13 +16,13 @@ open class CountrySelectionPresenter: NSObject {
     
     //MARK: semi-private properties
     private (set) var formSelectedCountries = Set<Country>()
-    private (set) var countrySelectionConfig: CountrySelectionConfig = .defaultValue
+    private (set) var countryPickerConfig: CountryPickerConfiguration = .default()
     
     //MARK: private properties
     private var fullCountryList = [Country]()
     private var filteredCountryList = [CountryViewModel]()
     private var cancellables: Set<AnyCancellable> = []
-    private var dataSource: UITableViewDiffableDataSource<CountrySelection, AnyHashable>?
+    private var dataSource: UITableViewDiffableDataSource<CountryPickerViewSection, AnyHashable>?
     private let reloadDataRelay = PassthroughSubject<Bool, Never>()
     private let viewRestorationRelay = PassthroughSubject<Void, Never>()
     private let tableSelectionRelay = PassthroughSubject<IndexPath, Never>()
@@ -41,10 +34,23 @@ open class CountrySelectionPresenter: NSObject {
     let countrySelectionRelay = PassthroughSubject<CellSelectionMeta, Never>()
     let dismissView = PassthroughSubject<Bool, Never>()
     
-    init(countryProvider: CountryProvider, textHighlighter: TextHighlighter, presenterQueue: DispatchQueue) {
+    public init(countryProvider: CountryProvider, textHighlighter: TextHighlighter, presenterQueue: DispatchQueue) {
         self.countryProvider = countryProvider
         self.textHighlighter = textHighlighter
         self.presenterQueue = presenterQueue
+    }
+    
+    open func register(config: CountryPickerConfiguration) {
+        formSelectedCountries = config.previouslySelectedCountries
+        countryPickerConfig = config
+        
+        let worldWideCountry = Country.Worldwide
+        if !config.localizedWorldWide.isEmpty {
+            Country.Worldwide = Country(alpha3Code: worldWideCountry.alpha3Code,
+                                       englishName: worldWideCountry.englishName,
+                                       alpha2Code: worldWideCountry.alpha2Code,
+                                       localizedNameOverride: countryPickerConfig.localizedWorldWide)
+        }
     }
     
     open func tearDown() {
@@ -59,12 +65,20 @@ open class CountrySelectionPresenter: NSObject {
             guard let strongSelf = self else { return }
                 
             let initialCountryList: [Country]
-            if !strongSelf.countrySelectionConfig.countryRoster.isEmpty {
+            if !strongSelf.countryPickerConfig.countryRoster.isEmpty {
                 initialCountryList = strongSelf.countryProvider.allKnownCountries.compactMap { (alpha2Code, eachCountry) -> Country? in
-                    if strongSelf.countrySelectionConfig.countryRoster.contains(eachCountry) {
+                    if strongSelf.countryPickerConfig.countryRoster.contains(eachCountry) {
                         return eachCountry
                     } else {
                         return nil
+                    }
+                }
+            } else if !strongSelf.countryPickerConfig.excludedCountries.isEmpty {
+                initialCountryList = strongSelf.countryProvider.allKnownCountries.compactMap { (alpha2Code, eachCountry) -> Country? in
+                    if strongSelf.countryPickerConfig.excludedCountries.contains(eachCountry) {
+                        return nil
+                    } else {
+                        return eachCountry
                     }
                 }
             } else {
@@ -106,7 +120,7 @@ open class CountrySelectionPresenter: NSObject {
         tableSelectionRelay.receive(on: presenterQueue)
             .sink { [weak self] selectedIndexPath in
                 guard let strongSelf = self else { return }
-                let countrySection = CountrySelection(rawValue: selectedIndexPath.section)!
+                let countrySection = CountryPickerViewSection(rawValue: selectedIndexPath.section)!
                 switch countrySection {
                 case .worldwide:
                     strongSelf.didSelect(country: Country.Worldwide, at: selectedIndexPath)
@@ -121,7 +135,7 @@ open class CountrySelectionPresenter: NSObject {
         tableDeselectionRelay.receive(on: presenterQueue)
             .sink { [weak self] deselectedIndexPath in
                 guard let strongSelf = self else { return }
-                let countrySection = CountrySelection(rawValue: deselectedIndexPath.section)!
+                let countrySection = CountryPickerViewSection(rawValue: deselectedIndexPath.section)!
                 switch countrySection {
                 case .worldwide:
                     strongSelf.didDeselect(country: Country.Worldwide, at: deselectedIndexPath)
@@ -142,7 +156,7 @@ open class CountrySelectionPresenter: NSObject {
     
     func configureDataSource(with tableView: UITableView) {
         if dataSource == nil {
-            dataSource = UITableViewDiffableDataSource<CountrySelection, AnyHashable>(tableView: tableView) { [weak self] (tableView, indexPath, itemIdentifier) -> UITableViewCell? in
+            dataSource = UITableViewDiffableDataSource<CountryPickerViewSection, AnyHashable>(tableView: tableView) { [weak self] (tableView, indexPath, itemIdentifier) -> UITableViewCell? in
                 guard let strongSelf = self else { return nil }
                 let cellIdentifier = strongSelf.reuseIdentifier(for: indexPath)
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
@@ -155,11 +169,11 @@ open class CountrySelectionPresenter: NSObject {
     }
     
     private func reloadData(shouldAnimate: Bool) {
-        var snapshot = NSDiffableDataSourceSnapshot<CountrySelection, AnyHashable>()
-        snapshot.appendSections(CountrySelection.allCases)
+        var snapshot = NSDiffableDataSourceSnapshot<CountryPickerViewSection, AnyHashable>()
+        snapshot.appendSections(CountryPickerViewSection.allCases)
         
         
-        CountrySelection.allCases.forEach { eachSection in
+        CountryPickerViewSection.allCases.forEach { eachSection in
             let vms = data(for: eachSection)
             snapshot.appendItems(vms, toSection: eachSection)
         }
@@ -170,20 +184,20 @@ open class CountrySelectionPresenter: NSObject {
         })
     }
     
-    private func data(for section: CountrySelection) -> [AnyHashable] {
+    private func data(for section: CountryPickerViewSection) -> [AnyHashable] {
         var vms = [AnyHashable]()
         switch section {
         case .worldwide:
             if !isInSearchMode {
-                if countrySelectionConfig.shouldShowWorldWide {
+                if countryPickerConfig.shouldShowWorldWide {
                     let vm = CountryViewModel(country: Country.Worldwide)
                     vms.append(vm)
                 }
             }
         case .worldwideExplanation:
             if !isInSearchMode {
-                if countrySelectionConfig.shouldShowWorldWide {
-                    let vm = FooterViewModel(footerText: "info_about_worldwide_selection".localized())
+                if countryPickerConfig.shouldShowWorldWide {
+                    let vm = FooterViewModel(footerText: countryPickerConfig.localizedWorldWideDescription)
                     vms.append(vm)
                 }
             }
@@ -191,8 +205,11 @@ open class CountrySelectionPresenter: NSObject {
             vms.append(contentsOf: filteredCountryList)
         case .rosterExplanation:
             if !isInSearchMode {
-                if !countrySelectionConfig.rosterJustification.isEmpty {
-                    let vm = FooterViewModel(footerText: countrySelectionConfig.rosterJustification)
+                if !countryPickerConfig.rosterJustification.isEmpty && !countryPickerConfig.rosterJustification.isEmpty {
+                    let vm = FooterViewModel(footerText: countryPickerConfig.rosterJustification)
+                    vms.append(vm)
+                } else if !countryPickerConfig.excludedCountries.isEmpty && !countryPickerConfig.excludedCountriesJustification.isEmpty {
+                    let vm = FooterViewModel(footerText: countryPickerConfig.excludedCountriesJustification)
                     vms.append(vm)
                 }
             }
@@ -200,13 +217,8 @@ open class CountrySelectionPresenter: NSObject {
         return vms
     }
     
-    func register(config: CountrySelectionConfig) {
-        formSelectedCountries = Set(config.previouslySelectedCountries)
-        countrySelectionConfig = config
-    }
-    
     private func reuseIdentifier(for indexPath: IndexPath) -> String {
-        let countrySection = CountrySelection(rawValue: indexPath.section)!
+        let countrySection = CountryPickerViewSection(rawValue: indexPath.section)!
         switch countrySection {
         case .worldwide, .allCountries:
             return CountryCell.nibName
@@ -226,22 +238,42 @@ open class CountrySelectionPresenter: NSObject {
             isInSearchMode = true
             let searchComponents = strippedString.components(separatedBy: " ") as [String]
             
-            // Build all the "OR" expressions for each value in searchString.
-            filteredCountryList = fullCountryList.filter { eachCountry -> Bool in
+            
+            filteredCountryList = fullCountryList.compactMap { eachCountry -> CountryViewModel? in
                 
-                var shouldIncludeThisCountry = false
-                for eachSearchComponent in searchComponents {
-                    shouldIncludeThisCountry = eachCountry.localizedName.localizedCaseInsensitiveContains(eachSearchComponent)
-                    if shouldIncludeThisCountry {
-                        break
+                var shouldIncludeThisCountry: Bool = false
+                
+                if countryPickerConfig.filteringCriteria == .orSearch {
+                    //when doing an "OR" search - assume that we will not be including this country to begin with
+                    //as soon as we get the first search component that is violating the search criteria, we bail out
+                    //of the loop
+                    shouldIncludeThisCountry = false
+                    for eachSearchComponent in searchComponents {
+                        shouldIncludeThisCountry = eachCountry.localizedName.localizedCaseInsensitiveContains(eachSearchComponent)
+                        if shouldIncludeThisCountry {
+                            break
+                        }
+                    }
+                } else {
+                    //when doing an "AND" search - assume that we will be including this country to begin with
+                    //as soon as we get the first search component that is violating the search criteria, we bail out
+                    //of the loop
+                    shouldIncludeThisCountry = true
+                    for eachSearchComponent in searchComponents {
+                        shouldIncludeThisCountry = eachCountry.localizedName.localizedCaseInsensitiveContains(eachSearchComponent)
+                        if !shouldIncludeThisCountry {
+                            break
+                        }
                     }
                 }
                 
-                return shouldIncludeThisCountry
-            }.map({ eachCountry in
-                let textToHighlight = textHighlighter.highlightedText(sourceText: eachCountry.localizedName, searchComponents: searchComponents)
-                return CountryViewModel(country: eachCountry, highlightedText: textToHighlight)
-            })
+                if shouldIncludeThisCountry {
+                    let textToHighlight = textHighlighter.highlightedText(sourceText: eachCountry.localizedName, searchComponents: searchComponents)
+                    return CountryViewModel(country: eachCountry, highlightedText: textToHighlight)
+                } else {
+                    return nil
+                }
+            }
         }
         reloadDataRelay.send(true)
     }
@@ -250,7 +282,7 @@ open class CountrySelectionPresenter: NSObject {
         switch cell {
         case let countryCell as CountryCell:
             if let vm = viewModel as? CountryViewModel {
-                countryCell.configure(with: vm)
+                countryCell.configure(with: vm, configuration: countryPickerConfig)
             }
         case let footerCell as FooterCell:
             if let vm = viewModel as? FooterViewModel {
@@ -266,7 +298,7 @@ open class CountrySelectionPresenter: NSObject {
             var numberOfRestoredSelections = 0
             for (index, eachCounty) in filteredCountryList.enumerated() {
                 if formSelectedCountries.contains(eachCounty.country) {
-                    let indexPathToRestore = IndexPath(row: index, section: CountrySelection.allCountries.rawValue)
+                    let indexPathToRestore = IndexPath(row: index, section: CountryPickerViewSection.allCountries.rawValue)
                     countrySelectionRelay.send(CellSelectionMeta(country: eachCounty.country, isSelected: true, indexPath: indexPathToRestore, performCellSelection: true))
                     numberOfRestoredSelections += 1
                 }
@@ -281,17 +313,25 @@ open class CountrySelectionPresenter: NSObject {
     
     // MARK: Country Selection Logic
     func didSelect(country: Country, at indexPath: IndexPath) {
-        if countrySelectionConfig.canMultiSelect {
+        if countryPickerConfig.canMultiSelect {
             //multi selection is allowed
             if country == Country.Worldwide {
-                //user selected Worldwide - deselect everything else
-                clearPreviousAnd(selectThis: country)
+                if formSelectedCountries.count == 0 {
+                    //there is no previous selection and user clicked on Worldwide
+                    //UI should already reflect this selection, however, we need to generate a selection event for
+                    //the delegate
+                    formSelectedCountries.insert(country)
+                    countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: true, indexPath: indexPath, performCellSelection: false))
+                } else {
+                    //user selected Worldwide - deselect everything else
+                    clearPreviousAnd(selectThis: country, at: indexPath)
+                }
             } else {
                 //user selected another country
                 if formSelectedCountries.contains(Country.Worldwide) {
                     //but previously worldwide was selected, so clear everything
                     //and select the new country
-                    clearPreviousAnd(selectThis: country)
+                    clearPreviousAnd(selectThis: country, at: indexPath)
                 } else {
                     formSelectedCountries.insert(country)
                     countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: true, indexPath: indexPath, performCellSelection: false))
@@ -299,10 +339,10 @@ open class CountrySelectionPresenter: NSObject {
             }
         } else {
             //only single selection is allowed
-            clearPreviousAnd(selectThis: country)
+            clearPreviousAnd(selectThis: country, at: indexPath)
         }
         
-        if countrySelectionConfig.autoDismiss {
+        if countryPickerConfig.autoDismiss {
             dismissView.send(true)
         }
     }
@@ -310,54 +350,55 @@ open class CountrySelectionPresenter: NSObject {
     func didDeselect(country: Country, at indexPath: IndexPath) {
         formSelectedCountries.remove(country)
         countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: false, indexPath: indexPath, performCellSelection: false))
-        if countrySelectionConfig.autoDismiss {
+        if countryPickerConfig.autoDismiss {
             dismissView.send(true)
         }
     }
     
-    private func clearPreviousAnd(selectThis: Country) {
+    private func clearPreviousAnd(selectThis: Country, at indexPath: IndexPath) {
         formSelectedCountries.forEach { eachSelectedCountry in
             var section: Int = 0
             var row: Int = 0
             
             if eachSelectedCountry == .Worldwide {
-                if isInSearchMode || !countrySelectionConfig.shouldShowWorldWide {
+                if isInSearchMode || !countryPickerConfig.shouldShowWorldWide {
                     //if the user is in search mode or worldwide selection is not allowed
                     //there is only one section
                     //worldwide selection cannot be visually cleared because it is already
                     //hidden
                 } else {
-                    section = CountrySelection.worldwide.rawValue
+                    section = CountryPickerViewSection.worldwide.rawValue
                     row = 0
                     let indexPathToDeselect = IndexPath(row: row, section: section)
-                    countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true))
+                    countrySelectionRelay.send(CellSelectionMeta(country: eachSelectedCountry, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true))
                 }
             } else {
                 if let indexOfPreviouslySelectedCountry = filteredCountryList.firstIndex (where: { $0.country == eachSelectedCountry }) {
-                    if isInSearchMode || !countrySelectionConfig.shouldShowWorldWide {
+                    if isInSearchMode || !countryPickerConfig.shouldShowWorldWide {
                         //if the user is in search mode or worldwide selection is not allowed
                         //there is only one section
-                        section = CountrySelection.allCountries.rawValue
+                        section = CountryPickerViewSection.allCountries.rawValue
                         row = indexOfPreviouslySelectedCountry
                     } else {
                         //other countries reside in section 1
-                        section = CountrySelection.allCountries.rawValue
+                        section = CountryPickerViewSection.allCountries.rawValue
                         row = indexOfPreviouslySelectedCountry
                     }
                     let indexPathToDeselect = IndexPath(row: row, section: section)
-                    countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true))
+                    countrySelectionRelay.send(CellSelectionMeta(country: eachSelectedCountry, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true))
                 }
             }
         }
         formSelectedCountries.removeAll()
         formSelectedCountries.insert(selectThis)
+        countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: true, indexPath: indexPath, performCellSelection: false))
     }
 }
 
 // MARK: UITableViewDelegate
 extension CountrySelectionPresenter: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let countrySection = CountrySelection(rawValue: indexPath.section)!
+        let countrySection = CountryPickerViewSection(rawValue: indexPath.section)!
         switch countrySection {
         case .worldwide:
             return 44
@@ -371,7 +412,7 @@ extension CountrySelectionPresenter: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        let countrySection = CountrySelection(rawValue: indexPath.section)!
+        let countrySection = CountryPickerViewSection(rawValue: indexPath.section)!
         switch countrySection {
         case .worldwideExplanation, .rosterExplanation:
             //explanation cells are not selectable
@@ -382,7 +423,7 @@ extension CountrySelectionPresenter: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        let currentSection = CountrySelection(rawValue: indexPath.section)!
+        let currentSection = CountryPickerViewSection(rawValue: indexPath.section)!
         switch currentSection {
         case .worldwideExplanation, .rosterExplanation:
             //explanation cells are not selectable

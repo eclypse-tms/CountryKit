@@ -9,10 +9,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CountrySelectionViewController" customModule="CountryKit" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UICountryPickerViewController" customModule="CountryKit" customModuleProvider="target">
             <connections>
-                <outlet property="countrySelectionDirections" destination="KwS-jK-QSA" id="SPj-NF-IIS"/>
-                <outlet property="mainView" destination="vfn-IK-tGF" id="jZX-g2-Hu6"/>
+                <outlet property="footerDirectionsContainer" destination="Uny-Mn-ayd" id="L2I-3d-CCN"/>
+                <outlet property="headerDirectionsContainer" destination="EGA-px-cvU" id="KAu-AD-tD4"/>
+                <outlet property="pickerView" destination="vfn-IK-tGF" id="rgZ-iL-ipg"/>
+                <outlet property="pinnedFooterDirections" destination="Dg7-0T-9wJ" id="mYt-74-fpc"/>
+                <outlet property="pinnedHeaderDirections" destination="KwS-jK-QSA" id="X5v-PM-Vtz"/>
                 <outlet property="searchBar" destination="bxp-cU-EnB" id="lft-ph-AB3"/>
                 <outlet property="view" destination="iN0-l3-epB" id="CUZ-iA-ULw"/>
             </connections>
@@ -28,7 +31,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EGA-px-cvU">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="36.333333333333336"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions on how to select countries" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-jK-QSA">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-jK-QSA">
                                     <rect key="frame" x="16" y="7.9999999999999982" width="361" height="20.333333333333329"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <color key="textColor" systemColor="systemGrayColor"/>
@@ -43,17 +46,35 @@
                                 <constraint firstAttribute="bottom" secondItem="KwS-jK-QSA" secondAttribute="bottom" constant="8" id="vy7-jx-99y"/>
                             </constraints>
                         </view>
-                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="bxp-cU-EnB">
-                            <rect key="frame" x="0.0" y="36" width="393" height="56"/>
+                        <searchBar contentMode="redraw" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bxp-cU-EnB">
+                            <rect key="frame" x="0.0" y="36.333333333333329" width="393" height="56"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="cpS-he-PN4"/>
                             </connections>
                         </searchBar>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfn-IK-tGF">
-                            <rect key="frame" x="0.0" y="92.333333333333314" width="393" height="666.66666666666674"/>
+                            <rect key="frame" x="0.0" y="92.333333333333314" width="393" height="608.33333333333348"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-Mn-ayd">
+                            <rect key="frame" x="0.0" y="700.66666666666663" width="393" height="58.333333333333371"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Additional instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-0T-9wJ">
+                                    <rect key="frame" x="16" y="8" width="361" height="42.333333333333336"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <color key="textColor" systemColor="systemGrayColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Dg7-0T-9wJ" secondAttribute="trailing" constant="16" id="2Vv-fs-0vw"/>
+                                <constraint firstItem="Dg7-0T-9wJ" firstAttribute="leading" secondItem="Uny-Mn-ayd" secondAttribute="leading" constant="16" id="8pl-AD-91x"/>
+                                <constraint firstItem="Dg7-0T-9wJ" firstAttribute="top" secondItem="Uny-Mn-ayd" secondAttribute="top" constant="8" id="Uln-iY-c4C"/>
+                                <constraint firstAttribute="bottom" secondItem="Dg7-0T-9wJ" secondAttribute="bottom" constant="8" id="aOW-m1-21W"/>
+                            </constraints>
+                        </view>
                     </subviews>
                 </stackView>
             </subviews>

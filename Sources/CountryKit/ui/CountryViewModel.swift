@@ -1,19 +1,22 @@
 //
 //  CountrySelectionViewModel.swift
-//  countrykit_example
+//  CountryKit
 //
-//  Created by Turker Nessa on 12/9/23.
+//  Created by eclypse on 12/9/23.
 //
 
 import Foundation
 
 public struct CountryViewModel: Hashable {
-    let country: Country
-    let highlightedText: NSAttributedString?
+    /// underlying country
+    public let country: Country
+    
+    /// optional search text that is highlighted
+    public let highlightedSearchText: NSAttributedString?
     
     init(country: Country,
          highlightedText: NSAttributedString? = nil) {
         self.country = country
-        self.highlightedText = highlightedText
+        self.highlightedSearchText = highlightedText
     }
 }

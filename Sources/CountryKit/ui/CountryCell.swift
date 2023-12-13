@@ -1,14 +1,14 @@
 //
 //  CountryCell.swift
-//  countrykit_example
+//  CountryKit
 //
-//  Created by Turker Nessa on 12/9/23.
+//  Created by eclypse on 12/9/23.
 //
 
 import UIKit
 import FlagKit
 
-class CountryCell: UITableViewCell, NibLoadable {
+class CountryCell: UITableViewCell, NibLoader {
     @IBOutlet private weak var countryFlag: UIImageView!
     @IBOutlet private weak var countryName: UILabel!
     
@@ -20,14 +20,24 @@ class CountryCell: UITableViewCell, NibLoadable {
         accessoryType = .none
     }
     
+    private var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
+    
     override func prepareForReuse() {
         countryFlag.image = nil
         countryName.attributedText = nil
+        
+        selectionStyle = .none
+        accessoryType = .none
     }
     
-    func configure(with viewModel: CountryViewModel) {
+    func configure(with viewModel: CountryViewModel, configuration: CountryPickerConfiguration) {
         countryFlag.image = Flag.rectImage(with: viewModel.country)
-        if let validHighlightedText = viewModel.highlightedText {
+        if let validThemeFont = configuration.themeFont {
+            countryName.font = validThemeFont
+        }
+        
+        self.cellSelectionStyle = configuration.cellSelectionStyle
+        if let validHighlightedText = viewModel.highlightedSearchText {
             countryName.attributedText = validHighlightedText
         } else {
             countryName.text = viewModel.country.localizedName
@@ -37,9 +47,17 @@ class CountryCell: UITableViewCell, NibLoadable {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
-            accessoryType = .checkmark
+            switch cellSelectionStyle {
+            case .checkMark:
+                accessoryType = .checkmark
+                selectionStyle = .none
+            case .highlight:
+                accessoryType = .none
+                selectionStyle = .default
+            }
         } else {
             accessoryType = .none
+            selectionStyle = .none
         }
     }
 }

@@ -1,13 +1,13 @@
 //
 //  FooterCell.swift
-//  countrykit_example
+//  CountryKit
 //
-//  Created by Turker Nessa on 12/9/23.
+//  Created by eclypse on 12/9/23.
 //
 
 import UIKit
 
-open class FooterCell: UITableViewCell, NibLoadable {
+open class FooterCell: UITableViewCell, NibLoader {
     @IBOutlet private weak var footerNote: UILabel!
     
     open override func awakeFromNib() {
