@@ -12,8 +12,8 @@ open class UICountryPickerViewController: UIViewController {
     
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var mainView: UITableView!
-    @IBOutlet private weak var headerDirections: UILabel!
-    @IBOutlet private weak var footerDirections: UILabel!
+    @IBOutlet private weak var pinnedHeaderDirections: UILabel!
+    @IBOutlet private weak var pinnedFooterDirections: UILabel!
     @IBOutlet private weak var headerDirectionsContainer: UIView!
     @IBOutlet private weak var footerDirectionsContainer: UIView!
 
@@ -71,15 +71,15 @@ open class UICountryPickerViewController: UIViewController {
     }
     
     open func configureHeaderFooterViews() {
-        if let validHeaderText = countryPickerConfiguration.headerText {
-            headerDirections.text = validHeaderText
+        if let validHeaderText = countryPickerConfiguration.pinnedHeaderText {
+            pinnedHeaderDirections.text = validHeaderText
             headerDirectionsContainer.isHidden = false
         } else {
             headerDirectionsContainer.isHidden = true
         }
         
-        if let validFooterText = countryPickerConfiguration.footerText {
-            headerDirections.text = validFooterText
+        if let validFooterText = countryPickerConfiguration.pinnedFooterText {
+            pinnedHeaderDirections.text = validFooterText
             footerDirectionsContainer.isHidden = false
         } else {
             footerDirectionsContainer.isHidden = true

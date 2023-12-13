@@ -59,10 +59,10 @@ public struct CountryPickerConfiguration: Hashable {
     public var rightBarButton: UIBarButtonItem?
     
     /// when provided, header text is pinned to the top of the view and does not scroll away.
-    public var headerText: String?
+    public var pinnedHeaderText: String?
     
     /// when provided, footer text is pinned to the bottom of the view and does not scroll away.
-    public var footerText: String?
+    public var pinnedFooterText: String?
     
     /// indicates how the cells should look like when they are selected by the user
     public var cellSelectionStyle: CountryCellSelectionStyle = .checkMark

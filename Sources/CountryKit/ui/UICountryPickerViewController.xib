@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UICountryPickerViewController" customModule="CountryKit" customModuleProvider="target">
             <connections>
+                <outlet property="footerDirectionsContainer" destination="Uny-Mn-ayd" id="L2I-3d-CCN"/>
+                <outlet property="headerDirectionsContainer" destination="EGA-px-cvU" id="KAu-AD-tD4"/>
                 <outlet property="mainView" destination="vfn-IK-tGF" id="jZX-g2-Hu6"/>
-                <outlet property="permanentBottomDirections" destination="Dg7-0T-9wJ" id="bdP-cq-iOJ"/>
-                <outlet property="permanentBottomDirectionsContainer" destination="Uny-Mn-ayd" id="Rcg-Zq-pHd"/>
-                <outlet property="permanentTopDirections" destination="KwS-jK-QSA" id="Dal-V2-MHl"/>
-                <outlet property="permanentTopDirectionsContainer" destination="EGA-px-cvU" id="WlU-8h-REV"/>
+                <outlet property="pinnedFooterDirections" destination="Dg7-0T-9wJ" id="mYt-74-fpc"/>
+                <outlet property="pinnedHeaderDirections" destination="KwS-jK-QSA" id="X5v-PM-Vtz"/>
                 <outlet property="searchBar" destination="bxp-cU-EnB" id="lft-ph-AB3"/>
                 <outlet property="view" destination="iN0-l3-epB" id="CUZ-iA-ULw"/>
             </connections>
