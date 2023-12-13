@@ -26,15 +26,22 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     ///localized name
     public let localizedName: String
     
-    ///returns a list of applicable address fields in this locale
+    ///returns a list of applicable address fields in this locale. useful when presenting shipping or invoice addresses in a form.
     public let addressLabels: [AddressLabel]
     
     ///when entering address, some countries like China prefers to present the address fields in a descending scope.
     ///from the largest address units (province) to the smallest address units (street). For most countries, this will be true.
     public let preferesAscendingAddressScope: Bool
     
-    /// frequently associated locales with this country. one of the locales may be the most commonly used locale.
-    /// some countries may not have any locales associated with them.
+    /// Frequently associated locales with this country.
+    /// If this country has more than one locale associated with it, CountryKit does not make a determination as to which locale is the primary one.
+    /// Locales are different from one and other because of the languages associated with that locale.
+    /// For example Puerto Rico has 2 locales:
+    /// * en_PR: Puerto Rico,English
+    /// * es_PR: Puerto Rico,Spanish
+    /// Irrespective of what language forms the basis for that locale, most of the other metadata about Puerto Rico
+    /// may still be useful such as currency, calendar info, measurement system, numbering system, etc...
+    /// Please note that some countries may not have any locales associated with them.
     public var locales: [Locale] = []
     
     public init(alpha3Code: String, englishName: String, alpha2Code: String,
