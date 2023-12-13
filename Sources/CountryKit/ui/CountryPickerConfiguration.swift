@@ -70,6 +70,9 @@ public struct CountryPickerConfiguration: Hashable {
     /// the methodology to use when filtering countries
     public var filteringCriteria: FilteringCriteria = .orSearch
     
+    /// provide a font to match the theme of your app. Otherwise it uses the default OS font
+    public var themeFont: UIFont?
+    
     /// initializes CountrySelectionConfiguration with default parameters
     static public func `default`() -> CountryPickerConfiguration {
         CountryPickerConfiguration()

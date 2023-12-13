@@ -30,9 +30,13 @@ class CountryCell: UITableViewCell, NibLoader {
         accessoryType = .none
     }
     
-    func configure(with viewModel: CountryViewModel, cellSelectionStyle: CountryCellSelectionStyle) {
+    func configure(with viewModel: CountryViewModel, configuration: CountryPickerConfiguration) {
         countryFlag.image = Flag.rectImage(with: viewModel.country)
-        self.cellSelectionStyle = cellSelectionStyle
+        if let validThemeFont = configuration.themeFont {
+            countryName.font = validThemeFont
+        }
+        
+        self.cellSelectionStyle = configuration.cellSelectionStyle
         if let validHighlightedText = viewModel.highlightedSearchText {
             countryName.attributedText = validHighlightedText
         } else {

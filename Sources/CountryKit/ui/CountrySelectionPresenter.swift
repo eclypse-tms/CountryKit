@@ -16,7 +16,7 @@ open class CountrySelectionPresenter: NSObject {
     
     //MARK: semi-private properties
     private (set) var formSelectedCountries = Set<Country>()
-    private (set) var countrySelectionConfig: CountryPickerConfiguration = .default()
+    private (set) var countryPickerConfig: CountryPickerConfiguration = .default()
     
     //MARK: private properties
     private var fullCountryList = [Country]()
@@ -42,14 +42,14 @@ open class CountrySelectionPresenter: NSObject {
     
     open func register(config: CountryPickerConfiguration) {
         formSelectedCountries = config.previouslySelectedCountries
-        countrySelectionConfig = config
+        countryPickerConfig = config
         
         let worldWideCountry = Country.Worldwide
         if !config.localizedWorldWide.isEmpty {
             Country.Worldwide = Country(alpha3Code: worldWideCountry.alpha3Code,
                                        englishName: worldWideCountry.englishName,
                                        alpha2Code: worldWideCountry.alpha2Code,
-                                       localizedNameOverride: countrySelectionConfig.localizedWorldWide)
+                                       localizedNameOverride: countryPickerConfig.localizedWorldWide)
         }
     }
     
@@ -65,17 +65,17 @@ open class CountrySelectionPresenter: NSObject {
             guard let strongSelf = self else { return }
                 
             let initialCountryList: [Country]
-            if !strongSelf.countrySelectionConfig.countryRoster.isEmpty {
+            if !strongSelf.countryPickerConfig.countryRoster.isEmpty {
                 initialCountryList = strongSelf.countryProvider.allKnownCountries.compactMap { (alpha2Code, eachCountry) -> Country? in
-                    if strongSelf.countrySelectionConfig.countryRoster.contains(eachCountry) {
+                    if strongSelf.countryPickerConfig.countryRoster.contains(eachCountry) {
                         return eachCountry
                     } else {
                         return nil
                     }
                 }
-            } else if !strongSelf.countrySelectionConfig.excludedCountries.isEmpty {
+            } else if !strongSelf.countryPickerConfig.excludedCountries.isEmpty {
                 initialCountryList = strongSelf.countryProvider.allKnownCountries.compactMap { (alpha2Code, eachCountry) -> Country? in
-                    if strongSelf.countrySelectionConfig.excludedCountries.contains(eachCountry) {
+                    if strongSelf.countryPickerConfig.excludedCountries.contains(eachCountry) {
                         return nil
                     } else {
                         return eachCountry
@@ -189,15 +189,15 @@ open class CountrySelectionPresenter: NSObject {
         switch section {
         case .worldwide:
             if !isInSearchMode {
-                if countrySelectionConfig.shouldShowWorldWide {
+                if countryPickerConfig.shouldShowWorldWide {
                     let vm = CountryViewModel(country: Country.Worldwide)
                     vms.append(vm)
                 }
             }
         case .worldwideExplanation:
             if !isInSearchMode {
-                if countrySelectionConfig.shouldShowWorldWide {
-                    let vm = FooterViewModel(footerText: countrySelectionConfig.localizedWorldWideDescription)
+                if countryPickerConfig.shouldShowWorldWide {
+                    let vm = FooterViewModel(footerText: countryPickerConfig.localizedWorldWideDescription)
                     vms.append(vm)
                 }
             }
@@ -205,11 +205,11 @@ open class CountrySelectionPresenter: NSObject {
             vms.append(contentsOf: filteredCountryList)
         case .rosterExplanation:
             if !isInSearchMode {
-                if !countrySelectionConfig.rosterJustification.isEmpty && !countrySelectionConfig.rosterJustification.isEmpty {
-                    let vm = FooterViewModel(footerText: countrySelectionConfig.rosterJustification)
+                if !countryPickerConfig.rosterJustification.isEmpty && !countryPickerConfig.rosterJustification.isEmpty {
+                    let vm = FooterViewModel(footerText: countryPickerConfig.rosterJustification)
                     vms.append(vm)
-                } else if !countrySelectionConfig.excludedCountries.isEmpty && !countrySelectionConfig.excludedCountriesJustification.isEmpty {
-                    let vm = FooterViewModel(footerText: countrySelectionConfig.excludedCountriesJustification)
+                } else if !countryPickerConfig.excludedCountries.isEmpty && !countryPickerConfig.excludedCountriesJustification.isEmpty {
+                    let vm = FooterViewModel(footerText: countryPickerConfig.excludedCountriesJustification)
                     vms.append(vm)
                 }
             }
@@ -243,7 +243,7 @@ open class CountrySelectionPresenter: NSObject {
                 
                 var shouldIncludeThisCountry: Bool = false
                 
-                if countrySelectionConfig.filteringCriteria == .orSearch {
+                if countryPickerConfig.filteringCriteria == .orSearch {
                     //when doing an "OR" search - assume that we will not be including this country to begin with
                     //as soon as we get the first search component that is violating the search criteria, we bail out
                     //of the loop
@@ -282,7 +282,7 @@ open class CountrySelectionPresenter: NSObject {
         switch cell {
         case let countryCell as CountryCell:
             if let vm = viewModel as? CountryViewModel {
-                countryCell.configure(with: vm, cellSelectionStyle: countrySelectionConfig.cellSelectionStyle)
+                countryCell.configure(with: vm, configuration: countryPickerConfig)
             }
         case let footerCell as FooterCell:
             if let vm = viewModel as? FooterViewModel {
@@ -313,7 +313,7 @@ open class CountrySelectionPresenter: NSObject {
     
     // MARK: Country Selection Logic
     func didSelect(country: Country, at indexPath: IndexPath) {
-        if countrySelectionConfig.canMultiSelect {
+        if countryPickerConfig.canMultiSelect {
             //multi selection is allowed
             if country == Country.Worldwide {
                 if formSelectedCountries.count == 0 {
@@ -342,7 +342,7 @@ open class CountrySelectionPresenter: NSObject {
             clearPreviousAnd(selectThis: country, at: indexPath)
         }
         
-        if countrySelectionConfig.autoDismiss {
+        if countryPickerConfig.autoDismiss {
             dismissView.send(true)
         }
     }
@@ -350,7 +350,7 @@ open class CountrySelectionPresenter: NSObject {
     func didDeselect(country: Country, at indexPath: IndexPath) {
         formSelectedCountries.remove(country)
         countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: false, indexPath: indexPath, performCellSelection: false))
-        if countrySelectionConfig.autoDismiss {
+        if countryPickerConfig.autoDismiss {
             dismissView.send(true)
         }
     }
@@ -361,7 +361,7 @@ open class CountrySelectionPresenter: NSObject {
             var row: Int = 0
             
             if eachSelectedCountry == .Worldwide {
-                if isInSearchMode || !countrySelectionConfig.shouldShowWorldWide {
+                if isInSearchMode || !countryPickerConfig.shouldShowWorldWide {
                     //if the user is in search mode or worldwide selection is not allowed
                     //there is only one section
                     //worldwide selection cannot be visually cleared because it is already
@@ -374,7 +374,7 @@ open class CountrySelectionPresenter: NSObject {
                 }
             } else {
                 if let indexOfPreviouslySelectedCountry = filteredCountryList.firstIndex (where: { $0.country == eachSelectedCountry }) {
-                    if isInSearchMode || !countrySelectionConfig.shouldShowWorldWide {
+                    if isInSearchMode || !countryPickerConfig.shouldShowWorldWide {
                         //if the user is in search mode or worldwide selection is not allowed
                         //there is only one section
                         section = CountryPickerViewSection.allCountries.rawValue

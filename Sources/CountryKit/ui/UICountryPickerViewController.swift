@@ -10,10 +10,10 @@ import Combine
 
 open class UICountryPickerViewController: UIViewController {
     
-    @IBOutlet private weak var searchBar: UISearchBar!
-    @IBOutlet private weak var mainView: UITableView!
-    @IBOutlet private weak var pinnedHeaderDirections: UILabel!
-    @IBOutlet private weak var pinnedFooterDirections: UILabel!
+    @IBOutlet public weak var searchBar: UISearchBar!
+    @IBOutlet public weak var pickerView: UITableView!
+    @IBOutlet public weak var pinnedHeaderDirections: UILabel!
+    @IBOutlet public weak var pinnedFooterDirections: UILabel!
     @IBOutlet private weak var headerDirectionsContainer: UIView!
     @IBOutlet private weak var footerDirectionsContainer: UIView!
 
@@ -44,6 +44,7 @@ open class UICountryPickerViewController: UIViewController {
         performDelayedInitialization()
         configureMainView()
         configureHeaderFooterViews()
+        configureTheme()
         configureSearchBar()
         configureBindings()
     }
@@ -95,6 +96,14 @@ open class UICountryPickerViewController: UIViewController {
                                               presenterQueue: presenterQueue)
     }
     
+    open func configureTheme() {
+        if let validThemeFont = countryPickerConfiguration.themeFont {
+            searchBar.searchTextField.font = validThemeFont
+            pinnedHeaderDirections.font = countryPickerConfiguration.themeFont
+            pinnedFooterDirections.font = countryPickerConfiguration.themeFont
+        }
+    }
+    
     open func configureBindings() {
         presenter.dismissView
             .receive(on: DispatchQueue.main)
@@ -110,9 +119,9 @@ open class UICountryPickerViewController: UIViewController {
                 guard let strongSelf = self else { return }
                 if cellSelectionMeta.performCellSelection {
                     if cellSelectionMeta.isSelected {
-                        strongSelf.mainView.selectRow(at: cellSelectionMeta.indexPath, animated: false, scrollPosition: .none)
+                        strongSelf.pickerView.selectRow(at: cellSelectionMeta.indexPath, animated: false, scrollPosition: .none)
                     } else {
-                        strongSelf.mainView.deselectRow(at: cellSelectionMeta.indexPath, animated: false)
+                        strongSelf.pickerView.deselectRow(at: cellSelectionMeta.indexPath, animated: false)
                     }
                 }
                 
@@ -131,18 +140,18 @@ open class UICountryPickerViewController: UIViewController {
     }
     
     open func configureMainView() {
-        presenter.configureDataSource(with: mainView)
-        mainView.delegate = presenter
-        mainView.register(CountryCell.nib, forCellReuseIdentifier: CountryCell.nibName)
-        mainView.register(FooterCell.nib, forCellReuseIdentifier: FooterCell.nibName)
+        presenter.configureDataSource(with: pickerView)
+        pickerView.delegate = presenter
+        pickerView.register(CountryCell.nib, forCellReuseIdentifier: CountryCell.nibName)
+        pickerView.register(FooterCell.nib, forCellReuseIdentifier: FooterCell.nibName)
         
-        mainView.allowsSelection = countryPickerConfiguration.allowsSelection
-        mainView.allowsMultipleSelection = countryPickerConfiguration.canMultiSelect
-        mainView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 150, right: 0)
-        mainView.tableFooterView = UIView()
-        mainView.separatorStyle = .singleLine
-        mainView.estimatedRowHeight = CGFloat(44)
-        mainView.rowHeight = UITableView.automaticDimension
+        pickerView.allowsSelection = countryPickerConfiguration.allowsSelection
+        pickerView.allowsMultipleSelection = countryPickerConfiguration.canMultiSelect
+        pickerView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 150, right: 0)
+        pickerView.tableFooterView = UIView()
+        pickerView.separatorStyle = .singleLine
+        pickerView.estimatedRowHeight = CGFloat(44)
+        pickerView.rowHeight = UITableView.automaticDimension
     }
     
     open func configureSearchBar() {
