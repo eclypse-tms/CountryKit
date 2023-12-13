@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  UICountryPickerViewController.swift
 //  CountryKit
 //
 //  Created by eclypse on 11/30/23.
@@ -8,11 +8,14 @@
 import UIKit
 import Combine
 
-open class CountrySelectionViewController: UIViewController {
+open class UICountryPickerViewController: UIViewController {
     
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var mainView: UITableView!
-    @IBOutlet private weak var countrySelectionDirections: UILabel!
+    @IBOutlet private weak var headerDirections: UILabel!
+    @IBOutlet private weak var footerDirections: UILabel!
+    @IBOutlet private weak var headerDirectionsContainer: UIView!
+    @IBOutlet private weak var footerDirectionsContainer: UIView!
 
     open var presenter: CountrySelectionPresenter!
     private var cancellables: Set<AnyCancellable> = []
@@ -28,7 +31,10 @@ open class CountrySelectionViewController: UIViewController {
     public var countrySelectionWasCanceled = PassthroughSubject<Void, Never>()
     
     /// get notified everytime user makes a selection or deselection
-    public var delegate: CountrySelectionDelegate?
+    public var delegate: UICountryPickerDelegate?
+    
+    ///register a config file to change the behavior of this country selection interface
+    open var countryPickerConfiguration: CountryPickerConfiguration = .default()
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +43,7 @@ open class CountrySelectionViewController: UIViewController {
         configureNavBarButtons()
         performDelayedInitialization()
         configureMainView()
+        configureHeaderFooterViews()
         configureSearchBar()
         configureBindings()
     }
@@ -47,7 +54,7 @@ open class CountrySelectionViewController: UIViewController {
     }
     
     open func configureNavBarButtons() {
-        if let validLeftBarButtonItem = countrySelectionConfiguration.leftBarButton {
+        if let validLeftBarButtonItem = countryPickerConfiguration.leftBarButton {
             navigationItem.leftBarButtonItem = validLeftBarButtonItem
             navigationItem.leftItemsSupplementBackButton = false
         } else {
@@ -56,10 +63,26 @@ open class CountrySelectionViewController: UIViewController {
             navigationItem.leftItemsSupplementBackButton = false
         }
 
-        if let validRightBarButtonItem = countrySelectionConfiguration.rightBarButton {
+        if let validRightBarButtonItem = countryPickerConfiguration.rightBarButton {
             navigationItem.rightBarButtonItem = validRightBarButtonItem
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
+        }
+    }
+    
+    open func configureHeaderFooterViews() {
+        if let validHeaderText = countryPickerConfiguration.headerText {
+            headerDirections.text = validHeaderText
+            headerDirectionsContainer.isHidden = false
+        } else {
+            headerDirectionsContainer.isHidden = true
+        }
+        
+        if let validFooterText = countryPickerConfiguration.footerText {
+            headerDirections.text = validFooterText
+            footerDirectionsContainer.isHidden = false
+        } else {
+            footerDirectionsContainer.isHidden = true
         }
     }
     
@@ -103,7 +126,7 @@ open class CountrySelectionViewController: UIViewController {
                 
             }).store(in: &cancellables)
         
-        presenter.register(config: self.countrySelectionConfiguration)
+        presenter.register(config: self.countryPickerConfiguration)
         presenter.configureBindings()
     }
     
@@ -113,8 +136,8 @@ open class CountrySelectionViewController: UIViewController {
         mainView.register(CountryCell.nib, forCellReuseIdentifier: CountryCell.nibName)
         mainView.register(FooterCell.nib, forCellReuseIdentifier: FooterCell.nibName)
         
-        mainView.allowsSelection = countrySelectionConfiguration.allowsSelection
-        mainView.allowsMultipleSelection = countrySelectionConfiguration.canMultiSelect
+        mainView.allowsSelection = countryPickerConfiguration.allowsSelection
+        mainView.allowsMultipleSelection = countryPickerConfiguration.canMultiSelect
         mainView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 150, right: 0)
         mainView.tableFooterView = UIView()
         mainView.separatorStyle = .singleLine
@@ -144,7 +167,7 @@ open class CountrySelectionViewController: UIViewController {
     @objc
     open func didSelectBack(_ sender: Any?) {
         countrySelectionWasCanceled.send(())
-        delegate?.didBackout()
+        delegate?.didCancel()
         
         dismissSelf()
     }
@@ -172,12 +195,9 @@ open class CountrySelectionViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         }
     }
-    
-    ///register a config file to change the behavior of this country selection interface
-    open var countrySelectionConfiguration: CountrySelectionConfiguration = .default()
 }
 
-extension CountrySelectionViewController: UISearchBarDelegate {
+extension UICountryPickerViewController: UISearchBarDelegate {
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter.searchBarRelay.send(searchText)
     }

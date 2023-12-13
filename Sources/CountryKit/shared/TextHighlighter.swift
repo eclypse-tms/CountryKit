@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// You use TextHighlighter to highlight search query within the target text
+/// You use TextHighlighter to highlight search query within a target text
 public protocol TextHighlighter: AnyObject {
     /// returns an attributed text where each search component is highlighted if found within the text
     func highlightedText(sourceText: String, searchComponents: [String]) -> NSAttributedString

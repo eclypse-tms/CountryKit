@@ -8,12 +8,15 @@
 import Foundation
 
 public struct CountryViewModel: Hashable {
-    let country: Country
-    let highlightedText: NSAttributedString?
+    /// underlying country
+    public let country: Country
+    
+    /// optional search text that is highlighted
+    public let highlightedSearchText: NSAttributedString?
     
     init(country: Country,
          highlightedText: NSAttributedString? = nil) {
         self.country = country
-        self.highlightedText = highlightedText
+        self.highlightedSearchText = highlightedText
     }
 }

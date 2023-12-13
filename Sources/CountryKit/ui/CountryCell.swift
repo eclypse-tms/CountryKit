@@ -20,7 +20,7 @@ class CountryCell: UITableViewCell, NibLoader {
         accessoryType = .none
     }
     
-    private var cellSelectionStyle: CountrySelectionStyle = .checkMark
+    private var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
     
     override func prepareForReuse() {
         countryFlag.image = nil
@@ -30,10 +30,10 @@ class CountryCell: UITableViewCell, NibLoader {
         accessoryType = .none
     }
     
-    func configure(with viewModel: CountryViewModel, cellSelectionStyle: CountrySelectionStyle) {
+    func configure(with viewModel: CountryViewModel, cellSelectionStyle: CountryCellSelectionStyle) {
         countryFlag.image = Flag.rectImage(with: viewModel.country)
         self.cellSelectionStyle = cellSelectionStyle
-        if let validHighlightedText = viewModel.highlightedText {
+        if let validHighlightedText = viewModel.highlightedSearchText {
             countryName.attributedText = validHighlightedText
         } else {
             countryName.text = viewModel.country.localizedName

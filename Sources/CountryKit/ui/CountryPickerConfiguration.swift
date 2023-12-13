@@ -1,5 +1,5 @@
 //
-//  CountrySelectionConfiguration.swift
+//  CountryPickerConfiguration.swift
 //  CountryKit
 //
 //  Created by eclypse on 12/9/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-public struct CountrySelectionConfiguration: Hashable {
+public struct CountryPickerConfiguration: Hashable {
     /// controls whether country selection interface allows user to select a country
     public var allowsSelection: Bool = true
     
@@ -58,12 +58,21 @@ public struct CountrySelectionConfiguration: Hashable {
     /// if you provide a custom button, you are responsible for dismissing CountrySelectionViewController yourself.
     public var rightBarButton: UIBarButtonItem?
     
+    /// when provided, header text is pinned to the top of the view and does not scroll away.
+    public var headerText: String?
+    
+    /// when provided, footer text is pinned to the bottom of the view and does not scroll away.
+    public var footerText: String?
+    
     /// indicates how the cells should look like when they are selected by the user
-    public var cellSelectionStyle: CountrySelectionStyle = .checkMark
+    public var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
+    
+    /// the methodology to use when filtering countries
+    public var filteringCriteria: FilteringCriteria = .orSearch
     
     /// initializes CountrySelectionConfiguration with default parameters
-    static public func `default`() -> CountrySelectionConfiguration {
-        CountrySelectionConfiguration()
+    static public func `default`() -> CountryPickerConfiguration {
+        CountryPickerConfiguration()
     }
     
     /// initializes CountrySelectionConfiguration with default parameters
