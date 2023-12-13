@@ -33,6 +33,10 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     ///from the largest address units (province) to the smallest address units (street). For most countries, this will be true.
     public let preferesAscendingAddressScope: Bool
     
+    /// frequently associated locales with this country. one of the locales may be the most commonly used locale.
+    /// some countries may not have any locales associated with them.
+    public var locales: [Locale] = []
+    
     public init(alpha3Code: String, englishName: String, alpha2Code: String,
                 addressLabels: [AddressLabel] = [],
                 preferesAscendingAddressScope: Bool = true,
@@ -316,4 +320,3 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     public static var Worldwide = Country(alpha3Code: "WWC", englishName: "Worldwide", alpha2Code: "WW", localizedNameOverride: nil)
     public static var Unknown = Country(alpha3Code: "_UK", englishName: "Unknown Country", alpha2Code: "_U", localizedNameOverride: nil)
 }
-

@@ -2,7 +2,7 @@
 //  NibLoadable.swift
 //  Countries
 //
-//  Created by Turker Nessa on 12/11/23.
+//  Created by eclypse on 12/11/23.
 //
 
 import UIKit

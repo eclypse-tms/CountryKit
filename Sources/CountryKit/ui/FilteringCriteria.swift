@@ -2,7 +2,7 @@
 //  FilteringCriteria.swift
 //  CountryKit
 //
-//  Created by Turker Nessa on 12/12/23.
+//  Created by eclypse on 12/12/23.
 //
 
 import Foundation

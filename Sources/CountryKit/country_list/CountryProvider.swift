@@ -20,9 +20,42 @@ public protocol CountryProvider: AnyObject {
     
     /// get a country for a given ISO 3166-1 alpha 3 code
     func find(alpha3Code: String) -> Country
+    
+    /// loads all metadata about countries into memory - call only once per app's lifecycle.
+    func loadAllMetaData()
 }
 
 open class CountryProviderImpl: CountryProvider {
+    open var bundleLoader: BundleLoader
+    
+    public init() {
+        self.bundleLoader = BundleLoaderImpl(fileManager: FileManager.default, bundle: CountryKit.assetBundle)
+    }
+    
+    public func loadAllMetaData() {
+        guard let fileContents = bundleLoader.getFileContents(fileName: "Locales", fileExtension: "csv", encoding: nil) else { return }
+        //this is a csv file
+        let parsedLocaleList = fileContents.components(separatedBy: CharacterSet.newlines)
+        for (index, eachParsedLocaleList) in parsedLocaleList.enumerated() {
+            if index == 0 {
+                //skip the header row
+                continue
+            }
+            
+            let components = eachParsedLocaleList.components(separatedBy: ",")
+            if components.count > 2 {
+                //locale,regioncode,region,language,script
+                let localeIdentifier = components[0]
+                let alpha2Code = components[1]
+                allKnownCountries[alpha2Code]?.locales.append(Locale(identifier: localeIdentifier))
+            } else {
+                //this locale entry does not have locale identifier and region code
+                continue
+            }
+        }
+    }
+    
+    /// a dictionary of all known countries that are keyed by their alpha2 code
     lazy public var allKnownCountries: [String: Country] = {
         return [
             Country.United_States.alpha2Code: .United_States,
