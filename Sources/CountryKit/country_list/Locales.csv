@@ -1,0 +1,647 @@
+locale,alpha2Code,region,language,script
+ca_AD,AD,Andorra,Catalan,--
+en_AE,AE,United Arab Emirates,English,--
+ar_AE,AE,United Arab Emirates,Arabic,--
+ps_AF,AF,Afghanistan,Pashto,--
+fa_AF,AF,Afghanistan,Persian,--
+uz_Arab_AF,AF,Afghanistan,Uzbek,Arabic
+en_AG,AG,Antigua & Barbuda,English,--
+es_AG,AG,Antigua & Barbuda,Spanish,--
+en_AI,AI,Anguilla,English,--
+en_AL,AL,Albania,English,--
+sq_AL,AL,Albania,Albanian,--
+hy_AM,AM,Armenia,Armenian,--
+ln_AO,AO,Angola,Lingala,--
+pt_AO,AO,Angola,Portuguese,--
+en_AR,AR,Argentina,English,--
+es_AR,AR,Argentina,Spanish,--
+en_AS,AS,American Samoa,English,--
+en_AT,AT,Austria,English,--
+de_AT,AT,Austria,German,--
+en_AU,AU,Australia,English,--
+nl_AW,AW,Aruba,Dutch,--
+sv_AX,AX,Åland Islands,Swedish,--
+az_Latn_AZ,AZ,Azerbaijan,Azerbaijani,Latin
+az_Cyrl_AZ,AZ,Azerbaijan,Azerbaijani,Cyrillic
+hr_BA,BA,Bosnia & Herzegovina,Croatian,--
+bs_Cyrl_BA,BA,Bosnia & Herzegovina,Bosnian,Cyrillic
+sr_Latn_BA,BA,Bosnia & Herzegovina,Serbian,Latin
+sr_Cyrl_BA,BA,Bosnia & Herzegovina,Serbian,Cyrillic
+bs_Latn_BA,BA,Bosnia & Herzegovina,Bosnian,Latin
+es_BB,BB,Barbados,Spanish,--
+en_BB,BB,Barbados,English,--
+rhg_Rohg_BD,BD,Bangladesh,Rohingya,Hanifi Rohingya
+ccp_BD,BD,Bangladesh,Chakma,--
+bn_BD,BD,Bangladesh,Bangla,--
+en_BD,BD,Bangladesh,English,--
+de_BE,BE,Belgium,German,--
+fr_BE,BE,Belgium,French,--
+wa_BE,BE,Belgium,Walloon,--
+nl_BE,BE,Belgium,Dutch,--
+en_BE,BE,Belgium,English,--
+fr_BF,BF,Burkina Faso,French,--
+ff_Latn_BF,BF,Burkina Faso,Fula,Latin
+ff_Adlm_BF,BF,Burkina Faso,Fula,Adlam
+en_BG,BG,Bulgaria,English,--
+bg_BG,BG,Bulgaria,Bulgarian,--
+ar_BH,BH,Bahrain,Arabic,--
+en_BI,BI,Burundi,English,--
+rn_BI,BI,Burundi,Rundi,--
+fr_BI,BI,Burundi,French,--
+yo_BJ,BJ,Benin,Yoruba,--
+fr_BJ,BJ,Benin,French,--
+fr_BL,BL,St. Barthélemy,French,--
+en_BM,BM,Bermuda,English,--
+es_BM,BM,Bermuda,Spanish,--
+en_BN,BN,Brunei,English,--
+ms_BN,BN,Brunei,Malay,--
+ms_Arab_BN,BN,Brunei,Malay,Arabic
+qu_BO,BO,Bolivia,Quechua,--
+es_BO,BO,Bolivia,Spanish,--
+es_BQ,BQ,Caribbean Netherlands,Spanish,--
+nl_BQ,BQ,Caribbean Netherlands,Dutch,--
+en_BR,BR,Brazil,English,--
+es_BR,BR,Brazil,Spanish,--
+pt_BR,BR,Brazil,Portuguese,--
+en_BS,BS,Bahamas,English,--
+es_BS,BS,Bahamas,Spanish,--
+dz_BT,BT,Bhutan,Dzongkha,--
+en_BW,BW,Botswana,English,--
+tn_BW,BW,Botswana,Tswana,--
+ru_BY,BY,Belarus,Russian,--
+be_BY,BY,Belarus,Belarusian,--
+en_BZ,BZ,Belize,English,--
+es_BZ,BZ,Belize,Spanish,--
+iu_CA,CA,Canada,Inuktitut,--
+es_CA,CA,Canada,Spanish,--
+fr_CA,CA,Canada,French,--
+moh_CA,CA,Canada,Mohawk,--
+en_CA,CA,Canada,English,--
+en_CC,CC,Cocos (Keeling) Islands,English,--
+sw_CD,CD,Congo - Kinshasa,Swahili,--
+lu_CD,CD,Congo - Kinshasa,Luba-Katanga,--
+ln_CD,CD,Congo - Kinshasa,Lingala,--
+fr_CD,CD,Congo - Kinshasa,French,--
+ln_CF,CF,Central African Republic,Lingala,--
+fr_CF,CF,Central African Republic,French,--
+sg_CF,CF,Central African Republic,Sango,--
+ln_CG,CG,Congo - Brazzaville,Lingala,--
+fr_CG,CG,Congo - Brazzaville,French,--
+de_CH,CH,Switzerland,German,--
+rm_CH,CH,Switzerland,Romansh,--
+wae_CH,CH,Switzerland,Walser,--
+pt_CH,CH,Switzerland,Portuguese,--
+fr_CH,CH,Switzerland,French,--
+gsw_CH,CH,Switzerland,Swiss German,--
+en_CH,CH,Switzerland,English,--
+it_CH,CH,Switzerland,Italian,--
+fr_CI,CI,Côte d’Ivoire,French,--
+en_CK,CK,Cook Islands,English,--
+es_CL,CL,Chile,Spanish,--
+arn_CL,CL,Chile,Mapuche,--
+en_CL,CL,Chile,English,--
+en_CM,CM,Cameroon,English,--
+ksf_CM,CM,Cameroon,Bafia,--
+mua_CM,CM,Cameroon,Mundang,--
+mgo_CM,CM,Cameroon,Metaʼ,--
+ewo_CM,CM,Cameroon,Ewondo,--
+nnh_CM,CM,Cameroon,Ngiemboon,--
+yav_CM,CM,Cameroon,Yangben,--
+dua_CM,CM,Cameroon,Duala,--
+agq_CM,CM,Cameroon,Aghem,--
+bas_CM,CM,Cameroon,Basaa,--
+fr_CM,CM,Cameroon,French,--
+jgo_CM,CM,Cameroon,Ngomba,--
+ff_Latn_CM,CM,Cameroon,Fula,Latin
+nmg_CM,CM,Cameroon,Kwasio,--
+ff_Adlm_CM,CM,Cameroon,Fula,Adlam
+kkj_CM,CM,Cameroon,Kako,--
+en_CN,CN,China mainland,English,--
+yue_Hans_CN,CN,China mainland,Cantonese,Simplified Han
+bo_CN,CN,China mainland,Tibetan,--
+zh_Hans_CN,CN,China mainland,Chinese,Simplified Han
+ug_CN,CN,China mainland,Uyghur,--
+zh_Hant_CN,CN,China mainland,Chinese,Traditional Han
+ii_CN,CN,China mainland,Sichuan Yi,--
+en_CO,CO,Colombia,English,--
+es_CO,CO,Colombia,Spanish,--
+es_CR,CR,Costa Rica,Spanish,--
+es_CU,CU,Cuba,Spanish,--
+kea_CV,CV,Cape Verde,Kabuverdianu,--
+pt_CV,CV,Cape Verde,Portuguese,--
+es_CW,CW,Curaçao,Spanish,--
+nl_CW,CW,Curaçao,Dutch,--
+en_CX,CX,Christmas Island,English,--
+en_CY,CY,Cyprus,English,--
+tr_CY,CY,Cyprus,Turkish,--
+el_CY,CY,Cyprus,Greek,--
+en_CZ,CZ,Czechia,English,--
+cs_CZ,CZ,Czechia,Czech,--
+ksh_DE,DE,Germany,Colognian,--
+nds_DE,DE,Germany,Low German,--
+en_DE,DE,Germany,English,--
+hsb_DE,DE,Germany,Upper Sorbian,--
+de_DE,DE,Germany,German,--
+dsb_DE,DE,Germany,Lower Sorbian,--
+en_DG,DG,Diego Garcia,English,--
+fr_DJ,DJ,Djibouti,French,--
+ar_DJ,DJ,Djibouti,Arabic,--
+so_DJ,DJ,Djibouti,Somali,--
+fo_DK,DK,Denmark,Faroese,--
+da_DK,DK,Denmark,Danish,--
+en_DK,DK,Denmark,English,--
+es_DM,DM,Dominica,Spanish,--
+en_DM,DM,Dominica,English,--
+es_DO,DO,Dominican Republic,Spanish,--
+fr_DZ,DZ,Algeria,French,--
+kab_DZ,DZ,Algeria,Kabyle,--
+ar_DZ,DZ,Algeria,Arabic,--
+es_EA,EA,Ceuta & Melilla,Spanish,--
+es_EC,EC,Ecuador,Spanish,--
+qu_EC,EC,Ecuador,Quechua,--
+et_EE,EE,Estonia,Estonian,--
+en_EE,EE,Estonia,English,--
+ar_EG,EG,Egypt,Arabic,--
+ar_EH,EH,Western Sahara,Arabic,--
+byn_ER,ER,Eritrea,Blin,--
+tig_ER,ER,Eritrea,Tigre,--
+ti_ER,ER,Eritrea,Tigrinya,--
+ar_ER,ER,Eritrea,Arabic,--
+gez_ER,ER,Eritrea,Geez,--
+en_ER,ER,Eritrea,English,--
+gl_ES,ES,Spain,Galician,--
+es_ES,ES,Spain,Spanish,--
+ca_ES,ES,Spain,Catalan,--
+eu_ES,ES,Spain,Basque,--
+ast_ES,ES,Spain,Asturian,--
+so_ET,ET,Ethiopia,Somali,--
+om_ET,ET,Ethiopia,Oromo,--
+am_ET,ET,Ethiopia,Amharic,--
+wal_ET,ET,Ethiopia,Wolaytta,--
+ti_ET,ET,Ethiopia,Tigrinya,--
+gez_ET,ET,Ethiopia,Geez,--
+smn_FI,FI,Finland,Inari Sami,--
+fi_FI,FI,Finland,Finnish,--
+en_FI,FI,Finland,English,--
+sv_FI,FI,Finland,Swedish,--
+se_FI,FI,Finland,Northern Sami,--
+en_FJ,FJ,Fiji,English,--
+en_FK,FK,Falkland Islands,English,--
+en_FM,FM,Micronesia,English,--
+fo_FO,FO,Faroe Islands,Faroese,--
+oc_FR,FR,France,Occitan,--
+gsw_FR,FR,France,Swiss German,--
+pt_FR,FR,France,Portuguese,--
+fr_FR,FR,France,French,--
+co_FR,FR,France,Corsican,--
+ca_FR,FR,France,Catalan,--
+en_FR,FR,France,English,--
+br_FR,FR,France,Breton,--
+fr_GA,GA,Gabon,French,--
+kw_GB,GB,United Kingdom,Cornish,--
+gd_GB,GB,United Kingdom,Scottish Gaelic,--
+en_GB,GB,United Kingdom,English,--
+ga_GB,GB,United Kingdom,Irish,--
+cy_GB,GB,United Kingdom,Welsh,--
+en_GD,GD,Grenada,English,--
+es_GD,GD,Grenada,Spanish,--
+os_GE,GE,Georgia,Ossetic,--
+ka_GE,GE,Georgia,Georgian,--
+fr_GF,GF,French Guiana,French,--
+en_GG,GG,Guernsey,English,--
+ee_GH,GH,Ghana,Ewe,--
+ff_Latn_GH,GH,Ghana,Fula,Latin
+ak_GH,GH,Ghana,Akan,--
+ff_Adlm_GH,GH,Ghana,Fula,Adlam
+en_GH,GH,Ghana,English,--
+gaa_GH,GH,Ghana,Ga,--
+ha_GH,GH,Ghana,Hausa,--
+en_GI,GI,Gibraltar,English,--
+kl_GL,GL,Greenland,Kalaallisut,--
+da_GL,GL,Greenland,Danish,--
+ff_Latn_GM,GM,Gambia,Fula,Latin
+ff_Adlm_GM,GM,Gambia,Fula,Adlam
+en_GM,GM,Gambia,English,--
+ff_Adlm_GN,GN,Guinea,Fula,Adlam
+nqo_GN,GN,Guinea,N’Ko,--
+fr_GN,GN,Guinea,French,--
+kpe_GN,GN,Guinea,Kpelle,--
+ff_Latn_GN,GN,Guinea,Fula,Latin
+fr_GP,GP,Guadeloupe,French,--
+es_GQ,GQ,Equatorial Guinea,Spanish,--
+pt_GQ,GQ,Equatorial Guinea,Portuguese,--
+fr_GQ,GQ,Equatorial Guinea,French,--
+el_GR,GR,Greece,Greek,--
+en_GR,GR,Greece,English,--
+es_GT,GT,Guatemala,Spanish,--
+en_GU,GU,Guam,English,--
+ff_Latn_GW,GW,Guinea-Bissau,Fula,Latin
+pt_GW,GW,Guinea-Bissau,Portuguese,--
+ff_Adlm_GW,GW,Guinea-Bissau,Fula,Adlam
+es_GY,GY,Guyana,Spanish,--
+en_GY,GY,Guyana,English,--
+zh_Hant_HK,HK,Hong Kong,Chinese,Traditional Han
+yue_Hant_HK,HK,Hong Kong,Cantonese,Traditional Han
+en_HK,HK,Hong Kong,English,--
+zh_Hans_HK,HK,Hong Kong,Chinese,Simplified Han
+es_HN,HN,Honduras,Spanish,--
+hr_HR,HR,Croatia,Croatian,--
+es_HT,HT,Haiti,Spanish,--
+fr_HT,HT,Haiti,French,--
+hu_HU,HU,Hungary,Hungarian,--
+en_HU,HU,Hungary,English,--
+es_IC,IC,Canary Islands,Spanish,--
+jv_ID,ID,Indonesia,Javanese,--
+en_ID,ID,Indonesia,English,--
+ms_ID,ID,Indonesia,Malay,--
+id_ID,ID,Indonesia,Indonesian,--
+su_Latn_ID,ID,Indonesia,Sundanese,Latin
+en_IE,IE,Ireland,English,--
+ga_IE,IE,Ireland,Irish,--
+he_IL,IL,Israel,Hebrew,--
+ar_IL,IL,Israel,Arabic,--
+en_IL,IL,Israel,English,--
+gv_IM,IM,Isle of Man,Manx,--
+en_IM,IM,Isle of Man,English,--
+ta_IN,IN,India,Tamil,--
+ccp_IN,IN,India,Chakma,--
+ne_IN,IN,India,Nepali,--
+or_IN,IN,India,Odia,--
+brx_IN,IN,India,Bodo,--
+te_IN,IN,India,Telugu,--
+hi_IN,IN,India,Hindi,--
+kok_IN,IN,India,Konkani,--
+doi_IN,IN,India,Dogri,--
+gu_IN,IN,India,Gujarati,--
+sd_Deva_IN,IN,India,Sindhi,Devanagari
+sat_Olck_IN,IN,India,Santali,Ol Chiki
+mr_IN,IN,India,Marathi,--
+sat_Deva_IN,IN,India,Santali,Devanagari
+ks_Arab_IN,IN,India,Kashmiri,Arabic
+bn_IN,IN,India,Bangla,--
+en_IN,IN,India,English,--
+hi_Latn_IN,IN,India,Hindi,Latin
+ks_Aran_IN,IN,India,Kashmiri,Nastaliq
+as_IN,IN,India,Assamese,--
+kn_IN,IN,India,Kannada,--
+mni_Mtei_IN,IN,India,Manipuri,Meitei Mayek
+sa_IN,IN,India,Sanskrit,--
+ur_Arab_IN,IN,India,Urdu,Arabic
+ml_IN,IN,India,Malayalam,--
+ks_Deva_IN,IN,India,Kashmiri,Devanagari
+pa_Guru_IN,IN,India,Punjabi,Gurmukhi
+bo_IN,IN,India,Tibetan,--
+mai_IN,IN,India,Maithili,--
+mni_Beng_IN,IN,India,Manipuri,Bangla
+en_IO,IO,Chagos Archipelago,English,--
+ckb_IQ,IQ,Iraq,Kurdish, Sorani,--
+ar_IQ,IQ,Iraq,Arabic,--
+syr_IQ,IQ,Iraq,Assyrian,--
+lrc_IQ,IQ,Iraq,Northern Luri,--
+fa_IR,IR,Iran,Persian,--
+ckb_IR,IR,Iran,Kurdish, Sorani,--
+lrc_IR,IR,Iran,Northern Luri,--
+mzn_IR,IR,Iran,Mazanderani,--
+is_IS,IS,Iceland,Icelandic,--
+ca_IT,IT,Italy,Catalan,--
+sc_IT,IT,Italy,Sardinian,--
+it_IT,IT,Italy,Italian,--
+fur_IT,IT,Italy,Friulian,--
+de_IT,IT,Italy,German,--
+scn_IT,IT,Italy,Sicilian,--
+en_JE,JE,Jersey,English,--
+en_JM,JM,Jamaica,English,--
+ar_JO,JO,Jordan,Arabic,--
+en_JP,JP,Japan,English,--
+ja_JP,JP,Japan,Japanese,--
+ain_JP,JP,Japan,Ainu,--
+zh_Hans_JP,JP,Japan,Chinese,Simplified Han
+guz_KE,KE,Kenya,Gusii,--
+en_KE,KE,Kenya,English,--
+kln_KE,KE,Kenya,Kalenjin,--
+teo_KE,KE,Kenya,Teso,--
+mer_KE,KE,Kenya,Meru,--
+so_KE,KE,Kenya,Somali,--
+luy_KE,KE,Kenya,Luyia,--
+om_KE,KE,Kenya,Oromo,--
+luo_KE,KE,Kenya,Luo,--
+saq_KE,KE,Kenya,Samburu,--
+dav_KE,KE,Kenya,Taita,--
+sw_KE,KE,Kenya,Swahili,--
+ebu_KE,KE,Kenya,Embu,--
+kam_KE,KE,Kenya,Kamba,--
+ki_KE,KE,Kenya,Kikuyu,--
+mas_KE,KE,Kenya,Masai,--
+ky_KG,KG,Kyrgyzstan,Kyrgyz,--
+ru_KG,KG,Kyrgyzstan,Russian,--
+km_KH,KH,Cambodia,Khmer,--
+en_KI,KI,Kiribati,English,--
+ar_KM,KM,Comoros,Arabic,--
+fr_KM,KM,Comoros,French,--
+en_KN,KN,St. Kitts & Nevis,English,--
+es_KN,KN,St. Kitts & Nevis,Spanish,--
+ko_KP,KP,North Korea,Korean,--
+en_KR,KR,South Korea,English,--
+ko_KR,KR,South Korea,Korean,--
+ar_KW,KW,Kuwait,Arabic,--
+es_KY,KY,Cayman Islands,Spanish,--
+en_KY,KY,Cayman Islands,English,--
+ru_KZ,KZ,Kazakhstan,Russian,--
+kk_KZ,KZ,Kazakhstan,Kazakh,--
+lo_LA,LA,Laos,Lao,--
+ar_LB,LB,Lebanon,Arabic,--
+en_LC,LC,St. Lucia,English,--
+es_LC,LC,St. Lucia,Spanish,--
+gsw_LI,LI,Liechtenstein,Swiss German,--
+de_LI,LI,Liechtenstein,German,--
+si_LK,LK,Sri Lanka,Sinhala,--
+ta_LK,LK,Sri Lanka,Tamil,--
+vai_Latn_LR,LR,Liberia,Vai,Latin
+en_LR,LR,Liberia,English,--
+kpe_LR,LR,Liberia,Kpelle,--
+vai_Vaii_LR,LR,Liberia,Vai,Vai
+ff_Latn_LR,LR,Liberia,Fula,Latin
+ff_Adlm_LR,LR,Liberia,Fula,Adlam
+en_LS,LS,Lesotho,English,--
+st_LS,LS,Lesotho,Southern Sotho,--
+en_LT,LT,Lithuania,English,--
+lt_LT,LT,Lithuania,Lithuanian,--
+lb_LU,LU,Luxembourg,Luxembourgish,--
+de_LU,LU,Luxembourg,German,--
+pt_LU,LU,Luxembourg,Portuguese,--
+fr_LU,LU,Luxembourg,French,--
+lv_LV,LV,Latvia,Latvian,--
+en_LV,LV,Latvia,English,--
+ar_LY,LY,Libya,Arabic,--
+shi_Latn_MA,MA,Morocco,Tachelhit,Latin
+fr_MA,MA,Morocco,French,--
+tzm_MA,MA,Morocco,Central Atlas Tamazight,--
+zgh_MA,MA,Morocco,Standard Moroccan Tamazight,--
+ar_MA,MA,Morocco,Arabic,--
+shi_Tfng_MA,MA,Morocco,Tachelhit,Tifinagh
+fr_MC,MC,Monaco,French,--
+ru_MD,MD,Moldova,Russian,--
+ro_MD,MD,Moldova,Romanian,--
+sr_Latn_ME,ME,Montenegro,Serbian,Latin
+sr_Cyrl_ME,ME,Montenegro,Serbian,Cyrillic
+fr_MF,MF,St. Martin,French,--
+en_MG,MG,Madagascar,English,--
+fr_MG,MG,Madagascar,French,--
+mg_MG,MG,Madagascar,Malagasy,--
+en_MH,MH,Marshall Islands,English,--
+mk_MK,MK,North Macedonia,Macedonian,--
+sq_MK,MK,North Macedonia,Albanian,--
+khq_ML,ML,Mali,Koyra Chiini,--
+fr_ML,ML,Mali,French,--
+ses_ML,ML,Mali,Koyraboro Senni,--
+bm_ML,ML,Mali,Bambara,--
+rhg_Rohg_MM,MM,Myanmar (Burma),Rohingya,Hanifi Rohingya
+my_MM,MM,Myanmar (Burma),Burmese,--
+en_MM,MM,Myanmar (Burma),English,--
+mn_MN,MN,Mongolia,Mongolian,--
+zh_Hant_MO,MO,Macao,Chinese,Traditional Han
+en_MO,MO,Macao,English,--
+pt_MO,MO,Macao,Portuguese,--
+zh_Hans_MO,MO,Macao,Chinese,Simplified Han
+en_MP,MP,Northern Mariana Islands,English,--
+fr_MQ,MQ,Martinique,French,--
+ar_MR,MR,Mauritania,Arabic,--
+ff_Latn_MR,MR,Mauritania,Fula,Latin
+ff_Adlm_MR,MR,Mauritania,Fula,Adlam
+fr_MR,MR,Mauritania,French,--
+en_MS,MS,Montserrat,English,--
+en_MT,MT,Malta,English,--
+mt_MT,MT,Malta,Maltese,--
+en_MU,MU,Mauritius,English,--
+mfe_MU,MU,Mauritius,Morisyen,--
+fr_MU,MU,Mauritius,French,--
+dv_MV,MV,Maldives,Dhivehi,--
+en_MV,MV,Maldives,English,--
+en_MW,MW,Malawi,English,--
+ny_MW,MW,Malawi,Nyanja,--
+en_MX,MX,Mexico,English,--
+es_MX,MX,Mexico,Spanish,--
+en_MY,MY,Malaysia,English,--
+ms_MY,MY,Malaysia,Malay,--
+ms_Arab_MY,MY,Malaysia,Malay,Arabic
+ta_MY,MY,Malaysia,Tamil,--
+mgh_MZ,MZ,Mozambique,Makhuwa-Meetto,--
+seh_MZ,MZ,Mozambique,Sena,--
+pt_MZ,MZ,Mozambique,Portuguese,--
+af_NA,NA,Namibia,Afrikaans,--
+naq_NA,NA,Namibia,Nama,--
+en_NA,NA,Namibia,English,--
+fr_NC,NC,New Caledonia,French,--
+dje_NE,NE,Niger,Zarma,--
+twq_NE,NE,Niger,Tasawaq,--
+ha_NE,NE,Niger,Hausa,--
+fr_NE,NE,Niger,French,--
+ff_Latn_NE,NE,Niger,Fula,Latin
+ff_Adlm_NE,NE,Niger,Fula,Adlam
+en_NF,NF,Norfolk Island,English,--
+en_NG,NG,Nigeria,English,--
+ff_Adlm_NG,NG,Nigeria,Fula,Adlam
+yo_NG,NG,Nigeria,Yoruba,--
+ha_NG,NG,Nigeria,Hausa,--
+ig_NG,NG,Nigeria,Igbo,--
+pcm_NG,NG,Nigeria,Nigerian Pidgin,--
+kaj_NG,NG,Nigeria,Jju,--
+kcg_NG,NG,Nigeria,Tyap,--
+ff_Latn_NG,NG,Nigeria,Fula,Latin
+es_NI,NI,Nicaragua,Spanish,--
+en_NL,NL,Netherlands,English,--
+fy_NL,NL,Netherlands,Western Frisian,--
+nl_NL,NL,Netherlands,Dutch,--
+nds_NL,NL,Netherlands,Low German,--
+en_NO,NO,Norway,English,--
+nn_NO,NO,Norway,Norwegian Nynorsk,--
+se_NO,NO,Norway,Northern Sami,--
+nb_NO,NO,Norway,Norwegian Bokmål,--
+ne_NP,NP,Nepal,Nepali,--
+en_NR,NR,Nauru,English,--
+en_NU,NU,Niue,English,--
+en_NZ,NZ,New Zealand,English,--
+mi_NZ,NZ,New Zealand,Māori,--
+ar_OM,OM,Oman,Arabic,--
+es_PA,PA,Panama,Spanish,--
+es_PE,PE,Peru,Spanish,--
+qu_PE,PE,Peru,Quechua,--
+fr_PF,PF,French Polynesia,French,--
+en_PG,PG,Papua New Guinea,English,--
+ceb_PH,PH,Philippines,Cebuano,--
+es_PH,PH,Philippines,Spanish,--
+fil_PH,PH,Philippines,Filipino,--
+en_PH,PH,Philippines,English,--
+pa_Aran_PK,PK,Pakistan,Punjabi,Nastaliq
+ps_PK,PK,Pakistan,Pashto,--
+ur_Arab_PK,PK,Pakistan,Urdu,Arabic
+ur_Aran_PK,PK,Pakistan,Urdu,Nastaliq
+sd_Arab_PK,PK,Pakistan,Sindhi,Arabic
+pa_Arab_PK,PK,Pakistan,Punjabi,Arabic
+en_PK,PK,Pakistan,English,--
+pl_PL,PL,Poland,Polish,--
+en_PL,PL,Poland,English,--
+fr_PM,PM,St. Pierre & Miquelon,French,--
+en_PN,PN,Pitcairn Islands,English,--
+en_US_POSIX,US,--,English,--
+en_PR,PR,Puerto Rico,English,--
+es_PR,PR,Puerto Rico,Spanish,--
+ar_PS,PS,Palestinian Territories,Arabic,--
+en_PT,PT,Portugal,English,--
+pt_PT,PT,Portugal,Portuguese,--
+en_PW,PW,Palau,English,--
+es_PY,PY,Paraguay,Spanish,--
+gn_PY,PY,Paraguay,Guarani,--
+ar_QA,QA,Qatar,Arabic,--
+fr_RE,RE,Réunion,French,--
+ro_RO,RO,Romania,Romanian,--
+sr_Latn_RS,RS,Serbia,Serbian,Latin
+sr_Cyrl_RS,RS,Serbia,Serbian,Cyrillic
+ba_RU,RU,Russia,Bashkir,--
+ru_RU,RU,Russia,Russian,--
+cv_RU,RU,Russia,Chuvash,--
+sah_RU,RU,Russia,Sakha,--
+ce_RU,RU,Russia,Chechen,--
+myv_RU,RU,Russia,Erzya,--
+tt_RU,RU,Russia,Tatar,--
+os_RU,RU,Russia,Ossetic,--
+en_RU,RU,Russia,English,--
+rw_RW,RW,Rwanda,Kinyarwanda,--
+en_RW,RW,Rwanda,English,--
+fr_RW,RW,Rwanda,French,--
+ar_SA,SA,Saudi Arabia,Arabic,--
+en_SA,SA,Saudi Arabia,English,--
+en_SB,SB,Solomon Islands,English,--
+fr_SC,SC,Seychelles,French,--
+en_SC,SC,Seychelles,English,--
+ar_SD,SD,Sudan,Arabic,--
+en_SD,SD,Sudan,English,--
+en_SE,SE,Sweden,English,--
+sv_SE,SE,Sweden,Swedish,--
+se_SE,SE,Sweden,Northern Sami,--
+ta_SG,SG,Singapore,Tamil,--
+zh_Hans_SG,SG,Singapore,Chinese,Simplified Han
+en_SG,SG,Singapore,English,--
+ms_SG,SG,Singapore,Malay,--
+en_SH,SH,St. Helena,English,--
+en_SI,SI,Slovenia,English,--
+sl_SI,SI,Slovenia,Slovenian,--
+nb_SJ,SJ,Svalbard & Jan Mayen,Norwegian Bokmål,--
+sk_SK,SK,Slovakia,Slovak,--
+en_SK,SK,Slovakia,English,--
+ff_Latn_SL,SL,Sierra Leone,Fula,Latin
+ff_Adlm_SL,SL,Sierra Leone,Fula,Adlam
+en_SL,SL,Sierra Leone,English,--
+it_SM,SM,San Marino,Italian,--
+wo_SN,SN,Senegal,Wolof,--
+fr_SN,SN,Senegal,French,--
+ff_Latn_SN,SN,Senegal,Fula,Latin
+ff_Adlm_SN,SN,Senegal,Fula,Adlam
+dyo_SN,SN,Senegal,Jola-Fonyi,--
+ar_SO,SO,Somalia,Arabic,--
+so_SO,SO,Somalia,Somali,--
+nl_SR,SR,Suriname,Dutch,--
+nus_SS,SS,South Sudan,Nuer,--
+ar_SS,SS,South Sudan,Arabic,--
+en_SS,SS,South Sudan,English,--
+pt_ST,ST,São Tomé & Príncipe,Portuguese,--
+es_SV,SV,El Salvador,Spanish,--
+nl_SX,SX,Sint Maarten,Dutch,--
+en_SX,SX,Sint Maarten,English,--
+fr_SY,SY,Syria,French,--
+syr_SY,SY,Syria,Assyrian,--
+ar_SY,SY,Syria,Arabic,--
+en_SZ,SZ,Eswatini,English,--
+ss_SZ,SZ,Eswatini,Swati,--
+en_TC,TC,Turks & Caicos Islands,English,--
+es_TC,TC,Turks & Caicos Islands,Spanish,--
+ar_TD,TD,Chad,Arabic,--
+fr_TD,TD,Chad,French,--
+ee_TG,TG,Togo,Ewe,--
+fr_TG,TG,Togo,French,--
+th_TH,TH,Thailand,Thai,--
+en_TH,TH,Thailand,English,--
+tg_TJ,TJ,Tajikistan,Tajik,--
+en_TK,TK,Tokelau,English,--
+pt_TL,TL,Timor-Leste,Portuguese,--
+tk_TM,TM,Turkmenistan,Turkmen,--
+fr_TN,TN,Tunisia,French,--
+ar_TN,TN,Tunisia,Arabic,--
+to_TO,TO,Tonga,Tongan,--
+en_TO,TO,Tonga,English,--
+tr_TR,TR,Turkey,Turkish,--
+en_TR,TR,Turkey,English,--
+ku_TR,TR,Turkey,Kurdish,--
+es_TT,TT,Trinidad & Tobago,Spanish,--
+en_TT,TT,Trinidad & Tobago,English,--
+en_TV,TV,Tuvalu,English,--
+zh_Hant_TW,TW,Taiwan,Chinese,Traditional Han
+trv_TW,TW,Taiwan,Taroko,--
+en_TW,TW,Taiwan,English,--
+rwk_TZ,TZ,Tanzania,Rwa,--
+jmc_TZ,TZ,Tanzania,Machame,--
+lag_TZ,TZ,Tanzania,Langi,--
+sw_TZ,TZ,Tanzania,Swahili,--
+ksb_TZ,TZ,Tanzania,Shambala,--
+bez_TZ,TZ,Tanzania,Bena,--
+asa_TZ,TZ,Tanzania,Asu,--
+sbp_TZ,TZ,Tanzania,Sangu,--
+vun_TZ,TZ,Tanzania,Vunjo,--
+rof_TZ,TZ,Tanzania,Rombo,--
+kde_TZ,TZ,Tanzania,Makonde,--
+mas_TZ,TZ,Tanzania,Masai,--
+en_TZ,TZ,Tanzania,English,--
+en_UA,UA,Ukraine,English,--
+ru_UA,UA,Ukraine,Russian,--
+uk_UA,UA,Ukraine,Ukrainian,--
+cgg_UG,UG,Uganda,Chiga,--
+nyn_UG,UG,Uganda,Nyankole,--
+teo_UG,UG,Uganda,Teso,--
+en_UG,UG,Uganda,English,--
+xog_UG,UG,Uganda,Soga,--
+sw_UG,UG,Uganda,Swahili,--
+lg_UG,UG,Uganda,Ganda,--
+en_UM,UM,U.S. Outlying Islands,English,--
+nv_US,US,United States,Navajo,--
+es_US,US,United States,Spanish,--
+chr_US,US,United States,Cherokee,--
+haw_US,US,United States,Hawaiian,--
+en_US,US,United States,English,--
+lkt_US,US,United States,Lakota,--
+es_UY,UY,Uruguay,Spanish,--
+uz_Latn_UZ,UZ,Uzbekistan,Uzbek,Latin
+uz_Cyrl_UZ,UZ,Uzbekistan,Uzbek,Cyrillic
+it_VA,VA,Vatican City,Italian,--
+en_VC,VC,St. Vincent & Grenadines,English,--
+es_VC,VC,St. Vincent & Grenadines,Spanish,--
+es_VE,VE,Venezuela,Spanish,--
+en_VG,VG,British Virgin Islands,English,--
+es_VG,VG,British Virgin Islands,Spanish,--
+en_VI,VI,U.S. Virgin Islands,English,--
+es_VI,VI,U.S. Virgin Islands,Spanish,--
+vi_VN,VN,Vietnam,Vietnamese,--
+fr_VU,VU,Vanuatu,French,--
+en_VU,VU,Vanuatu,English,--
+fr_WF,WF,Wallis & Futuna,French,--
+en_WS,WS,Samoa,English,--
+sr_Latn_XK,XK,Kosovo,Serbian,Latin
+sq_XK,XK,Kosovo,Albanian,--
+sr_Cyrl_XK,XK,Kosovo,Serbian,Cyrillic
+ar_YE,YE,Yemen,Arabic,--
+fr_YT,YT,Mayotte,French,--
+tn_ZA,ZA,South Africa,Tswana,--
+zu_ZA,ZA,South Africa,Zulu,--
+ss_ZA,ZA,South Africa,Swati,--
+nr_ZA,ZA,South Africa,South Ndebele,--
+ve_ZA,ZA,South Africa,Venda,--
+af_ZA,ZA,South Africa,Afrikaans,--
+st_ZA,ZA,South Africa,Southern Sotho,--
+nso_ZA,ZA,South Africa,Northern Sotho,--
+ts_ZA,ZA,South Africa,Tsonga,--
+xh_ZA,ZA,South Africa,Xhosa,--
+en_ZA,ZA,South Africa,English,--
+en_ZM,ZM,Zambia,English,--
+bem_ZM,ZM,Zambia,Bemba,--
+sn_ZW,ZW,Zimbabwe,Shona,--
+en_ZW,ZW,Zimbabwe,English,--
+nd_ZW,ZW,Zimbabwe,North Ndebele,--

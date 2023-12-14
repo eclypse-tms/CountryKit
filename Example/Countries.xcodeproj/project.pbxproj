@@ -23,6 +23,7 @@
 		B27079A42B26DE8E003435A1 /* Composure in Frameworks */ = {isa = PBXBuildFile; productRef = B27079A32B26DE8E003435A1 /* Composure */; };
 		B27079A72B26DE9E003435A1 /* CountryKit in Frameworks */ = {isa = PBXBuildFile; productRef = B27079A62B26DE9E003435A1 /* CountryKit */; };
 		B27079A92B274990003435A1 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27079A82B274990003435A1 /* NibLoadable.swift */; };
+		B28B60C92B29EF9D00485D23 /* LocaleComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28B60C82B29EF9D00485D23 /* LocaleComponents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		B27079AC2B276A29003435A1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		B27079AD2B276A29003435A1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B27079AE2B27C974003435A1 /* Countries.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Countries.entitlements; sourceTree = "<group>"; };
+		B28B60C82B29EF9D00485D23 /* LocaleComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleComponents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				B27079882B26DDF0003435A1 /* Assets.xcassets */,
 				B270798A2B26DDF0003435A1 /* LaunchScreen.storyboard */,
 				B270798D2B26DDF0003435A1 /* Info.plist */,
+				B28B60C82B29EF9D00485D23 /* LocaleComponents.swift */,
 			);
 			path = Countries;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B27079A02B26DE36003435A1 /* InstructionsViewController.swift in Sources */,
+				B28B60C92B29EF9D00485D23 /* LocaleComponents.swift in Sources */,
 				B27079A92B274990003435A1 /* NibLoadable.swift in Sources */,
 				B27079A12B26DE36003435A1 /* UIView+RoundedCorner.swift in Sources */,
 				B27079842B26DDEF003435A1 /* ViewController.swift in Sources */,
@@ -454,7 +458,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eclypse-tms/CountryKit";
 			requirement = {
-				branch = fix_bundling_issues;
+				branch = add_locale_info;
 				kind = branch;
 			};
 		};

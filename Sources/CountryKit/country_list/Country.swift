@@ -26,12 +26,23 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     ///localized name
     public let localizedName: String
     
-    ///returns a list of applicable address fields in this locale
+    ///returns a list of applicable address fields in this locale. useful when presenting shipping or invoice addresses in a form.
     public let addressLabels: [AddressLabel]
     
     ///when entering address, some countries like China prefers to present the address fields in a descending scope.
     ///from the largest address units (province) to the smallest address units (street). For most countries, this will be true.
     public let preferesAscendingAddressScope: Bool
+    
+    /// Frequently associated locales with this country.
+    /// If this country has more than one locale associated with it, CountryKit does not make a determination as to which locale is the primary one.
+    /// Locales are different from one and other because of the languages associated with that locale.
+    /// For example Puerto Rico has 2 locales:
+    /// * en_PR: Puerto Rico,English
+    /// * es_PR: Puerto Rico,Spanish
+    /// Irrespective of what language forms the basis for that locale, most of the other metadata about Puerto Rico
+    /// may still be useful such as currency, calendar info, measurement system, numbering system, etc...
+    /// Please note that some countries may not have any locales associated with them.
+    public var locales: [Locale] = []
     
     public init(alpha3Code: String, englishName: String, alpha2Code: String,
                 addressLabels: [AddressLabel] = [],
@@ -61,6 +72,16 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     public var debugDescription: String {
         return "alpha3Code: \(alpha3Code), name: \(englishName)"
     }
+    
+    /*
+    public static func == (lhs: Country, rhs: Country) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    */
         
     public static let Afghanistan = Country(alpha3Code: "AFG", englishName: "Afghanistan", alpha2Code: "AF", addressLabels: AddressLabel.cityOnly)
     public static let Aland_Islands = Country(alpha3Code: "ALA", englishName: "Åland Islands", alpha2Code: "AX")
@@ -316,4 +337,3 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     public static var Worldwide = Country(alpha3Code: "WWC", englishName: "Worldwide", alpha2Code: "WW", localizedNameOverride: nil)
     public static var Unknown = Country(alpha3Code: "_UK", englishName: "Unknown Country", alpha2Code: "_U", localizedNameOverride: nil)
 }
-

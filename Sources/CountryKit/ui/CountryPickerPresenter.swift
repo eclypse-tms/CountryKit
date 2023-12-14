@@ -8,14 +8,25 @@
 import UIKit
 import Combine
 
-open class CountrySelectionPresenter: NSObject {
+/// assists the UICountryPickerViewController in performing various view related tasks
+/// such as reacting to UI events, performing search and configuring the underlying table view
+open class CountryPickerPresenter: NSObject {
     //MARK: Injected properties
+    
+    /// used to highlight the text in search mode
     open var textHighlighter: TextHighlighter
+    
+    /// many of the actions are processed in this dedicated queue
     open var presenterQueue: DispatchQueue
+    
+    /// provides the list of countries that this presenter further refines
     open var countryProvider: CountryProvider
     
     //MARK: semi-private properties
+    /// keeps track of the selected countries
     private (set) var formSelectedCountries = Set<Country>()
+    
+    /// main configuration object that determines how the picker should work
     private (set) var countryPickerConfig: CountryPickerConfiguration = .default()
     
     //MARK: private properties
@@ -44,8 +55,11 @@ open class CountrySelectionPresenter: NSObject {
         formSelectedCountries = config.previouslySelectedCountries
         countryPickerConfig = config
         
+        /// initializes Worldwide
         let worldWideCountry = Country.Worldwide
         if !config.localizedWorldWide.isEmpty {
+            /// since the config file indicates that there is a localized worldwide option,
+            /// we re-init this with the provided localization override
             Country.Worldwide = Country(alpha3Code: worldWideCountry.alpha3Code,
                                        englishName: worldWideCountry.englishName,
                                        alpha2Code: worldWideCountry.alpha2Code,
@@ -53,16 +67,20 @@ open class CountrySelectionPresenter: NSObject {
         }
     }
     
+    /// if you override it, make sure to call super at some point
     open func tearDown() {
         cancellables.forEach { $0.cancel() }
-        dataSource = nil
+        dataSource = nil //making it nil breaks the memory reference cycle
     }
     
+    /// configures the country list and loads the table
     func configureBindings() {
         Just(true)
         .receive(on: presenterQueue)
         .sink(receiveValue: {  [weak self] _ in
             guard let strongSelf = self else { return }
+            
+            strongSelf.countryProvider.loadAdditionalMetaData()
                 
             let initialCountryList: [Country]
             if !strongSelf.countryPickerConfig.countryRoster.isEmpty {
@@ -104,12 +122,10 @@ open class CountrySelectionPresenter: NSObject {
         
         
         reloadDataRelay.receive(on: presenterQueue)
-            .sink { completed in
-                
-            } receiveValue: { [weak self] shouldAnimate in
+            .sink(receiveValue: { [weak self] shouldAnimate in
                 guard let strongSelf = self else { return }
                 strongSelf.reloadData(shouldAnimate: shouldAnimate)
-            }.store(in: &cancellables)
+            }).store(in: &cancellables)
         
         searchBarRelay.receive(on: presenterQueue)
             .debounce(for: .milliseconds(300), scheduler: presenterQueue)
@@ -154,6 +170,7 @@ open class CountrySelectionPresenter: NSObject {
             }.store(in: &cancellables)
     }
     
+    /// configures the data source
     func configureDataSource(with tableView: UITableView) {
         if dataSource == nil {
             dataSource = UITableViewDiffableDataSource<CountryPickerViewSection, AnyHashable>(tableView: tableView) { [weak self] (tableView, indexPath, itemIdentifier) -> UITableViewCell? in
@@ -171,7 +188,6 @@ open class CountrySelectionPresenter: NSObject {
     private func reloadData(shouldAnimate: Bool) {
         var snapshot = NSDiffableDataSourceSnapshot<CountryPickerViewSection, AnyHashable>()
         snapshot.appendSections(CountryPickerViewSection.allCases)
-        
         
         CountryPickerViewSection.allCases.forEach { eachSection in
             let vms = data(for: eachSection)
@@ -227,6 +243,8 @@ open class CountrySelectionPresenter: NSObject {
         }
     }
     
+    /// determines how the search should happen
+    /// override it to customize the search behavior and make sure to call reloadDataRelay.send(true) at the end.
     open func apply(searchQuery: String) {
         // Strip out all the leading and trailing spaces.
         let strippedString = searchQuery.trimmingCharacters(in: CharacterSet.whitespaces)
@@ -312,7 +330,8 @@ open class CountrySelectionPresenter: NSObject {
     }
     
     // MARK: Country Selection Logic
-    func didSelect(country: Country, at indexPath: IndexPath) {
+    /// this function gets invoked after the user taps on a row to select that row.
+    open func didSelect(country: Country, at indexPath: IndexPath) {
         if countryPickerConfig.canMultiSelect {
             //multi selection is allowed
             if country == Country.Worldwide {
@@ -347,7 +366,8 @@ open class CountrySelectionPresenter: NSObject {
         }
     }
     
-    func didDeselect(country: Country, at indexPath: IndexPath) {
+    /// this function gets invoked after the user taps on a row to deselect it.
+    open func didDeselect(country: Country, at indexPath: IndexPath) {
         formSelectedCountries.remove(country)
         countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: false, indexPath: indexPath, performCellSelection: false))
         if countryPickerConfig.autoDismiss {
@@ -396,7 +416,7 @@ open class CountrySelectionPresenter: NSObject {
 }
 
 // MARK: UITableViewDelegate
-extension CountrySelectionPresenter: UITableViewDelegate {
+extension CountryPickerPresenter: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let countrySection = CountryPickerViewSection(rawValue: indexPath.section)!
         switch countrySection {
