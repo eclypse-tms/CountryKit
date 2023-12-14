@@ -20,7 +20,6 @@ class SelectionsViewController: UIViewController {
     @IBOutlet private weak var excludedCountryStack: UIStackView!
     
     
-    
     @IBOutlet private weak var allowSelectionSwitch: UISwitch!
     @IBOutlet private weak var canMultiSelectSwitch: UISwitch!
     @IBOutlet private weak var cellSelectionStyleSegment: UISegmentedControl!
@@ -64,6 +63,7 @@ class SelectionsViewController: UIViewController {
     private func configureInitialState() {
         limitedCountryStack.isHidden = true
         excludedCountryStack.isHidden = true
+        worldWideStack.isHidden = true
         
         addBorder(to: worldwideDescriptionTranslation)
         addBorder(to: limitedCountryDescriptionTranslation)

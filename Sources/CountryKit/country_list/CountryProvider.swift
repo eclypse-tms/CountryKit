@@ -22,15 +22,15 @@ public protocol CountryProvider: AnyObject {
     func find(alpha3Code: String) -> Country
     
     /// loads all metadata about countries into memory.
-    /// You should call this function only once per app's lifecycle preferable in a non-main queue.
+    /// You should call this function only once per app's lifecycle preferably in a non-main thread.
     func loadAdditionalMetaData()
 }
 
 open class CountryProviderImpl: CountryProvider {
     open var bundleLoader: BundleLoader
     
-    public init() {
-        self.bundleLoader = BundleLoaderImpl(fileManager: FileManager.default, bundle: CountryKit.assetBundle)
+    public init(bundleLoader: BundleLoader) {
+        self.bundleLoader = bundleLoader
     }
     
     public func loadAdditionalMetaData() {

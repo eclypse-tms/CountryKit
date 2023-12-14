@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// determines how the search text should be used in the CountryPicker UI
+/// determines how the search text should be applied in the CountryPicker UI
 public enum FilteringCriteria: Int {
     /// search text components that are separated by space are treated as "OR".
     case orSearch

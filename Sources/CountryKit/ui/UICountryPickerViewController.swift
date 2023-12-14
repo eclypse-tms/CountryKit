@@ -17,7 +17,10 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet private weak var headerDirectionsContainer: UIView!
     @IBOutlet private weak var footerDirectionsContainer: UIView!
 
-    open var presenter: CountrySelectionPresenter!
+    /// presenter gets initialized after view did load via lateInitPresenter() function
+    open var presenter: CountryPickerPresenter!
+    
+    /// combine support - cancels listeners.
     private var cancellables: Set<AnyCancellable> = []
     
     /// this relay gets fired everytime user makes a selection in the UI. true value
@@ -41,7 +44,7 @@ open class UICountryPickerViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         configureNavBarButtons()
-        performDelayedInitialization()
+        lateInitPresenter()
         configureMainView()
         configureHeaderFooterViews()
         configureTheme()
@@ -54,6 +57,7 @@ open class UICountryPickerViewController: UIViewController {
         presenter.tearDown()
     }
     
+    /// performs configuration of built-in navigation bar buttons.
     open func configureNavBarButtons() {
         if let validLeftBarButtonItem = countryPickerConfiguration.leftBarButton {
             navigationItem.leftBarButtonItem = validLeftBarButtonItem
@@ -71,6 +75,7 @@ open class UICountryPickerViewController: UIViewController {
         }
     }
     
+    /// performs configuration of non-scrolling header and footer views
     open func configureHeaderFooterViews() {
         if let validHeaderText = countryPickerConfiguration.pinnedHeaderText {
             pinnedHeaderDirections.text = validHeaderText
@@ -87,11 +92,13 @@ open class UICountryPickerViewController: UIViewController {
         }
     }
     
-    open func performDelayedInitialization() {
+    ///
+    open func lateInitPresenter() {
+        let bundleLoader = BundleLoaderImpl(fileManager: FileManager.default, bundle: CountryKit.assetBundle)
         let textHighlighter = TextHighlighterImpl()
-        let countryProvider = CountryProviderImpl()
+        let countryProvider = CountryProviderImpl(bundleLoader: bundleLoader)
         let presenterQueue = DispatchQueue(label: "countrykit.queue.presenter")
-        presenter = CountrySelectionPresenter(countryProvider: countryProvider,
+        presenter = CountryPickerPresenter(countryProvider: countryProvider,
                                               textHighlighter: textHighlighter,
                                               presenterQueue: presenterQueue)
     }
