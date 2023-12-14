@@ -107,7 +107,7 @@ class SelectionsViewController: UIViewController {
         
         config.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)!
         config.filteringCriteria = FilteringCriteria(rawValue: searchCriteriaSegment.selectedSegmentIndex)!
-        config.navBarButtonOption = PickernavBarButtonOption(rawValue: navBarButtonsSegment.selectedSegmentIndex)!
+        config.navBarButtonOption = NavBarButtonOption(rawValue: navBarButtonsSegment.selectedSegmentIndex)!
         
         if allowWorldwideSwitch.isOn {
             config.shouldShowWorldWide = true
