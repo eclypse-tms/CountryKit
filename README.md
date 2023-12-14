@@ -10,8 +10,26 @@
 
 # CountryKit 
 
-CountryKit provides a convenient way to interact with countries, their metadata and complete with a pre-built UI.
+CountryKit provides a convenient way to interact with countries, their metadata and comes with a pre-built UI.
 <p align="center">
   <img src="./assets/hero_image.gif">
 </p>
 
+## Installation (iOS, macCatalyst)
+
+### Swift Package Manager 
+Add CountryKit to your project via Swift Package Manager.
+
+`https://github.com/eclypse-tms/CountryKit`
+
+## Usage
+```
+//in a view controller:
+let countryPickerVC = UICountryPickerViewController()
+countryPickerVC.delegate = self //to receive callbacks when a country is selected or deselected
+
+//present the view controller according to your UX. this example presents it modally in a navigation controller
+let navController = UINavigationController(rootViewController: countryPickerVC)
+navController.modalPresentationStyle = .formSheet
+present(navController, animated: true)
+```
