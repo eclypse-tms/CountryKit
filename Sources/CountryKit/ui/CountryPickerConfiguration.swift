@@ -52,12 +52,12 @@ public struct CountryPickerConfiguration: Hashable {
     
     /// provide custom bar button that appears on the left (leading) side of the navigation bar instead of chevron.backward styled back bar button.
     /// if you provide a custom button, you are responsible for dismissing CountrySelectionViewController yourself.
-    /// if this button is provided, viewDismissOption is ignored
+    /// if this button is provided, navBarButtonOption is ignored
     public var leftBarButton: UIBarButtonItem?
 
     /// provide custom bar button item that appears on the right (trailing) side of the navigation bar instead of system Done button
     /// if you provide a custom button, you are responsible for dismissing CountrySelectionViewController yourself.
-    /// if this button is provided, viewDismissOption is ignored
+    /// if this button is provided, navBarButtonOption is ignored
     public var rightBarButton: UIBarButtonItem?
     
     /// when provided, header text is pinned to the top of the view and does not scroll away.
@@ -79,7 +79,7 @@ public struct CountryPickerConfiguration: Hashable {
     public var navigationBarTitleView: UIView?
     
     /// controls whether to display both the cancel and done buttons in the UI
-    public var viewDismissOption: PickerViewDismissOption = .displayBothButtons
+    public var navBarButtonOption: NavBarButtonOption = .displayBothButtons
     
     /// initializes CountrySelectionConfiguration with default parameters
     static public func `default`() -> CountryPickerConfiguration {

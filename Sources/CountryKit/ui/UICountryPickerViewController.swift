@@ -74,7 +74,7 @@ open class UICountryPickerViewController: UIViewController {
                 navigationItem.leftBarButtonItem = validLeftBarButtonItem
                 navigationItem.leftItemsSupplementBackButton = false
             } else {
-                switch countryPickerConfiguration.viewDismissOption {
+                switch countryPickerConfiguration.navBarButtonOption {
                 case .displayLeadingButtonOnly, .displayBothButtons:
                     //there is no left bar button.
                     if self == validNavController.viewControllers.first {
@@ -96,7 +96,7 @@ open class UICountryPickerViewController: UIViewController {
             if let validRightBarButtonItem = countryPickerConfiguration.rightBarButton {
                 navigationItem.rightBarButtonItem = validRightBarButtonItem
             } else {
-                switch countryPickerConfiguration.viewDismissOption {
+                switch countryPickerConfiguration.navBarButtonOption {
                 case .displayTrailingButtonOnly, .displayBothButtons:
                     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
                 default:
