@@ -98,9 +98,7 @@ class SelectionsViewController: UIViewController {
     @IBAction func didClickOnSelectCountry(_ sender: UIButton) {
         configScroll.isHidden = true
         mainView.isHidden = false
-        
-        
-        let countrySelectionVC = UICountryPickerViewController(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
+            
         var config = CountryPickerConfiguration.default()
         config.allowsSelection = allowSelectionSwitch.isOn
         config.canMultiSelect = canMultiSelectSwitch.isOn
@@ -159,14 +157,17 @@ class SelectionsViewController: UIViewController {
             config.previouslySelectedCountries = Set()
         }        
         
-        //save the configuration on the view controller
-        countrySelectionVC.countryPickerConfiguration = config
+        //initialize
+        let countryPickerVC = UICountryPickerViewController(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
         
+        //save the configuration on the view controller
+        countryPickerVC.countryPickerConfiguration = config
         
         //get notified when user interacts with the country selection ui
-        countrySelectionVC.delegate = self
+        countryPickerVC.delegate = self
         
-        splitViewController?.setViewController(countrySelectionVC, for: .secondary)
+        splitViewController?.setViewController(countryPickerVC, for: .secondary)
+        splitViewController?.show(.secondary)
     }
     
     private func addBorder(to uiTextView: UITextView) {
@@ -240,5 +241,11 @@ enum SelectedCountriesSection: Int, DefinesCompositionalLayout, CaseIterable {
     
     func sectionInsets(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
         return .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+    }
+}
+
+extension SelectionsViewController: UISplitViewControllerDelegate {
+    func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
+        return .primary
     }
 }

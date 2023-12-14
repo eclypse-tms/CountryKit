@@ -25,15 +25,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         splitVC.preferredPrimaryColumnWidthFraction = 0.4
         
         
-        let exampleVC = SelectionsViewController()
-        let emptyVC = InstructionsViewController()
+        let selectionsVC = SelectionsViewController()
+        let instructionsVC = InstructionsViewController()
         
-        splitVC.setViewController(exampleVC, for: .primary)
-        splitVC.setViewController(emptyVC, for: .secondary)
+        splitVC.setViewController(selectionsVC, for: .primary)
+        splitVC.setViewController(instructionsVC, for: .secondary)
+        
+        splitVC.delegate = selectionsVC
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = splitVC
         window?.makeKeyAndVisible()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
