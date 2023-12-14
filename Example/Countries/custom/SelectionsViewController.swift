@@ -157,8 +157,8 @@ class SelectionsViewController: UIViewController {
             config.previouslySelectedCountries = Set()
         }        
         
-        //initialize
-        let countryPickerVC = UICountryPickerViewController(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
+        //initialize country picker ui
+        let countryPickerVC = UICountryPickerViewController()
         
         //save the configuration on the view controller
         countryPickerVC.countryPickerConfiguration = config

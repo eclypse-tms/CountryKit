@@ -17,6 +17,14 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet private weak var headerDirectionsContainer: UIView!
     @IBOutlet private weak var footerDirectionsContainer: UIView!
 
+    public init() {
+        super.init(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     /// presenter gets initialized after view did load via lateInitPresenter() function
     open var presenter: CountryPickerPresenter!
     
@@ -78,6 +86,9 @@ open class UICountryPickerViewController: UIViewController {
     /// performs configuration of non-scrolling header and footer views
     open func configureHeaderFooterViews() {
         if let validHeaderText = countryPickerConfiguration.pinnedHeaderText {
+            if let validFont = countryPickerConfiguration.themeFont {
+                pinnedHeaderDirections.font = validFont
+            }
             pinnedHeaderDirections.text = validHeaderText
             headerDirectionsContainer.isHidden = false
         } else {
@@ -85,6 +96,9 @@ open class UICountryPickerViewController: UIViewController {
         }
         
         if let validFooterText = countryPickerConfiguration.pinnedFooterText {
+            if let validFont = countryPickerConfiguration.themeFont {
+                pinnedFooterDirections.font = validFont
+            }
             pinnedFooterDirections.text = validFooterText
             footerDirectionsContainer.isHidden = false
         } else {
