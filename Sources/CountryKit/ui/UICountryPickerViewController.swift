@@ -74,24 +74,34 @@ open class UICountryPickerViewController: UIViewController {
                 navigationItem.leftBarButtonItem = validLeftBarButtonItem
                 navigationItem.leftItemsSupplementBackButton = false
             } else {
-                //there is no left bar button.
-                if self == validNavController.viewControllers.first {
-                    //if this view controller is at the root of the navigation hierarchy
-                    //we should present it with a dismiss/cancel button
-                    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didSelectBack(_:)))
-                } else {
-                    //this view controller is somewhere in the navigation stack
-                    //we should present it with a back button
-                    let backButtonImage = UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
-                    navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(didSelectBack(_:)))
+                switch countryPickerConfiguration.viewDismissOption {
+                case .displayLeadingButtonOnly, .displayBothButtons:
+                    //there is no left bar button.
+                    if self == validNavController.viewControllers.first {
+                        //if this view controller is at the root of the navigation hierarchy
+                        //we should present it with a dismiss/cancel button
+                        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didSelectBack(_:)))
+                    } else {
+                        //this view controller is somewhere in the navigation stack
+                        //we should present it with a back button
+                        let backButtonImage = UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
+                        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(didSelectBack(_:)))
+                    }
+                    navigationItem.leftItemsSupplementBackButton = false
+                case .displayTrailingButtonOnly:
+                    navigationItem.hidesBackButton = true
                 }
-                navigationItem.leftItemsSupplementBackButton = false
             }
             
             if let validRightBarButtonItem = countryPickerConfiguration.rightBarButton {
                 navigationItem.rightBarButtonItem = validRightBarButtonItem
             } else {
-                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
+                switch countryPickerConfiguration.viewDismissOption {
+                case .displayTrailingButtonOnly, .displayBothButtons:
+                    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
+                default:
+                    break
+                }
             }
         } else {
             //there is no navigation controller, there is no point in setting navigation bar buttons
