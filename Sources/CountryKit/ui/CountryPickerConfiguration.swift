@@ -73,6 +73,9 @@ public struct CountryPickerConfiguration: Hashable {
     /// provide a font to match the theme of your app. Otherwise it uses the default OS font
     public var themeFont: UIFont?
     
+    /// provide a custom view to appear at the navigation bar's title view.
+    public var navigationBarTitleView: UIView?
+    
     /// initializes CountrySelectionConfiguration with default parameters
     static public func `default`() -> CountryPickerConfiguration {
         CountryPickerConfiguration()

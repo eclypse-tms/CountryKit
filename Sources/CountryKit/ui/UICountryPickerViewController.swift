@@ -123,6 +123,10 @@ open class UICountryPickerViewController: UIViewController {
             pinnedHeaderDirections.font = countryPickerConfiguration.themeFont
             pinnedFooterDirections.font = countryPickerConfiguration.themeFont
         }
+        
+        if let validNavBarTitleView = countryPickerConfiguration.navigationBarTitleView {
+            navigationItem.titleView = validNavBarTitleView
+        }
     }
     
     open func configureBindings() {

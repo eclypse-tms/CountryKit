@@ -12,6 +12,6 @@
 
 CountryKit provides a convenient way to interact with countries, their metadata and complete with a pre-built UI.
 <p align="center">
-  <img width="150" height="150" src="./assets/countrykit_app_icon.svg">
+  <img src="./assets/hero_image.gif">
 </p>
 
