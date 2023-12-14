@@ -70,18 +70,8 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     }
     
     public var debugDescription: String {
-        return "alpha3Code: \(alpha3Code), name: \(englishName)"
+        return "alpha2Code: \(alpha2Code), name: \(englishName)"
     }
-    
-    /*
-    public static func == (lhs: Country, rhs: Country) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    */
         
     public static let Afghanistan = Country(alpha3Code: "AFG", englishName: "Afghanistan", alpha2Code: "AF", addressLabels: AddressLabel.cityOnly)
     public static let Aland_Islands = Country(alpha3Code: "ALA", englishName: "Åland Islands", alpha2Code: "AX")

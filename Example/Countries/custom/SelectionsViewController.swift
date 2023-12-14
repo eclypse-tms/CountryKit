@@ -24,6 +24,8 @@ class SelectionsViewController: UIViewController {
     @IBOutlet private weak var canMultiSelectSwitch: UISwitch!
     @IBOutlet private weak var cellSelectionStyleSegment: UISegmentedControl!
     @IBOutlet private weak var searchCriteriaSegment: UISegmentedControl!
+    @IBOutlet private weak var navBarButtonsSegment: UISegmentedControl!
+    
     @IBOutlet private weak var allowWorldwideSwitch: UISwitch!
     @IBOutlet private weak var autoDismissSwitch: UISwitch!
     @IBOutlet private weak var preselectCountriesSwitch: UISwitch!
@@ -103,8 +105,9 @@ class SelectionsViewController: UIViewController {
         config.allowsSelection = allowSelectionSwitch.isOn
         config.canMultiSelect = canMultiSelectSwitch.isOn
         
-        config.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)! //don't force unwrap in a shipping application
-        config.filteringCriteria = FilteringCriteria(rawValue: searchCriteriaSegment.selectedSegmentIndex)! //don't force unwrap in a shipping application
+        config.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)!
+        config.filteringCriteria = FilteringCriteria(rawValue: searchCriteriaSegment.selectedSegmentIndex)!
+        config.navBarButtonOption = NavBarButtonOption(rawValue: navBarButtonsSegment.selectedSegmentIndex)!
         
         if allowWorldwideSwitch.isOn {
             config.shouldShowWorldWide = true
@@ -157,14 +160,18 @@ class SelectionsViewController: UIViewController {
             config.previouslySelectedCountries = Set()
         }        
         
-        //initialize
-        let countryPickerVC = UICountryPickerViewController(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
+        //initialize country picker ui
+        let countryPickerVC = UICountryPickerViewController()
         
         //save the configuration on the view controller
         countryPickerVC.countryPickerConfiguration = config
         
         //get notified when user interacts with the country selection ui
         countryPickerVC.delegate = self
+        
+        //let navController = UINavigationController(rootViewController: countryPickerVC)
+        //navController.modalPresentationStyle = .formSheet
+        //present(navController, animated: true)
         
         splitViewController?.setViewController(countryPickerVC, for: .secondary)
         splitViewController?.show(.secondary)

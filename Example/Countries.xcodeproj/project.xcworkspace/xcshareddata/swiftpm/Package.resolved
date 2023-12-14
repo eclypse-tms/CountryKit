@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/eclypse-tms/CountryKit",
       "state" : {
-        "branch" : "add_locale_info",
-        "revision" : "93d4a9048cb9472d44af0dc973a4fb9aaf0228ed"
+        "branch" : "build_readme",
+        "revision" : "986aacbbdcf3496d97acda17ded9efc255c3c5fc"
       }
     },
     {

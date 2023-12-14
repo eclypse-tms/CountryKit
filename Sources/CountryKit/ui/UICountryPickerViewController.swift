@@ -17,6 +17,14 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet private weak var headerDirectionsContainer: UIView!
     @IBOutlet private weak var footerDirectionsContainer: UIView!
 
+    public init() {
+        super.init(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     /// presenter gets initialized after view did load via lateInitPresenter() function
     open var presenter: CountryPickerPresenter!
     
@@ -59,25 +67,53 @@ open class UICountryPickerViewController: UIViewController {
     
     /// performs configuration of built-in navigation bar buttons.
     open func configureNavBarButtons() {
-        if let validLeftBarButtonItem = countryPickerConfiguration.leftBarButton {
-            navigationItem.leftBarButtonItem = validLeftBarButtonItem
-            navigationItem.leftItemsSupplementBackButton = false
+        //check to see if the picker UI is presented in a navigation controller
+        if let validNavController = self.navigationController {
+            if let validLeftBarButtonItem = countryPickerConfiguration.leftBarButton {
+                //use the provided left bar button
+                navigationItem.leftBarButtonItem = validLeftBarButtonItem
+                navigationItem.leftItemsSupplementBackButton = false
+            } else {
+                switch countryPickerConfiguration.navBarButtonOption {
+                case .displayLeadingButtonOnly, .displayBothButtons:
+                    //there is no left bar button.
+                    if self == validNavController.viewControllers.first {
+                        //if this view controller is at the root of the navigation hierarchy
+                        //we should present it with a dismiss/cancel button
+                        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didSelectBack(_:)))
+                    } else {
+                        //this view controller is somewhere in the navigation stack
+                        //we should present it with a back button
+                        let backButtonImage = UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
+                        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(didSelectBack(_:)))
+                    }
+                    navigationItem.leftItemsSupplementBackButton = false
+                case .displayTrailingButtonOnly:
+                    navigationItem.hidesBackButton = true
+                }
+            }
+            
+            if let validRightBarButtonItem = countryPickerConfiguration.rightBarButton {
+                navigationItem.rightBarButtonItem = validRightBarButtonItem
+            } else {
+                switch countryPickerConfiguration.navBarButtonOption {
+                case .displayTrailingButtonOnly, .displayBothButtons:
+                    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
+                default:
+                    break
+                }
+            }
         } else {
-            let backButtonImage = UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
-            navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(didSelectBack(_:)))
-            navigationItem.leftItemsSupplementBackButton = false
-        }
-
-        if let validRightBarButtonItem = countryPickerConfiguration.rightBarButton {
-            navigationItem.rightBarButtonItem = validRightBarButtonItem
-        } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
+            //there is no navigation controller, there is no point in setting navigation bar buttons
         }
     }
     
     /// performs configuration of non-scrolling header and footer views
     open func configureHeaderFooterViews() {
         if let validHeaderText = countryPickerConfiguration.pinnedHeaderText {
+            if let validFont = countryPickerConfiguration.themeFont {
+                pinnedHeaderDirections.font = validFont
+            }
             pinnedHeaderDirections.text = validHeaderText
             headerDirectionsContainer.isHidden = false
         } else {
@@ -85,6 +121,9 @@ open class UICountryPickerViewController: UIViewController {
         }
         
         if let validFooterText = countryPickerConfiguration.pinnedFooterText {
+            if let validFont = countryPickerConfiguration.themeFont {
+                pinnedFooterDirections.font = validFont
+            }
             pinnedFooterDirections.text = validFooterText
             footerDirectionsContainer.isHidden = false
         } else {
@@ -92,7 +131,8 @@ open class UICountryPickerViewController: UIViewController {
         }
     }
     
-    ///
+    /// initializes injectable classes that are required for the CountryPickerPresenter.
+    /// override it to modify the behavior of the dependent classes
     open func lateInitPresenter() {
         let bundleLoader = BundleLoaderImpl(fileManager: FileManager.default, bundle: CountryKit.assetBundle)
         let textHighlighter = TextHighlighterImpl()
@@ -108,6 +148,10 @@ open class UICountryPickerViewController: UIViewController {
             searchBar.searchTextField.font = validThemeFont
             pinnedHeaderDirections.font = countryPickerConfiguration.themeFont
             pinnedFooterDirections.font = countryPickerConfiguration.themeFont
+        }
+        
+        if let validNavBarTitleView = countryPickerConfiguration.navigationBarTitleView {
+            navigationItem.titleView = validNavBarTitleView
         }
     }
     
