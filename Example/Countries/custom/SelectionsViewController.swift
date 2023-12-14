@@ -166,8 +166,12 @@ class SelectionsViewController: UIViewController {
         //get notified when user interacts with the country selection ui
         countryPickerVC.delegate = self
         
-        splitViewController?.setViewController(countryPickerVC, for: .secondary)
-        splitViewController?.show(.secondary)
+        let navController = UINavigationController(rootViewController: countryPickerVC)
+        navController.modalPresentationStyle = .formSheet
+        present(navController, animated: true)
+        
+        //splitViewController?.setViewController(countryPickerVC, for: .secondary)
+        //splitViewController?.show(.secondary)
     }
     
     private func addBorder(to uiTextView: UITextView) {
