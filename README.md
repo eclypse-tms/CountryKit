@@ -24,7 +24,9 @@ Add CountryKit to your project via Swift Package Manager.
 
 ## Usage
 ```
-//in a view controller:
+//in a view controller
+import CountryKit
+...
 let countryPickerVC = UICountryPickerViewController()
 countryPickerVC.delegate = self //to receive callbacks when a country is selected
 
@@ -42,13 +44,15 @@ There are 250 countries or regions present in the CountryKit. Country data model
 |alpha3 code|ISO 3166-1 alpha-3 country code [wiki link](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)|
 |localized name|automatic localization of the country names based on user's preferences|
 |address labels|address labels used in each country. for example in Chile the address fields are composed of street, city and postal code only|
-|associated locales|all known NSLocales for this country|
+|associated locales|all known [NSLocales](https://developer.apple.com/documentation/foundation/locale) for this country.|
 
 ## UI Customization
 
-CountryKit's prebuilt UI is highly customizable. In order to customize the behavior, you create an instance of [CountryPickerConfiguration](./Sources/CountryKit/ui/CountryPickerConfiguration.swift) object and pass it to the picker view before presenting like so:
+CountryKit's prebuilt UI is highly customizable. In order to customize the behavior, you create an instance of [CountryPickerConfiguration](./Sources/CountryKit/ui/CountryPickerConfiguration.swift) object and pass it to the picker view before presenting:
 
 ```
+import CountryKit
+...
 var config = CountryPickerConfiguration.default()
 //customize it according to your needs
 config.canMultiSelect = false
@@ -65,10 +69,6 @@ public var allowsSelection: Bool = true
 /// controls whether country selection interface allows user to select multiple countries
 public var canMultiSelect: Bool = true
 
-/// controls whether country selection interface allows user to highlight the row without actually making a selection
-/// this option is only considered if allowsSelection is false.
-public var canHighlightWithoutSelecting: Bool = false
-
 ///restrict the countries to the ones in this list. leave empty to show all the countries
 public var countryRoster: Set<Country> = Set()
 
@@ -83,13 +83,14 @@ public var excludedCountries: Set<Country> = Set()
 public var excludedCountriesJustification: String = ""
 
 ///after the user makes the first selection, automatically dismisses the interface. defaults to false.
-public var autoDismiss: Bool = false
+public var dismissAfterFirstSelection: Bool = false
 
 /// the countries on this list are preselected when the UI first opens
-public var previouslySelectedCountries: Set<Country> = Set()
+public var preselectedCountries: Set<Country> = Set()
 
-///should worldwide be a visible option
-public var shouldShowWorldWide: Bool = true
+///allow user to select worldwide instead of specific countries. worldwide represents a
+///selection of all countries and regions.
+public var shouldShowWorldWide: Bool = false
 
 /// only needed if your are planning to display worldwide as a selectable option.
 /// for example, in english this property would read "Worlwide"
@@ -109,10 +110,10 @@ public var leftBarButton: UIBarButtonItem?
 /// if this button is provided, navBarButtonOption is ignored
 public var rightBarButton: UIBarButtonItem?
 
-/// when provided, header text is pinned to the top of the picker view and does not scroll away.
+/// when provided, a header text is diplayed that is pinned to the top of the picker view and does not scroll away.
 public var pinnedHeaderText: String?
 
-/// when provided, footer text is pinned to the bottom of the picker view and does not scroll away.
+/// when provided, a footer text is displayed that is pinned to the bottom of the picker view and does not scroll away.
 public var pinnedFooterText: String?
 
 /// indicates how the cells should look like when they are selected by the user
@@ -132,7 +133,13 @@ public var navBarButtonOption: NavBarButtonOption = .displayBothButtons
 ```
 
 ## Extending CountryKit
-Do you want to see additional metadata about each country? Extending CountryKit is fairly simple. Provide a csv file keyed by each countries alpha2Code. Checkout Locales.csv as an example. Submit a ticket to get started.
+Do you want to see additional metadata about each country? Extending CountryKit is fairly simple. Provide a csv file keyed by each country's alpha2Code. Checkout [Locales.csv](./Sources/CountryKit/country_list/Locales.csv) as an example. Submit a ticket or pull request to get started.
 
 ## Example
-CountryKit provides a demo app for you to play with the behavior. See [/Example/Countries.xcodeproj](./Example/Countries.xcodeproj). It is highly recommended to run the demo app in a **iPad** or **mac** device.
+CountryKit provides a demo app for you to play with the behavior. See [/Example/Countries.xcodeproj](./Example/Countries.xcodeproj). It is highly recommended to run the demo app in a **iPad** or **mac** device. The example app already includes some of the configuration behavior in the UI for easy testing.
+<p align="center">
+  <img width="600" src="./assets/config_example.jpg">
+</p>
+
+## Corrections and Feature Requests
+Submit a ticket or pull request to get started. All contributions are welcome.

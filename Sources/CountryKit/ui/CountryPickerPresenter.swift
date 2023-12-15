@@ -52,7 +52,7 @@ open class CountryPickerPresenter: NSObject {
     }
     
     open func register(config: CountryPickerConfiguration) {
-        formSelectedCountries = config.previouslySelectedCountries
+        formSelectedCountries = config.preselectedCountries
         countryPickerConfig = config
         
         /// initializes Worldwide
@@ -361,7 +361,7 @@ open class CountryPickerPresenter: NSObject {
             clearPreviousAnd(selectThis: country, at: indexPath)
         }
         
-        if countryPickerConfig.autoDismiss {
+        if countryPickerConfig.dismissAfterFirstSelection {
             dismissView.send(true)
         }
     }
@@ -370,7 +370,7 @@ open class CountryPickerPresenter: NSObject {
     open func didDeselect(country: Country, at indexPath: IndexPath) {
         formSelectedCountries.remove(country)
         countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: false, indexPath: indexPath, performCellSelection: false))
-        if countryPickerConfig.autoDismiss {
+        if countryPickerConfig.dismissAfterFirstSelection {
             dismissView.send(true)
         }
     }

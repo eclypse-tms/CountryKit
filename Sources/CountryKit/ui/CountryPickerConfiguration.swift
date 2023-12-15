@@ -14,10 +14,6 @@ public struct CountryPickerConfiguration: Hashable {
     /// controls whether country selection interface allows user to select multiple countries
     public var canMultiSelect: Bool = true
     
-    /// controls whether country selection interface allows user to highlight the row without actually making a selection
-    /// this option is only considered if allowsSelection is false.
-    public var canHighlightWithoutSelecting: Bool = false
-    
     ///restrict the countries to the ones in this list. leave empty to show all the countries
     public var countryRoster: Set<Country> = Set()
     
@@ -32,13 +28,14 @@ public struct CountryPickerConfiguration: Hashable {
     public var excludedCountriesJustification: String = ""
     
     ///after the user makes the first selection, automatically dismisses the interface. defaults to false.
-    public var autoDismiss: Bool = false
+    public var dismissAfterFirstSelection: Bool = false
     
     /// the countries on this list are preselected when the UI first opens
-    public var previouslySelectedCountries: Set<Country> = Set()
+    public var preselectedCountries: Set<Country> = Set()
     
-    ///should worldwide be a visible option
-    public var shouldShowWorldWide: Bool = true
+    ///allow user to select worldwide instead of specific countries. worldwide represents a
+    ///selection of all countries and regions.
+    public var shouldShowWorldWide: Bool = false
     
     /// only needed if your are planning to display worldwide as a selectable option.
     /// for example, in english this property would read "Worlwide"
@@ -58,10 +55,10 @@ public struct CountryPickerConfiguration: Hashable {
     /// if this button is provided, navBarButtonOption is ignored
     public var rightBarButton: UIBarButtonItem?
     
-    /// when provided, header text is pinned to the top of the picker view and does not scroll away.
+    /// when provided, a header text is displayed that is pinned to the top of the picker view and does not scroll away.
     public var pinnedHeaderText: String?
     
-    /// when provided, footer text is pinned to the bottom of the picker view and does not scroll away.
+    /// when provided, a footer text is displayed that is pinned to the bottom of the picker view and does not scroll away.
     public var pinnedFooterText: String?
     
     /// indicates how the cells should look like when they are selected by the user

@@ -151,13 +151,13 @@ class SelectionsViewController: UIViewController {
             config.pinnedFooterText = pinnedFooterTooltip.text
         }
         
-        config.autoDismiss = autoDismissSwitch.isOn
+        config.dismissAfterFirstSelection = autoDismissSwitch.isOn
         
         if preselectCountriesSwitch.isOn {
             let currentSnapshot = dataSource.snapshot()
-            config.previouslySelectedCountries = Set(currentSnapshot.itemIdentifiers)
+            config.preselectedCountries = Set(currentSnapshot.itemIdentifiers)
         } else {
-            config.previouslySelectedCountries = Set()
+            config.preselectedCountries.removeAll()
         }        
         
         //initialize country picker ui
