@@ -18,7 +18,8 @@ public struct TimeZoneOffset: Hashable, Codable, RawRepresentable {
     }
     
     /// rawValue is either UTC -10, UTC 0 or UTC +9:30
-    public init(rawValue utcText: String) {
+    public init?(rawValue utcText: String) {
+        guard !utcText.isEmpty else { return nil }
         self.rawValue = utcText
         let rawStringComponents = utcText.components(separatedBy: " ")
         if rawStringComponents.count == 2 {

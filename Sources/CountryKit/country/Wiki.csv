@@ -242,7 +242,7 @@ rownum,alpha2 code,country name,top level domain,wikipedia link,de-jure capital 
 241,VN,Viet Nam,.vn,https://en.wikipedia.org/wiki/Vietnam,Hanoi,,Vietnamese,vi,331700.00,UTC +7,,+84,,,,,,
 242,VU,Vanuatu,.vu,https://en.wikipedia.org/wiki/Vanuatu,Port Vila,,Bislama|English|French,en|fr|bi,12189.00,UTC +11,,+678,,TRUE,,,,
 243,WF,Wallis and Futuna,.wf,https://en.wikipedia.org/wiki/Wallis_and_Futuna,Mata Utu,,French,fr,142.42,UTC +12,,+681,,,France,fr,,
-244,WS,Samoa,.ws,https://en.wikipedia.org/wiki/Samoa,Apia,,English|Samoan,en|sm,2831.00,UTC +13,,+685,,,,,,
+244,WS,Samoa,.ws,https://en.wikipedia.org/wiki/Samoa,Apia,,English|Samoan,en|sm,2831.00,UTC +13,,+685,,TRUE,,,,
 245,YE,Yemen,.ye,https://en.wikipedia.org/wiki/Yemen,Sanaa,Aden,Arabic,ar,530000.00,UTC +3,,+967,,,,,,
 246,YT,Mayotte,.yt,https://en.wikipedia.org/wiki/Mayotte,,,France,fr,374.00,UTC +3,,+262,,,France,fr,,
 247,ZA,South Africa,.za,https://en.wikipedia.org/wiki/South_Africa,Cape Town,Pretoria,Afrikaans|English|Ndebele|Sepedi|Sesotho|Setswana|Swazi|Tshivenda|Xhosa|Xitsonga|Zulu,af|en|nr|nso|st|tn|ss|ve|xh|ts|zu,1221037.00,UTC +2,,+27,,TRUE,,,,
