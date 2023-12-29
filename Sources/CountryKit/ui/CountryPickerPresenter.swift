@@ -178,7 +178,7 @@ open class CountryPickerPresenter: NSObject {
         }
     }
     
-    private func applyInclusionCriteria(alpha2Code: String, country: Country) -> Country? {
+    open func applyInclusionCriteria(alpha2Code: String, country: Country) -> Country? {
         if countryPickerConfig.includeOption.contains(.all) {
             return country
         }
@@ -313,7 +313,11 @@ open class CountryPickerPresenter: NSObject {
                     //of the loop
                     shouldIncludeThisCountry = false
                     for eachSearchComponent in searchComponents {
-                        shouldIncludeThisCountry = eachCountry.localizedName.localizedCaseInsensitiveContains(eachSearchComponent)
+                        let rangeOfSearchComponent = eachCountry.localizedName.range(of: eachSearchComponent, options: [.caseInsensitive, .diacriticInsensitive])
+                        if rangeOfSearchComponent != nil {
+                            shouldIncludeThisCountry
+                        }
+                        //shouldIncludeThisCountry = eachCountry.localizedName.localizedCaseInsensitiveContains(eachSearchComponent)
                         if shouldIncludeThisCountry {
                             break
                         }
@@ -324,7 +328,11 @@ open class CountryPickerPresenter: NSObject {
                     //of the loop
                     shouldIncludeThisCountry = true
                     for eachSearchComponent in searchComponents {
-                        shouldIncludeThisCountry = eachCountry.localizedName.localizedCaseInsensitiveContains(eachSearchComponent)
+                        let rangeOfSearchComponent = eachCountry.localizedName.range(of: eachSearchComponent, options: [.caseInsensitive, .diacriticInsensitive])
+                        if rangeOfSearchComponent == nil {
+                            shouldIncludeThisCountry = false
+                        }
+                        //shouldIncludeThisCountry = eachCountry.localizedName.localizedCaseInsensitiveContains(eachSearchComponent)
                         if !shouldIncludeThisCountry {
                             break
                         }
