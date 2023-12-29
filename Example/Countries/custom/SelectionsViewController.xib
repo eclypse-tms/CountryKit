@@ -193,13 +193,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BkI-6f-MYy">
                                                     <rect key="frame" x="123.66666666666664" y="0.0" width="253.33333333333337" height="30"/>
                                                     <menu key="menu" id="qZ5-q5-fgf">
+                                                        <menuOptions key="menuOptions" singleSelection="YES"/>
                                                         <children>
                                                             <command title="Sovereign States" id="W0Y-ba-c8N"/>
-                                                            <command title="Commonwealth Member" id="odi-eS-dAm"/>
-                                                            <command title="Dependent Territory" id="bN0-64-DiI"/>
-                                                            <command title="No Population" id="9qx-Wd-7kF"/>
-                                                            <command title="Disputed Territory" id="IGW-fo-SXm"/>
-                                                            <command title="All Countries" id="StA-Eg-Pvb"/>
                                                         </children>
                                                     </menu>
                                                     <state key="normal" title="Button">

@@ -176,14 +176,15 @@ open class UICountryPickerViewController: UIViewController {
                     }
                 }
                 
-                if cellSelectionMeta.isSelected {
-                    strongSelf.delegate?.didSelect(country: cellSelectionMeta.country)
-                    strongSelf.countrySelectionRelay.send((cellSelectionMeta.country, true))
-                } else {
-                    strongSelf.delegate?.didDeselect(country: cellSelectionMeta.country)
-                    strongSelf.countrySelectionRelay.send((cellSelectionMeta.country, false))
+                if cellSelectionMeta.isInitiatedByUser {
+                    if cellSelectionMeta.isSelected {
+                        strongSelf.delegate?.didSelect(country: cellSelectionMeta.country)
+                        strongSelf.countrySelectionRelay.send((cellSelectionMeta.country, true))
+                    } else {
+                        strongSelf.delegate?.didDeselect(country: cellSelectionMeta.country)
+                        strongSelf.countrySelectionRelay.send((cellSelectionMeta.country, false))
+                    }
                 }
-                
             }).store(in: &cancellables)
         
         presenter.register(config: self.countryPickerConfiguration)

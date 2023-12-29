@@ -66,6 +66,7 @@ class SelectionsViewController: UIViewController {
     }
     
     private func configureInclusionOptions() {
+        
         let inclusionMenu = UIMenu(children: [
             UIAction(title: "Sovereign State", handler: { _ in self.add(includeOptions: .sovereignState) }),
             UIAction(title: "Commonwealth Member", handler: { _ in self.add(includeOptions: .commonwealthMember) }),

@@ -359,7 +359,7 @@ open class CountryPickerPresenter: NSObject {
             for (index, eachCounty) in filteredCountryList.enumerated() {
                 if formSelectedCountries.contains(eachCounty.country) {
                     let indexPathToRestore = IndexPath(row: index, section: CountryPickerViewSection.allCountries.rawValue)
-                    countrySelectionRelay.send(CellSelectionMeta(country: eachCounty.country, isSelected: true, indexPath: indexPathToRestore, performCellSelection: true))
+                    countrySelectionRelay.send(CellSelectionMeta(country: eachCounty.country, isSelected: true, indexPath: indexPathToRestore, performCellSelection: true, isInitiatedByUser: false))
                     numberOfRestoredSelections += 1
                 }
                 
@@ -382,7 +382,7 @@ open class CountryPickerPresenter: NSObject {
                     //UI should already reflect this selection, however, we need to generate a selection event for
                     //the delegate
                     formSelectedCountries.insert(country)
-                    countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: true, indexPath: indexPath, performCellSelection: false))
+                    countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: true, indexPath: indexPath, performCellSelection: false, isInitiatedByUser: true))
                 } else {
                     //user selected Worldwide - deselect everything else
                     clearPreviousAnd(selectThis: country, at: indexPath)
@@ -395,7 +395,7 @@ open class CountryPickerPresenter: NSObject {
                     clearPreviousAnd(selectThis: country, at: indexPath)
                 } else {
                     formSelectedCountries.insert(country)
-                    countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: true, indexPath: indexPath, performCellSelection: false))
+                    countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: true, indexPath: indexPath, performCellSelection: false, isInitiatedByUser: true))
                 }
             }
         } else {
@@ -411,7 +411,7 @@ open class CountryPickerPresenter: NSObject {
     /// this function gets invoked after the user taps on a row to deselect it.
     open func didDeselect(country: Country, at indexPath: IndexPath) {
         formSelectedCountries.remove(country)
-        countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: false, indexPath: indexPath, performCellSelection: false))
+        countrySelectionRelay.send(CellSelectionMeta(country: country, isSelected: false, indexPath: indexPath, performCellSelection: false, isInitiatedByUser: true))
         if countryPickerConfig.dismissAfterFirstSelection {
             dismissView.send(true)
         }
@@ -432,7 +432,7 @@ open class CountryPickerPresenter: NSObject {
                     section = CountryPickerViewSection.worldwide.rawValue
                     row = 0
                     let indexPathToDeselect = IndexPath(row: row, section: section)
-                    countrySelectionRelay.send(CellSelectionMeta(country: eachSelectedCountry, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true))
+                    countrySelectionRelay.send(CellSelectionMeta(country: eachSelectedCountry, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true, isInitiatedByUser: true))
                 }
             } else {
                 if let indexOfPreviouslySelectedCountry = filteredCountryList.firstIndex (where: { $0.country == eachSelectedCountry }) {
@@ -447,13 +447,13 @@ open class CountryPickerPresenter: NSObject {
                         row = indexOfPreviouslySelectedCountry
                     }
                     let indexPathToDeselect = IndexPath(row: row, section: section)
-                    countrySelectionRelay.send(CellSelectionMeta(country: eachSelectedCountry, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true))
+                    countrySelectionRelay.send(CellSelectionMeta(country: eachSelectedCountry, isSelected: false, indexPath: indexPathToDeselect, performCellSelection: true, isInitiatedByUser: true))
                 }
             }
         }
         formSelectedCountries.removeAll()
         formSelectedCountries.insert(selectThis)
-        countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: true, indexPath: indexPath, performCellSelection: false))
+        countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: true, indexPath: indexPath, performCellSelection: false, isInitiatedByUser: true))
     }
 }
 
