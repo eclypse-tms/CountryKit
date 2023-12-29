@@ -41,7 +41,7 @@ class SelectionsViewController: UIViewController {
     
     @IBOutlet private weak var inclusionButton: UIButton!
     
-    private var selectedInclusionOption: FilterOptions = []
+    private var selectedInclusionOption: IncludeOptions = []
     
     
     private var dataSource: UICollectionViewDiffableDataSource<SelectedCountriesSection, Country>!
@@ -67,20 +67,20 @@ class SelectionsViewController: UIViewController {
     
     private func configureInclusionOptions() {
         let inclusionMenu = UIMenu(children: [
-            UIAction(title: "Sovereign State", handler: { _ in self.add(filterOption: .sovereignState) }),
-            UIAction(title: "Commonwealth Member", handler: { _ in self.add(filterOption: .commonwealthMember) }),
-            UIAction(title: "Dependent Territory", handler: { _ in self.add(filterOption: .dependentTerritory) }),
-            UIAction(title: "No Population", handler: { _ in self.add(filterOption: .hasNoPermanentPopulation) }),
-            UIAction(title: "Disputed Territories", handler: { _ in self.add(filterOption: .disputedTerritories) }),
-            UIAction(title: "All of the above", handler: { _ in self.add(filterOption: .all) })
+            UIAction(title: "Sovereign State", handler: { _ in self.add(includeOptions: .sovereignState) }),
+            UIAction(title: "Commonwealth Member", handler: { _ in self.add(includeOptions: .commonwealthMember) }),
+            UIAction(title: "Dependent Territory", handler: { _ in self.add(includeOptions: .dependentTerritory) }),
+            UIAction(title: "No Population", handler: { _ in self.add(includeOptions: .hasNoPermanentPopulation) }),
+            UIAction(title: "Disputed Territories", handler: { _ in self.add(includeOptions: .disputedTerritories) }),
+            UIAction(title: "All of the above", handler: { _ in self.add(includeOptions: .all) })
         ])
         
         inclusionButton.menu = inclusionMenu
         inclusionButton.showsMenuAsPrimaryAction = true
     }
     
-    private func add(filterOption: FilterOptions) {
-        selectedInclusionOption = [filterOption]
+    private func add(includeOptions: IncludeOptions) {
+        selectedInclusionOption = [includeOptions]
     }
     
     private func configureInitialState() {
@@ -139,6 +139,9 @@ class SelectionsViewController: UIViewController {
             config.localizedWorldWide = ""
             config.localizedWorldWideDescription = ""
         }
+        
+        //save the inclusions
+        config.includeOption = selectedInclusionOption
         
         if limitedCountrySwitch.isOn {
             limitedCountryStack.isHidden = false

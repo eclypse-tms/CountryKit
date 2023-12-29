@@ -70,18 +70,18 @@ open class CountryProviderImpl: CountryProvider {
                 //17:is territory only (no permanent population)
                 //18:disputed territory
                 let wiki = Wiki(
-                    topLevelDomain: components[3],
+                    topLevelDomain: components[3].valueOrNil,
                     wikipediaLink: URL(string: components[4]),
-                    capitalCity: components[5],
-                    capitalCityDeFacto: components[6],
+                    capitalCity: components[5].valueOrNil,
+                    capitalCityDeFacto: components[6].valueOrNil,
                     officialLanguages: components[8].components(separatedBy: "|"),
                     area: Double(components[9]) ?? .zero,
                     timeZoneOffsets: components[10].components(separatedBy: "|").map { TimeZoneOffset(rawValue: $0) },
                     daylightSavingsTimeZoneOffsets: components[11].components(separatedBy: "|").map { TimeZoneOffset(rawValue: $0) },
-                    internationalCallingCode: components[12],
+                    internationalCallingCode: components[12].valueOrNil,
                     dedicatedAreaCodes: components[13].components(separatedBy: "|"),
                     isMemberOfCommonwealth: Bool(components[14].lowercased()) ?? false,
-                    sovereignStateCountryCode: components[16],
+                    sovereignStateCountryCode: components[16].valueOrNil,
                     territoryWithoutAnyPermanentPopulation:  Bool(components[17].lowercased()) ?? false,
                     disputedTerritory: Bool(components[18].lowercased()) ?? false)
                 let alpha2Code = components[1]
