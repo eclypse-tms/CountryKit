@@ -10,11 +10,26 @@ import Foundation
 public struct TimeZoneOffset: Hashable, Codable, RawRepresentable {
     public typealias RawValue = String
     
+    /// the number of hours that is separated from UTC 0
     public let hourOffset: Int
+    
+    /// the number of minutes that is separated from its own primary UTC
     public let minuteOffset: Int
+    
+    /// whether this timezone is located on the east or west side of UTC. Eastern timezones have positive offset values.
+    /// UTC 0 is a special case and is also considered to have positive offset
+    public let offsetSign: OffsetSign
+    
+    /// rawValue reads as follows: UTC -10, UTC 0 or UTC +9:30
     public let rawValue: String
+    
+    /// indicates the number of seconds either positive or negative this timezone is separated from UTC 0.
+    public var secondsFromUTC: Int {
+        return hourOffset * 3600 + minuteOffset * 60
+    }
+    
     public var timeZone: TimeZone? {
-        return TimeZone(secondsFromGMT: hourOffset * 3600 + minuteOffset * 60)
+        return TimeZone(secondsFromGMT: secondsFromUTC)
     }
     
     /// rawValue is either UTC -10, UTC 0 or UTC +9:30
@@ -42,6 +57,7 @@ public struct TimeZoneOffset: Hashable, Codable, RawRepresentable {
                     self.hourOffset = Int(hourAndMinuteComponents[0])! * -1
                     self.minuteOffset = Int(hourAndMinuteComponents[1])! * -1
                 }
+                self.offsetSign = .minus
             case "+":
                 let hourAndMinuteComponents = rawOffSetInfo.components(separatedBy: ":")
                 if hourAndMinuteComponents.count == 1 {
@@ -52,15 +68,17 @@ public struct TimeZoneOffset: Hashable, Codable, RawRepresentable {
                     self.hourOffset = Int(hourAndMinuteComponents[0])!
                     self.minuteOffset = Int(hourAndMinuteComponents[1])!
                 }
+                self.offsetSign = .plus
             default:
                 self.hourOffset = 0
                 self.minuteOffset = 0
+                self.offsetSign = .zero
             }
-            
         } else {
             //assume this is UTC 0
             self.hourOffset = 0
             self.minuteOffset = 0
+            self.offsetSign = .zero
         }
     }
 }

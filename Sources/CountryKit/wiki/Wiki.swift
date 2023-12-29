@@ -47,18 +47,18 @@ public struct Wiki: Hashable, Codable {
     /// whether this county belongs Commonwealth of Nations
     public var isMemberOfCommonwealth: Bool
     
-    /// alpha2 code of the sovereign nation that manages this country, region or territory's certain affairs on behalf of it.
-    /// For example Finland is the sovereign state of Åland Islands.
-    public var sovereignStateCountryCode: String?
+    /// alpha2 code of the sovereign nation that manages this region or territory's certain affairs on behalf of it.
+    /// For example Finland is the sovereign state of Åland Islands. As a result it would read "fi" for Åland Islands.
+    public var alpha2CodeOfItsSovereignState: String?
 
     /// indicates whether a permanent population lives here or not. For example Antartica and Bouvet Islands do not
     /// have a permanent population.
-    public var territoryWithoutAnyPermanentPopulation: Bool
+    public var noPermanentPopulation: Bool
     
     /// indicates whether this territory, region or country is disputed and its existence is not officially recognized universally by
     /// majority of other countries. For example Western Sahara is  disputed territory where it is both claimed by Morocco and
     /// Sahrawi Arab Democratic Republic.
-    public var disputedTerritory: Bool
+    public var isDisputedTerritory: Bool
     
     /// not available to public
     static func uninitializedWiki() -> Wiki {
@@ -73,8 +73,8 @@ public struct Wiki: Hashable, Codable {
                     internationalCallingCode: nil,
                     dedicatedAreaCodes: [],
                     isMemberOfCommonwealth: false,
-                    sovereignStateCountryCode: nil,
-                    territoryWithoutAnyPermanentPopulation: false,
-                    disputedTerritory: false)
+                    alpha2CodeOfItsSovereignState: nil,
+                    noPermanentPopulation: false,
+                    isDisputedTerritory: false)
     }
 }

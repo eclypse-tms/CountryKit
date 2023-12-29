@@ -14,7 +14,7 @@ public struct IncludeOptions: OptionSet, Hashable {
         self.rawValue = rawValue
     }
     
-    /// includes those countries, regions and territories that are not claimed by another sovereign state
+    /// includes those countries, regions and territories that are not claimed by another sovereign state, are not a disputed territory and have a permanent population
     public static let sovereignState = IncludeOptions(rawValue: 1 << 0)
     
     /// includes those countries, regions and territories that are a member of Commonwealth of Nations

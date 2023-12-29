@@ -81,9 +81,9 @@ open class CountryProviderImpl: CountryProvider {
                     internationalCallingCode: components[12].valueOrNil,
                     dedicatedAreaCodes: components[13].components(separatedBy: "|").compactMap { $0.valueOrNil },
                     isMemberOfCommonwealth: Bool(components[14].lowercased()) ?? false,
-                    sovereignStateCountryCode: components[16].valueOrNil,
-                    territoryWithoutAnyPermanentPopulation:  Bool(components[17].lowercased()) ?? false,
-                    disputedTerritory: Bool(components[18].lowercased()) ?? false)
+                    alpha2CodeOfItsSovereignState: components[16].valueOrNil,
+                    noPermanentPopulation:  Bool(components[17].lowercased()) ?? false,
+                    isDisputedTerritory: Bool(components[18].lowercased()) ?? false)
                 let alpha2Code = components[1]
                 allKnownCountries[alpha2Code]?.wiki = wiki
             } else {

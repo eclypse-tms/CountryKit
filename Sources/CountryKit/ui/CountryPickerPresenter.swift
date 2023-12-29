@@ -183,7 +183,11 @@ open class CountryPickerPresenter: NSObject {
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.sovereignState), country.wiki.sovereignStateCountryCode == nil {
+        if countryPickerConfig.includeOption.contains(.sovereignState), 
+            country.wiki.alpha2CodeOfItsSovereignState == nil, //cannot have another country as its sovereign
+            !country.wiki.isDisputedTerritory, //cannot be a disputed territory
+            !country.wiki.noPermanentPopulation //must have a permanent population
+        {
             //user wanted to include the sovereign states and this country does not have another sovereign state
             return country
         }
@@ -193,17 +197,17 @@ open class CountryPickerPresenter: NSObject {
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.dependentTerritory), country.wiki.sovereignStateCountryCode != nil {
+        if countryPickerConfig.includeOption.contains(.dependentTerritory), country.wiki.alpha2CodeOfItsSovereignState != nil {
             //user wanted to include the commonwealth states and this country HAS another sovereign state
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.hasNoPermanentPopulation), country.wiki.territoryWithoutAnyPermanentPopulation {
+        if countryPickerConfig.includeOption.contains(.hasNoPermanentPopulation), country.wiki.noPermanentPopulation {
             //user wanted to include those regions and territories without any permanent population
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.disputedTerritories), country.wiki.disputedTerritory {
+        if countryPickerConfig.includeOption.contains(.disputedTerritories), country.wiki.isDisputedTerritory {
             //user wanted to include those regions and territories that are internationally disputed
             return country
         }

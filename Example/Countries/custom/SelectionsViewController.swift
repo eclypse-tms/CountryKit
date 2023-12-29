@@ -40,9 +40,10 @@ class SelectionsViewController: UIViewController {
     @IBOutlet private weak var pinnedFooterTooltip: UITextView!
     
     @IBOutlet private weak var inclusionButton: UIButton!
+    @IBOutlet private weak var sortButton: UIButton!
     
     private var selectedInclusionOption: IncludeOptions = []
-    
+    private var selectedSortOption: CountrySorter?
     
     private var dataSource: UICollectionViewDiffableDataSource<SelectedCountriesSection, Country>!
 
@@ -53,6 +54,7 @@ class SelectionsViewController: UIViewController {
         configureMainView()
         configureInitialState()
         configureInclusionOptions()
+        configureSortOptions()
     }
     
     private func configureMainView() {
@@ -73,7 +75,7 @@ class SelectionsViewController: UIViewController {
             UIAction(title: "Dependent Territory", handler: { _ in self.add(includeOptions: .dependentTerritory) }),
             UIAction(title: "No Population", handler: { _ in self.add(includeOptions: .hasNoPermanentPopulation) }),
             UIAction(title: "Disputed Territories", handler: { _ in self.add(includeOptions: .disputedTerritories) }),
-            UIAction(title: "All of the above", handler: { _ in self.add(includeOptions: .all) })
+            UIAction(title: "All Countries/Territories", handler: { _ in self.add(includeOptions: .all) })
         ])
         
         inclusionButton.menu = inclusionMenu
@@ -83,6 +85,35 @@ class SelectionsViewController: UIViewController {
     
     private func add(includeOptions: IncludeOptions) {
         selectedInclusionOption = [includeOptions]
+    }
+    
+    private func configureSortOptions() {
+        
+        let sortMenu = UIMenu(children: [
+            UIAction(title: "Default", handler: { _ in self.mark(selectedSort: 0) }),
+            UIAction(title: "Alpha 2 Code", handler: { _ in self.mark(selectedSort: 1) }),
+            UIAction(title: "Area", handler: { _ in self.mark(selectedSort: 2) }),
+            UIAction(title: "NA Countries First", handler: { _ in self.mark(selectedSort: 3) }),
+        ])
+        
+        sortButton.menu = sortMenu
+        sortButton.showsMenuAsPrimaryAction = true
+    }
+    
+    private func mark(selectedSort: Int) {
+        switch selectedSort {
+        case 1:
+            //sort countries by their alpha2 code
+            selectedSortOption = Alpha2Sorter()
+        case 2:
+            //sort countries by their area
+            selectedSortOption = AreaSorter()
+        case 3:
+            //place Canada, United States and Mexico on top and then sort by name
+            selectedSortOption = CountriesInNorthAmericaFirst()
+        default:
+            selectedSortOption = nil
+        }
     }
     
     private func configureInitialState() {
@@ -187,6 +218,8 @@ class SelectionsViewController: UIViewController {
             resetCountrySelections()
         }
         
+        config.countrySorter = self.selectedSortOption
+        
         //initialize country picker ui
         let countryPickerVC = UICountryPickerViewController()
         
@@ -216,7 +249,7 @@ class SelectionsViewController: UIViewController {
 
 extension SelectionsViewController: UICountryPickerDelegate {
     func didSelect(country: Country) {
-        print("selected \(country.localizedName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))")
+        print("selected \(country.localizedName)")
         var currentSnapshot = dataSource.snapshot()
         if currentSnapshot.numberOfSections == 0 {
             currentSnapshot.appendSections([SelectedCountriesSection.primarySection])
@@ -232,7 +265,7 @@ extension SelectionsViewController: UICountryPickerDelegate {
     }
     
     func didDeselect(country: Country) {
-        print("deselected \(country.localizedName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))")
+        print("deselected \(country.localizedName)")
         var currentSnapshot = dataSource.snapshot()
         if currentSnapshot.itemIdentifiers.contains(country) {
             currentSnapshot.deleteItems([country])
