@@ -78,6 +78,7 @@ class SelectionsViewController: UIViewController {
         
         inclusionButton.menu = inclusionMenu
         inclusionButton.showsMenuAsPrimaryAction = true
+        selectedInclusionOption = [.sovereignState] //default option
     }
     
     private func add(includeOptions: IncludeOptions) {
@@ -183,7 +184,8 @@ class SelectionsViewController: UIViewController {
             config.preselectedCountries = Set(currentSnapshot.itemIdentifiers)
         } else {
             config.preselectedCountries.removeAll()
-        }        
+            resetCountrySelections()
+        }
         
         //initialize country picker ui
         let countryPickerVC = UICountryPickerViewController()
@@ -214,7 +216,7 @@ class SelectionsViewController: UIViewController {
 
 extension SelectionsViewController: UICountryPickerDelegate {
     func didSelect(country: Country) {
-        print("selected \(country.localizedName)")
+        print("selected \(country.localizedName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))")
         var currentSnapshot = dataSource.snapshot()
         if currentSnapshot.numberOfSections == 0 {
             currentSnapshot.appendSections([SelectedCountriesSection.primarySection])
@@ -230,7 +232,7 @@ extension SelectionsViewController: UICountryPickerDelegate {
     }
     
     func didDeselect(country: Country) {
-        print("deselected \(country.localizedName)")
+        print("deselected \(country.localizedName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))")
         var currentSnapshot = dataSource.snapshot()
         if currentSnapshot.itemIdentifiers.contains(country) {
             currentSnapshot.deleteItems([country])
@@ -239,6 +241,12 @@ extension SelectionsViewController: UICountryPickerDelegate {
             //selected country is not present in the collection view's snapshot
             //nothing to do
         }
+    }
+    
+    func resetCountrySelections() {
+        var currentSnapshot = dataSource.snapshot()
+        currentSnapshot.deleteSections([.primarySection])
+        dataSource.apply(currentSnapshot, animatingDifferences: false)
     }
     
     func didFinishSelecting(countries: [Country]) {

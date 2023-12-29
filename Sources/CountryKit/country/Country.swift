@@ -60,7 +60,7 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
         case "_U":
             self.localizedName = localizedNameOverride ?? "country_unknown".localize()
         default:
-            self.localizedName = localizedNameOverride ?? Locale.autoupdatingCurrent.localizedString(forRegionCode: alpha2Code) ?? englishName
+            self.localizedName = localizedNameOverride ?? Locale.autoupdatingCurrent.localizedString(forRegionCode: alpha2Code)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) ?? englishName
         }
         
         if addressLabels.isEmpty {
