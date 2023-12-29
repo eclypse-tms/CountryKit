@@ -261,7 +261,7 @@ open class CountryPickerPresenter: NSObject {
                 
                 var shouldIncludeThisCountry: Bool = false
                 
-                if countryPickerConfig.filteringCriteria == .orSearch {
+                if countryPickerConfig.searchMethodology == .orSearch {
                     //when doing an "OR" search - assume that we will not be including this country to begin with
                     //as soon as we get the first search component that is violating the search criteria, we bail out
                     //of the loop

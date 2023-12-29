@@ -106,7 +106,7 @@ class SelectionsViewController: UIViewController {
         config.canMultiSelect = canMultiSelectSwitch.isOn
         
         config.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)!
-        config.filteringCriteria = FilteringCriteria(rawValue: searchCriteriaSegment.selectedSegmentIndex)!
+        config.searchMethodology = SearchMethodology(rawValue: searchCriteriaSegment.selectedSegmentIndex)!
         config.navBarButtonOption = NavBarButtonOption(rawValue: navBarButtonsSegment.selectedSegmentIndex)!
         
         if allowWorldwideSwitch.isOn {
