@@ -306,16 +306,16 @@ open class CountryPickerPresenter: NSObject {
             filteredCountryList = fullCountryList.compactMap { eachCountry -> CountryViewModel? in
                 
                 var shouldIncludeThisCountry: Bool = false
+                let rangeOfThisString = eachCountry.localizedName.startIndex..<eachCountry.localizedName.endIndex
                 
                 if countryPickerConfig.searchMethodology == .orSearch {
                     //when doing an "OR" search - assume that we will not be including this country to begin with
                     //as soon as we get the first search component that is violating the search criteria, we bail out
                     //of the loop
                     shouldIncludeThisCountry = false
-                    //let masterRange = eachCountry.localizedName.startIndex..<eachCountry.localizedName.endIndex
                     
                     for eachSearchComponent in searchComponents {
-                        let rangeOfSearchComponent = eachCountry.localizedName.range(of: eachSearchComponent, options: [.caseInsensitive, .diacriticInsensitive])
+                        let rangeOfSearchComponent = eachCountry.localizedName.range(of: eachSearchComponent, options: [.caseInsensitive, .diacriticInsensitive], range: rangeOfThisString, locale: Locale.autoupdatingCurrent)
                         if rangeOfSearchComponent != nil {
                             shouldIncludeThisCountry = true
                         }
@@ -330,7 +330,7 @@ open class CountryPickerPresenter: NSObject {
                     //of the loop
                     shouldIncludeThisCountry = true
                     for eachSearchComponent in searchComponents {
-                        let rangeOfSearchComponent = eachCountry.localizedName.range(of: eachSearchComponent, options: [.caseInsensitive, .diacriticInsensitive])
+                        let rangeOfSearchComponent = eachCountry.localizedName.range(of: eachSearchComponent, options: [.caseInsensitive, .diacriticInsensitive], range: rangeOfThisString, locale: Locale.autoupdatingCurrent)
                         if rangeOfSearchComponent == nil {
                             shouldIncludeThisCountry = false
                         }
