@@ -312,10 +312,12 @@ open class CountryPickerPresenter: NSObject {
                     //as soon as we get the first search component that is violating the search criteria, we bail out
                     //of the loop
                     shouldIncludeThisCountry = false
+                    //let masterRange = eachCountry.localizedName.startIndex..<eachCountry.localizedName.endIndex
+                    
                     for eachSearchComponent in searchComponents {
                         let rangeOfSearchComponent = eachCountry.localizedName.range(of: eachSearchComponent, options: [.caseInsensitive, .diacriticInsensitive])
                         if rangeOfSearchComponent != nil {
-                            shouldIncludeThisCountry
+                            shouldIncludeThisCountry = true
                         }
                         //shouldIncludeThisCountry = eachCountry.localizedName.localizedCaseInsensitiveContains(eachSearchComponent)
                         if shouldIncludeThisCountry {
