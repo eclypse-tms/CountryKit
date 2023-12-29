@@ -39,6 +39,11 @@ class SelectionsViewController: UIViewController {
     @IBOutlet private weak var pinnedHeaderTooltip: UITextView!
     @IBOutlet private weak var pinnedFooterTooltip: UITextView!
     
+    @IBOutlet private weak var inclusionButton: UIButton!
+    
+    private var selectedInclusionOption: FilterOptions = []
+    
+    
     private var dataSource: UICollectionViewDiffableDataSource<SelectedCountriesSection, Country>!
 
     override func viewDidLoad() {
@@ -47,9 +52,7 @@ class SelectionsViewController: UIViewController {
         // Do any additional setup after loading the view.
         configureMainView()
         configureInitialState()
-
-        
-        print("example view controller is loaded...")
+        configureInclusionOptions()
     }
     
     private func configureMainView() {
@@ -60,6 +63,24 @@ class SelectionsViewController: UIViewController {
         mainView.allowsSelection = false
         
         mainView.isHidden = true //upon initial launch we are showing the configuration elements
+    }
+    
+    private func configureInclusionOptions() {
+        let inclusionMenu = UIMenu(children: [
+            UIAction(title: "Sovereign State", handler: { _ in self.add(filterOption: .sovereignState) }),
+            UIAction(title: "Commonwealth Member", handler: { _ in self.add(filterOption: .commonwealthMember) }),
+            UIAction(title: "Dependent Territory", handler: { _ in self.add(filterOption: .dependentTerritory) }),
+            UIAction(title: "No Population", handler: { _ in self.add(filterOption: .hasNoPermanentPopulation) }),
+            UIAction(title: "Disputed Territories", handler: { _ in self.add(filterOption: .disputedTerritories) }),
+            UIAction(title: "All of the above", handler: { _ in self.add(filterOption: .all) })
+        ])
+        
+        inclusionButton.menu = inclusionMenu
+        inclusionButton.showsMenuAsPrimaryAction = true
+    }
+    
+    private func add(filterOption: FilterOptions) {
+        selectedInclusionOption = [filterOption]
     }
     
     private func configureInitialState() {

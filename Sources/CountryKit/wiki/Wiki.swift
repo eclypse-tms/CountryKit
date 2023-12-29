@@ -59,4 +59,22 @@ public struct Wiki: Hashable, Codable {
     /// majority of other countries. For example Western Sahara is  disputed territory where it is both claimed by Morocco and
     /// Sahrawi Arab Democratic Republic.
     public var disputedTerritory: Bool
+    
+    /// not available to public
+    static func uninitializedWiki() -> Wiki {
+        return Wiki(topLevelDomain: nil,
+                    wikipediaLink: nil,
+                    capitalCity: nil,
+                    capitalCityDeFacto: nil,
+                    officialLanguages: [],
+                    area: Double.zero,
+                    timeZoneOffsets: [],
+                    daylightSavingsTimeZoneOffsets: [],
+                    internationalCallingCode: nil,
+                    dedicatedAreaCodes: [],
+                    isMemberOfCommonwealth: false,
+                    sovereignStateCountryCode: nil,
+                    territoryWithoutAnyPermanentPopulation: false,
+                    disputedTerritory: false)
+    }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public struct CountryPickerConfiguration: Hashable {
+public struct CountryPickerConfiguration {
     /// controls whether country selection interface allows user to select a country
     public var allowsSelection: Bool = true
     
@@ -76,8 +76,12 @@ public struct CountryPickerConfiguration: Hashable {
     /// controls whether to display both the cancel and done buttons in the UI
     public var navBarButtonOption: NavBarButtonOption = .displayBothButtons
     
-    /// controls which countries, regions or territories to display in the PickerUI. Select another option to display soverign states only.
-    public var filterOption: FilterOptions = .all
+    /// controls which countries, regions or territories to display in the PickerUI. 
+    /// By default, it includes all territories that have an alpha 2 code assigned to it.
+    public var includeOption: IncludeOptions = .all
+    
+    /// provide your custom sorting algorithm for the picker view
+    public var countrySorter: CountrySorter?
     
     /// initializes CountrySelectionConfiguration with default parameters
     static public func `default`() -> CountryPickerConfiguration {

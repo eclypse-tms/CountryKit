@@ -82,37 +82,29 @@ open class CountryPickerPresenter: NSObject {
             
             strongSelf.countryProvider.loadAdditionalMetaData()
                 
-            let initialCountryList: [Country]
+            let unsortedCountryList: [Country]
+            
+            
             if !strongSelf.countryPickerConfig.countryRoster.isEmpty {
-                initialCountryList = strongSelf.countryProvider.allKnownCountries.compactMap { (alpha2Code, eachCountry) -> Country? in
-                    if strongSelf.countryPickerConfig.countryRoster.contains(eachCountry) {
-                        return eachCountry
-                    } else {
-                        return nil
-                    }
-                }
+                unsortedCountryList = strongSelf.countryProvider
+                    .allKnownCountries
+                    .compactMap(strongSelf.applyInclusionCriteria(alpha2Code:country:))
+                    .compactMap(strongSelf.applyCountryRoster(country:))
             } else if !strongSelf.countryPickerConfig.excludedCountries.isEmpty {
-                initialCountryList = strongSelf.countryProvider.allKnownCountries.compactMap { (alpha2Code, eachCountry) -> Country? in
-                    if strongSelf.countryPickerConfig.excludedCountries.contains(eachCountry) {
-                        return nil
-                    } else {
-                        return eachCountry
-                    }
-                }
+                unsortedCountryList = strongSelf.countryProvider
+                    .allKnownCountries
+                    .compactMap(strongSelf.applyInclusionCriteria(alpha2Code:country:))
+                    .compactMap(strongSelf.applyExclusionCriteria(country:))
             } else {
-                initialCountryList = strongSelf.countryProvider.allKnownCountries.map { $1 }
+                unsortedCountryList = strongSelf.countryProvider.allKnownCountries
+                    .compactMap(strongSelf.applyInclusionCriteria(alpha2Code:country:))
             }
               
-            strongSelf.fullCountryList = initialCountryList
-                .sorted(by: { (lhs, rhs) -> Bool in
-                    let result = lhs.localizedName.compare(rhs.localizedName, options: [.caseInsensitive, .diacriticInsensitive])
-                    switch result {
-                    case .orderedAscending:
-                        return true
-                    default:
-                        return false
-                    }
-                })
+            if let providedSorter = strongSelf.countryPickerConfig.countrySorter {
+                strongSelf.fullCountryList = unsortedCountryList.sorted(by: providedSorter.sort(lhs:rhs:))
+            } else {
+                strongSelf.fullCountryList = unsortedCountryList.sorted()
+            }
 
             strongSelf.filteredCountryList = strongSelf.fullCountryList.map({
                 CountryViewModel(country: $0)
@@ -168,6 +160,56 @@ open class CountryPickerPresenter: NSObject {
                 guard let strongSelf = self else { return }
                 strongSelf.restoreCellSelectionsAfterReload()
             }.store(in: &cancellables)
+    }
+    
+    private func applyExclusionCriteria(country: Country) -> Country? {
+        if countryPickerConfig.excludedCountries.contains(country) {
+            return nil
+        } else {
+            return country
+        }
+    }
+    
+    private func applyCountryRoster(country: Country) -> Country? {
+        if countryPickerConfig.countryRoster.contains(country) {
+            return country
+        } else {
+            return nil
+        }
+    }
+    
+    private func applyInclusionCriteria(alpha2Code: String, country: Country) -> Country? {
+        if countryPickerConfig.includeOption.contains(.all) {
+            return country
+        }
+        
+        if countryPickerConfig.includeOption.contains(.sovereignState), country.wiki.sovereignStateCountryCode == nil {
+            //user wanted to include the sovereign states and this country does not have another sovereign state
+            return country
+        }
+        
+        if countryPickerConfig.includeOption.contains(.commonwealthMember), country.wiki.isMemberOfCommonwealth {
+            //user wanted to include the commonwealth states and this country is a member of commonwealth
+            return country
+        }
+        
+        if countryPickerConfig.includeOption.contains(.dependentTerritory), country.wiki.sovereignStateCountryCode != nil {
+            //user wanted to include the commonwealth states and this country HAS another sovereign state
+            return country
+        }
+        
+        if countryPickerConfig.includeOption.contains(.hasNoPermanentPopulation), country.wiki.territoryWithoutAnyPermanentPopulation {
+            //user wanted to include those regions and territories without any permanent population
+            return country
+        }
+        
+        if countryPickerConfig.includeOption.contains(.disputedTerritories), country.wiki.disputedTerritory {
+            //user wanted to include those regions and territories that are internationally disputed
+            return country
+        }
+        
+        
+        return nil
     }
     
     /// configures the data source

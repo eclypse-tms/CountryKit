@@ -8,7 +8,7 @@
 import Foundation
 
 /// a type that represents country
-public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable {
+public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable, Comparable {
     /// alias for alpha2Code
     public var id: String {
         return alpha2Code
@@ -45,7 +45,7 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     public var locales: [Locale] = []
     
     /// contains all the meta data from wikipedia regarding this country, territory or region
-    public var wiki: Wiki?
+    public var wiki: Wiki = .uninitializedWiki()
     
     public init(alpha3Code: String, englishName: String, alpha2Code: String,
                 addressLabels: [AddressLabel] = [],
@@ -74,6 +74,16 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     
     public var debugDescription: String {
         return "alpha2Code: \(alpha2Code), name: \(englishName)"
+    }
+    
+    public static func < (lhs: Country, rhs: Country) -> Bool {
+        let result = lhs.localizedName.compare(rhs.localizedName, options: [.caseInsensitive, .diacriticInsensitive])
+        switch result {
+        case .orderedAscending:
+            return true
+        default:
+            return false
+        }
     }
         
     public static let Afghanistan = Country(alpha3Code: "AFG", englishName: "Afghanistan", alpha2Code: "AF", addressLabels: AddressLabel.cityOnly)
