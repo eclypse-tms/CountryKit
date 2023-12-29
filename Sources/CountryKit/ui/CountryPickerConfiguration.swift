@@ -65,7 +65,7 @@ public struct CountryPickerConfiguration: Hashable {
     public var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
     
     /// the methodology to use when filtering countries
-    public var filteringCriteria: FilteringCriteria = .orSearch
+    public var searchMethodology: SearchMethodology = .orSearch
     
     /// provide a font to match the theme of your app. Otherwise it uses the default OS font
     public var themeFont: UIFont?
@@ -75,6 +75,9 @@ public struct CountryPickerConfiguration: Hashable {
     
     /// controls whether to display both the cancel and done buttons in the UI
     public var navBarButtonOption: NavBarButtonOption = .displayBothButtons
+    
+    /// controls which countries, regions or territories to display in the PickerUI. Select another option to display soverign states only.
+    public var filterOption: FilterOptions = .all
     
     /// initializes CountrySelectionConfiguration with default parameters
     static public func `default`() -> CountryPickerConfiguration {

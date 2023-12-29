@@ -44,6 +44,9 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     /// Please note that some countries may not have any locales associated with them.
     public var locales: [Locale] = []
     
+    /// contains all the meta data from wikipedia regarding this country, territory or region
+    public var wiki: Wiki?
+    
     public init(alpha3Code: String, englishName: String, alpha2Code: String,
                 addressLabels: [AddressLabel] = [],
                 preferesAscendingAddressScope: Bool = true,

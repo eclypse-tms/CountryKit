@@ -35,6 +35,62 @@ open class CountryProviderImpl: CountryProvider {
     
     public func loadAdditionalMetaData() {
         loadAssociatedLocales()
+        loadWikiData()
+    }
+    
+    private func loadWikiData() {
+        guard let fileContents = bundleLoader.getFileContents(fileName: "Wiki", fileExtension: "csv", encoding: nil) else { return }
+        //this is a csv file
+        let parsedLocaleList = fileContents.components(separatedBy: CharacterSet.newlines)
+        for (index, eachParsedLocaleList) in parsedLocaleList.enumerated() {
+            if index == 0 {
+                //skip the header row
+                continue
+            }
+            
+            let components = eachParsedLocaleList.components(separatedBy: ",")
+            if components.count == 19 {
+                //0:rownum -> reference purposes only
+                //1:alpha2 code
+                //2:country name -> reference purposes only
+                //3:top level domain
+                //4:wikipedia link
+                //5:de-jure capital city
+                //6:de-facto capital city,
+                //7:official languages -> reference purposes only
+                //8:language ISO 639 codes
+                //9:area (in km2),
+                //10:time zones
+                //11:day light saving time zones,
+                //12:international calling code
+                //13:dedicated area codes
+                //14:is country Commonwealth?
+                //15:sovereign state name -> reference purposes only
+                //16:sovereign state alpha 2 code
+                //17:is territory only (no permanent population)
+                //18:disputed territory
+                let wiki = Wiki(
+                    topLevelDomain: components[3],
+                    wikipediaLink: URL(string: components[4]),
+                    capitalCity: components[5],
+                    capitalCityDeFacto: components[6],
+                    officialLanguages: components[8].components(separatedBy: "|"),
+                    area: Double(components[9]) ?? .zero,
+                    timeZoneOffsets: components[10].components(separatedBy: "|").map { TimeZoneOffset(rawValue: $0) },
+                    daylightSavingsTimeZoneOffsets: components[11].components(separatedBy: "|").map { TimeZoneOffset(rawValue: $0) },
+                    internationalCallingCode: components[12],
+                    dedicatedAreaCodes: components[13].components(separatedBy: "|"),
+                    isMemberOfCommonwealth: Bool(components[14].lowercased()) ?? false,
+                    sovereignStateCountryCode: components[16],
+                    territoryWithoutAnyPermanentPopulation:  Bool(components[17].lowercased()) ?? false,
+                    disputedTerritory: Bool(components[18].lowercased()) ?? false)
+                let alpha2Code = components[1]
+                allKnownCountries[alpha2Code]?.wiki = wiki
+            } else {
+                //we don't know how to parse this enty
+                continue
+            }
+        }
     }
     
     private func loadAssociatedLocales() {
