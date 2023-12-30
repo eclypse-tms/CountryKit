@@ -30,6 +30,11 @@ public struct Wiki: Hashable, Codable {
     /// area of the country or region in square kilometers
     public var area: Double
     
+    /// area of the country or region in square miles
+    public var areaSquareMiles: Double {
+        return area * 0.38610216
+    }
+    
     /// the timezone offsets this country or region uses
     public var timeZoneOffsets: [TimeZoneOffset] = []
     

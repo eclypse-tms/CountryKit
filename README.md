@@ -44,7 +44,16 @@ There are 250 countries or regions present in the CountryKit. Country data model
 |alpha3 code|ISO 3166-1 alpha-3 country code [wiki link](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)|
 |localized name|automatic localization of the country names based on user's preferences|
 |address labels|address labels used in each country. for example in Chile the address fields are composed of street, city and postal code only|
-|associated locales|all known [NSLocales](https://developer.apple.com/documentation/foundation/locale) for this country.|
+|associated locales|all known [Locales](https://developer.apple.com/documentation/foundation/locale) for this country.|
+|ccTLD|A country code top-level domain. for example: .de for Germany|
+|capital city|For example: France -> Paris|
+|official languages|For example: Canada -> French and English|
+|area|geograhical size in km2 or mi2|
+|timezones|all the timezones that a country spans|
+|calling code|international dialing codes|
+|Commonwealth membership|For example: Belize is Commonwealth member|
+|Sovereignity status|Whether another state claims this territory or not|
+
 
 ## UI Customization
 
@@ -130,6 +139,13 @@ public var navigationBarTitleView: UIView?
 
 /// controls whether to display both the cancel and done buttons in the UI
 public var navBarButtonOption: NavBarButtonOption = .displayBothButtons
+
+/// controls which countries, regions or territories to display in the PickerUI. 
+/// By default, it includes all territories that have an alpha 2 code assigned to it.
+public var includeOption: IncludeOptions = .all
+
+/// provide your custom sorting algorithm for the picker view
+public var countrySorter: CountrySorter?
 ```
 
 ## Extending CountryKit
