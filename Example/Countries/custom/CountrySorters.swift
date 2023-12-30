@@ -33,12 +33,18 @@ class TimeZoneSorter: CountrySorter {
     func sort(lhs: Country, rhs: Country) -> Bool {
         if let lhsTimeZone = lhs.wiki.timeZoneOffsets.first, let rhsTimeZone = rhs.wiki.timeZoneOffsets.first {
             return lhsTimeZone < rhsTimeZone
+        } else if let lhsTimeZone = lhs.wiki.timeZoneOffsets.first {
+            return true
+        } else if let rhsTimeZone = rhs.wiki.timeZoneOffsets.first {
+            return false
+        } else {
+            return false
         }
     }
 }
 
 /// displays the countries in north america first and then displays the countries by their name
-class CountriesInNorthAmericaFirst: CountrySorter {
+class NorthAmericanCountriesSorter: CountrySorter {
     func sort(lhs: Country, rhs: Country) -> Bool {
         func _compare(lhs: Country, rhs: Country) -> Bool {
             let result = lhs.localizedName.compare(rhs.localizedName, options: [.caseInsensitive, .diacriticInsensitive])

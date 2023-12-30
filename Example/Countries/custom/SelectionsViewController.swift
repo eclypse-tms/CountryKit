@@ -93,7 +93,8 @@ class SelectionsViewController: UIViewController {
             UIAction(title: "Default", handler: { _ in self.mark(selectedSort: 0) }),
             UIAction(title: "Alpha 2 Code", handler: { _ in self.mark(selectedSort: 1) }),
             UIAction(title: "Area", handler: { _ in self.mark(selectedSort: 2) }),
-            UIAction(title: "NA Countries First", handler: { _ in self.mark(selectedSort: 3) }),
+            UIAction(title: "North American Countries", handler: { _ in self.mark(selectedSort: 3) }),
+            UIAction(title: "Timezone", handler: { _ in self.mark(selectedSort: 4) })
         ])
         
         sortButton.menu = sortMenu
@@ -110,7 +111,10 @@ class SelectionsViewController: UIViewController {
             selectedSortOption = AreaSorter()
         case 3:
             //place Canada, United States and Mexico on top and then sort by name
-            selectedSortOption = CountriesInNorthAmericaFirst()
+            selectedSortOption = NorthAmericanCountriesSorter()
+        case 4:
+            //sorty by each countries easternward timezone 
+            selectedSortOption = TimeZoneSorter()
         default:
             selectedSortOption = nil
         }

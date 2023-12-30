@@ -51,11 +51,11 @@ public struct TimeZoneOffset: Hashable, Codable, RawRepresentable, Comparable {
                 let hourAndMinuteComponents = rawOffSetInfo.components(separatedBy: ":")
                 if hourAndMinuteComponents.count == 1 {
                     //there is no minute component in this utc
-                    self.hourOffset = Int(hourAndMinuteComponents[0])! * -1
+                    self.hourOffset = Int(hourAndMinuteComponents[0])!
                     self.minuteOffset = 0
                 } else {
-                    self.hourOffset = Int(hourAndMinuteComponents[0])! * -1
-                    self.minuteOffset = Int(hourAndMinuteComponents[1])! * -1
+                    self.hourOffset = Int(hourAndMinuteComponents[0])!
+                    self.minuteOffset = Int(hourAndMinuteComponents[1])!
                 }
                 self.offsetSign = .minus
             case "+":
