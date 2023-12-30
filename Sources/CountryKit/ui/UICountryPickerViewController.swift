@@ -136,11 +136,12 @@ open class UICountryPickerViewController: UIViewController {
     open func lateInitPresenter() {
         let bundleLoader = BundleLoaderImpl(fileManager: FileManager.default, bundle: CountryKit.assetBundle)
         let textHighlighter = TextHighlighterImpl()
+        let countryFilteringMethod = CountryFilteringMethodImpl(textHighlighter: textHighlighter)
         let countryProvider = CountryProviderImpl(bundleLoader: bundleLoader)
         let presenterQueue = DispatchQueue(label: "countrykit.queue.presenter")
         presenter = CountryPickerPresenter(countryProvider: countryProvider,
-                                              textHighlighter: textHighlighter,
-                                              presenterQueue: presenterQueue)
+                                           countryFilteringMethod: countryFilteringMethod,
+                                           presenterQueue: presenterQueue)
     }
     
     open func configureTheme() {

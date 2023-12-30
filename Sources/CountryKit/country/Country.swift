@@ -8,29 +8,29 @@
 import Foundation
 
 /// a type that represents country
-public class Country: Hashable, Identifiable, /*CustomDebugStringConvertible, */ Codable, Comparable {
+public class Country: Hashable, Identifiable, Codable, Comparable {
     /// alias for alpha2Code
     public var id: String {
         return alpha2Code
     }
     
-    ///ISO 3166-1 alpha-2 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+    /// ISO 3166-1 alpha-2 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
     public let alpha2Code: String
     
-    ///ISO 3166-1 alpha-3 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+    /// ISO 3166-1 alpha-3 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
     public let alpha3Code: String
     
-    ///non-localized english name of this country
+    /// non-localized english name of this country
     public let englishName: String
     
-    ///localized name
+    /// localized name
     public let localizedName: String
     
-    ///returns a list of applicable address fields in this locale. useful when presenting shipping or invoice addresses in a form.
+    /// returns a list of applicable address fields in this locale. useful when presenting shipping or invoice addresses in a form.
     public let addressLabels: [AddressLabel]
     
-    ///when entering address, some countries like China prefers to present the address fields in a descending scope.
-    ///from the largest address units (province) to the smallest address units (street). For most countries, this will be true.
+    /// when entering address, some countries like China prefers to present the address fields in a descending scope.
+    /// from the largest address units (province) to the smallest address units (street). For most countries, this will be true.
     public let preferesAscendingAddressScope: Bool
     
     /// Frequently associated locales with this country.
@@ -72,10 +72,6 @@ public class Country: Hashable, Identifiable, /*CustomDebugStringConvertible, */
         self.preferesAscendingAddressScope = preferesAscendingAddressScope
     }
     
-//    public var debugDescription: String {
-//        return "alpha2Code: \(alpha2Code), name: \(englishName)"
-//    }
-    
     //MARK: Comparable conformance
     public static func < (lhs: Country, rhs: Country) -> Bool {
         let result = lhs.localizedName.compare(rhs.localizedName, options: [.caseInsensitive, .diacriticInsensitive])
@@ -103,6 +99,7 @@ public class Country: Hashable, Identifiable, /*CustomDebugStringConvertible, */
         hasher.combine(wiki)
     }
         
+    //MARK: Country List
     public static let Afghanistan = Country(alpha3Code: "AFG", englishName: "Afghanistan", alpha2Code: "AF", addressLabels: AddressLabel.cityOnly)
     public static let Aland_Islands = Country(alpha3Code: "ALA", englishName: "Åland Islands", alpha2Code: "AX")
     public static let Albania = Country(alpha3Code: "ALB", englishName: "Albania", alpha2Code: "AL", addressLabels: AddressLabel.cityOnly)
