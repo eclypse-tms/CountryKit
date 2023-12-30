@@ -2,46 +2,11 @@
 //  Alpha2Sorter.swift
 //  Countries
 //
-//  Created by Turker Nessa Kucuk on 12/29/23.
+//  Created by eclypse on 12/29/23.
 //
 
 import Foundation
 import CountryKit
-
-/// sorts countries by their alpha2 code
-class Alpha2Sorter: CountrySorter {
-    func sort(lhs: Country, rhs: Country) -> Bool {
-        let result = lhs.alpha2Code.compare(rhs.alpha2Code, options: [.caseInsensitive])
-        switch result {
-        case .orderedAscending:
-            return true
-        default:
-            return false
-        }
-    }
-}
-
-/// sorts countries by area in descending order
-class AreaSorter: CountrySorter {
-    func sort(lhs: Country, rhs: Country) -> Bool {
-        return lhs.wiki.area > rhs.wiki.area
-    }
-}
-
-/// sorts countries from east to west depending on the most-eastern border timezone of each country
-class TimeZoneSorter: CountrySorter {
-    func sort(lhs: Country, rhs: Country) -> Bool {
-        if let lhsTimeZone = lhs.wiki.timeZoneOffsets.first, let rhsTimeZone = rhs.wiki.timeZoneOffsets.first {
-            return lhsTimeZone < rhsTimeZone
-        } else if let lhsTimeZone = lhs.wiki.timeZoneOffsets.first {
-            return true
-        } else if let rhsTimeZone = rhs.wiki.timeZoneOffsets.first {
-            return false
-        } else {
-            return false
-        }
-    }
-}
 
 /// displays the countries in north america first and then displays the countries by their name
 class NorthAmericanCountriesSorter: CountrySorter {

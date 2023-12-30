@@ -24,7 +24,10 @@
 		B27079A42B26DE8E003435A1 /* Composure in Frameworks */ = {isa = PBXBuildFile; productRef = B27079A32B26DE8E003435A1 /* Composure */; };
 		B27079A92B274990003435A1 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27079A82B274990003435A1 /* NibLoadable.swift */; };
 		B28B60C92B29EF9D00485D23 /* LocaleComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28B60C82B29EF9D00485D23 /* LocaleComponents.swift */; };
-		B2E60A7D2B3F70A70087DFB7 /* CountrySorters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E60A7C2B3F70A70087DFB7 /* CountrySorters.swift */; };
+		B2E60A7D2B3F70A70087DFB7 /* NorthAmericanCountriesSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E60A7C2B3F70A70087DFB7 /* NorthAmericanCountriesSorter.swift */; };
+		B2E60A812B4062EA0087DFB7 /* Alpha2Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E60A802B4062EA0087DFB7 /* Alpha2Sorter.swift */; };
+		B2E60A832B4063080087DFB7 /* AreaSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E60A822B4063080087DFB7 /* AreaSorter.swift */; };
+		B2E60A852B4063220087DFB7 /* TimeZoneSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E60A842B4063220087DFB7 /* TimeZoneSorter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +53,10 @@
 		B27079AD2B276A29003435A1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B27079AE2B27C974003435A1 /* Countries.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Countries.entitlements; sourceTree = "<group>"; };
 		B28B60C82B29EF9D00485D23 /* LocaleComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleComponents.swift; sourceTree = "<group>"; };
-		B2E60A7C2B3F70A70087DFB7 /* CountrySorters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySorters.swift; sourceTree = "<group>"; };
+		B2E60A7C2B3F70A70087DFB7 /* NorthAmericanCountriesSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NorthAmericanCountriesSorter.swift; sourceTree = "<group>"; };
+		B2E60A802B4062EA0087DFB7 /* Alpha2Sorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alpha2Sorter.swift; sourceTree = "<group>"; };
+		B2E60A822B4063080087DFB7 /* AreaSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSorter.swift; sourceTree = "<group>"; };
+		B2E60A842B4063220087DFB7 /* TimeZoneSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneSorter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				B27079AE2B27C974003435A1 /* Countries.entitlements */,
+				B2E60A7F2B4062C60087DFB7 /* sorters */,
 				B27079932B26DE04003435A1 /* custom */,
 				B270797F2B26DDEF003435A1 /* AppDelegate.swift */,
 				B27079812B26DDEF003435A1 /* SceneDelegate.swift */,
@@ -110,9 +117,19 @@
 				B27079962B26DE34003435A1 /* SelectionsViewController.xib */,
 				B270799A2B26DE36003435A1 /* UIView+RoundedCorner.swift */,
 				B27079A82B274990003435A1 /* NibLoadable.swift */,
-				B2E60A7C2B3F70A70087DFB7 /* CountrySorters.swift */,
 			);
 			path = custom;
+			sourceTree = "<group>";
+		};
+		B2E60A7F2B4062C60087DFB7 /* sorters */ = {
+			isa = PBXGroup;
+			children = (
+				B2E60A802B4062EA0087DFB7 /* Alpha2Sorter.swift */,
+				B2E60A822B4063080087DFB7 /* AreaSorter.swift */,
+				B2E60A842B4063220087DFB7 /* TimeZoneSorter.swift */,
+				B2E60A7C2B3F70A70087DFB7 /* NorthAmericanCountriesSorter.swift */,
+			);
+			path = sorters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,8 +216,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2E60A7D2B3F70A70087DFB7 /* CountrySorters.swift in Sources */,
+				B2E60A7D2B3F70A70087DFB7 /* NorthAmericanCountriesSorter.swift in Sources */,
+				B2E60A852B4063220087DFB7 /* TimeZoneSorter.swift in Sources */,
 				B27079A02B26DE36003435A1 /* InstructionsViewController.swift in Sources */,
+				B2E60A812B4062EA0087DFB7 /* Alpha2Sorter.swift in Sources */,
+				B2E60A832B4063080087DFB7 /* AreaSorter.swift in Sources */,
 				B28B60C92B29EF9D00485D23 /* LocaleComponents.swift in Sources */,
 				B27079A92B274990003435A1 /* NibLoadable.swift in Sources */,
 				B27079A12B26DE36003435A1 /* UIView+RoundedCorner.swift in Sources */,
