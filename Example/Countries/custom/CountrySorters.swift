@@ -28,6 +28,15 @@ class AreaSorter: CountrySorter {
     }
 }
 
+/// sorts countries from east to west depending on the most-eastern border timezone of each country
+class TimeZoneSorter: CountrySorter {
+    func sort(lhs: Country, rhs: Country) -> Bool {
+        if let lhsTimeZone = lhs.wiki.timeZoneOffsets.first, let rhsTimeZone = rhs.wiki.timeZoneOffsets.first {
+            return lhsTimeZone < rhsTimeZone
+        }
+    }
+}
+
 /// displays the countries in north america first and then displays the countries by their name
 class CountriesInNorthAmericaFirst: CountrySorter {
     func sort(lhs: Country, rhs: Country) -> Bool {

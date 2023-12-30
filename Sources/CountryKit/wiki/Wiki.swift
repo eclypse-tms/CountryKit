@@ -35,10 +35,10 @@ public struct Wiki: Hashable, Codable {
         return area * 0.38610216
     }
     
-    /// the timezone offsets this country or region uses
+    /// the timezone offsets this country or region uses - sorted from eastward to westward
     public var timeZoneOffsets: [TimeZoneOffset] = []
     
-    /// the timezone offsets this country or region uses, if any
+    /// the timezone offsets this country or region uses, if any - sorted from eastward to westward
     public var daylightSavingsTimeZoneOffsets: [TimeZoneOffset] = []
     
     /// the country code to dial when calling a phone number from another country

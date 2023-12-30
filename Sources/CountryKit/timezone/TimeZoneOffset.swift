@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TimeZoneOffset: Hashable, Codable, RawRepresentable {
+public struct TimeZoneOffset: Hashable, Codable, RawRepresentable, Comparable {
     public typealias RawValue = String
     
     /// the number of hours that is separated from UTC 0
@@ -80,5 +80,10 @@ public struct TimeZoneOffset: Hashable, Codable, RawRepresentable {
             self.minuteOffset = 0
             self.offsetSign = .zero
         }
+    }
+    
+    /// timezones that are on the eastern hemisphere (positive values) are sorted first
+    public static func < (lhs: TimeZoneOffset, rhs: TimeZoneOffset) -> Bool {
+        return lhs.secondsFromUTC > rhs.secondsFromUTC
     }
 }
