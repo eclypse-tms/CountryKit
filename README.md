@@ -46,11 +46,11 @@ There are 250 countries or regions present in the CountryKit. Country data model
 |address labels|address labels used in each country. for example in Chile the address fields are composed of street, city and postal code only|
 |associated locales|all known [Locales](https://developer.apple.com/documentation/foundation/locale) for this country.|
 |ccTLD|A country code top-level domain. for example: .de for Germany|
-|capital city|For example: France -> Paris|
-|official languages|For example: Canada -> French and English|
-|area|geograhical size in km2 or mi2|
+|capital city|Capital city of each country in English|
+|official languages|for Canada the official languages are fr and en (for French and English)|
+|area|geograhical size of the country or territory in km2 or mi2|
 |timezones|all the timezones that a country spans|
-|calling code|international dialing codes|
+|calling code|international dialing codes. for example for India +91|
 |Commonwealth membership|For example: Belize is Commonwealth member|
 |Sovereignity status|Whether another state claims this territory or not|
 
