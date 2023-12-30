@@ -306,7 +306,6 @@ open class CountryPickerPresenter: NSObject {
             filteredCountryList = fullCountryList.compactMap { eachCountry -> CountryViewModel? in
                 
                 var shouldIncludeThisCountry: Bool = false
-                let rangeOfThisString = eachCountry.localizedName.startIndex..<eachCountry.localizedName.endIndex
                 
                 if countryPickerConfig.searchMethodology == .orSearch {
                     //when doing an "OR" search - assume that we will not be including this country to begin with
@@ -315,11 +314,10 @@ open class CountryPickerPresenter: NSObject {
                     shouldIncludeThisCountry = false
                     
                     for eachSearchComponent in searchComponents {
-                        let rangeOfSearchComponent = eachCountry.localizedName.range(of: eachSearchComponent, options: [.caseInsensitive, .diacriticInsensitive], range: rangeOfThisString, locale: Locale.autoupdatingCurrent)
+                        let rangeOfSearchComponent = eachCountry.localizedName.localizedStandardRange(of: eachSearchComponent)
                         if rangeOfSearchComponent != nil {
                             shouldIncludeThisCountry = true
                         }
-                        //shouldIncludeThisCountry = eachCountry.localizedName.localizedCaseInsensitiveContains(eachSearchComponent)
                         if shouldIncludeThisCountry {
                             break
                         }
@@ -330,11 +328,10 @@ open class CountryPickerPresenter: NSObject {
                     //of the loop
                     shouldIncludeThisCountry = true
                     for eachSearchComponent in searchComponents {
-                        let rangeOfSearchComponent = eachCountry.localizedName.range(of: eachSearchComponent, options: [.caseInsensitive, .diacriticInsensitive], range: rangeOfThisString, locale: Locale.autoupdatingCurrent)
+                        let rangeOfSearchComponent = eachCountry.localizedName.localizedStandardRange(of: eachSearchComponent)
                         if rangeOfSearchComponent == nil {
                             shouldIncludeThisCountry = false
                         }
-                        //shouldIncludeThisCountry = eachCountry.localizedName.localizedCaseInsensitiveContains(eachSearchComponent)
                         if !shouldIncludeThisCountry {
                             break
                         }
