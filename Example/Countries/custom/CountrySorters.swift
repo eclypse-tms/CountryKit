@@ -44,15 +44,6 @@ class CountriesInNorthAmericaFirst: CountrySorter {
         let isLhsNACountry = lhs == .Canada || lhs == .United_States || lhs == .Mexico
         let isRhsNACountry = rhs == .Canada || rhs == .United_States || rhs == .Mexico
         
-        /*
-        // All successes are equivalent, so none is before any other
-            case (.ok, .ok): return false
-
-
-            // Order errors before successes
-            case (.error, .ok): return true
-            case (.ok, .error): return false
-        */
         
         if isLhsNACountry, !isRhsNACountry {
             //left hand side is NA country but right hand side is not

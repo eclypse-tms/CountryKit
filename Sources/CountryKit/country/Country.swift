@@ -8,7 +8,7 @@
 import Foundation
 
 /// a type that represents country
-public class Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable, Comparable {
+public class Country: Hashable, Identifiable, /*CustomDebugStringConvertible, */ Codable, Comparable {
     /// alias for alpha2Code
     public var id: String {
         return alpha2Code
@@ -72,9 +72,9 @@ public class Country: Hashable, Identifiable, CustomDebugStringConvertible, Coda
         self.preferesAscendingAddressScope = preferesAscendingAddressScope
     }
     
-    public var debugDescription: String {
-        return "alpha2Code: \(alpha2Code), name: \(englishName)"
-    }
+//    public var debugDescription: String {
+//        return "alpha2Code: \(alpha2Code), name: \(englishName)"
+//    }
     
     //MARK: Comparable conformance
     public static func < (lhs: Country, rhs: Country) -> Bool {
