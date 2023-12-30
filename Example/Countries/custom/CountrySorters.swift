@@ -53,11 +53,8 @@ class CountriesInNorthAmericaFirst: CountrySorter {
             //right hand side is NA country but left hand side is not
             //return false to order rhs before lhs
             return false
-        } else if isLhsNACountry, isRhsNACountry {
-            //simply apply localized name comparison
-            return false
         } else {
-            //simply apply localized name comparison for all other countries
+            //simply apply localized name comparison otherwise
             return _compare(lhs: lhs, rhs: rhs)
         }
     }

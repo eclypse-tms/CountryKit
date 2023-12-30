@@ -172,12 +172,12 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="4bg-z3-6ce">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4bg-z3-6ce">
                                                     <rect key="frame" x="222" y="0.0" width="155" height="32"/>
                                                     <segments>
+                                                        <segment title="Both"/>
                                                         <segment title="Left"/>
                                                         <segment title="Right"/>
-                                                        <segment title="Both"/>
                                                     </segments>
                                                 </segmentedControl>
                                             </subviews>
