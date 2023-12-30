@@ -8,7 +8,7 @@
 import Foundation
 
 /// a type that represents country
-public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable, Comparable {
+public class Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable, Comparable {
     /// alias for alpha2Code
     public var id: String {
         return alpha2Code
@@ -17,11 +17,11 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     ///ISO 3166-1 alpha-2 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
     public let alpha2Code: String
     
-    ///non-localized english name of this country
-    public let englishName: String
-    
     ///ISO 3166-1 alpha-3 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
     public let alpha3Code: String
+    
+    ///non-localized english name of this country
+    public let englishName: String
     
     ///localized name
     public let localizedName: String
@@ -60,7 +60,7 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
         case "_U":
             self.localizedName = localizedNameOverride ?? "country_unknown".localize()
         default:
-            self.localizedName = localizedNameOverride ?? Locale.autoupdatingCurrent.localizedString(forRegionCode: alpha2Code)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) ?? englishName
+            self.localizedName = localizedNameOverride ?? (Locale.autoupdatingCurrent.localizedString(forRegionCode: alpha2Code) ?? englishName)
         }
         
         if addressLabels.isEmpty {
@@ -76,6 +76,7 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
         return "alpha2Code: \(alpha2Code), name: \(englishName)"
     }
     
+    //MARK: Comparable conformance
     public static func < (lhs: Country, rhs: Country) -> Bool {
         let result = lhs.localizedName.compare(rhs.localizedName, options: [.caseInsensitive, .diacriticInsensitive])
         switch result {
@@ -84,6 +85,22 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
         default:
             return false
         }
+    }
+    
+    //MARK: Hashable conformance
+    public static func == (lhs: Country, rhs: Country) -> Bool {
+        return lhs.alpha2Code == rhs.alpha2Code
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(alpha2Code)
+        hasher.combine(alpha3Code)
+        hasher.combine(englishName)
+        hasher.combine(localizedName)
+        hasher.combine(addressLabels)
+        hasher.combine(preferesAscendingAddressScope)
+        hasher.combine(locales)
+        hasher.combine(wiki)
     }
         
     public static let Afghanistan = Country(alpha3Code: "AFG", englishName: "Afghanistan", alpha2Code: "AF", addressLabels: AddressLabel.cityOnly)

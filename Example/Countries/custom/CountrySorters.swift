@@ -41,10 +41,32 @@ class CountriesInNorthAmericaFirst: CountrySorter {
             }
         }
         
+        let isLhsNACountry = lhs == .Canada || lhs == .United_States || lhs == .Mexico
+        let isRhsNACountry = rhs == .Canada || rhs == .United_States || rhs == .Mexico
         
-        if lhs == .Canada || lhs == .United_States || lhs == .Mexico {
-            return _compare(lhs: lhs, rhs: rhs)
+        /*
+        // All successes are equivalent, so none is before any other
+            case (.ok, .ok): return false
+
+
+            // Order errors before successes
+            case (.error, .ok): return true
+            case (.ok, .error): return false
+        */
+        
+        if isLhsNACountry, !isRhsNACountry {
+            //left hand side is NA country but right hand side is not
+            //return true to order lhs before rhs
+            return true
+        } else if !isLhsNACountry, isRhsNACountry {
+            //right hand side is NA country but left hand side is not
+            //return false to order rhs before lhs
+            return false
+        } else if isLhsNACountry, isRhsNACountry {
+            //simply apply localized name comparison
+            return false
         } else {
+            //simply apply localized name comparison for all other countries
             return _compare(lhs: lhs, rhs: rhs)
         }
     }
