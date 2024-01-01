@@ -22,7 +22,7 @@ Add CountryKit to your project via Swift Package Manager.
 
 `https://github.com/eclypse-tms/CountryKit`
 
-## Usage
+## PickerView Usage
 ```
 //in a view controller
 import CountryKit
@@ -35,6 +35,25 @@ let navController = UINavigationController(rootViewController: countryPickerVC)
 navController.modalPresentationStyle = .formSheet
 present(navController, animated: true)
 ```
+
+## CountryList Usage (No UI)
+```
+import CountryKit
+...
+//instantiate the provider object or preferably inject it 
+let provider: CountryProvider = CountryProviderImpl()
+...
+
+//optional but recommended. call this only-once preferably in
+//a non-main queue. 
+provider.loadAdditionalMetaData()
+...
+
+//obtain a country by that country's alpha2 code
+let countryElSalvador = provider.find(alpha2Code: "SV")
+print(countryElSalvador)
+```
+
 ## Country object
 
 There are 250 countries or regions present in the CountryKit. Country data model in CountryKit contains the following information:
@@ -47,11 +66,11 @@ There are 250 countries or regions present in the CountryKit. Country data model
 |associated locales|all known [Locales](https://developer.apple.com/documentation/foundation/locale) for this country.|
 |ccTLD|A country code top-level domain. for example: .de for Germany|
 |capital city|Capital city of each country in English|
-|official languages|for Canada the official languages are fr and en (for French and English)|
+|official languages|for example: Canada's' official languages are fr and en (French and English)|
 |area|geograhical size of the country or territory in km2 or mi2|
 |timezones|all the timezones that a country spans|
-|calling code|international dialing codes. for example for India +91|
-|Commonwealth membership|For example: Belize is Commonwealth member|
+|calling code|international dialing codes. for example: India's dialing code is +91|
+|Commonwealth membership|For example: Belize is a Commonwealth member|
 |Sovereignity status|Whether another state claims this territory or not|
 
 
@@ -72,64 +91,73 @@ countryPickerVC.countryPickerConfiguration = config
 
 ### Full list of all customizable options
 ```
-/// controls whether country selection interface allows user to select a country
+/// controls whether the country selection interface allows user to select a country.
 public var allowsSelection: Bool = true
 
-/// controls whether country selection interface allows user to select multiple countries
+/// controls whether the country selection interface allows user to select multiple countries.
 public var canMultiSelect: Bool = true
 
-///restrict the countries to the ones in this list. leave empty to show all the countries
+/// restrict the countries to the ones in this list. leave empty to show all the countries.
 public var countryRoster: Set<Country> = Set()
 
-///if the countries are restricted to a limited set, you provide justification to the user as to why that is the case. optional.
+/// if the countries are restricted to a limited set, you may
+/// provide justification to the user as to why that is the case. optional.
 public var rosterJustification: String = ""
 
 /// list of countries that should be excluded from the main list.
 /// if countryRoster is provided, this property is ignored.
 public var excludedCountries: Set<Country> = Set()
 
-///if some countries are removed the list, you may provide justification to the user as to why that is the case. optional.
+/// if some countries are removed the list, you may provide justification
+/// to the user as to why that is the case. optional.
 public var excludedCountriesJustification: String = ""
 
-///after the user makes the first selection, automatically dismisses the interface. defaults to false.
+/// after the user makes the first selection, automatically dismisses
+/// the interface. defaults to false.
 public var dismissAfterFirstSelection: Bool = false
 
 /// the countries on this list are preselected when the UI first opens
 public var preselectedCountries: Set<Country> = Set()
 
-///allow user to select worldwide instead of specific countries. worldwide represents a
-///selection of all countries and regions.
+/// allow user to select worldwide as an addition option.
+/// worldwide represents a selection of all countries and regions.
 public var shouldShowWorldWide: Bool = false
 
 /// only needed if your are planning to display worldwide as a selectable option.
-/// for example, in english this property would read "Worlwide"
+/// for example, in english this property would read "Worlwide".
 public var localizedWorldWide: String = ""
 
 /// only needed if your are planning to display worldwide as a selectable option.
-/// for example, in english this property would read something like "Selecting Worldwide clears previous country selections and represents a selection of all countries and regions.
+/// for example, in english this property would read something like 
+/// "Selecting Worldwide clears previous country selections and represents a
+/// selection of all countries and regions."
 public var localizedWorldWideDescription: String = ""
 
-/// provide custom bar button that appears on the left (leading) side of the navigation bar instead of chevron.backward styled back bar button.
+/// provide custom bar button that appears on the left (leading) side of the 
+/// navigation bar instead of chevron.backward styled back bar button.
 /// if you provide a custom button, you are responsible for dismissing the picker view yourself.
 /// if this button is provided, navBarButtonOption is ignored
 public var leftBarButton: UIBarButtonItem?
 
-/// provide custom bar button item that appears on the right (trailing) side of the navigation bar instead of system Done button
+/// provide custom bar button item that appears on the right (trailing) side of the
+/// navigation bar instead of system Done button.
 /// if you provide a custom button, you are responsible for dismissing the picker view yourself.
 /// if this button is provided, navBarButtonOption is ignored
 public var rightBarButton: UIBarButtonItem?
 
-/// when provided, a header text is diplayed that is pinned to the top of the picker view and does not scroll away.
+/// when provided, a header text is displayed that is pinned to the top 
+/// of the picker view and does not scroll away.
 public var pinnedHeaderText: String?
 
-/// when provided, a footer text is displayed that is pinned to the bottom of the picker view and does not scroll away.
+/// when provided, a footer text is displayed that is pinned to the bottom 
+/// of the picker view and does not scroll away.
 public var pinnedFooterText: String?
 
 /// indicates how the cells should look like when they are selected by the user
 public var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
 
 /// the methodology to use when filtering countries
-public var filteringCriteria: FilteringCriteria = .orSearch
+public var searchMethodology: SearchMethodology = .orSearch
 
 /// provide a font to match the theme of your app. Otherwise it uses the default OS font
 public var themeFont: UIFont?
@@ -144,7 +172,7 @@ public var navBarButtonOption: NavBarButtonOption = .displayBothButtons
 /// By default, it includes all territories that have an alpha 2 code assigned to it.
 public var includeOption: IncludeOptions = .all
 
-/// provide your custom sorting algorithm for the picker view
+/// you can provide your own custom sorting algorithm for the picker view.
 public var countrySorter: CountrySorter?
 ```
 

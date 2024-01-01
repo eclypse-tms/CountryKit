@@ -83,7 +83,6 @@ open class CountryPickerPresenter: NSObject {
                 
             let unsortedCountryList: [Country]
             
-            
             if !strongSelf.countryPickerConfig.countryRoster.isEmpty {
                 unsortedCountryList = strongSelf.countryProvider
                     .allKnownCountries
