@@ -20,10 +20,14 @@ struct CellSelectionMeta: Hashable {
     /// indicates whether table view should perform a programmatic cell selection
     let performCellSelection: Bool
     
-    init(country: Country, isSelected: Bool, indexPath: IndexPath, performCellSelection: Bool = false) {
+    /// whether this cell selection happened by user action or programmatically to restore views
+    let isInitiatedByUser: Bool
+    
+    init(country: Country, isSelected: Bool, indexPath: IndexPath, performCellSelection: Bool = false, isInitiatedByUser: Bool) {
         self.country = country
         self.isSelected = isSelected
         self.indexPath = indexPath
         self.performCellSelection = performCellSelection
+        self.isInitiatedByUser = isInitiatedByUser
     }
 }

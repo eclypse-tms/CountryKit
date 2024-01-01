@@ -23,7 +23,8 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         Target.target(name: "CountryKit",
                       dependencies: ["FlagKit"],
-                      resources: [Resource.process("country_list/Locales.csv")]),
+                      resources: [Resource.process("country/Locales.csv"),
+                                  Resource.process("country/Wiki.csv")]),
         .testTarget(
             name: "CountryKitTests",
             dependencies: ["CountryKit", "FlagKit"]),

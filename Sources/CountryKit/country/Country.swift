@@ -8,29 +8,29 @@
 import Foundation
 
 /// a type that represents country
-public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Codable {
+public class Country: Hashable, Identifiable, Codable, Comparable {
     /// alias for alpha2Code
     public var id: String {
         return alpha2Code
     }
     
-    ///ISO 3166-1 alpha-2 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+    /// ISO 3166-1 alpha-2 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
     public let alpha2Code: String
     
-    ///non-localized english name of this country
-    public let englishName: String
-    
-    ///ISO 3166-1 alpha-3 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+    /// ISO 3166-1 alpha-3 country code - see: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
     public let alpha3Code: String
     
-    ///localized name
+    /// non-localized english name of this country
+    public let englishName: String
+    
+    /// localized name
     public let localizedName: String
     
-    ///returns a list of applicable address fields in this locale. useful when presenting shipping or invoice addresses in a form.
+    /// returns a list of applicable address fields in this locale. useful when presenting shipping or invoice addresses in a form.
     public let addressLabels: [AddressLabel]
     
-    ///when entering address, some countries like China prefers to present the address fields in a descending scope.
-    ///from the largest address units (province) to the smallest address units (street). For most countries, this will be true.
+    /// when entering address, some countries like China prefers to present the address fields in a descending scope.
+    /// from the largest address units (province) to the smallest address units (street). For most countries, this will be true.
     public let preferesAscendingAddressScope: Bool
     
     /// Frequently associated locales with this country.
@@ -43,6 +43,9 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
     /// may still be useful such as currency, calendar info, measurement system, numbering system, etc...
     /// Please note that some countries may not have any locales associated with them.
     public var locales: [Locale] = []
+    
+    /// contains all the meta data from wikipedia regarding this country, territory or region
+    public var wiki: Wiki = .uninitializedWiki()
     
     public init(alpha3Code: String, englishName: String, alpha2Code: String,
                 addressLabels: [AddressLabel] = [],
@@ -57,7 +60,7 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
         case "_U":
             self.localizedName = localizedNameOverride ?? "country_unknown".localize()
         default:
-            self.localizedName = localizedNameOverride ?? Locale.autoupdatingCurrent.localizedString(forRegionCode: alpha2Code) ?? englishName
+            self.localizedName = localizedNameOverride ?? (Locale.autoupdatingCurrent.localizedString(forRegionCode: alpha2Code) ?? englishName)
         }
         
         if addressLabels.isEmpty {
@@ -69,10 +72,34 @@ public struct Country: Hashable, Identifiable, CustomDebugStringConvertible, Cod
         self.preferesAscendingAddressScope = preferesAscendingAddressScope
     }
     
-    public var debugDescription: String {
-        return "alpha2Code: \(alpha2Code), name: \(englishName)"
+    //MARK: Comparable conformance
+    public static func < (lhs: Country, rhs: Country) -> Bool {
+        let result = lhs.localizedName.compare(rhs.localizedName, options: [.caseInsensitive, .diacriticInsensitive])
+        switch result {
+        case .orderedAscending:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    //MARK: Hashable conformance
+    public static func == (lhs: Country, rhs: Country) -> Bool {
+        return lhs.alpha2Code == rhs.alpha2Code
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(alpha2Code)
+        hasher.combine(alpha3Code)
+        hasher.combine(englishName)
+        hasher.combine(localizedName)
+        hasher.combine(addressLabels)
+        hasher.combine(preferesAscendingAddressScope)
+        hasher.combine(locales)
+        hasher.combine(wiki)
     }
         
+    //MARK: Country List
     public static let Afghanistan = Country(alpha3Code: "AFG", englishName: "Afghanistan", alpha2Code: "AF", addressLabels: AddressLabel.cityOnly)
     public static let Aland_Islands = Country(alpha3Code: "ALA", englishName: "Åland Islands", alpha2Code: "AX")
     public static let Albania = Country(alpha3Code: "ALB", englishName: "Albania", alpha2Code: "AL", addressLabels: AddressLabel.cityOnly)

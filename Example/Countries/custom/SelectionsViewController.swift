@@ -39,6 +39,12 @@ class SelectionsViewController: UIViewController {
     @IBOutlet private weak var pinnedHeaderTooltip: UITextView!
     @IBOutlet private weak var pinnedFooterTooltip: UITextView!
     
+    @IBOutlet private weak var inclusionButton: UIButton!
+    @IBOutlet private weak var sortButton: UIButton!
+    
+    private var selectedInclusionOption: IncludeOptions = []
+    private var selectedSortOption: CountrySorter?
+    
     private var dataSource: UICollectionViewDiffableDataSource<SelectedCountriesSection, Country>!
 
     override func viewDidLoad() {
@@ -47,9 +53,8 @@ class SelectionsViewController: UIViewController {
         // Do any additional setup after loading the view.
         configureMainView()
         configureInitialState()
-
-        
-        print("example view controller is loaded...")
+        configureInclusionOptions()
+        configureSortOptions()
     }
     
     private func configureMainView() {
@@ -60,6 +65,59 @@ class SelectionsViewController: UIViewController {
         mainView.allowsSelection = false
         
         mainView.isHidden = true //upon initial launch we are showing the configuration elements
+    }
+    
+    private func configureInclusionOptions() {
+        
+        let inclusionMenu = UIMenu(children: [
+            UIAction(title: "Sovereign State", handler: { _ in self.add(includeOptions: .sovereignState) }),
+            UIAction(title: "Commonwealth Member", handler: { _ in self.add(includeOptions: .commonwealthMember) }),
+            UIAction(title: "Dependent Territory", handler: { _ in self.add(includeOptions: .dependentTerritory) }),
+            UIAction(title: "No Population", handler: { _ in self.add(includeOptions: .hasNoPermanentPopulation) }),
+            UIAction(title: "Disputed Territories", handler: { _ in self.add(includeOptions: .disputedTerritories) }),
+            UIAction(title: "All Countries/Territories", handler: { _ in self.add(includeOptions: .all) })
+        ])
+        
+        inclusionButton.menu = inclusionMenu
+        inclusionButton.showsMenuAsPrimaryAction = true
+        selectedInclusionOption = [.sovereignState] //default option
+    }
+    
+    private func add(includeOptions: IncludeOptions) {
+        selectedInclusionOption = [includeOptions]
+    }
+    
+    private func configureSortOptions() {
+        
+        let sortMenu = UIMenu(children: [
+            UIAction(title: "Default", handler: { _ in self.mark(selectedSort: 0) }),
+            UIAction(title: "Alpha 2 Code", handler: { _ in self.mark(selectedSort: 1) }),
+            UIAction(title: "Area", handler: { _ in self.mark(selectedSort: 2) }),
+            UIAction(title: "North American Countries", handler: { _ in self.mark(selectedSort: 3) }),
+            UIAction(title: "Timezone", handler: { _ in self.mark(selectedSort: 4) })
+        ])
+        
+        sortButton.menu = sortMenu
+        sortButton.showsMenuAsPrimaryAction = true
+    }
+    
+    private func mark(selectedSort: Int) {
+        switch selectedSort {
+        case 1:
+            //sort countries by their alpha2 code
+            selectedSortOption = Alpha2Sorter()
+        case 2:
+            //sort countries by their area
+            selectedSortOption = AreaSorter()
+        case 3:
+            //place Canada, United States and Mexico on top and then sort by name
+            selectedSortOption = NorthAmericanCountriesSorter()
+        case 4:
+            //sorty by each countries easternward timezone 
+            selectedSortOption = TimeZoneSorter()
+        default:
+            selectedSortOption = nil
+        }
     }
     
     private func configureInitialState() {
@@ -106,7 +164,7 @@ class SelectionsViewController: UIViewController {
         config.canMultiSelect = canMultiSelectSwitch.isOn
         
         config.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)!
-        config.filteringCriteria = FilteringCriteria(rawValue: searchCriteriaSegment.selectedSegmentIndex)!
+        config.searchMethodology = SearchMethodology(rawValue: searchCriteriaSegment.selectedSegmentIndex)!
         config.navBarButtonOption = NavBarButtonOption(rawValue: navBarButtonsSegment.selectedSegmentIndex)!
         
         if allowWorldwideSwitch.isOn {
@@ -118,6 +176,9 @@ class SelectionsViewController: UIViewController {
             config.localizedWorldWide = ""
             config.localizedWorldWideDescription = ""
         }
+        
+        //save the inclusions
+        config.includeOption = selectedInclusionOption
         
         if limitedCountrySwitch.isOn {
             limitedCountryStack.isHidden = false
@@ -158,7 +219,10 @@ class SelectionsViewController: UIViewController {
             config.preselectedCountries = Set(currentSnapshot.itemIdentifiers)
         } else {
             config.preselectedCountries.removeAll()
-        }        
+            resetCountrySelections()
+        }
+        
+        config.countrySorter = self.selectedSortOption
         
         //initialize country picker ui
         let countryPickerVC = UICountryPickerViewController()
@@ -214,6 +278,12 @@ extension SelectionsViewController: UICountryPickerDelegate {
             //selected country is not present in the collection view's snapshot
             //nothing to do
         }
+    }
+    
+    func resetCountrySelections() {
+        var currentSnapshot = dataSource.snapshot()
+        currentSnapshot.deleteSections([.primarySection])
+        dataSource.apply(currentSnapshot, animatingDifferences: false)
     }
     
     func didFinishSelecting(countries: [Country]) {
