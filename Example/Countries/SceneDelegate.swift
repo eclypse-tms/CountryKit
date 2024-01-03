@@ -21,18 +21,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         #if targetEnvironment(macCatalyst)
 
         self.toolbarDelegate = ToolbarDelegate()
-        let toolBar = NSToolbar(identifier: "countries-main-toolbar")
+        let toolBar = NSToolbar(identifier: "main-toolbar")
         toolBar.delegate = toolbarDelegate
         toolBar.displayMode = .iconOnly
         toolBar.allowsUserCustomization = false
         windowScene.titlebar?.toolbar = toolBar
-        windowScene.titlebar?.separatorStyle = .automatic
-        windowScene.titlebar?.toolbarStyle = .automatic
-
-        /*
-        windowScene.titlebar?.titleVisibility = .hidden
-        windowScene.titlebar?.toolbar = nil
-        */
+        windowScene.titlebar?.separatorStyle = .shadow
+        windowScene.titlebar?.toolbarStyle = .unified
 
         #endif
         

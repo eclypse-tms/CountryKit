@@ -17,8 +17,8 @@ class ToolbarDelegate: NSObject {
 
 extension NSToolbarItem.Identifier {
     static let search = NSToolbarItem.Identifier("com.company.countries.nstoolbaritem.search")
-    static let share = NSToolbarItem.Identifier("com.company.countries.nstoolbaritem.search")
-    static let clear = NSToolbarItem.Identifier("com.company.countries.nstoolbaritem.search")
+    static let share = NSToolbarItem.Identifier("com.company.countries.nstoolbaritem.share")
+    static let clear = NSToolbarItem.Identifier("com.company.countries.nstoolbaritem.clear")
     
 }
 
@@ -29,7 +29,7 @@ extension ToolbarDelegate: NSToolbarDelegate {
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [.flexibleSpace, .share, .clear, .search]
+        return [.search, .share, .clear]
     }
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
@@ -39,8 +39,9 @@ extension ToolbarDelegate: NSToolbarDelegate {
         case .search:
             let newItemToAdd = NSToolbarItem(itemIdentifier: itemIdentifier)
             let uiSearchBar = UISearchBar()
-            uiSearchBar.backgroundImage = UIImage() //an empty image removes the default background color
-            //uiSearchBar.placeholder = "Search"
+            uiSearchBar.showsCancelButton = true
+            //uiSearchBar.backgroundImage = UIImage() //an empty image removes the default background color
+            uiSearchBar.placeholder = "Search"
             uiSearchBar.delegate = self //or whichever object most appropriate
               
             // using custom views is not supported when targeting macOS 12 or earlier
@@ -73,7 +74,7 @@ extension ToolbarDelegate: NSToolbarDelegate {
 
         toolbarItemToInsert?.target = nil
         toolbarItemToInsert?.autovalidates = false
-        toolbarItemToInsert?.isEnabled = false
+        //toolbarItemToInsert?.isEnabled = false
         return toolbarItemToInsert
     }
 }
