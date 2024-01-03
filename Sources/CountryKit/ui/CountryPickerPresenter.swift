@@ -417,11 +417,19 @@ extension CountryPickerPresenter: UITableViewDelegate {
         let countrySection = CountryPickerViewSection(rawValue: indexPath.section)!
         switch countrySection {
         case .worldwide:
+            #if targetEnvironment(macCatalyst)
+            return UIFloat(35)
+            #else
             return UIFloat(44)
+            #endif
         case .worldwideExplanation:
             return UITableView.automaticDimension
         case .allCountries:
+            #if targetEnvironment(macCatalyst)
+            return UIFloat(35)
+            #else
             return UIFloat(44)
+            #endif
         case .rosterExplanation:
             return UITableView.automaticDimension
         }

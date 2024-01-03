@@ -242,7 +242,7 @@ class SelectionsViewController: UIViewController {
     }
     
     private func addBorder(to uiTextView: UITextView) {
-        uiTextView.layer.cornerRadius = 6
+        uiTextView.layer.cornerRadius = UIFloat(6)
         uiTextView.layer.borderColor = UIColor.gray.cgColor
         uiTextView.layer.borderWidth = 0.5
         uiTextView.layer.opacity = 0.5
@@ -304,7 +304,7 @@ enum SelectedCountriesSection: Int, DefinesCompositionalLayout, CaseIterable {
     func layoutInfo(using layoutEnvironment: NSCollectionLayoutEnvironment) -> Composure.CompositionalLayoutOption {
         switch self {
         case .primarySection:
-            return .dynamicWidthFixedHeight(estimatedWidth: 150, fixedHeight: 36)
+            return .dynamicWidthFixedHeight(estimatedWidth: UIFloat(150), fixedHeight: UIFloat(36))
         }
     }
     
