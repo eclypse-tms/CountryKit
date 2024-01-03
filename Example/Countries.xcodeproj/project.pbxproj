@@ -474,7 +474,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eclypse-tms/CountryKit";
 			requirement = {
-				branch = main;
+				branch = fix_awakeFromNibError;
 				kind = branch;
 			};
 		};
