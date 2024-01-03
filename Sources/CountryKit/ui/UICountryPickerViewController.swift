@@ -312,3 +312,17 @@ extension UICountryPickerViewController: UISearchBarDelegate {
         self.view.endEditing(true)
     }
 }
+
+extension UICountryPickerViewController: ToolbarActionsResponder {
+    func clearSelections(_ sender: Any?) {
+        print("did request to clear")
+    }
+    
+    func share(_ sender: Any?) {
+        print("did request to share")
+    }
+    
+    func search(_ sender: Any?) {
+        print("did request to search")
+    }
+}

@@ -10,13 +10,32 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var toolbarDelegate: ToolbarDelegate?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        #if targetEnvironment(macCatalyst)
+
+        self.toolbarDelegate = ToolbarDelegate()
+        let toolBar = NSToolbar(identifier: "countries-main-toolbar")
+        toolBar.delegate = toolbarDelegate
+        toolBar.displayMode = .iconOnly
+        toolBar.allowsUserCustomization = false
+        windowScene.titlebar?.toolbar = toolBar
+        windowScene.titlebar?.separatorStyle = .automatic
+        windowScene.titlebar?.toolbarStyle = .automatic
+
+        /*
+        windowScene.titlebar?.titleVisibility = .hidden
+        windowScene.titlebar?.toolbar = nil
+        */
+
+        #endif
+        
         
         let splitVC = UISplitViewController(style: .doubleColumn)
         splitVC.preferredDisplayMode = .oneBesideSecondary

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B1940EBD2B452D9D004261EB /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1940EBC2B452D9D004261EB /* ToolbarDelegate.swift */; };
 		B20C62CD2B2CEF5400D5DFEC /* CountryKit in Frameworks */ = {isa = PBXBuildFile; productRef = B20C62CC2B2CEF5400D5DFEC /* CountryKit */; };
 		B27079802B26DDEF003435A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B270797F2B26DDEF003435A1 /* AppDelegate.swift */; };
 		B27079822B26DDEF003435A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27079812B26DDEF003435A1 /* SceneDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B1940EBC2B452D9D004261EB /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
 		B270797C2B26DDEF003435A1 /* Countries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Countries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B270797F2B26DDEF003435A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B27079812B26DDEF003435A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				B27079932B26DE04003435A1 /* custom */,
 				B270797F2B26DDEF003435A1 /* AppDelegate.swift */,
 				B27079812B26DDEF003435A1 /* SceneDelegate.swift */,
+				B1940EBC2B452D9D004261EB /* ToolbarDelegate.swift */,
 				B27079832B26DDEF003435A1 /* ViewController.swift */,
 				B27079852B26DDEF003435A1 /* Main.storyboard */,
 				B27079882B26DDF0003435A1 /* Assets.xcassets */,
@@ -225,6 +228,7 @@
 				B27079A92B274990003435A1 /* NibLoadable.swift in Sources */,
 				B27079A12B26DE36003435A1 /* UIView+RoundedCorner.swift in Sources */,
 				B27079842B26DDEF003435A1 /* ViewController.swift in Sources */,
+				B1940EBD2B452D9D004261EB /* ToolbarDelegate.swift in Sources */,
 				B270799E2B26DE36003435A1 /* SelectionsViewController.swift in Sources */,
 				B27079802B26DDEF003435A1 /* AppDelegate.swift in Sources */,
 				B27079822B26DDEF003435A1 /* SceneDelegate.swift in Sources */,
