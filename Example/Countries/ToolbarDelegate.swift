@@ -53,14 +53,14 @@ extension ToolbarDelegate: NSToolbarDelegate {
             toolbarItemToInsert = newItemToAdd
         case .share:
             let newItemToAdd = NSToolbarItem(itemIdentifier: itemIdentifier)
-            newItemToAdd.image = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))?.withTintColor(UIColor(named: "color_bar_button_mac")!)
+            newItemToAdd.image = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
             newItemToAdd.action = #selector(ToolbarActionsResponder.share(_:))
             newItemToAdd.isBordered = true
             toolbarItemToInsert = newItemToAdd
         case .clear:
             let newItemToAdd = NSToolbarItem(itemIdentifier: itemIdentifier)
-            newItemToAdd.image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))?.withTintColor(UIColor(named: "color_bar_button_mac")!)
-            newItemToAdd.action = #selector(ToolbarActionsResponder.clear(_:))
+            newItemToAdd.image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
+            newItemToAdd.action = #selector(ToolbarActionsResponder.clearSelections(_:))
             newItemToAdd.isBordered = true
             toolbarItemToInsert = newItemToAdd
         case .flexibleSpace:
