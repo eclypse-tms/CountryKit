@@ -31,10 +31,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EGA-px-cvU">
-                            <rect key="frame" x="0.0" y="0.0" width="800" height="36.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="800" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-jK-QSA">
-                                    <rect key="frame" x="16" y="8" width="768" height="20.5"/>
+                                    <rect key="frame" x="16" y="8" width="768" height="34"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <color key="textColor" systemColor="systemGrayColor"/>
                                     <nil key="highlightedColor"/>
@@ -49,21 +49,22 @@
                             </constraints>
                         </view>
                         <searchBar contentMode="redraw" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bxp-cU-EnB">
-                            <rect key="frame" x="0.0" y="37" width="800" height="36"/>
+                            <rect key="frame" x="0.0" y="50" width="800" height="0.0"/>
                             <textInputTraits key="textInputTraits"/>
+                            <variation key="userInterfaceIdiom=mac" hidden="YES"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="cpS-he-PN4"/>
                             </connections>
                         </searchBar>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfn-IK-tGF">
-                            <rect key="frame" x="0.0" y="73" width="800" height="441"/>
+                            <rect key="frame" x="0.0" y="50" width="800" height="450"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-Mn-ayd">
-                            <rect key="frame" x="0.0" y="514" width="800" height="36.5"/>
+                            <rect key="frame" x="0.0" y="500" width="800" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Additional instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-0T-9wJ">
-                                    <rect key="frame" x="16" y="8" width="768" height="20.5"/>
+                                    <rect key="frame" x="16" y="8" width="768" height="34"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <color key="textColor" systemColor="systemGrayColor"/>
                                     <nil key="highlightedColor"/>

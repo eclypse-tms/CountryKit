@@ -14,11 +14,12 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet public weak var pickerView: UITableView!
     @IBOutlet public weak var pinnedHeaderDirections: UILabel!
     @IBOutlet public weak var pinnedFooterDirections: UILabel!
-    @IBOutlet private weak var headerDirectionsContainer: UIView!
-    @IBOutlet private weak var footerDirectionsContainer: UIView!
+    @IBOutlet public weak var headerDirectionsContainer: UIView!
+    @IBOutlet public weak var footerDirectionsContainer: UIView!
     
-    @IBOutlet private weak var cancelButtonMacStyle: UIButton!
-    @IBOutlet private weak var doneButtonMacStyle: UIButton!
+    @IBOutlet public weak var cancelButtonMacStyle: UIButton!
+    @IBOutlet public weak var doneButtonMacStyle: UIButton!
+    public var searchBarMacStyle: UISearchBar? //this search bar is added to the toolbar to make it more mac-like
 
     public init() {
         super.init(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
@@ -73,7 +74,7 @@ open class UICountryPickerViewController: UIViewController {
         #if targetEnvironment(macCatalyst)
         //hide the navigation bar for catalyst
         navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.setToolbarHidden(false, animated: true)
+        navigationController?.setToolbarHidden(true, animated: true)
         
         //create titles to obtain localized versions of Done/Cancel phrases
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
@@ -225,14 +226,25 @@ open class UICountryPickerViewController: UIViewController {
         pickerView.allowsMultipleSelection = countryPickerConfiguration.canMultiSelect
         pickerView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: UIFloat(150), right: 0)
         pickerView.tableFooterView = UIView()
+        #if targetEnvironment(macCatalyst)
+        pickerView.separatorStyle = .none //make it more mac-like
+        #else
         pickerView.separatorStyle = .singleLine
+        #endif
         pickerView.estimatedRowHeight = UIFloat(44)
         pickerView.rowHeight = UITableView.automaticDimension
+        
     }
     
     open func configureSearchBar() {
+        #if targetEnvironment(macCatalyst)
+        searchBarMacStyle?.returnKeyType = .done
+        searchBarMacStyle?.delegate = self
+        #else
+        //search bar is hidden
         searchBar.returnKeyType = .done
         searchBar.delegate = self
+        #endif
     }
     
     /// convenience function for obtaining currently selected countries
