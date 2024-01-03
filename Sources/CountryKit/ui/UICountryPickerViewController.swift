@@ -67,6 +67,13 @@ open class UICountryPickerViewController: UIViewController {
     
     /// performs configuration of built-in navigation bar buttons.
     open func configureNavBarButtons() {
+        #if targetEnvironment(macCatalyst)
+        //hide the navigation bar for catalyst
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didSelectBack(_:)))
+        navigationController?.setToolbarItems([closeButton, doneButton], animated: false)
+        #else
         //check to see if the picker UI is presented in a navigation controller
         if let validNavController = self.navigationController {
             if let validLeftBarButtonItem = countryPickerConfiguration.leftBarButton {
@@ -106,6 +113,7 @@ open class UICountryPickerViewController: UIViewController {
         } else {
             //there is no navigation controller, there is no point in setting navigation bar buttons
         }
+        #endif
     }
     
     /// performs configuration of non-scrolling header and footer views

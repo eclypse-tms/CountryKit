@@ -14,12 +14,14 @@ class SelectedCountryCell: UICollectionViewCell, NibLoadable {
     @IBOutlet private weak var countryName: UILabel!
     @IBOutlet private weak var container: UIView!
     
+    #if !targetEnvironment(macCatalyst)
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         container.roundCorners(cornerRadius: 12)
     }
+    #endif
     
     override func prepareForReuse() {
         super.prepareForReuse()
