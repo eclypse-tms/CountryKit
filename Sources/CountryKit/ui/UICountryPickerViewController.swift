@@ -72,7 +72,9 @@ open class UICountryPickerViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
         let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didSelectBack(_:)))
+        
         navigationController?.setToolbarItems([closeButton, doneButton], animated: false)
+        navigationController?.setToolbarHidden(false, animated: true)
         #else
         //check to see if the picker UI is presented in a navigation controller
         if let validNavController = self.navigationController {
@@ -208,10 +210,10 @@ open class UICountryPickerViewController: UIViewController {
         
         pickerView.allowsSelection = countryPickerConfiguration.allowsSelection
         pickerView.allowsMultipleSelection = countryPickerConfiguration.canMultiSelect
-        pickerView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 150, right: 0)
+        pickerView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: UIFloat(150), right: 0)
         pickerView.tableFooterView = UIView()
         pickerView.separatorStyle = .singleLine
-        pickerView.estimatedRowHeight = CGFloat(44)
+        pickerView.estimatedRowHeight = UIFloat(44)
         pickerView.rowHeight = UITableView.automaticDimension
     }
     
