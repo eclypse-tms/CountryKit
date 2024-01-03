@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import CountryKit
+
 #if canImport(AppKit)
 import AppKit
 #endif
@@ -46,19 +48,19 @@ extension ToolbarDelegate: NSToolbarDelegate {
             let uibarButtonItem = UIBarButtonItem(customView: uiSearchBar)
             toolbarItemToInsert = NSToolbarItem(itemIdentifier: itemIdentifier, barButtonItem: uibarButtonItem)
             
-            //newItemToAdd.action = #selector(BaseViewController.didClickOnSidebarMenu(_:))
+            newItemToAdd.action = #selector(ToolbarActionsResponder.search(_:))
             newItemToAdd.isBordered = true
             toolbarItemToInsert = newItemToAdd
         case .share:
             let newItemToAdd = NSToolbarItem(itemIdentifier: itemIdentifier)
             newItemToAdd.image = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))?.withTintColor(UIColor(named: "color_bar_button_mac")!)
-            //newItemToAdd.action = #selector(BaseViewController.didClickOnSidebarMenu(_:))
+            newItemToAdd.action = #selector(ToolbarActionsResponder.share(_:))
             newItemToAdd.isBordered = true
             toolbarItemToInsert = newItemToAdd
         case .clear:
             let newItemToAdd = NSToolbarItem(itemIdentifier: itemIdentifier)
             newItemToAdd.image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))?.withTintColor(UIColor(named: "color_bar_button_mac")!)
-            //newItemToAdd.action = #selector(BaseViewController.didSelectClear(_:))
+            newItemToAdd.action = #selector(ToolbarActionsResponder.clear(_:))
             newItemToAdd.isBordered = true
             toolbarItemToInsert = newItemToAdd
         case .flexibleSpace:
