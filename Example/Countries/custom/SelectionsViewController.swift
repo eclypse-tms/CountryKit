@@ -309,15 +309,15 @@ enum SelectedCountriesSection: Int, DefinesCompositionalLayout, CaseIterable {
     }
     
     var interItemSpacing: CGFloat {
-        return 8
+        return UIFloat(8)
     }
     
     var interGroupSpacing: CGFloat {
-        return 8
+        return UIFloat(8)
     }
     
     func sectionInsets(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
-        return .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+        return .init(top: 0, leading: UIFloat(8), bottom: 0, trailing: UIFloat(8))
     }
 }
 

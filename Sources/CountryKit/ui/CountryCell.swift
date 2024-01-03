@@ -39,6 +39,9 @@ class CountryCell: UITableViewCell, NibLoader {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
+            #if targetEnvironment(macCatalyst)
+            selectionStyle = .default
+            #else
             switch cellSelectionStyle {
             case .checkMark:
                 accessoryType = .checkmark
@@ -47,6 +50,7 @@ class CountryCell: UITableViewCell, NibLoader {
                 accessoryType = .none
                 selectionStyle = .default
             }
+            #endif
         } else {
             accessoryType = .none
             selectionStyle = .none

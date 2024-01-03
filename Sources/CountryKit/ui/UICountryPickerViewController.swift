@@ -73,8 +73,9 @@ open class UICountryPickerViewController: UIViewController {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
         let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didSelectBack(_:)))
         
-        navigationController?.setToolbarItems([closeButton, doneButton], animated: false)
         navigationController?.setToolbarHidden(false, animated: true)
+        navigationController?.setToolbarItems([closeButton, doneButton], animated: false)
+        
         #else
         //check to see if the picker UI is presented in a navigation controller
         if let validNavController = self.navigationController {
