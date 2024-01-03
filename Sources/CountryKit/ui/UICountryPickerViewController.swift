@@ -16,6 +16,9 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet public weak var pinnedFooterDirections: UILabel!
     @IBOutlet private weak var headerDirectionsContainer: UIView!
     @IBOutlet private weak var footerDirectionsContainer: UIView!
+    
+    @IBOutlet private weak var cancelButtonMacStyle: UIButton!
+    @IBOutlet private weak var doneButtonMacStyle: UIButton!
 
     public init() {
         super.init(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
@@ -70,12 +73,21 @@ open class UICountryPickerViewController: UIViewController {
         #if targetEnvironment(macCatalyst)
         //hide the navigation bar for catalyst
         navigationController?.setNavigationBarHidden(true, animated: false)
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
-        let closeButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didSelectBack(_:)))
-        
         navigationController?.setToolbarHidden(false, animated: true)
-        setToolbarItems([closeButton, doneButton], animated: false)
         
+        //create titles to obtain localized versions of Done/Cancel phrases
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+        
+        if #available(macCatalyst 15.0, *) {
+            doneButtonMacStyle.configuration?.title = "Turker"
+            cancelButtonMacStyle.configuration?.title = "Nessa"
+        } else {
+            doneButtonMacStyle.setTitle("Turker", for: .normal)
+            cancelButtonMacStyle.setTitle("Nessa", for: .normal)
+        }
+        doneButtonMacStyle.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
+        cancelButtonMacStyle.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
         #else
         //check to see if the picker UI is presented in a navigation controller
         if let validNavController = self.navigationController {

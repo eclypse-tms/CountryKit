@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="mac" appearance="light" renderMode="macOS"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UICountryPickerViewController" customModule="CountryKit" customModuleProvider="target">
             <connections>
+                <outlet property="cancelButtonMacStyle" destination="6UR-yq-J07" id="Bp7-bt-BPT"/>
+                <outlet property="doneButtonMacStyle" destination="Pg2-wr-Mr0" id="zgL-Lj-xHc"/>
                 <outlet property="footerDirectionsContainer" destination="Uny-Mn-ayd" id="L2I-3d-CCN"/>
                 <outlet property="headerDirectionsContainer" destination="EGA-px-cvU" id="KAu-AD-tD4"/>
                 <outlet property="pickerView" destination="vfn-IK-tGF" id="rgZ-iL-ipg"/>
@@ -22,17 +24,17 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UfP-6c-kJ8">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EGA-px-cvU">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="36.333333333333336"/>
+                            <rect key="frame" x="0.0" y="0.0" width="800" height="36.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-jK-QSA">
-                                    <rect key="frame" x="16" y="7.9999999999999982" width="361" height="20.333333333333329"/>
+                                    <rect key="frame" x="16" y="8" width="768" height="20.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <color key="textColor" systemColor="systemGrayColor"/>
                                     <nil key="highlightedColor"/>
@@ -47,21 +49,21 @@
                             </constraints>
                         </view>
                         <searchBar contentMode="redraw" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bxp-cU-EnB">
-                            <rect key="frame" x="0.0" y="36.333333333333329" width="393" height="56"/>
+                            <rect key="frame" x="0.0" y="37" width="800" height="36"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="cpS-he-PN4"/>
                             </connections>
                         </searchBar>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfn-IK-tGF">
-                            <rect key="frame" x="0.0" y="92.333333333333314" width="393" height="608.33333333333348"/>
+                            <rect key="frame" x="0.0" y="73" width="800" height="441"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-Mn-ayd">
-                            <rect key="frame" x="0.0" y="700.66666666666663" width="393" height="58.333333333333371"/>
+                            <rect key="frame" x="0.0" y="514" width="800" height="36.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Additional instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-0T-9wJ">
-                                    <rect key="frame" x="16" y="8" width="361" height="42.333333333333336"/>
+                                    <rect key="frame" x="16" y="8" width="768" height="20.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <color key="textColor" systemColor="systemGrayColor"/>
                                     <nil key="highlightedColor"/>
@@ -73,6 +75,35 @@
                                 <constraint firstItem="Dg7-0T-9wJ" firstAttribute="leading" secondItem="Uny-Mn-ayd" secondAttribute="leading" constant="16" id="8pl-AD-91x"/>
                                 <constraint firstItem="Dg7-0T-9wJ" firstAttribute="top" secondItem="Uny-Mn-ayd" secondAttribute="top" constant="8" id="Uln-iY-c4C"/>
                                 <constraint firstAttribute="bottom" secondItem="Dg7-0T-9wJ" secondAttribute="bottom" constant="8" id="aOW-m1-21W"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5j-9W-R3M">
+                            <rect key="frame" x="0.0" y="550" width="800" height="50"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-YN-9qz">
+                                    <rect key="frame" x="660" y="0.0" width="132" height="50"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UR-yq-J07">
+                                            <rect key="frame" x="-7" y="-5" width="76" height="62"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="gray" title="Cancel"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pg2-wr-Mr0">
+                                            <rect key="frame" x="63" y="-5" width="76" height="62"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="filled" title="Done"/>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="vyg-YN-9qz" secondAttribute="bottom" id="D9h-qP-X71"/>
+                                <constraint firstItem="vyg-YN-9qz" firstAttribute="top" secondItem="B5j-9W-R3M" secondAttribute="top" id="O8Y-vu-kjw"/>
+                                <constraint firstAttribute="trailing" secondItem="vyg-YN-9qz" secondAttribute="trailing" constant="8" id="Rsh-GG-Kn9"/>
+                                <constraint firstAttribute="height" id="ZrL-IK-SZf">
+                                    <variation key="userInterfaceIdiom=mac" constant="50"/>
+                                </constraint>
                             </constraints>
                         </view>
                     </subviews>
