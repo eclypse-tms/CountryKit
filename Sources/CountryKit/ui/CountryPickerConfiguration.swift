@@ -72,6 +72,7 @@ public struct CountryPickerConfiguration {
     public var pinnedFooterText: String?
     
     /// indicates how the cells should look like when they are selected by the user
+    /// this property is ignored when running in mac catalyst mode 
     public var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
     
     /// the methodology to use when filtering countries

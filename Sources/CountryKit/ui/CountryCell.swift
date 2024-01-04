@@ -12,14 +12,6 @@ class CountryCell: UITableViewCell, NibLoader {
     @IBOutlet private weak var countryFlag: UIImageView!
     @IBOutlet private weak var countryName: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
-        selectionStyle = .none
-        accessoryType = .none
-    }
-    
     private var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
     
     override func prepareForReuse() {
@@ -47,6 +39,9 @@ class CountryCell: UITableViewCell, NibLoader {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
+            #if targetEnvironment(macCatalyst)
+            selectionStyle = .default
+            #else
             switch cellSelectionStyle {
             case .checkMark:
                 accessoryType = .checkmark
@@ -55,6 +50,7 @@ class CountryCell: UITableViewCell, NibLoader {
                 accessoryType = .none
                 selectionStyle = .default
             }
+            #endif
         } else {
             accessoryType = .none
             selectionStyle = .none

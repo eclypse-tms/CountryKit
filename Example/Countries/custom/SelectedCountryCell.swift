@@ -14,12 +14,15 @@ class SelectedCountryCell: UICollectionViewCell, NibLoadable {
     @IBOutlet private weak var countryName: UILabel!
     @IBOutlet private weak var container: UIView!
     
+    
+    #if !targetEnvironment(macCatalyst)
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         container.roundCorners(cornerRadius: 12)
     }
+    #endif
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -31,5 +34,6 @@ class SelectedCountryCell: UICollectionViewCell, NibLoadable {
     func configure(with country: Country) {
         self.countryFlag.image = country.flagImage
         self.countryName.text = country.localizedName
+        container.roundCorners(cornerRadius: 12)
     }
 }

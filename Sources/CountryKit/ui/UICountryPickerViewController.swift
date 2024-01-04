@@ -8,14 +8,23 @@
 import UIKit
 import Combine
 
+@objc
+public protocol ToolbarActionsResponder: NSObjectProtocol {
+    @objc optional func clearSelections(_ sender: Any?)
+}
+
 open class UICountryPickerViewController: UIViewController {
     
     @IBOutlet public weak var searchBar: UISearchBar!
     @IBOutlet public weak var pickerView: UITableView!
     @IBOutlet public weak var pinnedHeaderDirections: UILabel!
     @IBOutlet public weak var pinnedFooterDirections: UILabel!
-    @IBOutlet private weak var headerDirectionsContainer: UIView!
-    @IBOutlet private weak var footerDirectionsContainer: UIView!
+    @IBOutlet public weak var headerDirectionsContainer: UIView!
+    @IBOutlet public weak var footerDirectionsContainer: UIView!
+    
+    @IBOutlet public weak var cancelButtonMacStyle: UIButton!
+    @IBOutlet public weak var doneButtonMacStyle: UIButton!
+    public var searchBarMacStyle: UISearchBar? //this search bar is added to the toolbar to make it more mac-like
 
     public init() {
         super.init(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
@@ -58,6 +67,7 @@ open class UICountryPickerViewController: UIViewController {
         configureTheme()
         configureSearchBar()
         configureBindings()
+        configureNotificationListening()
     }
     
     deinit {
@@ -67,6 +77,25 @@ open class UICountryPickerViewController: UIViewController {
     
     /// performs configuration of built-in navigation bar buttons.
     open func configureNavBarButtons() {
+        #if targetEnvironment(macCatalyst)
+        //hide the navigation bar for catalyst
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setToolbarHidden(true, animated: true)
+        
+        //create titles to obtain localized versions of Done/Cancel phrases
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+        
+        if #available(macCatalyst 15.0, *) {
+            doneButtonMacStyle.configuration?.title = "Turker"
+            cancelButtonMacStyle.configuration?.title = "Nessa"
+        } else {
+            doneButtonMacStyle.setTitle("Turker", for: .normal)
+            cancelButtonMacStyle.setTitle("Nessa", for: .normal)
+        }
+        doneButtonMacStyle.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
+        cancelButtonMacStyle.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
+        #else
         //check to see if the picker UI is presented in a navigation controller
         if let validNavController = self.navigationController {
             if let validLeftBarButtonItem = countryPickerConfiguration.leftBarButton {
@@ -106,6 +135,7 @@ open class UICountryPickerViewController: UIViewController {
         } else {
             //there is no navigation controller, there is no point in setting navigation bar buttons
         }
+        #endif
     }
     
     /// performs configuration of non-scrolling header and footer views
@@ -200,16 +230,27 @@ open class UICountryPickerViewController: UIViewController {
         
         pickerView.allowsSelection = countryPickerConfiguration.allowsSelection
         pickerView.allowsMultipleSelection = countryPickerConfiguration.canMultiSelect
-        pickerView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 150, right: 0)
+        pickerView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: UIFloat(150), right: 0)
         pickerView.tableFooterView = UIView()
+        #if targetEnvironment(macCatalyst)
+        pickerView.separatorStyle = .none //make it more mac-like
+        #else
         pickerView.separatorStyle = .singleLine
-        pickerView.estimatedRowHeight = CGFloat(44)
+        #endif
+        pickerView.estimatedRowHeight = UIFloat(44)
         pickerView.rowHeight = UITableView.automaticDimension
+        
     }
     
     open func configureSearchBar() {
+        #if targetEnvironment(macCatalyst)
+        searchBarMacStyle?.returnKeyType = .done
+        searchBarMacStyle?.delegate = self
+        #else
+        //search bar is hidden
         searchBar.returnKeyType = .done
         searchBar.delegate = self
+        #endif
     }
     
     /// convenience function for obtaining currently selected countries
@@ -257,6 +298,18 @@ open class UICountryPickerViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         }
     }
+    
+    open func configureNotificationListening() {
+        // do not forget to remove self from observing notifications in order to prevent memory leaks
+        NotificationCenter.default.addObserver(self, selector: #selector(userPerformedSearch(_:)), name: SearchBarEvent.toolbarSearchBarTextChanged.name, object: nil)
+    }
+    
+    @objc
+    open func userPerformedSearch(_ notification: Notification) {
+        if let searchText = notification.object as? String {
+            presenter.searchBarRelay.send(searchText)
+        }
+    }
 }
 
 extension UICountryPickerViewController: UISearchBarDelegate {
@@ -275,5 +328,11 @@ extension UICountryPickerViewController: UISearchBarDelegate {
     
     public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.view.endEditing(true)
+    }
+}
+
+extension UICountryPickerViewController: ToolbarActionsResponder {
+    public func clearSelections(_ sender: Any?) {
+        presenter.clearAll()
     }
 }
