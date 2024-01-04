@@ -182,6 +182,12 @@ open class CountryPickerPresenter: NSObject {
     }
     
     open func applyInclusionCriteria(alpha2Code: String, country: Country) -> Country? {
+        if !countryPickerConfig.countryRoster.isEmpty {
+            //there is a specific list of countries that user wants to present.
+            //we cannot apply the inclusion criteria on this
+            return country
+        }
+        
         if countryPickerConfig.includeOption.contains(.all) {
             return country
         }
