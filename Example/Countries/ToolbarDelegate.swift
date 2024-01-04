@@ -75,5 +75,7 @@ extension ToolbarDelegate: NSToolbarDelegate {
 
 
 extension ToolbarDelegate: UISearchBarDelegate {
-    
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        NotificationCenter.default.post(name: SearchBarEvent.toolbarSearchBarTextChanged.name, object: (searchBar.text ?? ""))
+    }
 }

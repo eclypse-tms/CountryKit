@@ -10,7 +10,7 @@ import Combine
 
 @objc
 public protocol ToolbarActionsResponder: NSObjectProtocol {
-    func clearSelections(_ sender: Any?)
+    @objc optional func clearSelections(_ sender: Any?)
 }
 
 open class UICountryPickerViewController: UIViewController {

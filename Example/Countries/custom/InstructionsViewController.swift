@@ -14,6 +14,18 @@ class InstructionsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        #if targetEnvironment(macCatalyst)
+        if let toolbaritem = sender as? NSToolbarItem {
+            toolbaritem.isEnabled = false
+            return true
+        }
+        return super.canPerformAction(action, withSender: sender)
+        #else
+        return super.canPerformAction(action, withSender: sender)
+        #endif
+    }
 
 
     /*

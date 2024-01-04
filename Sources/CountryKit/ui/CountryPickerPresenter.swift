@@ -423,7 +423,7 @@ extension CountryPickerPresenter: UITableViewDelegate {
         switch countrySection {
         case .worldwide:
             #if targetEnvironment(macCatalyst)
-            return UIFloat(35)
+            return UIFloat(40)
             #else
             return UIFloat(44)
             #endif
@@ -431,7 +431,7 @@ extension CountryPickerPresenter: UITableViewDelegate {
             return UITableView.automaticDimension
         case .allCountries:
             #if targetEnvironment(macCatalyst)
-            return UIFloat(35)
+            return UIFloat(40)
             #else
             return UIFloat(44)
             #endif

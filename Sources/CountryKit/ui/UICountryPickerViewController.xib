@@ -57,11 +57,11 @@
                             </connections>
                         </searchBar>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfn-IK-tGF">
-                            <rect key="frame" x="0.0" y="50" width="800" height="450"/>
+                            <rect key="frame" x="0.0" y="50" width="800" height="456"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-Mn-ayd">
-                            <rect key="frame" x="0.0" y="500" width="800" height="50"/>
+                            <rect key="frame" x="0.0" y="506" width="800" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Additional instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-0T-9wJ">
                                     <rect key="frame" x="16" y="8" width="768" height="34"/>
@@ -79,18 +79,18 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5j-9W-R3M">
-                            <rect key="frame" x="0.0" y="550" width="800" height="50"/>
+                            <rect key="frame" x="0.0" y="556" width="800" height="44"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-YN-9qz">
-                                    <rect key="frame" x="660" y="0.0" width="132" height="50"/>
+                                    <rect key="frame" x="660" y="0.0" width="132" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UR-yq-J07">
-                                            <rect key="frame" x="-7" y="-5" width="76" height="62"/>
+                                            <rect key="frame" x="-7" y="-5" width="76" height="56"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="gray" title="Cancel"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pg2-wr-Mr0">
-                                            <rect key="frame" x="63" y="-5" width="76" height="62"/>
+                                            <rect key="frame" x="63" y="-5" width="76" height="56"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="filled" title="Done"/>
                                         </button>
@@ -103,7 +103,7 @@
                                 <constraint firstItem="vyg-YN-9qz" firstAttribute="top" secondItem="B5j-9W-R3M" secondAttribute="top" id="O8Y-vu-kjw"/>
                                 <constraint firstAttribute="trailing" secondItem="vyg-YN-9qz" secondAttribute="trailing" constant="8" id="Rsh-GG-Kn9"/>
                                 <constraint firstAttribute="height" id="ZrL-IK-SZf">
-                                    <variation key="userInterfaceIdiom=mac" constant="50"/>
+                                    <variation key="userInterfaceIdiom=mac" constant="44"/>
                                 </constraint>
                             </constraints>
                         </view>
@@ -126,7 +126,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
