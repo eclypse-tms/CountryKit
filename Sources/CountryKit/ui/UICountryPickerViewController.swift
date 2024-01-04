@@ -299,19 +299,6 @@ open class UICountryPickerViewController: UIViewController {
         }
     }
     
-    override open func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        #if targetEnvironment(macCatalyst)
-        if let toolbaritem = sender as? NSToolbarItem {
-            toolbaritem.isEnabled = true
-            return true
-        } else {
-            return super.canPerformAction(action, withSender: sender)
-        }
-        #else
-        return super.canPerformAction(action, withSender: sender)
-        #endif
-    }
-    
     open func configureNotificationListening() {
         // do not forget to remove self from observing notifications in order to prevent memory leaks
         NotificationCenter.default.addObserver(self, selector: #selector(userPerformedSearch(_:)), name: SearchBarEvent.toolbarSearchBarTextChanged.name, object: nil)

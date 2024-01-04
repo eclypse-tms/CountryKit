@@ -6,25 +6,18 @@
 //
 
 import UIKit
+import CountryKit
 
-class InstructionsViewController: UIViewController {
-
+class InstructionsViewController: UIViewController, ToolbarActionsResponder {
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        #if targetEnvironment(macCatalyst)
-        if let toolbaritem = sender as? NSToolbarItem {
-            toolbaritem.isEnabled = false
-            return true
-        }
-        return super.canPerformAction(action, withSender: sender)
-        #else
-        return super.canPerformAction(action, withSender: sender)
-        #endif
+    override func responds(to aSelector: Selector!) -> Bool {
+        let clearSelectionsSelector = #selector(ToolbarActionsResponder.clearSelections(_:))
+        return  aSelector != clearSelectionsSelector
     }
 
 
