@@ -8,18 +8,12 @@
 import UIKit
 import CountryKit
 
-class InstructionsViewController: UIViewController, ToolbarActionsResponder {
+class InstructionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
-    override func responds(to aSelector: Selector!) -> Bool {
-        let clearSelectionsSelector = #selector(ToolbarActionsResponder.clearSelections(_:))
-        return  aSelector != clearSelectionsSelector
-    }
-
 
     /*
     // MARK: - Navigation
@@ -30,5 +24,4 @@ class InstructionsViewController: UIViewController, ToolbarActionsResponder {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
