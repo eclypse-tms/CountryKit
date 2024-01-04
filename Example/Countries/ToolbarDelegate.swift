@@ -37,20 +37,20 @@ extension ToolbarDelegate: NSToolbarDelegate {
         
         switch itemIdentifier {
         case .search:
-            let newItemToAdd = NSToolbarItem(itemIdentifier: itemIdentifier)
             let uiSearchBar = UISearchBar()
-            uiSearchBar.showsCancelButton = true
-            //uiSearchBar.backgroundImage = UIImage() //an empty image removes the default background color
+            uiSearchBar.backgroundImage = UIImage()
             uiSearchBar.placeholder = "Search"
-            uiSearchBar.delegate = self //or whichever object most appropriate
-              
+            uiSearchBar.sizeToFit()
+            uiSearchBar.delegate = self
+            
+            // !!! Warning !!!
             // using custom views is not supported when targeting macOS 12 or earlier
             // see https://developer.apple.com/documentation/appkit/nstoolbaritem/3375792-init
             let uibarButtonItem = UIBarButtonItem(customView: uiSearchBar)
-            toolbarItemToInsert = NSToolbarItem(itemIdentifier: itemIdentifier, barButtonItem: uibarButtonItem)
+            uibarButtonItem.width = 180
+            let newItemToAdd = NSToolbarItem(itemIdentifier: itemIdentifier, barButtonItem: uibarButtonItem)
             
-            newItemToAdd.action = #selector(ToolbarActionsResponder.search(_:))
-            newItemToAdd.isBordered = true
+            newItemToAdd.isBordered = false
             toolbarItemToInsert = newItemToAdd
         case .share:
             let newItemToAdd = NSToolbarItem(itemIdentifier: itemIdentifier)

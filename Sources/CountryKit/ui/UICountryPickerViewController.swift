@@ -8,6 +8,11 @@
 import UIKit
 import Combine
 
+@objc
+public protocol ToolbarActionsResponder: NSObjectProtocol {
+    func clearSelections(_ sender: Any?)
+}
+
 open class UICountryPickerViewController: UIViewController {
     
     @IBOutlet public weak var searchBar: UISearchBar!
@@ -292,6 +297,19 @@ open class UICountryPickerViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         }
     }
+    
+    override open func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        #if targetEnvironment(macCatalyst)
+        if let toolbaritem = sender as? NSToolbarItem {
+            toolbaritem.isEnabled = true
+            return true
+        } else {
+            return super.canPerformAction(action, withSender: sender)
+        }
+        #else
+        return super.canPerformAction(action, withSender: sender)
+        #endif
+    }
 }
 
 extension UICountryPickerViewController: UISearchBarDelegate {
@@ -315,14 +333,6 @@ extension UICountryPickerViewController: UISearchBarDelegate {
 
 extension UICountryPickerViewController: ToolbarActionsResponder {
     public func clearSelections(_ sender: Any?) {
-        print("did request to clear")
-    }
-    
-    public func share(_ sender: Any?) {
-        print("did request to share")
-    }
-    
-    public func search(_ sender: Any?) {
-        print("did request to search")
+        presenter.clearAll()
     }
 }

@@ -372,6 +372,13 @@ open class CountryPickerPresenter: NSObject {
     }
     
     private func clearPreviousAnd(selectThis: Country, at indexPath: IndexPath) {
+        clearAll()
+        formSelectedCountries.insert(selectThis)
+        countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: true, indexPath: indexPath, performCellSelection: false, isInitiatedByUser: true))
+    }
+    
+    /// removes all selections from the country picker view
+    open func clearAll() {
         formSelectedCountries.forEach { eachSelectedCountry in
             var section: Int = 0
             var row: Int = 0
@@ -406,8 +413,6 @@ open class CountryPickerPresenter: NSObject {
             }
         }
         formSelectedCountries.removeAll()
-        formSelectedCountries.insert(selectThis)
-        countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: true, indexPath: indexPath, performCellSelection: false, isInitiatedByUser: true))
     }
 }
 
