@@ -17,7 +17,6 @@ class ToolbarDelegate: NSObject {
 
 extension NSToolbarItem.Identifier {
     static let search = NSToolbarItem.Identifier("com.company.countries.nstoolbaritem.search")
-    static let share = NSToolbarItem.Identifier("com.company.countries.nstoolbaritem.share")
     static let clear = NSToolbarItem.Identifier("com.company.countries.nstoolbaritem.clear")
     
 }
@@ -29,7 +28,7 @@ extension ToolbarDelegate: NSToolbarDelegate {
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [.search, .share, .clear]
+        return [.search, .clear]
     }
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
@@ -51,12 +50,6 @@ extension ToolbarDelegate: NSToolbarDelegate {
             let newItemToAdd = NSToolbarItem(itemIdentifier: itemIdentifier, barButtonItem: uibarButtonItem)
             
             newItemToAdd.isBordered = false
-            toolbarItemToInsert = newItemToAdd
-        case .share:
-            let newItemToAdd = NSToolbarItem(itemIdentifier: itemIdentifier)
-            newItemToAdd.image = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))
-            newItemToAdd.action = #selector(ToolbarActionsResponder.share(_:))
-            newItemToAdd.isBordered = true
             toolbarItemToInsert = newItemToAdd
         case .clear:
             let newItemToAdd = NSToolbarItem(itemIdentifier: itemIdentifier)

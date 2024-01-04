@@ -67,6 +67,7 @@ open class UICountryPickerViewController: UIViewController {
         configureTheme()
         configureSearchBar()
         configureBindings()
+        configureNotificationListening()
     }
     
     deinit {
@@ -309,6 +310,18 @@ open class UICountryPickerViewController: UIViewController {
         #else
         return super.canPerformAction(action, withSender: sender)
         #endif
+    }
+    
+    open func configureNotificationListening() {
+        // do not forget to remove self from observing notifications in order to prevent memory leaks
+        NotificationCenter.default.addObserver(self, selector: #selector(userPerformedSearch(_:)), name: SearchBarEvent.toolbarSearchBarTextChanged.name, object: nil)
+    }
+    
+    @objc
+    open func userPerformedSearch(_ notification: Notification) {
+        if let searchText = notification.object as? String {
+            presenter.searchBarRelay.send(searchText)
+        }
     }
 }
 
