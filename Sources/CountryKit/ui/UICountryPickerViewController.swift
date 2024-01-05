@@ -137,12 +137,14 @@ open class UICountryPickerViewController: UIViewController {
         if #available(macCatalyst 15.0, *) {
             if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
                 doneButtonMacStyle.configuration?.title = providedDoneButtonTitle
+                doneButtonMacStyle.setNeedsUpdateConfiguration()
             } else {
                 doneButtonMacStyle.configuration?.title = "Turker"
             }
             
             if let providedCancelButtonTitle = countryPickerConfiguration.macConfiguration.cancelButtonTitle {
                 cancelButtonMacStyle.configuration?.title = providedCancelButtonTitle
+                cancelButtonMacStyle.setNeedsUpdateConfiguration()
             } else {
                 cancelButtonMacStyle.configuration?.title = "Nessa"
             }
