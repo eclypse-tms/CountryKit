@@ -84,10 +84,7 @@ open class CountryPickerPresenter: NSObject {
             let unsortedCountryList: [Country]
             
             if !strongSelf.countryPickerConfig.countryRoster.isEmpty {
-                unsortedCountryList = strongSelf.countryProvider
-                    .allKnownCountries
-                    .compactMap(strongSelf.applyInclusionCriteria(alpha2Code:country:))
-                    .compactMap(strongSelf.applyCountryRoster(country:))
+                unsortedCountryList = Array(strongSelf.countryPickerConfig.countryRoster)
             } else if !strongSelf.countryPickerConfig.excludedCountries.isEmpty {
                 unsortedCountryList = strongSelf.countryProvider
                     .allKnownCountries
@@ -170,14 +167,6 @@ open class CountryPickerPresenter: NSObject {
             return nil
         } else {
             return country
-        }
-    }
-    
-    private func applyCountryRoster(country: Country) -> Country? {
-        if countryPickerConfig.countryRoster.contains(country) {
-            return country
-        } else {
-            return nil
         }
     }
     

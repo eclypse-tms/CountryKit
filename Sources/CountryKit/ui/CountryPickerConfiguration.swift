@@ -89,6 +89,7 @@ public struct CountryPickerConfiguration {
     
     /// controls which countries, regions or territories to display in the PickerUI. 
     /// By default, it includes all territories that have an alpha 2 code assigned to it.
+    /// If a country roster is provided, this property is ignored.
     public var includeOption: IncludeOptions = .all
     
     /// you can provide your own custom sorting algorithm for the picker view.
