@@ -134,35 +134,18 @@ open class UICountryPickerViewController: UIViewController {
         let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
         let closeBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
 
-        /*
-        if #available(macCatalyst 15.0, *) {
-            if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
-                doneButtonMacStyle.configuration?.title = providedDoneButtonTitle
-            } else {
-                doneButtonMacStyle.configuration?.title = "Turker"
-            }
-            doneButtonMacStyle.setNeedsUpdateConfiguration()
-            
-            if let providedCancelButtonTitle = countryPickerConfiguration.macConfiguration.cancelButtonTitle {
-                cancelButtonMacStyle.configuration?.title = providedCancelButtonTitle
-            } else {
-                cancelButtonMacStyle.configuration?.title = "Nessa"
-            }
-            cancelButtonMacStyle.setNeedsUpdateConfiguration()
+        if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
+            doneButtonMacStyle.setTitle(providedDoneButtonTitle, for: .normal)
         } else {
-         */
-            if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
-                doneButtonMacStyle.setTitle(providedDoneButtonTitle, for: .normal)
-            } else {
-                doneButtonMacStyle.setTitle("Turker", for: .normal)
-            }
-            
-            if let providedCancelButtonTitle = countryPickerConfiguration.macConfiguration.cancelButtonTitle {
-                cancelButtonMacStyle.setTitle(providedCancelButtonTitle, for: .normal)
-            } else {
-                cancelButtonMacStyle.setTitle("Nessa", for: .normal)
-            }
-        //}
+            doneButtonMacStyle.setTitle(doneBarButton.title, for: .normal)
+        }
+        
+        if let providedCancelButtonTitle = countryPickerConfiguration.macConfiguration.cancelButtonTitle {
+            cancelButtonMacStyle.setTitle(providedCancelButtonTitle, for: .normal)
+        } else {
+            cancelButtonMacStyle.setTitle(closeBarButton.title, for: .normal)
+        }
+        
         doneButtonMacStyle.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
         cancelButtonMacStyle.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
         
