@@ -134,6 +134,7 @@ open class UICountryPickerViewController: UIViewController {
         let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
         let closeBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
 
+        /*
         if #available(macCatalyst 15.0, *) {
             if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
                 doneButtonMacStyle.configuration?.title = providedDoneButtonTitle
@@ -149,6 +150,7 @@ open class UICountryPickerViewController: UIViewController {
             }
             cancelButtonMacStyle.setNeedsUpdateConfiguration()
         } else {
+         */
             if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
                 doneButtonMacStyle.setTitle(providedDoneButtonTitle, for: .normal)
             } else {
@@ -160,7 +162,7 @@ open class UICountryPickerViewController: UIViewController {
             } else {
                 cancelButtonMacStyle.setTitle("Nessa", for: .normal)
             }
-        }
+        //}
         doneButtonMacStyle.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
         cancelButtonMacStyle.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
         
