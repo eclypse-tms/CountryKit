@@ -131,19 +131,20 @@ open class UICountryPickerViewController: UIViewController {
         #if targetEnvironment(macCatalyst)
 
         //create titles to obtain localized versions of Done/Cancel phrases
-        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
-        let closeBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+        let uikitBundle = Bundle(for: UIButton.self)
+        let doneTitle = uikitBundle.localizedString(forKey: "Done", value: nil, table: nil)
+        let cancelTitle = uikitBundle.localizedString(forKey: "Cancel", value: nil, table: nil)
 
         if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
             doneButtonMacStyle.setTitle(providedDoneButtonTitle, for: .normal)
         } else {
-            doneButtonMacStyle.setTitle(doneBarButton.title, for: .normal)
+            doneButtonMacStyle.setTitle(doneTitle, for: .normal)
         }
         
         if let providedCancelButtonTitle = countryPickerConfiguration.macConfiguration.cancelButtonTitle {
             cancelButtonMacStyle.setTitle(providedCancelButtonTitle, for: .normal)
         } else {
-            cancelButtonMacStyle.setTitle(closeBarButton.title, for: .normal)
+            cancelButtonMacStyle.setTitle(cancelTitle, for: .normal)
         }
         
         doneButtonMacStyle.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
