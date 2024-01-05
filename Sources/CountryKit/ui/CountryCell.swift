@@ -11,6 +11,8 @@ import FlagKit
 class CountryCell: UITableViewCell, NibLoader {
     @IBOutlet private weak var countryFlag: UIImageView!
     @IBOutlet private weak var countryName: UILabel!
+    @IBOutlet private weak var flagHeight: NSLayoutConstraint!
+    @IBOutlet private weak var flagWidth: NSLayoutConstraint!
     
     private var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
     
@@ -34,6 +36,11 @@ class CountryCell: UITableViewCell, NibLoader {
         } else {
             countryName.text = viewModel.country.localizedName
         }
+        
+        #if targetEnvironment(macCatalyst)
+        flagHeight.constant = configuration.macConfiguration.flagSize.height
+        flagWidth.constant = configuration.macConfiguration.flagSize.width
+        #endif
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

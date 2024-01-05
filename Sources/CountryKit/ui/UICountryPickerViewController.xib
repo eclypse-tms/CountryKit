@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UICountryPickerViewController" customModule="CountryKit" customModuleProvider="target">
             <connections>
+                <outlet property="bottomToolbar" destination="B5j-9W-R3M" id="Vmw-h2-4cs"/>
                 <outlet property="cancelButtonMacStyle" destination="6UR-yq-J07" id="Bp7-bt-BPT"/>
                 <outlet property="doneButtonMacStyle" destination="Pg2-wr-Mr0" id="zgL-Lj-xHc"/>
                 <outlet property="footerDirectionsContainer" destination="Uny-Mn-ayd" id="L2I-3d-CCN"/>
@@ -81,6 +82,13 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5j-9W-R3M">
                             <rect key="frame" x="0.0" y="556" width="800" height="44"/>
                             <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GM2-LN-0dg" userLabel="Separator">
+                                    <rect key="frame" x="0.0" y="0.0" width="800" height="0.5"/>
+                                    <color key="backgroundColor" systemColor="separatorColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="0.5" id="sON-oo-mFd"/>
+                                    </constraints>
+                                </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-YN-9qz">
                                     <rect key="frame" x="660" y="0.0" width="132" height="44"/>
                                     <subviews>
@@ -100,11 +108,14 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="vyg-YN-9qz" secondAttribute="bottom" id="D9h-qP-X71"/>
+                                <constraint firstItem="GM2-LN-0dg" firstAttribute="leading" secondItem="B5j-9W-R3M" secondAttribute="leading" id="DeZ-Zj-vn7"/>
                                 <constraint firstItem="vyg-YN-9qz" firstAttribute="top" secondItem="B5j-9W-R3M" secondAttribute="top" id="O8Y-vu-kjw"/>
                                 <constraint firstAttribute="trailing" secondItem="vyg-YN-9qz" secondAttribute="trailing" constant="8" id="Rsh-GG-Kn9"/>
                                 <constraint firstAttribute="height" id="ZrL-IK-SZf">
                                     <variation key="userInterfaceIdiom=mac" constant="44"/>
                                 </constraint>
+                                <constraint firstAttribute="trailing" secondItem="GM2-LN-0dg" secondAttribute="trailing" id="aPD-Ap-7eY"/>
+                                <constraint firstItem="GM2-LN-0dg" firstAttribute="top" secondItem="B5j-9W-R3M" secondAttribute="top" id="oiN-ud-IY2"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -122,6 +133,9 @@
         </view>
     </objects>
     <resources>
+        <systemColor name="separatorColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

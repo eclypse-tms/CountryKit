@@ -21,6 +21,7 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet public weak var pinnedFooterDirections: UILabel!
     @IBOutlet public weak var headerDirectionsContainer: UIView!
     @IBOutlet public weak var footerDirectionsContainer: UIView!
+    @IBOutlet public weak var bottomToolbar: UIView!
     
     @IBOutlet public weak var cancelButtonMacStyle: UIButton!
     @IBOutlet public weak var doneButtonMacStyle: UIButton!
@@ -68,6 +69,7 @@ open class UICountryPickerViewController: UIViewController {
         configureSearchBar()
         configureBindings()
         configureNotificationListening()
+        configureBottomBar()
     }
     
     deinit {
@@ -81,20 +83,6 @@ open class UICountryPickerViewController: UIViewController {
         //hide the navigation bar for catalyst
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.setToolbarHidden(true, animated: true)
-        
-        //create titles to obtain localized versions of Done/Cancel phrases
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
-        let closeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
-        
-        if #available(macCatalyst 15.0, *) {
-            doneButtonMacStyle.configuration?.title = "Turker"
-            cancelButtonMacStyle.configuration?.title = "Nessa"
-        } else {
-            doneButtonMacStyle.setTitle("Turker", for: .normal)
-            cancelButtonMacStyle.setTitle("Nessa", for: .normal)
-        }
-        doneButtonMacStyle.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
-        cancelButtonMacStyle.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
         #else
         //check to see if the picker UI is presented in a navigation controller
         if let validNavController = self.navigationController {
@@ -134,6 +122,48 @@ open class UICountryPickerViewController: UIViewController {
             }
         } else {
             //there is no navigation controller, there is no point in setting navigation bar buttons
+        }
+        #endif
+    }
+    
+    /// configures bottom bar - only applicable for mac catalyst
+    open func configureBottomBar() {
+        #if targetEnvironment(macCatalyst)
+
+        //create titles to obtain localized versions of Done/Cancel phrases
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
+        let closeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+
+        if #available(macCatalyst 15.0, *) {
+            if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
+                doneButtonMacStyle.configuration?.title = providedDoneButtonTitle
+            } else {
+                doneButtonMacStyle.configuration?.title = "Turker"
+            }
+            
+            if let providedCancelButtonTitle = countryPickerConfiguration.macConfiguration.cancelButtonTitle {
+                cancelButtonMacStyle.configuration?.title = providedCancelButtonTitle
+            } else {
+                cancelButtonMacStyle.configuration?.title = "Nessa"
+            }
+        } else {
+            if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
+                doneButtonMacStyle.setTitle(providedDoneButtonTitle, for: .normal)
+            } else {
+                doneButtonMacStyle.setTitle("Turker", for: .normal)
+            }
+            
+            if let providedCancelButtonTitle = countryPickerConfiguration.macConfiguration.cancelButtonTitle {
+                cancelButtonMacStyle.setTitle(providedCancelButtonTitle, for: .normal)
+            } else {
+                cancelButtonMacStyle.setTitle("Nessa", for: .normal)
+            }
+        }
+        doneButtonMacStyle.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
+        cancelButtonMacStyle.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
+        
+        if let providedBottomToolbarColor = countryPickerConfiguration.macConfiguration.bottomToolbarColor {
+            bottomToolbar.backgroundColor = providedBottomToolbarColor
         }
         #endif
     }

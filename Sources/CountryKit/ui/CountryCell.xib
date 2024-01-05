@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="mac" appearance="light" renderMode="macOS"/>
+    <device id="mac" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.down.doc" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D3I-2N-1fw">
-                        <rect key="frame" x="16" y="13.5" width="19" height="19"/>
+                        <rect key="frame" x="16" y="10.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="EI5-gz-JgM">
                                 <variation key="userInterfaceIdiom=mac" constant="19"/>
@@ -29,7 +29,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aruba" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4g-8I-xw7">
-                        <rect key="frame" x="43" y="0.0" width="229" height="44"/>
+                        <rect key="frame" x="49" y="0.0" width="223" height="44"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -51,6 +51,8 @@
             <connections>
                 <outlet property="countryFlag" destination="D3I-2N-1fw" id="046-8I-cIb"/>
                 <outlet property="countryName" destination="A4g-8I-xw7" id="Pm4-m3-8UA"/>
+                <outlet property="flagHeight" destination="J9C-na-BFm" id="FQz-dB-2zb"/>
+                <outlet property="flagWidth" destination="EI5-gz-JgM" id="Dnu-DB-mYd"/>
             </connections>
             <point key="canvasLocation" x="121" y="10"/>
         </tableViewCell>

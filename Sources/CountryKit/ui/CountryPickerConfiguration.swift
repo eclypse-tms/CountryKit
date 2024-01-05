@@ -95,6 +95,9 @@ public struct CountryPickerConfiguration {
     /// you can provide your own custom sorting algorithm for the picker view.
     public var countrySorter: CountrySorter?
     
+    /// additional configuration parameters when running the picker view in mac catalyst mode
+    public var macConfiguration: MacConfiguration = .default()
+    
     /// initializes CountrySelectionConfiguration with default parameters
     static public func `default`() -> CountryPickerConfiguration {
         CountryPickerConfiguration()
