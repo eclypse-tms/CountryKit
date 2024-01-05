@@ -9,8 +9,7 @@ import UIKit
 
 extension UIColor {
     /// indicates whether this color is perceived as a bright color to human eyes
-    /// see http://alienryderflex.com/hsp.html
-    var isPerceivedBright: Bool {
+        var isPerceivedBright: Bool {
         var redComponent: CGFloat = .zero
         var greenComponent: CGFloat = .zero
         var blueComponent: CGFloat = .zero
@@ -34,6 +33,8 @@ extension UIColor {
             let greenNormalized = greenComponent * 255.0
             let blueNormalized = blueComponent * 255.0
             
+            //HSP Method -> see http://alienryderflex.com/hsp.html
+            /*
             let hspSquared: Double = (0.299 * redNormalized * redNormalized) + (0.587 * greenNormalized * greenNormalized) + (0.114 * blueNormalized * blueNormalized)
             
             let hsp = sqrt(hspSquared)
@@ -41,6 +42,14 @@ extension UIColor {
                 return true
             } else {
                 return false
+            }
+            */
+            //YIQ Method -> see https://24ways.org/2010/calculating-color-contrast
+            let yiq = ((redNormalized*299.0)+(greenNormalized*587.0)+(blueNormalized*114))/1000.0
+            if (yiq >= 128) {
+                return false
+            } else {
+                return true
             }
         } else {
             //we can determine the brighness of this color
