@@ -52,11 +52,11 @@ class CountryCell: UITableViewCell, NibLoader {
             if let providedHighlightColor = configuration.macConfiguration.rowSelectionColor {
                 selectionStyle = .none
                 contentView.backgroundColor = providedHighlightColor
-                if providedHighlightColor.isPerceivedBright {
-                    //let's invert the color
-                    countryName.textColor = UIColor.white
-                } else {
+                
+                if configuration.macConfiguration._isRowSelectionColorPerceivedBright {
                     countryName.textColor = UIColor.label
+                } else {
+                    countryName.textColor = UIColor.white
                 }
             } else {
                 selectionStyle = .default

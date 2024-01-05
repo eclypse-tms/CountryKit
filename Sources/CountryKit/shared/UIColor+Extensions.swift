@@ -33,23 +33,14 @@ extension UIColor {
             let greenNormalized = greenComponent * 255.0
             let blueNormalized = blueComponent * 255.0
             
-            //HSP Method -> see http://alienryderflex.com/hsp.html
-            /*
-            let hspSquared: Double = (0.299 * redNormalized * redNormalized) + (0.587 * greenNormalized * greenNormalized) + (0.114 * blueNormalized * blueNormalized)
-            
-            let hsp = sqrt(hspSquared)
-            if (hsp > 127.5) {
-                return true
-            } else {
-                return false
-            }
-            */
-            //YIQ Method -> see https://24ways.org/2010/calculating-color-contrast
+            //Color contrast by YIQ Method -> see https://24ways.org/2010/calculating-color-contrast
             let yiq = ((redNormalized*299.0)+(greenNormalized*587.0)+(blueNormalized*114))/1000.0
             if (yiq >= 128) {
-                return false
-            } else {
+                //this color is perceived bright
                 return true
+            } else {
+                //this color is perceived dark
+                return false
             }
         } else {
             //we can determine the brighness of this color

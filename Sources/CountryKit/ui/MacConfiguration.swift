@@ -26,7 +26,14 @@ public struct MacConfiguration {
     public var flagSize: CGSize = CGSize(width: 20, height: 20)
     
     /// the color to apply when the row is selected
-    public var rowSelectionColor: UIColor?
+    public var rowSelectionColor: UIColor? {
+        didSet {
+            _isRowSelectionColorPerceivedBright = rowSelectionColor?.isPerceivedBright ?? false
+        }
+    }
+    
+    /// used to eliminate subsequent calls to isPerceivedBright
+    var _isRowSelectionColorPerceivedBright: Bool = false
     
     /// initializes MacConfiguration with default parameters
     static public func `default`() -> MacConfiguration {
