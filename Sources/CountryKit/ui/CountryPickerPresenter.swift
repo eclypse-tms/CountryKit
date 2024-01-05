@@ -84,10 +84,7 @@ open class CountryPickerPresenter: NSObject {
             let unsortedCountryList: [Country]
             
             if !strongSelf.countryPickerConfig.countryRoster.isEmpty {
-                unsortedCountryList = strongSelf.countryProvider
-                    .allKnownCountries
-                    .compactMap(strongSelf.applyInclusionCriteria(alpha2Code:country:))
-                    .compactMap(strongSelf.applyCountryRoster(country:))
+                unsortedCountryList = Array(strongSelf.countryPickerConfig.countryRoster)
             } else if !strongSelf.countryPickerConfig.excludedCountries.isEmpty {
                 unsortedCountryList = strongSelf.countryProvider
                     .allKnownCountries
@@ -173,15 +170,13 @@ open class CountryPickerPresenter: NSObject {
         }
     }
     
-    private func applyCountryRoster(country: Country) -> Country? {
-        if countryPickerConfig.countryRoster.contains(country) {
-            return country
-        } else {
-            return nil
-        }
-    }
-    
     open func applyInclusionCriteria(alpha2Code: String, country: Country) -> Country? {
+        if !countryPickerConfig.countryRoster.isEmpty {
+            //there is a specific list of countries that user wants to present.
+            //we cannot apply the inclusion criteria on this
+            return country
+        }
+        
         if countryPickerConfig.includeOption.contains(.all) {
             return country
         }
@@ -423,7 +418,7 @@ extension CountryPickerPresenter: UITableViewDelegate {
         switch countrySection {
         case .worldwide:
             #if targetEnvironment(macCatalyst)
-            return UIFloat(40)
+            return UIFloat(countryPickerConfig.macConfiguration.rowHeight)
             #else
             return UIFloat(44)
             #endif
@@ -431,7 +426,7 @@ extension CountryPickerPresenter: UITableViewDelegate {
             return UITableView.automaticDimension
         case .allCountries:
             #if targetEnvironment(macCatalyst)
-            return UIFloat(40)
+            return UIFloat(countryPickerConfig.macConfiguration.rowHeight)
             #else
             return UIFloat(44)
             #endif

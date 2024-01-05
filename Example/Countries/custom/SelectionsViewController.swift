@@ -224,6 +224,8 @@ class SelectionsViewController: UIViewController {
         
         config.countrySorter = self.selectedSortOption
         
+        config.macConfiguration.rowSelectionColor = UIColor(named: "AccentColor")
+        
         //initialize country picker ui
         let countryPickerVC = UICountryPickerViewController()
         
