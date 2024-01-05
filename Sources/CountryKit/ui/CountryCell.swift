@@ -15,6 +15,7 @@ class CountryCell: UITableViewCell, NibLoader {
     @IBOutlet private weak var flagWidth: NSLayoutConstraint!
     
     private var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
+    private var configuration: CountryPickerConfiguration = .default()
     
     override func prepareForReuse() {
         countryFlag.image = nil
@@ -41,13 +42,20 @@ class CountryCell: UITableViewCell, NibLoader {
         flagHeight.constant = configuration.macConfiguration.flagSize.height
         flagWidth.constant = configuration.macConfiguration.flagSize.width
         #endif
+        self.configuration = configuration
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
             #if targetEnvironment(macCatalyst)
-            selectionStyle = .default
+            if let providedHighlightColor = configuration.macConfiguration.rowSelectionColor {
+                selectionStyle = .none
+                contentView.backgroundColor = providedHighlightColor
+            } else {
+                selectionStyle = .default
+                contentView.backgroundColor = nil
+            }
             #else
             switch cellSelectionStyle {
             case .checkMark:
@@ -59,6 +67,9 @@ class CountryCell: UITableViewCell, NibLoader {
             }
             #endif
         } else {
+            #if targetEnvironment(macCatalyst)
+            contentView.backgroundColor = nil
+            #endif
             accessoryType = .none
             selectionStyle = .none
         }

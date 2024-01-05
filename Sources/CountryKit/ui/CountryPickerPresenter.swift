@@ -418,7 +418,7 @@ extension CountryPickerPresenter: UITableViewDelegate {
         switch countrySection {
         case .worldwide:
             #if targetEnvironment(macCatalyst)
-            return UIFloat(countryPickerConfig.macConfiguration.countryRowHeight)
+            return UIFloat(countryPickerConfig.macConfiguration.rowHeight)
             #else
             return UIFloat(44)
             #endif
@@ -426,7 +426,7 @@ extension CountryPickerPresenter: UITableViewDelegate {
             return UITableView.automaticDimension
         case .allCountries:
             #if targetEnvironment(macCatalyst)
-            return UIFloat(countryPickerConfig.macConfiguration.countryRowHeight)
+            return UIFloat(countryPickerConfig.macConfiguration.rowHeight)
             #else
             return UIFloat(44)
             #endif
