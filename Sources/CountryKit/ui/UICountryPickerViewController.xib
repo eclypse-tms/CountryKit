@@ -83,10 +83,10 @@
                             <rect key="frame" x="0.0" y="556" width="800" height="44"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GM2-LN-0dg" userLabel="Separator">
-                                    <rect key="frame" x="0.0" y="0.0" width="800" height="0.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="800" height="1"/>
                                     <color key="backgroundColor" systemColor="separatorColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="sON-oo-mFd"/>
+                                        <constraint firstAttribute="height" constant="1" id="sON-oo-mFd"/>
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-YN-9qz">
