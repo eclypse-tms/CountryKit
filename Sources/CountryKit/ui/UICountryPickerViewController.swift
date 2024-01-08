@@ -182,10 +182,9 @@ open class UICountryPickerViewController: UIViewController {
     /// initializes injectable classes that are required for the CountryPickerPresenter.
     /// override it to modify the behavior of the dependent classes
     open func lateInitPresenter() {
-        let bundleLoader = BundleLoaderImpl(fileManager: FileManager.default, bundle: CountryKit.assetBundle)
         let textHighlighter = TextHighlighterImpl()
         let countryFilteringMethod = CountryFilteringMethodImpl(textHighlighter: textHighlighter)
-        let countryProvider = CountryProviderImpl(bundleLoader: bundleLoader)
+        let countryProvider = CountryProviderImpl()
         let presenterQueue = DispatchQueue(label: "countrykit.queue.presenter")
         presenter = CountryPickerPresenter(countryProvider: countryProvider,
                                            countryFilteringMethod: countryFilteringMethod,
