@@ -41,7 +41,7 @@ open class CountryKitBundleLoaderImpl: CountryKitBundleLoader {
         self.bundle = CountryKit.assetBundle
     }
     
-    /// only use this initializer if you need specific behaviors
+    /// only use this initializer if you need specific behaviors from the filemanager or the bundle
     public init(fileManager: FileManager, bundle: Bundle) {
         self.fileManager = fileManager
         self.bundle = bundle
