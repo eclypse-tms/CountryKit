@@ -478,7 +478,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eclypse-tms/CountryKit";
 			requirement = {
-				branch = fix_bundle_loader;
+				branch = main;
 				kind = branch;
 			};
 		};
