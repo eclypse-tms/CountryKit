@@ -1,5 +1,5 @@
 //
-//  BundleLoader.swift
+//  CountryKitBundleLoader.swift
 //  CountryKit
 //
 //  Created by eclypse on 12/13/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol BundleLoader: AnyObject {
+public protocol CountryKitBundleLoader: AnyObject {
     /// the main bundle
     var bundle: Bundle { get }
     
@@ -31,11 +31,18 @@ public protocol BundleLoader: AnyObject {
     
 }
 
-open class BundleLoaderImpl: BundleLoader {
+open class CountryKitBundleLoaderImpl: CountryKitBundleLoader {
     open var bundle: Bundle
     open var fileManager: FileManager
     
-    init(fileManager: FileManager, bundle: Bundle) {
+    /// default initializer. there is generally no need to initialize the bundle loader any other way
+    public init() {
+        self.fileManager = FileManager.default
+        self.bundle = CountryKit.assetBundle
+    }
+    
+    /// only use this initializer if you need specific behaviors
+    public init(fileManager: FileManager, bundle: Bundle) {
         self.fileManager = fileManager
         self.bundle = bundle
     }

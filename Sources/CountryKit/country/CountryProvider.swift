@@ -27,9 +27,9 @@ public protocol CountryProvider: AnyObject {
 }
 
 open class CountryProviderImpl: CountryProvider {
-    open var bundleLoader: BundleLoader
+    open var bundleLoader: CountryKitBundleLoader
     
-    public init(bundleLoader: BundleLoader) {
+    public init(bundleLoader: CountryKitBundleLoader) {
         self.bundleLoader = bundleLoader
     }
     
