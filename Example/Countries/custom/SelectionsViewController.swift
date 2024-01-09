@@ -224,23 +224,29 @@ class SelectionsViewController: UIViewController {
         
         config.countrySorter = self.selectedSortOption
         
-        config.macConfiguration.rowSelectionColor = UIColor(named: "AccentColor")
+        config.macConfiguration.cellSelectionColor = UIColor(named: "AccentColor")
         
         //initialize country picker ui
         let countryPickerVC = UICountryPickerViewController()
         
-        //save the configuration on the view controller
-        countryPickerVC.countryPickerConfiguration = config
-        
         //get notified when user interacts with the country selection ui
         countryPickerVC.delegate = self
         
-        //let navController = UINavigationController(rootViewController: countryPickerVC)
-        //navController.modalPresentationStyle = .formSheet
-        //present(navController, animated: true)
+        var shouldDisplayPickerViewModally = true
         
-        splitViewController?.setViewController(countryPickerVC, for: .secondary)
-        splitViewController?.show(.secondary)
+        if shouldDisplayPickerViewModally {
+            //save the configuration on the view controller
+            countryPickerVC.countryPickerConfiguration = config
+            let navController = UINavigationController(rootViewController: countryPickerVC)
+            navController.modalPresentationStyle = .formSheet
+            present(navController, animated: true)
+        } else {
+            config.macConfiguration.showSearchBar = false
+            //save the configuration on the view controller
+            countryPickerVC.countryPickerConfiguration = config
+            splitViewController?.setViewController(countryPickerVC, for: .secondary)
+            splitViewController?.show(.secondary)
+        }
     }
     
     private func addBorder(to uiTextView: UITextView) {

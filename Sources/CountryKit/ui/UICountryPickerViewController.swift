@@ -153,6 +153,8 @@ open class UICountryPickerViewController: UIViewController {
         
         if let providedBottomToolbarColor = countryPickerConfiguration.macConfiguration.bottomToolbarColor {
             bottomToolbar.backgroundColor = providedBottomToolbarColor
+        } else {
+            bottomToolbar.backgroundColor = UIColor(named: "mac_bottom_bar_color", in: Bundle.module, compatibleWith: nil) ?? .tertiarySystemBackground
         }
         
         bottomToolbarHeight.constant = 44
