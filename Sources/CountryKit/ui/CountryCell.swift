@@ -49,43 +49,45 @@ class CountryCell: UITableViewCell, NibLoader {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
-            #if targetEnvironment(macCatalyst)
-            
-            if let providedCellSelectionColor = configuration.macConfiguration.cellSelectionColor {
-                selectionStyle = .none
-                
-                if self.selectedBackgroundView == nil {
-                    let newView = UIView()
-                    newView.backgroundColor = providedCellSelectionColor
-                    self.selectedBackgroundView = newView
-                }
-                
-                if configuration.macConfiguration._isRowSelectionColorPerceivedBright {
-                    countryName.textColor = UIColor.label
+            switch traitCollection.userInterfaceIdiom {
+            case .mac:
+                if let providedCellSelectionColor = configuration.macConfiguration.cellSelectionColor {
+                    selectionStyle = .none
+                    
+                    if self.selectedBackgroundView == nil {
+                        let newView = UIView()
+                        newView.backgroundColor = providedCellSelectionColor
+                        self.selectedBackgroundView = newView
+                    }
+                    
+                    if configuration.macConfiguration._isRowSelectionColorPerceivedBright {
+                        countryName.textColor = UIColor.label
+                    } else {
+                        countryName.textColor = UIColor.white
+                    }
                 } else {
-                    countryName.textColor = UIColor.white
+                    selectionStyle = .default
+                    contentView.backgroundColor = nil
                 }
-            } else {
-                selectionStyle = .default
-                contentView.backgroundColor = nil
+            default:
+                switch configuration.theme.cellSelectionStyle {
+                case .checkMark:
+                    accessoryType = .checkmark
+                    selectionStyle = .none
+                case .highlight:
+                    accessoryType = .none
+                    selectionStyle = .default
+                }
             }
-            #else
-            switch configuration.theme.cellSelectionStyle {
-            case .checkMark:
-                accessoryType = .checkmark
-                selectionStyle = .none
-            case .highlight:
-                accessoryType = .none
-                selectionStyle = .default
-            }
-            #endif
         } else {
-            #if targetEnvironment(macCatalyst)
-            self.selectedBackgroundView = nil
-            countryName.textColor = UIColor.label
-            #endif
-            accessoryType = .none
-            selectionStyle = .none
+            switch traitCollection.userInterfaceIdiom {
+            case .mac:
+                self.selectedBackgroundView = nil
+                countryName.textColor = UIColor.label
+            default:
+                accessoryType = .none
+                selectionStyle = .none
+            }
         }
     }
 }

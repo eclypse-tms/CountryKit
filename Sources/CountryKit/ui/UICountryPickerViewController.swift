@@ -288,11 +288,16 @@ open class UICountryPickerViewController: UIViewController {
         pickerView.allowsMultipleSelection = countryPickerConfiguration.canMultiSelect
         pickerView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: UIFloat(150), right: 0)
         pickerView.tableFooterView = UIView()
-        #if targetEnvironment(macCatalyst)
-        pickerView.separatorStyle = .none //make it more mac-like
-        #else
-        pickerView.separatorStyle = .singleLine
-        #endif
+        
+        switch traitCollection.userInterfaceIdiom {
+        case .mac:
+            pickerView.separatorStyle = .none //make it more mac-like
+        case .pad:
+            pickerView.separatorStyle = .singleLine
+        default:
+            pickerView.separatorStyle = .singleLine
+        }
+        
         pickerView.estimatedRowHeight = UIFloat(44)
         pickerView.rowHeight = UITableView.automaticDimension
         
