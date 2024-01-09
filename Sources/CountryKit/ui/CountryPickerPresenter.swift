@@ -307,6 +307,14 @@ open class CountryPickerPresenter: NSObject {
             var numberOfRestoredSelections = 0
             //only compare the alpha2 codes to determine whether set contains a selected country
             let setOfSelectedAlpha2Codes = Set<String>(formSelectedCountries.map { $0.alpha2Code })
+            
+            //we need to treat worldwide differently as its data source is not contained in filteredCountryList
+            if setOfSelectedAlpha2Codes.contains(Country.Worldwide.alpha2Code) {
+                let indexPathToRestore = IndexPath(row: 0, section: CountryPickerViewSection.worldwide.rawValue)
+                countrySelectionRelay.send(CellSelectionMeta(country: eachCounty.country, isSelected: true, indexPath: indexPathToRestore, performCellSelection: true, isInitiatedByUser: false))
+                numberOfRestoredSelections += 1
+            }
+            
             for (index, eachCounty) in filteredCountryList.enumerated() {
                 if setOfSelectedAlpha2Codes.contains(eachCounty.country.alpha2Code) {
                     let indexPathToRestore = IndexPath(row: index, section: CountryPickerViewSection.allCountries.rawValue)
