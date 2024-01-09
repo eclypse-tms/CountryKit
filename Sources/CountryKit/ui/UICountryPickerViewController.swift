@@ -22,6 +22,7 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet public weak var headerDirectionsContainer: UIView!
     @IBOutlet public weak var footerDirectionsContainer: UIView!
     @IBOutlet public weak var bottomToolbar: UIView!
+    @IBOutlet public weak var bottomToolbarHeight: NSLayoutConstraint!
     
     @IBOutlet public weak var cancelButtonMacStyle: UIButton!
     @IBOutlet public weak var doneButtonMacStyle: UIButton!
@@ -83,7 +84,11 @@ open class UICountryPickerViewController: UIViewController {
         //hide the navigation bar for catalyst
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.setToolbarHidden(true, animated: true)
+        bottomToolbarHeight.constant = 44
+        bottomToolbar.isHidden = false
         #else
+        bottomToolbarHeight.constant = 0
+        bottomToolbar.isHidden = true
         //check to see if the picker UI is presented in a navigation controller
         if let validNavController = self.navigationController {
             if let validLeftBarButtonItem = countryPickerConfiguration.leftBarButton {
