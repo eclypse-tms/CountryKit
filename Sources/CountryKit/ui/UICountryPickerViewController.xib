@@ -91,8 +91,8 @@
                                         <constraint firstAttribute="height" constant="1" id="sON-oo-mFd"/>
                                     </constraints>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-YN-9qz">
-                                    <rect key="frame" x="600" y="0.0" width="192" height="44"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-YN-9qz">
+                                    <rect key="frame" x="592" y="0.0" width="200" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UR-yq-J07">
                                             <rect key="frame" x="-7" y="7" width="106" height="32"/>
@@ -100,7 +100,7 @@
                                             <buttonConfiguration key="configuration" style="gray" title="Cancel Title"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pg2-wr-Mr0">
-                                            <rect key="frame" x="93" y="7" width="106" height="32"/>
+                                            <rect key="frame" x="101" y="7" width="106" height="32"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="filled" title="Done Title"/>
                                         </button>
