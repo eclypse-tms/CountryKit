@@ -311,7 +311,7 @@ open class CountryPickerPresenter: NSObject {
             //we need to treat worldwide differently as its data source is not contained in filteredCountryList
             if setOfSelectedAlpha2Codes.contains(Country.Worldwide.alpha2Code) {
                 let indexPathToRestore = IndexPath(row: 0, section: CountryPickerViewSection.worldwide.rawValue)
-                countrySelectionRelay.send(CellSelectionMeta(country: eachCounty.country, isSelected: true, indexPath: indexPathToRestore, performCellSelection: true, isInitiatedByUser: false))
+                countrySelectionRelay.send(CellSelectionMeta(country: Country.Worldwide, isSelected: true, indexPath: indexPathToRestore, performCellSelection: true, isInitiatedByUser: false))
                 numberOfRestoredSelections += 1
             }
             
