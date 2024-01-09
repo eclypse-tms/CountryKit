@@ -29,8 +29,6 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet public weak var cancelButtonMacStyle: UIButton!
     @IBOutlet public weak var doneButtonMacStyle: UIButton!
     
-    public var searchBarMacStyle: UISearchBar? //this search bar is added to the toolbar to make it more mac-like
-
     public init() {
         super.init(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
     }
@@ -96,7 +94,7 @@ open class UICountryPickerViewController: UIViewController {
                 navigationItem.leftItemsSupplementBackButton = false
             } else {
                 switch countryPickerConfiguration.navBarButtonOption {
-                case .displayLeadingButtonOnly, .displayBothButtons:
+                case .displayCancelButtonOnly, .displayBothButtons:
                     //there is no left bar button.
                     if self == validNavController.viewControllers.first {
                         //if this view controller is at the root of the navigation hierarchy
@@ -109,7 +107,7 @@ open class UICountryPickerViewController: UIViewController {
                         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(didSelectBack(_:)))
                     }
                     navigationItem.leftItemsSupplementBackButton = false
-                case .displayTrailingButtonOnly:
+                case .displayDoneButtonOnly:
                     navigationItem.hidesBackButton = true
                 }
             }
@@ -118,7 +116,7 @@ open class UICountryPickerViewController: UIViewController {
                 navigationItem.rightBarButtonItem = validRightBarButtonItem
             } else {
                 switch countryPickerConfiguration.navBarButtonOption {
-                case .displayTrailingButtonOnly, .displayBothButtons:
+                case .displayDoneButtonOnly, .displayBothButtons:
                     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
                 default:
                     break
@@ -134,6 +132,7 @@ open class UICountryPickerViewController: UIViewController {
     open func configureBottomBar() {
         #if targetEnvironment(macCatalyst)
         
+        countryPickerConfiguration.navBarButtonOption
         if let providedCancelButton = countryPickerConfiguration.macConfiguration.customCancelButton {
             cancelButtonMacStyle.isHidden = true
             providedCancelButton.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
@@ -304,15 +303,16 @@ open class UICountryPickerViewController: UIViewController {
     }
     
     open func configureSearchBar() {
-        #if targetEnvironment(macCatalyst)
-        searchBarMacStyle?.returnKeyType = .done
-        searchBarMacStyle?.delegate = self
-        searchBar.backgroundImage = UIImage()
-        #else
-        //search bar is hidden
-        searchBar.returnKeyType = .done
+        switch traitCollection.userInterfaceIdiom {
+        case .mac:
+            //remove the background color on mac idioms
+            searchBar.backgroundImage = UIImage()
+        case .pad:
+            break
+        default:
+            searchBar.returnKeyType = .done
+        }
         searchBar.delegate = self
-        #endif
     }
     
     /// convenience function for obtaining currently selected countries

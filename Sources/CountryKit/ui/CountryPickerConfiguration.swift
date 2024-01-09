@@ -75,7 +75,7 @@ public struct CountryPickerConfiguration {
     public var searchMethodology: SearchMethodology = .orSearch
     
     /// controls whether to display both the cancel and done buttons in the UI
-    public var navBarButtonOption: NavBarButtonOption = .displayBothButtons
+    public var navBarButtonOption: CancelDoneButtonsDisplayOption = .displayBothButtons
     
     /// controls which countries, regions or territories to display in the PickerUI. 
     /// By default, it includes all territories that have an alpha 2 code assigned to it.
