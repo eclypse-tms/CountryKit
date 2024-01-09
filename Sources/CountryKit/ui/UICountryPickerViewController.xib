@@ -32,7 +32,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UfP-6c-kJ8">
                     <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EGA-px-cvU">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EGA-px-cvU" userLabel="Header Instructions">
                             <rect key="frame" x="0.0" y="0.0" width="800" height="36.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-jK-QSA">
@@ -62,7 +62,7 @@
                             <rect key="frame" x="0.0" y="37" width="800" height="483"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </tableView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-Mn-ayd">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-Mn-ayd" userLabel="Footer Instructions">
                             <rect key="frame" x="0.0" y="520" width="800" height="36.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Additional instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-0T-9wJ">
@@ -80,7 +80,7 @@
                                 <constraint firstAttribute="bottom" secondItem="Dg7-0T-9wJ" secondAttribute="bottom" constant="8" id="aOW-m1-21W"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5j-9W-R3M">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5j-9W-R3M" userLabel="Bottom Toolbar">
                             <rect key="frame" x="0.0" y="556" width="800" height="44"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GM2-LN-0dg" userLabel="Separator">
