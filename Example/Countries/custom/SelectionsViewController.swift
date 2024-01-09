@@ -224,7 +224,10 @@ class SelectionsViewController: UIViewController {
         
         config.countrySorter = self.selectedSortOption
         
+        #if targetEnvironment(macCatalyst)
         config.macConfiguration.cellSelectionColor = UIColor(named: "AccentColor")
+        config.macConfiguration.bottomToolbarSeparatorColor = .clear
+        #endif
         
         //initialize country picker ui
         let countryPickerVC = UICountryPickerViewController()

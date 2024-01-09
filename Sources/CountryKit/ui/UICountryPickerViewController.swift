@@ -22,6 +22,7 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet public weak var headerDirectionsContainer: UIView!
     @IBOutlet public weak var footerDirectionsContainer: UIView!
     @IBOutlet public weak var bottomToolbar: UIView!
+    @IBOutlet public weak var bottomToolbarSeparator: UIView!
     @IBOutlet public weak var bottomToolbarHeight: NSLayoutConstraint!
     
     @IBOutlet public weak var horizontalButtonStack: UIStackView!
@@ -169,6 +170,10 @@ open class UICountryPickerViewController: UIViewController {
             bottomToolbar.backgroundColor = providedBottomToolbarColor
         } else {
             bottomToolbar.backgroundColor = UIColor(named: "mac_bottom_bar_color", in: Bundle.module, compatibleWith: nil) ?? .tertiarySystemBackground
+        }
+        
+        if let providedSeparatorColor = countryPickerConfiguration.macConfiguration.bottomToolbarSeparatorColor {
+            bottomToolbarSeparator.backgroundColor = providedSeparatorColor
         }
         
         bottomToolbarHeight.constant = 44

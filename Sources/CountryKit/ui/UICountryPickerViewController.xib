@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="bottomToolbar" destination="B5j-9W-R3M" id="Vmw-h2-4cs"/>
                 <outlet property="bottomToolbarHeight" destination="ZrL-IK-SZf" id="v03-9Z-WDr"/>
+                <outlet property="bottomToolbarSeparator" destination="GM2-LN-0dg" id="tJv-Oz-bN8"/>
                 <outlet property="cancelButtonMacStyle" destination="6UR-yq-J07" id="Bp7-bt-BPT"/>
                 <outlet property="doneButtonMacStyle" destination="Pg2-wr-Mr0" id="zgL-Lj-xHc"/>
                 <outlet property="footerDirectionsContainer" destination="Uny-Mn-ayd" id="L2I-3d-CCN"/>
