@@ -71,18 +71,8 @@ public struct CountryPickerConfiguration {
     /// of the picker view and does not scroll away.
     public var pinnedFooterText: String?
     
-    /// indicates how the cells should look like when they are selected by the user
-    /// this property is ignored when running in mac catalyst mode 
-    public var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
-    
     /// the methodology to use when filtering countries
     public var searchMethodology: SearchMethodology = .orSearch
-    
-    /// provide a font to match the theme of your app. Otherwise it uses the default OS font
-    public var themeFont: UIFont?
-    
-    /// provide a custom view to appear at the navigation bar's title view.
-    public var navigationBarTitleView: UIView?
     
     /// controls whether to display both the cancel and done buttons in the UI
     public var navBarButtonOption: NavBarButtonOption = .displayBothButtons
@@ -97,6 +87,9 @@ public struct CountryPickerConfiguration {
     
     /// additional configuration parameters when running the picker view in mac catalyst mode
     public var macConfiguration: MacConfiguration = .default()
+    
+    ///
+    public var theme: CountryPickerTheme = .init()
     
     /// initializes CountrySelectionConfiguration with default parameters
     static public func `default`() -> CountryPickerConfiguration {

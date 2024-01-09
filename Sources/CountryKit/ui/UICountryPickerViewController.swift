@@ -169,7 +169,7 @@ open class UICountryPickerViewController: UIViewController {
     /// performs configuration of non-scrolling header and footer views
     open func configureHeaderFooterViews() {
         if let validHeaderText = countryPickerConfiguration.pinnedHeaderText {
-            if let validFont = countryPickerConfiguration.themeFont {
+            if let validFont = countryPickerConfiguration.theme.font {
                 pinnedHeaderDirections.font = validFont
             }
             pinnedHeaderDirections.text = validHeaderText
@@ -179,7 +179,7 @@ open class UICountryPickerViewController: UIViewController {
         }
         
         if let validFooterText = countryPickerConfiguration.pinnedFooterText {
-            if let validFont = countryPickerConfiguration.themeFont {
+            if let validFont = countryPickerConfiguration.theme.font {
                 pinnedFooterDirections.font = validFont
             }
             pinnedFooterDirections.text = validFooterText
@@ -202,14 +202,18 @@ open class UICountryPickerViewController: UIViewController {
     }
     
     open func configureTheme() {
-        if let validThemeFont = countryPickerConfiguration.themeFont {
+        if let validThemeFont = countryPickerConfiguration.theme.font {
             searchBar.searchTextField.font = validThemeFont
-            pinnedHeaderDirections.font = countryPickerConfiguration.themeFont
-            pinnedFooterDirections.font = countryPickerConfiguration.themeFont
+            pinnedHeaderDirections.font = countryPickerConfiguration.theme.font
+            pinnedFooterDirections.font = countryPickerConfiguration.theme.font
         }
         
-        if let validNavBarTitleView = countryPickerConfiguration.navigationBarTitleView {
+        if let validNavBarTitleView = countryPickerConfiguration.theme.navigationBarTitleView {
             navigationItem.titleView = validNavBarTitleView
+        }
+        
+        if let validBackgroundColor = countryPickerConfiguration.theme.backgroundColor {
+            self.view.backgroundColor = validBackgroundColor
         }
     }
     

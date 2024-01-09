@@ -2,7 +2,7 @@
 //  ToolbarController.swift
 //  Countries
 //
-//  Created by Nessa Kucuk, Turker on 1/2/24.
+//  Created by eclypse on 1/2/24.
 //
 
 import UIKit
@@ -15,11 +15,13 @@ import AppKit
 class ToolbarDelegate: NSObject {
 }
 
+#if targetEnvironment(macCatalyst)
 extension NSToolbarItem.Identifier {
     static let search = NSToolbarItem.Identifier("com.company.countries.nstoolbaritem.search")
     static let clear = NSToolbarItem.Identifier("com.company.countries.nstoolbaritem.clear")
     
 }
+#endif
 
 #if targetEnvironment(macCatalyst)
 extension ToolbarDelegate: NSToolbarDelegate {

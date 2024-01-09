@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="mac" appearance="light" renderMode="macOS"/>
+    <device id="mac" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -33,16 +33,15 @@
                     <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EGA-px-cvU" userLabel="Header Instructions">
-                            <rect key="frame" x="0.0" y="0.0" width="800" height="36.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="800" height="35"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-jK-QSA">
-                                    <rect key="frame" x="16" y="8" width="768" height="20.5"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <rect key="frame" x="16" y="8" width="768" height="19"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <color key="textColor" systemColor="systemGrayColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="KwS-jK-QSA" secondAttribute="trailing" constant="16" id="CGE-Mw-son"/>
                                 <constraint firstItem="KwS-jK-QSA" firstAttribute="leading" secondItem="EGA-px-cvU" secondAttribute="leading" constant="16" id="XUK-WB-gAf"/>
@@ -51,28 +50,26 @@
                             </constraints>
                         </view>
                         <searchBar contentMode="redraw" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bxp-cU-EnB">
-                            <rect key="frame" x="0.0" y="37" width="800" height="0.0"/>
+                            <rect key="frame" x="0.0" y="35" width="800" height="50"/>
                             <textInputTraits key="textInputTraits"/>
-                            <variation key="userInterfaceIdiom=mac" hidden="YES"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="cpS-he-PN4"/>
                             </connections>
                         </searchBar>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfn-IK-tGF">
-                            <rect key="frame" x="0.0" y="37" width="800" height="483"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <rect key="frame" x="0.0" y="85" width="800" height="439"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-Mn-ayd" userLabel="Footer Instructions">
-                            <rect key="frame" x="0.0" y="520" width="800" height="36.5"/>
+                            <rect key="frame" x="0.0" y="524" width="800" height="32"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Additional instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-0T-9wJ">
-                                    <rect key="frame" x="16" y="8" width="768" height="20.5"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <rect key="frame" x="16" y="8" width="768" height="16"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                     <color key="textColor" systemColor="systemGrayColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="Dg7-0T-9wJ" secondAttribute="trailing" constant="16" id="2Vv-fs-0vw"/>
                                 <constraint firstItem="Dg7-0T-9wJ" firstAttribute="leading" secondItem="Uny-Mn-ayd" secondAttribute="leading" constant="16" id="8pl-AD-91x"/>
@@ -90,16 +87,16 @@
                                         <constraint firstAttribute="height" constant="1" id="sON-oo-mFd"/>
                                     </constraints>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-YN-9qz">
-                                    <rect key="frame" x="600" y="0.0" width="192" height="44"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-YN-9qz">
+                                    <rect key="frame" x="549" y="0.0" width="243" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UR-yq-J07">
-                                            <rect key="frame" x="-7" y="-5" width="106" height="56"/>
+                                            <rect key="frame" x="0.0" y="5" width="117.5" height="34.5"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="gray" title="Cancel Title"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pg2-wr-Mr0">
-                                            <rect key="frame" x="93" y="-5" width="106" height="56"/>
+                                            <rect key="frame" x="126" y="5" width="117.5" height="34.5"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="filled" title="Done Title"/>
                                         </button>
@@ -112,9 +109,7 @@
                                 <constraint firstItem="GM2-LN-0dg" firstAttribute="leading" secondItem="B5j-9W-R3M" secondAttribute="leading" id="DeZ-Zj-vn7"/>
                                 <constraint firstItem="vyg-YN-9qz" firstAttribute="top" secondItem="B5j-9W-R3M" secondAttribute="top" id="O8Y-vu-kjw"/>
                                 <constraint firstAttribute="trailing" secondItem="vyg-YN-9qz" secondAttribute="trailing" constant="8" id="Rsh-GG-Kn9"/>
-                                <constraint firstAttribute="height" id="ZrL-IK-SZf">
-                                    <variation key="userInterfaceIdiom=mac" constant="44"/>
-                                </constraint>
+                                <constraint firstAttribute="height" constant="44" id="ZrL-IK-SZf"/>
                                 <constraint firstAttribute="trailing" secondItem="GM2-LN-0dg" secondAttribute="trailing" id="aPD-Ap-7eY"/>
                                 <constraint firstItem="GM2-LN-0dg" firstAttribute="top" secondItem="B5j-9W-R3M" secondAttribute="top" id="oiN-ud-IY2"/>
                             </constraints>

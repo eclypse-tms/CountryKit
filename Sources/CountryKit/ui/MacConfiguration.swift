@@ -32,6 +32,10 @@ public struct MacConfiguration {
         }
     }
     
+    /// if you are presenting the picker view in a window that already includes a search bar,
+    /// turn this flag to false to hide the embedded search bar.
+    public var showSearchBar: Bool = true
+    
     /// used to eliminate subsequent calls to isPerceivedBright
     var _isRowSelectionColorPerceivedBright: Bool = false
     
