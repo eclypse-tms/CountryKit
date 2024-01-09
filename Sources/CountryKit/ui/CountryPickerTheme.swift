@@ -19,9 +19,6 @@ public struct CountryPickerTheme {
     /// Navigation bar is hidden when running in catalyst mode.
     public var navigationBarTitleView: UIView?
     
-    /// the color to apply to the picker view's background
-    public var backgroundColor: UIColor?
-    
     /// the color to apply to the picker view's non-scrollable header view area
     public var headerBackgroundColor: UIColor?
     

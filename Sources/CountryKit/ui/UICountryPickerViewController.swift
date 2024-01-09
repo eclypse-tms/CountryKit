@@ -212,11 +212,6 @@ open class UICountryPickerViewController: UIViewController {
             navigationItem.titleView = validNavBarTitleView
         }
         
-        if let validBackgroundColor = countryPickerConfiguration.theme.backgroundColor {
-            self.view.backgroundColor = validBackgroundColor
-            self.pickerView.backgroundColor = validBackgroundColor
-        }
-        
         if let validHeaderBackgroundColor = countryPickerConfiguration.theme.headerBackgroundColor {
             self.headerDirectionsContainer.backgroundColor = validHeaderBackgroundColor
         }

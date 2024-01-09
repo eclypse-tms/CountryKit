@@ -50,9 +50,15 @@ class CountryCell: UITableViewCell, NibLoader {
         super.setSelected(selected, animated: animated)
         if selected {
             #if targetEnvironment(macCatalyst)
-            if let providedHighlightColor = configuration.macConfiguration.rowSelectionColor {
+            
+            if let providedRowSelectionColor = configuration.macConfiguration.rowSelectionColor {
                 selectionStyle = .none
-                contentView.backgroundColor = providedHighlightColor
+                
+                if self.selectedBackgroundView == nil {
+                    let newView = UIView()
+                    newView.backgroundColor = providedRowSelectionColor
+                    self.selectedBackgroundView = newView
+                }
                 
                 if configuration.macConfiguration._isRowSelectionColorPerceivedBright {
                     countryName.textColor = UIColor.label
@@ -70,23 +76,16 @@ class CountryCell: UITableViewCell, NibLoader {
                 selectionStyle = .none
             case .highlight:
                 accessoryType = .none
-                selectionStyle = .default
+                selectionStyle = .gray
             }
             #endif
         } else {
             #if targetEnvironment(macCatalyst)
-            contentView.backgroundColor = nil
+            self.selectedBackgroundView = nil
             countryName.textColor = UIColor.label
             #endif
             accessoryType = .none
             selectionStyle = .none
-            if let themeBackgroundColor = configuration.theme.backgroundColor {
-                if backgroundView == nil {
-                    let newView = UIView()
-                    newView.backgroundColor = themeBackgroundColor
-                    self.backgroundView = newView
-                }
-            }
         }
     }
 }
