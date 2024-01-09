@@ -51,12 +51,12 @@ class CountryCell: UITableViewCell, NibLoader {
         if selected {
             #if targetEnvironment(macCatalyst)
             
-            if let providedRowSelectionColor = configuration.macConfiguration.rowSelectionColor {
+            if let providedCellSelectionColor = configuration.macConfiguration.cellSelectionColor {
                 selectionStyle = .none
                 
                 if self.selectedBackgroundView == nil {
                     let newView = UIView()
-                    newView.backgroundColor = providedRowSelectionColor
+                    newView.backgroundColor = providedCellSelectionColor
                     self.selectedBackgroundView = newView
                 }
                 
@@ -76,7 +76,7 @@ class CountryCell: UITableViewCell, NibLoader {
                 selectionStyle = .none
             case .highlight:
                 accessoryType = .none
-                selectionStyle = .gray
+                selectionStyle = .default
             }
             #endif
         } else {

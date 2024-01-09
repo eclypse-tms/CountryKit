@@ -25,10 +25,10 @@ public struct MacConfiguration {
     /// size of the flag in each row. Defaults to 20x20.
     public var flagSize: CGSize = CGSize(width: 20, height: 20)
     
-    /// the color to apply when the row is selected
-    public var rowSelectionColor: UIColor? {
+    /// the color to apply when the cell is selected
+    public var cellSelectionColor: UIColor? {
         didSet {
-            _isRowSelectionColorPerceivedBright = rowSelectionColor?.isPerceivedBright ?? false
+            _isRowSelectionColorPerceivedBright = cellSelectionColor?.isPerceivedBright ?? false
         }
     }
     
