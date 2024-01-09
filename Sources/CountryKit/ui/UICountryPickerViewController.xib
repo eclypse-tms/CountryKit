@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="mac" appearance="light"/>
+    <device id="mac" appearance="light" renderMode="macOS"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -17,6 +17,7 @@
                 <outlet property="doneButtonMacStyle" destination="Pg2-wr-Mr0" id="zgL-Lj-xHc"/>
                 <outlet property="footerDirectionsContainer" destination="Uny-Mn-ayd" id="L2I-3d-CCN"/>
                 <outlet property="headerDirectionsContainer" destination="EGA-px-cvU" id="KAu-AD-tD4"/>
+                <outlet property="horizontalButtonStack" destination="vyg-YN-9qz" id="Fyk-aY-JqK"/>
                 <outlet property="pickerView" destination="vfn-IK-tGF" id="rgZ-iL-ipg"/>
                 <outlet property="pinnedFooterDirections" destination="Dg7-0T-9wJ" id="mYt-74-fpc"/>
                 <outlet property="pinnedHeaderDirections" destination="KwS-jK-QSA" id="X5v-PM-Vtz"/>
@@ -50,15 +51,15 @@
                                 <constraint firstAttribute="bottom" secondItem="KwS-jK-QSA" secondAttribute="bottom" constant="8" id="vy7-jx-99y"/>
                             </constraints>
                         </view>
-                        <searchBar contentMode="redraw" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bxp-cU-EnB">
-                            <rect key="frame" x="0.0" y="50" width="800" height="145"/>
+                        <searchBar contentMode="redraw" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bxp-cU-EnB">
+                            <rect key="frame" x="0.0" y="50" width="800" height="36"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="cpS-he-PN4"/>
                             </connections>
                         </searchBar>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfn-IK-tGF">
-                            <rect key="frame" x="0.0" y="195" width="800" height="311"/>
+                            <rect key="frame" x="0.0" y="86" width="800" height="420"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-Mn-ayd" userLabel="Footer Instructions">
@@ -90,15 +91,15 @@
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vyg-YN-9qz">
-                                    <rect key="frame" x="549" y="0.0" width="243" height="44"/>
+                                    <rect key="frame" x="600" y="0.0" width="192" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UR-yq-J07">
-                                            <rect key="frame" x="0.0" y="5" width="117.5" height="34.5"/>
+                                            <rect key="frame" x="-7" y="7" width="106" height="32"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="gray" title="Cancel Title"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pg2-wr-Mr0">
-                                            <rect key="frame" x="126" y="5" width="117.5" height="34.5"/>
+                                            <rect key="frame" x="93" y="7" width="106" height="32"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="filled" title="Done Title"/>
                                         </button>

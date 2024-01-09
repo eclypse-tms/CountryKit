@@ -19,6 +19,10 @@ public struct MacConfiguration {
     /// background color of the bottom toolbar
     public var bottomToolbarColor: UIColor?
     
+    /// by default, bottom toolbar is separated by a 1 pt height separator.
+    /// provide clear color to hide it.
+    public var bottomToolbarSeparatorColor: UIColor?
+    
     /// the height of each row in the picker UI. defaults to 40.
     public var rowHeight: CGFloat = 40
     
@@ -35,6 +39,12 @@ public struct MacConfiguration {
     /// if you are presenting the picker view in a window that already includes a search bar,
     /// turn this flag to false to hide the embedded search bar.
     public var showSearchBar: Bool = true
+    
+    /// provide a custom button to replace the default cancel button provided by the picker view.
+    public var customCancelButton: UIButton?
+    
+    /// provide a custom button to replace the default done button provided by the picker view.
+    public var customDoneButton: UIButton?
     
     /// used to eliminate subsequent calls to isPerceivedBright
     var _isRowSelectionColorPerceivedBright: Bool = false

@@ -24,8 +24,10 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet public weak var bottomToolbar: UIView!
     @IBOutlet public weak var bottomToolbarHeight: NSLayoutConstraint!
     
+    @IBOutlet public weak var horizontalButtonStack: UIStackView!
     @IBOutlet public weak var cancelButtonMacStyle: UIButton!
     @IBOutlet public weak var doneButtonMacStyle: UIButton!
+    
     public var searchBarMacStyle: UISearchBar? //this search bar is added to the toolbar to make it more mac-like
 
     public init() {
@@ -130,26 +132,38 @@ open class UICountryPickerViewController: UIViewController {
     /// configures bottom bar - only applicable for mac catalyst
     open func configureBottomBar() {
         #if targetEnvironment(macCatalyst)
-
-        //create titles to obtain localized versions of Done/Cancel phrases
-        let uikitBundle = Bundle(for: UIButton.self)
-        let doneTitle = uikitBundle.localizedString(forKey: "Done", value: nil, table: nil)
-        let cancelTitle = uikitBundle.localizedString(forKey: "Cancel", value: nil, table: nil)
-
-        if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
-            doneButtonMacStyle.setTitle(providedDoneButtonTitle, for: .normal)
+        
+        if let providedCancelButton = countryPickerConfiguration.macConfiguration.customCancelButton {
+            cancelButtonMacStyle.isHidden = true
+            providedCancelButton.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
+            horizontalButtonStack.addArrangedSubview(providedCancelButton)
         } else {
-            doneButtonMacStyle.setTitle(doneTitle, for: .normal)
+            if let providedCancelButtonTitle = countryPickerConfiguration.macConfiguration.cancelButtonTitle {
+                cancelButtonMacStyle.setTitle(providedCancelButtonTitle, for: .normal)
+            } else {
+                //create titles to obtain localized versions of Done/Cancel phrases
+                let uikitBundle = Bundle(for: UIButton.self)
+                let cancelTitle = uikitBundle.localizedString(forKey: "Cancel", value: nil, table: nil)
+                cancelButtonMacStyle.setTitle(cancelTitle, for: .normal)
+            }
+            cancelButtonMacStyle.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
         }
         
-        if let providedCancelButtonTitle = countryPickerConfiguration.macConfiguration.cancelButtonTitle {
-            cancelButtonMacStyle.setTitle(providedCancelButtonTitle, for: .normal)
+        if let providedDoneButton = countryPickerConfiguration.macConfiguration.customDoneButton {
+            doneButtonMacStyle.isHidden = true
+            providedDoneButton.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
+            horizontalButtonStack.addArrangedSubview(providedDoneButton)
         } else {
-            cancelButtonMacStyle.setTitle(cancelTitle, for: .normal)
+            if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
+                doneButtonMacStyle.setTitle(providedDoneButtonTitle, for: .normal)
+            } else {
+                //create titles to obtain localized versions of Done/Cancel phrases
+                let uikitBundle = Bundle(for: UIButton.self)
+                let doneTitle = uikitBundle.localizedString(forKey: "Done", value: nil, table: nil)
+                doneButtonMacStyle.setTitle(doneTitle, for: .normal)
+            }
+            doneButtonMacStyle.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
         }
-        
-        doneButtonMacStyle.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
-        cancelButtonMacStyle.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
         
         if let providedBottomToolbarColor = countryPickerConfiguration.macConfiguration.bottomToolbarColor {
             bottomToolbar.backgroundColor = providedBottomToolbarColor
