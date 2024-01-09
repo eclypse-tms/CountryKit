@@ -214,6 +214,15 @@ open class UICountryPickerViewController: UIViewController {
         
         if let validBackgroundColor = countryPickerConfiguration.theme.backgroundColor {
             self.view.backgroundColor = validBackgroundColor
+            self.pickerView.backgroundColor = validBackgroundColor
+        }
+        
+        if let validHeaderBackgroundColor = countryPickerConfiguration.theme.headerBackgroundColor {
+            self.headerDirectionsContainer.backgroundColor = validHeaderBackgroundColor
+        }
+        
+        if let validFooterBackgroundColor = countryPickerConfiguration.theme.footerBackgroundColor {
+            self.footerDirectionsContainer.backgroundColor = validFooterBackgroundColor
         }
     }
     
@@ -277,6 +286,7 @@ open class UICountryPickerViewController: UIViewController {
         #if targetEnvironment(macCatalyst)
         searchBarMacStyle?.returnKeyType = .done
         searchBarMacStyle?.delegate = self
+        searchBar.backgroundImage = UIImage()
         #else
         //search bar is hidden
         searchBar.returnKeyType = .done

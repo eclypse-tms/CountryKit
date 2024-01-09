@@ -163,7 +163,9 @@ class SelectionsViewController: UIViewController {
         config.allowsSelection = allowSelectionSwitch.isOn
         config.canMultiSelect = canMultiSelectSwitch.isOn
         
-        config.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)!
+        config.theme.backgroundColor = UIColor.green
+        
+        config.theme.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)!
         config.searchMethodology = SearchMethodology(rawValue: searchCriteriaSegment.selectedSegmentIndex)!
         config.navBarButtonOption = NavBarButtonOption(rawValue: navBarButtonsSegment.selectedSegmentIndex)!
         

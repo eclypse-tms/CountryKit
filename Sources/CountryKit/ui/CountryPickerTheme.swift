@@ -22,5 +22,11 @@ public struct CountryPickerTheme {
     /// the color to apply to the picker view's background
     public var backgroundColor: UIColor?
     
+    /// the color to apply to the picker view's non-scrollable header view area
+    public var headerBackgroundColor: UIColor?
+    
+    /// the color to apply to the picker view's non-scrollable footer view area
+    public var footerBackgroundColor: UIColor?
+    
     public init() {}
 }

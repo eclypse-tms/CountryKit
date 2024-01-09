@@ -88,7 +88,7 @@ public struct CountryPickerConfiguration {
     /// additional configuration parameters when running the picker view in mac catalyst mode
     public var macConfiguration: MacConfiguration = .default()
     
-    ///
+    /// theme to apply to the picker view
     public var theme: CountryPickerTheme = .init()
     
     /// initializes CountrySelectionConfiguration with default parameters
