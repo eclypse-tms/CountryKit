@@ -95,8 +95,11 @@ public class Country: Hashable, Identifiable, Codable, Comparable {
         hasher.combine(localizedName)
         hasher.combine(addressLabels)
         hasher.combine(preferesAscendingAddressScope)
-        hasher.combine(locales)
-        hasher.combine(wiki)
+        //both the locales and wiki are lazily loaded
+        //which means that if you create a country before full meta data is loaded,
+        //the hash of the country will not match the hash of the same country after its meta data changes
+        //hasher.combine(locales)
+        //hasher.combine(wiki)
     }
         
     //MARK: Country List
