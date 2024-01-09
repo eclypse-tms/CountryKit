@@ -42,6 +42,7 @@ class CountryCell: UITableViewCell, NibLoader {
         flagHeight.constant = configuration.macConfiguration.flagSize.height
         flagWidth.constant = configuration.macConfiguration.flagSize.width
         #endif
+        
         self.configuration = configuration
     }
     
@@ -63,7 +64,7 @@ class CountryCell: UITableViewCell, NibLoader {
                 contentView.backgroundColor = nil
             }
             #else
-            switch cellSelectionStyle {
+            switch configuration.theme.cellSelectionStyle {
             case .checkMark:
                 accessoryType = .checkmark
                 selectionStyle = .none

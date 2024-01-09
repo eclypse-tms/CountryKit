@@ -28,5 +28,11 @@ public struct CountryPickerTheme {
     /// the color to apply to the picker view's non-scrollable footer view area
     public var footerBackgroundColor: UIColor?
     
+    /// initializes CountryPickerTheme with default parameters
+    public static func `default`() -> CountryPickerTheme {
+        return CountryPickerTheme()
+    }
+    
+    /// initializes CountryPickerTheme with default parameters
     public init() {}
 }
