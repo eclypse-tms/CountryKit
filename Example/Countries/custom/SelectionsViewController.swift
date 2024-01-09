@@ -163,7 +163,6 @@ class SelectionsViewController: UIViewController {
         config.allowsSelection = allowSelectionSwitch.isOn
         config.canMultiSelect = canMultiSelectSwitch.isOn
         
-        config.theme.backgroundColor = UIColor.green
         config.theme.cellSelectionStyle = .highlight
         
         config.theme.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)!
