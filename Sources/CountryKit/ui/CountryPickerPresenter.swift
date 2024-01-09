@@ -305,8 +305,10 @@ open class CountryPickerPresenter: NSObject {
     private func restoreCellSelectionsAfterReload() {
         if formSelectedCountries.count > 0 {
             var numberOfRestoredSelections = 0
+            //only compare the alpha2 codes to determine whether set contains a selected country
+            let setOfSelectedAlpha2Codes = Set<String>(formSelectedCountries.map { $0.alpha2Code })
             for (index, eachCounty) in filteredCountryList.enumerated() {
-                if formSelectedCountries.contains(eachCounty.country) {
+                if setOfSelectedAlpha2Codes.contains(eachCounty.country.alpha2Code) {
                     let indexPathToRestore = IndexPath(row: index, section: CountryPickerViewSection.allCountries.rawValue)
                     countrySelectionRelay.send(CellSelectionMeta(country: eachCounty.country, isSelected: true, indexPath: indexPathToRestore, performCellSelection: true, isInitiatedByUser: false))
                     numberOfRestoredSelections += 1
