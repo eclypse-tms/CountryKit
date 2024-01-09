@@ -31,10 +31,6 @@ class CountryCell: UITableViewCell, NibLoader {
             countryName.font = validThemeFont
         }
         
-        if let validBackgroundColor = configuration.theme.backgroundColor {
-            contentView.backgroundColor = validBackgroundColor
-        }
-        
         self.cellSelectionStyle = configuration.theme.cellSelectionStyle
         if let validHighlightedText = viewModel.highlightedSearchText {
             countryName.attributedText = validHighlightedText
@@ -83,6 +79,13 @@ class CountryCell: UITableViewCell, NibLoader {
             #endif
             accessoryType = .none
             selectionStyle = .none
+            if let themeBackgroundColor = configuration.theme.backgroundColor {
+                if backgroundView == nil {
+                    let newView = UIView()
+                    newView.backgroundColor = themeBackgroundColor
+                    self.backgroundView = newView
+                }
+            }
         }
     }
 }
