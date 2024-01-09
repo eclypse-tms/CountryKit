@@ -19,8 +19,8 @@ public struct MacConfiguration {
     /// background color of the bottom toolbar
     public var bottomToolbarColor: UIColor?
     
-    /// by default, bottom toolbar is separated by a 1 pt height separator.
-    /// provide clear color to hide it.
+    /// provide a color to create a separation line between the view and the bottom toolbar
+    /// by default this line color is clear.
     public var bottomToolbarSeparatorColor: UIColor?
     
     /// the height of each row in the picker UI. defaults to 40.
