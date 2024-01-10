@@ -1,7 +1,7 @@
 //
 //  SearchBarEvent.swift
-//
-//
+//  CountryKit
+// 
 //  Created by eclypse on 1/3/24.
 //
 

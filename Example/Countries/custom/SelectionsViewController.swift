@@ -42,7 +42,7 @@ class SelectionsViewController: UIViewController {
     @IBOutlet private weak var inclusionButton: UIButton!
     @IBOutlet private weak var sortButton: UIButton!
     
-    private var selectedInclusionOption: IncludeOptions = []
+    private var selectedInclusionOption: CountryPoolOptions = []
     private var selectedSortOption: CountrySorter?
     
     private var dataSource: UICollectionViewDiffableDataSource<SelectedCountriesSection, Country>!
@@ -70,21 +70,21 @@ class SelectionsViewController: UIViewController {
     private func configureInclusionOptions() {
         
         let inclusionMenu = UIMenu(children: [
-            UIAction(title: "Sovereign State", handler: { _ in self.add(includeOptions: .sovereignState) }),
-            UIAction(title: "Commonwealth Member", handler: { _ in self.add(includeOptions: .commonwealthMember) }),
-            UIAction(title: "Dependent Territory", handler: { _ in self.add(includeOptions: .dependentTerritory) }),
-            UIAction(title: "No Population", handler: { _ in self.add(includeOptions: .hasNoPermanentPopulation) }),
-            UIAction(title: "Disputed Territories", handler: { _ in self.add(includeOptions: .disputedTerritories) }),
-            UIAction(title: "All Countries/Territories", handler: { _ in self.add(includeOptions: .all) })
+            UIAction(title: "Sovereign State", handler: { _ in self.add(countryPoolOptions: .sovereignStates) }),
+            UIAction(title: "Commonwealth Member", handler: { _ in self.add(countryPoolOptions: .commonwealthMembers) }),
+            UIAction(title: "Dependent Territory", handler: { _ in self.add(countryPoolOptions: .dependentTerritories) }),
+            UIAction(title: "No Population", handler: { _ in self.add(countryPoolOptions: .noPermanentPopulation) }),
+            UIAction(title: "Disputed Territories", handler: { _ in self.add(countryPoolOptions: .disputedTerritories) }),
+            UIAction(title: "All Countries/Territories", handler: { _ in self.add(countryPoolOptions: .all) })
         ])
         
         inclusionButton.menu = inclusionMenu
         inclusionButton.showsMenuAsPrimaryAction = true
-        selectedInclusionOption = [.sovereignState] //default option
+        selectedInclusionOption = [.sovereignStates] //default option
     }
     
-    private func add(includeOptions: IncludeOptions) {
-        selectedInclusionOption = [includeOptions]
+    private func add(countryPoolOptions: CountryPoolOptions) {
+        selectedInclusionOption = [countryPoolOptions]
     }
     
     private func configureSortOptions() {
@@ -165,7 +165,7 @@ class SelectionsViewController: UIViewController {
         
         config.theme.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)!
         config.searchMethodology = SearchMethodology(rawValue: searchCriteriaSegment.selectedSegmentIndex)!
-        config.navBarButtonOption = NavBarButtonOption(rawValue: navBarButtonsSegment.selectedSegmentIndex)!
+        config.buttonDisplayOption = ToolbarButtonsDisplayOption(rawValue: navBarButtonsSegment.selectedSegmentIndex)!
         
         if allowWorldwideSwitch.isOn {
             config.shouldShowWorldWide = true
