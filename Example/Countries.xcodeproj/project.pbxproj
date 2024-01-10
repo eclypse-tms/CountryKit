@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B1940EBD2B452D9D004261EB /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1940EBC2B452D9D004261EB /* ToolbarDelegate.swift */; };
-		B20C62CD2B2CEF5400D5DFEC /* CountryKit in Frameworks */ = {isa = PBXBuildFile; productRef = B20C62CC2B2CEF5400D5DFEC /* CountryKit */; };
+		B1AA63452B4E57C7007B8095 /* CountryKit in Frameworks */ = {isa = PBXBuildFile; productRef = B1AA63442B4E57C7007B8095 /* CountryKit */; };
 		B27079802B26DDEF003435A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B270797F2B26DDEF003435A1 /* AppDelegate.swift */; };
 		B27079822B26DDEF003435A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27079812B26DDEF003435A1 /* SceneDelegate.swift */; };
 		B27079842B26DDEF003435A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27079832B26DDEF003435A1 /* ViewController.swift */; };
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B20C62CD2B2CEF5400D5DFEC /* CountryKit in Frameworks */,
+				B1AA63452B4E57C7007B8095 /* CountryKit in Frameworks */,
 				B27079A42B26DE8E003435A1 /* Composure in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,7 +153,7 @@
 			name = Countries;
 			packageProductDependencies = (
 				B27079A32B26DE8E003435A1 /* Composure */,
-				B20C62CC2B2CEF5400D5DFEC /* CountryKit */,
+				B1AA63442B4E57C7007B8095 /* CountryKit */,
 			);
 			productName = Countries;
 			productReference = B270797C2B26DDEF003435A1 /* Countries.app */;
@@ -187,7 +187,7 @@
 			mainGroup = B27079732B26DDEF003435A1;
 			packageReferences = (
 				B27079A22B26DE8E003435A1 /* XCRemoteSwiftPackageReference "Composure" */,
-				B20C62CB2B2CEF5400D5DFEC /* XCRemoteSwiftPackageReference "CountryKit" */,
+				B1AA63432B4E57C7007B8095 /* XCRemoteSwiftPackageReference "CountryKit" */,
 			);
 			productRefGroup = B270797D2B26DDEF003435A1 /* Products */;
 			projectDirPath = "";
@@ -474,11 +474,11 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B20C62CB2B2CEF5400D5DFEC /* XCRemoteSwiftPackageReference "CountryKit" */ = {
+		B1AA63432B4E57C7007B8095 /* XCRemoteSwiftPackageReference "CountryKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eclypse-tms/CountryKit";
 			requirement = {
-				branch = fix_catalyst_ipad;
+				branch = main;
 				kind = branch;
 			};
 		};
@@ -493,9 +493,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B20C62CC2B2CEF5400D5DFEC /* CountryKit */ = {
+		B1AA63442B4E57C7007B8095 /* CountryKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B20C62CB2B2CEF5400D5DFEC /* XCRemoteSwiftPackageReference "CountryKit" */;
+			package = B1AA63432B4E57C7007B8095 /* XCRemoteSwiftPackageReference "CountryKit" */;
 			productName = CountryKit;
 		};
 		B27079A32B26DE8E003435A1 /* Composure */ = {
