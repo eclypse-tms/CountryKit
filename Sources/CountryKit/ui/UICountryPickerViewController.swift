@@ -151,7 +151,7 @@ open class UICountryPickerViewController: UIViewController {
                 }
                 defaultCancelButton.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
             default:
-                break
+                defaultCancelButton.isHidden = true
             }
         }
         
@@ -172,7 +172,7 @@ open class UICountryPickerViewController: UIViewController {
                 }
                 defaultDoneButton.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
             default:
-                break
+                defaultDoneButton.isHidden = true
             }
         }
         
