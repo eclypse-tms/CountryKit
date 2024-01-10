@@ -42,7 +42,7 @@ class SelectionsViewController: UIViewController {
     @IBOutlet private weak var inclusionButton: UIButton!
     @IBOutlet private weak var sortButton: UIButton!
     
-    private var selectedCountryList: PickerViewPopulation = []
+    private var selectedCountryListOption: CountryListOption = []
     private var selectedSortOption: CountrySorter?
     
     private var dataSource: UICollectionViewDiffableDataSource<SelectedCountriesSection, Country>!
@@ -70,21 +70,21 @@ class SelectionsViewController: UIViewController {
     private func configureInclusionOptions() {
         
         let inclusionMenu = UIMenu(children: [
-            UIAction(title: "Sovereign State", handler: { _ in self.add(countryPoolOptions: .sovereignStates) }),
-            UIAction(title: "Commonwealth Member", handler: { _ in self.add(countryPoolOptions: .commonwealthMembers) }),
-            UIAction(title: "Dependent Territory", handler: { _ in self.add(countryPoolOptions: .dependentTerritories) }),
-            UIAction(title: "No Population", handler: { _ in self.add(countryPoolOptions: .noPermanentPopulation) }),
-            UIAction(title: "Disputed Territories", handler: { _ in self.add(countryPoolOptions: .disputedTerritories) }),
-            UIAction(title: "All Countries/Territories", handler: { _ in self.add(countryPoolOptions: .all) })
+            UIAction(title: "Sovereign State", handler: { _ in self.add(countryListOption: .sovereignStates) }),
+            UIAction(title: "Commonwealth Member", handler: { _ in self.add(countryListOption: .commonwealthMembers) }),
+            UIAction(title: "Dependent Territory", handler: { _ in self.add(countryListOption: .dependentTerritories) }),
+            UIAction(title: "No Population", handler: { _ in self.add(countryListOption: .noPermanentPopulation) }),
+            UIAction(title: "Disputed Territories", handler: { _ in self.add(countryListOption: .disputedTerritories) }),
+            UIAction(title: "All Countries/Territories", handler: { _ in self.add(countryListOption: .all) })
         ])
         
         inclusionButton.menu = inclusionMenu
         inclusionButton.showsMenuAsPrimaryAction = true
-        selectedCountryList = [.sovereignStates] //default option
+        selectedCountryListOption = [.sovereignStates] //default option
     }
     
-    private func add(countryPoolOptions: CountryPoolOptions) {
-        selectedInclusionOption = [countryPoolOptions]
+    private func add(countryListOption: CountryListOption) {
+        selectedCountryListOption = [countryListOption]
     }
     
     private func configureSortOptions() {
@@ -178,7 +178,7 @@ class SelectionsViewController: UIViewController {
         }
         
         //save the inclusions
-        config.includeOption = selectedInclusionOption
+        config.countryListOption = selectedCountryListOption
         
         if limitedCountrySwitch.isOn {
             limitedCountryStack.isHidden = false

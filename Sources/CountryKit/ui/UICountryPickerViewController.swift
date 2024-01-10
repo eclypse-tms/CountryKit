@@ -139,15 +139,20 @@ open class UICountryPickerViewController: UIViewController {
             providedCancelButton.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
             horizontalButtonStack.addArrangedSubview(providedCancelButton)
         } else {
-            if let providedCancelButtonTitle = countryPickerConfiguration.macConfiguration.cancelButtonTitle {
-                defaultCancelButton.setTitle(providedCancelButtonTitle, for: .normal)
-            } else {
-                //create titles to obtain localized versions of Done/Cancel phrases
-                let uikitBundle = Bundle(for: UIButton.self)
-                let cancelTitle = uikitBundle.localizedString(forKey: "Cancel", value: nil, table: nil)
-                defaultCancelButton.setTitle(cancelTitle, for: .normal)
+            switch countryPickerConfiguration.buttonDisplayOption {
+            case .displayBothButtons, .displayCancelButtonOnly:
+                if let providedCancelButtonTitle = countryPickerConfiguration.macConfiguration.cancelButtonTitle {
+                    defaultCancelButton.setTitle(providedCancelButtonTitle, for: .normal)
+                } else {
+                    //create titles to obtain localized versions of Done/Cancel phrases
+                    let uikitBundle = Bundle(for: UIButton.self)
+                    let cancelTitle = uikitBundle.localizedString(forKey: "Cancel", value: nil, table: nil)
+                    defaultCancelButton.setTitle(cancelTitle, for: .normal)
+                }
+                defaultCancelButton.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
+            default:
+                break
             }
-            defaultCancelButton.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)
         }
         
         if let providedDoneButton = countryPickerConfiguration.macConfiguration.customDoneButton {
@@ -155,15 +160,20 @@ open class UICountryPickerViewController: UIViewController {
             providedDoneButton.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
             horizontalButtonStack.addArrangedSubview(providedDoneButton)
         } else {
-            if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
-                defaultDoneButton.setTitle(providedDoneButtonTitle, for: .normal)
-            } else {
-                //create titles to obtain localized versions of Done/Cancel phrases
-                let uikitBundle = Bundle(for: UIButton.self)
-                let doneTitle = uikitBundle.localizedString(forKey: "Done", value: nil, table: nil)
-                defaultDoneButton.setTitle(doneTitle, for: .normal)
+            switch countryPickerConfiguration.buttonDisplayOption {
+            case .displayBothButtons, .displayDoneButtonOnly:
+                if let providedDoneButtonTitle = countryPickerConfiguration.macConfiguration.doneButtonTitle {
+                    defaultDoneButton.setTitle(providedDoneButtonTitle, for: .normal)
+                } else {
+                    //create titles to obtain localized versions of Done/Cancel phrases
+                    let uikitBundle = Bundle(for: UIButton.self)
+                    let doneTitle = uikitBundle.localizedString(forKey: "Done", value: nil, table: nil)
+                    defaultDoneButton.setTitle(doneTitle, for: .normal)
+                }
+                defaultDoneButton.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
+            default:
+                break
             }
-            defaultDoneButton.addTarget(self, action: #selector(didSelectDone(_:)), for: .touchUpInside)
         }
         
         if let providedBottomToolbarColor = countryPickerConfiguration.macConfiguration.bottomToolbarColor {
