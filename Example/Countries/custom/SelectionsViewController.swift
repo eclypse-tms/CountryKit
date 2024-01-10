@@ -42,7 +42,7 @@ class SelectionsViewController: UIViewController {
     @IBOutlet private weak var inclusionButton: UIButton!
     @IBOutlet private weak var sortButton: UIButton!
     
-    private var selectedInclusionOption: CountryPoolOptions = []
+    private var selectedCountryList: PickerViewPopulation = []
     private var selectedSortOption: CountrySorter?
     
     private var dataSource: UICollectionViewDiffableDataSource<SelectedCountriesSection, Country>!
@@ -80,7 +80,7 @@ class SelectionsViewController: UIViewController {
         
         inclusionButton.menu = inclusionMenu
         inclusionButton.showsMenuAsPrimaryAction = true
-        selectedInclusionOption = [.sovereignStates] //default option
+        selectedCountryList = [.sovereignStates] //default option
     }
     
     private func add(countryPoolOptions: CountryPoolOptions) {

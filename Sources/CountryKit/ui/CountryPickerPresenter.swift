@@ -177,11 +177,11 @@ open class CountryPickerPresenter: NSObject {
             return country
         }
         
-        if countryPickerConfig.pickerViewPopulation.contains(.all) {
+        if countryPickerConfig.countryListOption.contains(.all) {
             return country
         }
         
-        if countryPickerConfig.pickerViewPopulation.contains(.sovereignStates), 
+        if countryPickerConfig.countryListOption.contains(.sovereignStates), 
             country.wiki.alpha2CodeOfItsSovereignState == nil, //cannot have another country as its sovereign
             !country.wiki.isDisputedTerritory, //cannot be a disputed territory
             !country.wiki.noPermanentPopulation //must have a permanent population
@@ -190,22 +190,22 @@ open class CountryPickerPresenter: NSObject {
             return country
         }
         
-        if countryPickerConfig.pickerViewPopulation.contains(.commonwealthMembers), country.wiki.isMemberOfCommonwealth {
+        if countryPickerConfig.countryListOption.contains(.commonwealthMembers), country.wiki.isMemberOfCommonwealth {
             //user wanted to include the commonwealth states and this country is a member of commonwealth
             return country
         }
         
-        if countryPickerConfig.pickerViewPopulation.contains(.dependentTerritories), country.wiki.alpha2CodeOfItsSovereignState != nil {
+        if countryPickerConfig.countryListOption.contains(.dependentTerritories), country.wiki.alpha2CodeOfItsSovereignState != nil {
             //user wanted to include the commonwealth states and this country HAS another sovereign state
             return country
         }
         
-        if countryPickerConfig.pickerViewPopulation.contains(.noPermanentPopulation), country.wiki.noPermanentPopulation {
+        if countryPickerConfig.countryListOption.contains(.noPermanentPopulation), country.wiki.noPermanentPopulation {
             //user wanted to include those regions and territories without any permanent population
             return country
         }
         
-        if countryPickerConfig.pickerViewPopulation.contains(.disputedTerritories), country.wiki.isDisputedTerritory {
+        if countryPickerConfig.countryListOption.contains(.disputedTerritories), country.wiki.isDisputedTerritory {
             //user wanted to include those regions and territories that are internationally disputed
             return country
         }

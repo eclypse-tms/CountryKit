@@ -80,7 +80,7 @@ public struct CountryPickerConfiguration {
     /// controls which countries, regions or territories to display in the PickerUI. 
     /// By default, it includes all territories that have an alpha 2 code assigned to it.
     /// If a country roster is provided, this property is ignored.
-    public var pickerViewPopulation: PickerViewPopulation = .all
+    public var countryListOption: CountryListOption = .all
     
     /// you can provide your own custom sorting algorithm for the picker view.
     public var countrySorter: CountrySorter?
@@ -89,7 +89,7 @@ public struct CountryPickerConfiguration {
     public var macConfiguration: MacConfiguration = .default()
     
     /// theme to apply to the picker view
-    public var theme: CountryPickerTheme = .init()
+    public var theme: CountryPickerTheme = .default()
     
     /// initializes CountrySelectionConfiguration with default parameters
     static public func `default`() -> CountryPickerConfiguration {
