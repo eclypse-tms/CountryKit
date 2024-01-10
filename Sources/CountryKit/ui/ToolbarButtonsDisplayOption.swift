@@ -1,5 +1,5 @@
 //
-//  CancelDoneButtonsDisplayOption.swift
+//  ToolbarButtonsDisplayOption.swift
 //  CountryKit
 //
 //  Created by eclypse on 12/14/23.
@@ -17,7 +17,7 @@ import Foundation
  making selections and therefore want to be notified at the end of the selection process, presenting
  the "Back/Cancel" button may be redundant.
  */
-public enum CancelDoneButtonsDisplayOption: Int {
+public enum ToolbarButtonsDisplayOption: Int {
     /// displays both the Cancel and Done buttons that appears both sides of navigation bar (if present).
     /// User can click either button to dismiss the UI.
     /// Displaying both buttons may be redundant.

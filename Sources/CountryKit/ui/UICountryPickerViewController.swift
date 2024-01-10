@@ -93,7 +93,7 @@ open class UICountryPickerViewController: UIViewController {
                 navigationItem.leftBarButtonItem = validLeftBarButtonItem
                 navigationItem.leftItemsSupplementBackButton = false
             } else {
-                switch countryPickerConfiguration.navBarButtonOption {
+                switch countryPickerConfiguration.buttonDisplayOption {
                 case .displayCancelButtonOnly, .displayBothButtons:
                     //there is no left bar button.
                     if self == validNavController.viewControllers.first {
@@ -115,7 +115,7 @@ open class UICountryPickerViewController: UIViewController {
             if let validRightBarButtonItem = countryPickerConfiguration.rightBarButton {
                 navigationItem.rightBarButtonItem = validRightBarButtonItem
             } else {
-                switch countryPickerConfiguration.navBarButtonOption {
+                switch countryPickerConfiguration.buttonDisplayOption {
                 case .displayDoneButtonOnly, .displayBothButtons:
                     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
                 default:
@@ -132,7 +132,7 @@ open class UICountryPickerViewController: UIViewController {
     open func configureBottomBar() {
         #if targetEnvironment(macCatalyst)
         
-        countryPickerConfiguration.navBarButtonOption
+        countryPickerConfiguration.buttonDisplayOption
         if let providedCancelButton = countryPickerConfiguration.macConfiguration.customCancelButton {
             cancelButtonMacStyle.isHidden = true
             providedCancelButton.addTarget(self, action: #selector(didSelectBack(_:)), for: .touchUpInside)

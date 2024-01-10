@@ -54,13 +54,13 @@ public struct CountryPickerConfiguration {
     /// provide custom bar button that appears on the left (leading) side of the 
     /// navigation bar instead of chevron.backward styled back bar button.
     /// if you provide a custom button, you are responsible for dismissing the picker view yourself.
-    /// if this button is provided, navBarButtonOption is ignored
+    /// if this button is provided, buttonDisplayOption is ignored
     public var leftBarButton: UIBarButtonItem?
 
     /// provide custom bar button item that appears on the right (trailing) side of the
     /// navigation bar instead of system Done button.
     /// if you provide a custom button, you are responsible for dismissing the picker view yourself.
-    /// if this button is provided, navBarButtonOption is ignored
+    /// if this button is provided, buttonDisplayOption is ignored
     public var rightBarButton: UIBarButtonItem?
     
     /// when provided, a header text is displayed that is pinned to the top 
@@ -75,12 +75,12 @@ public struct CountryPickerConfiguration {
     public var searchMethodology: SearchMethodology = .orSearch
     
     /// controls whether to display both the cancel and done buttons in the UI
-    public var navBarButtonOption: CancelDoneButtonsDisplayOption = .displayBothButtons
+    public var buttonDisplayOption: ToolbarButtonsDisplayOption = .displayBothButtons
     
     /// controls which countries, regions or territories to display in the PickerUI. 
     /// By default, it includes all territories that have an alpha 2 code assigned to it.
     /// If a country roster is provided, this property is ignored.
-    public var includeOption: IncludeOptions = .all
+    public var includeOption: CountryPoolOptions = .all
     
     /// you can provide your own custom sorting algorithm for the picker view.
     public var countrySorter: CountrySorter?

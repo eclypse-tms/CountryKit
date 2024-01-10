@@ -181,7 +181,7 @@ open class CountryPickerPresenter: NSObject {
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.sovereignState), 
+        if countryPickerConfig.includeOption.contains(.sovereignStates), 
             country.wiki.alpha2CodeOfItsSovereignState == nil, //cannot have another country as its sovereign
             !country.wiki.isDisputedTerritory, //cannot be a disputed territory
             !country.wiki.noPermanentPopulation //must have a permanent population
@@ -190,17 +190,17 @@ open class CountryPickerPresenter: NSObject {
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.commonwealthMember), country.wiki.isMemberOfCommonwealth {
+        if countryPickerConfig.includeOption.contains(.commonwealthMembers), country.wiki.isMemberOfCommonwealth {
             //user wanted to include the commonwealth states and this country is a member of commonwealth
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.dependentTerritory), country.wiki.alpha2CodeOfItsSovereignState != nil {
+        if countryPickerConfig.includeOption.contains(.dependentTerritories), country.wiki.alpha2CodeOfItsSovereignState != nil {
             //user wanted to include the commonwealth states and this country HAS another sovereign state
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.hasNoPermanentPopulation), country.wiki.noPermanentPopulation {
+        if countryPickerConfig.includeOption.contains(.noPermanentPopulation), country.wiki.noPermanentPopulation {
             //user wanted to include those regions and territories without any permanent population
             return country
         }
