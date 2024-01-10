@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B1940EBD2B452D9D004261EB /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1940EBC2B452D9D004261EB /* ToolbarDelegate.swift */; };
 		B20C62CD2B2CEF5400D5DFEC /* CountryKit in Frameworks */ = {isa = PBXBuildFile; productRef = B20C62CC2B2CEF5400D5DFEC /* CountryKit */; };
 		B27079802B26DDEF003435A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B270797F2B26DDEF003435A1 /* AppDelegate.swift */; };
 		B27079822B26DDEF003435A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27079812B26DDEF003435A1 /* SceneDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B1940EBC2B452D9D004261EB /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
 		B270797C2B26DDEF003435A1 /* Countries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Countries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B270797F2B26DDEF003435A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B27079812B26DDEF003435A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				B27079932B26DE04003435A1 /* custom */,
 				B270797F2B26DDEF003435A1 /* AppDelegate.swift */,
 				B27079812B26DDEF003435A1 /* SceneDelegate.swift */,
+				B1940EBC2B452D9D004261EB /* ToolbarDelegate.swift */,
 				B27079832B26DDEF003435A1 /* ViewController.swift */,
 				B27079852B26DDEF003435A1 /* Main.storyboard */,
 				B27079882B26DDF0003435A1 /* Assets.xcassets */,
@@ -225,6 +228,7 @@
 				B27079A92B274990003435A1 /* NibLoadable.swift in Sources */,
 				B27079A12B26DE36003435A1 /* UIView+RoundedCorner.swift in Sources */,
 				B27079842B26DDEF003435A1 /* ViewController.swift in Sources */,
+				B1940EBD2B452D9D004261EB /* ToolbarDelegate.swift in Sources */,
 				B270799E2B26DE36003435A1 /* SelectionsViewController.swift in Sources */,
 				B27079802B26DDEF003435A1 /* AppDelegate.swift in Sources */,
 				B27079822B26DDEF003435A1 /* SceneDelegate.swift in Sources */,
@@ -309,7 +313,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -364,7 +368,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -380,10 +384,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Countries/Countries.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L9RBVTH4A6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Countries/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -392,13 +396,13 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.Countries;
+				PRODUCT_BUNDLE_IDENTIFIER = io.eclypse.eclypse.countries;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -406,7 +410,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -428,13 +432,13 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.Countries;
+				PRODUCT_BUNDLE_IDENTIFIER = io.eclypse.eclypse.countries;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -442,7 +446,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};
@@ -474,7 +478,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eclypse-tms/CountryKit";
 			requirement = {
-				branch = main;
+				branch = fix_catalyst_ipad;
 				kind = branch;
 			};
 		};

@@ -1,34 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="mac" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="CountryCell" id="KGk-i7-Jjw" customClass="CountryCell" customModule="CountryKit">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CountryCell" id="KGk-i7-Jjw" customClass="CountryCell" customModule="CountryKit">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.down.doc" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D3I-2N-1fw">
-                        <rect key="frame" x="16" y="9.9999999999999982" width="25" height="24.666666666666668"/>
+                        <rect key="frame" x="16" y="10.5" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="EI5-gz-JgM"/>
-                            <constraint firstAttribute="width" constant="25" id="J9C-na-BFm"/>
+                            <constraint firstAttribute="height" constant="25" id="EI5-gz-JgM">
+                                <variation key="userInterfaceIdiom=mac" constant="19"/>
+                            </constraint>
+                            <constraint firstAttribute="width" constant="25" id="J9C-na-BFm">
+                                <variation key="userInterfaceIdiom=mac" constant="19"/>
+                            </constraint>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aruba" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4g-8I-xw7">
-                        <rect key="frame" x="49" y="0.0" width="223" height="44"/>
+                        <rect key="frame" x="49" y="0.0" width="263" height="44"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
+                        <variation key="userInterfaceIdiom=mac">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        </variation>
                     </label>
                 </subviews>
                 <constraints>
@@ -44,6 +51,8 @@
             <connections>
                 <outlet property="countryFlag" destination="D3I-2N-1fw" id="046-8I-cIb"/>
                 <outlet property="countryName" destination="A4g-8I-xw7" id="Pm4-m3-8UA"/>
+                <outlet property="flagHeight" destination="J9C-na-BFm" id="FQz-dB-2zb"/>
+                <outlet property="flagWidth" destination="EI5-gz-JgM" id="Dnu-DB-mYd"/>
             </connections>
             <point key="canvasLocation" x="121" y="10"/>
         </tableViewCell>

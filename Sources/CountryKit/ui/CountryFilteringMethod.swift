@@ -1,8 +1,8 @@
 //
 //  CountryFilteringMethod.swift
+//  CountryKit
 //
-//
-//  Created by Turker Nessa Kucuk on 12/29/23.
+//  Created by eclypse on 12/29/23.
 //
 
 import Foundation

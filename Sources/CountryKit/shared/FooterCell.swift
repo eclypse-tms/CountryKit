@@ -10,11 +10,6 @@ import UIKit
 open class FooterCell: UITableViewCell, NibLoader {
     @IBOutlet private weak var footerNote: UILabel!
     
-    open override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     open override func prepareForReuse() {
         super.prepareForReuse()
         

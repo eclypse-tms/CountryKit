@@ -136,13 +136,13 @@ public var localizedWorldWideDescription: String = ""
 /// provide custom bar button that appears on the left (leading) side of the 
 /// navigation bar instead of chevron.backward styled back bar button.
 /// if you provide a custom button, you are responsible for dismissing the picker view yourself.
-/// if this button is provided, navBarButtonOption is ignored
+/// if this button is provided, buttonDisplayOption is ignored
 public var leftBarButton: UIBarButtonItem?
 
 /// provide custom bar button item that appears on the right (trailing) side of the
 /// navigation bar instead of system Done button.
 /// if you provide a custom button, you are responsible for dismissing the picker view yourself.
-/// if this button is provided, navBarButtonOption is ignored
+/// if this button is provided, buttonDisplayOption is ignored
 public var rightBarButton: UIBarButtonItem?
 
 /// when provided, a header text is displayed that is pinned to the top 
@@ -153,27 +153,25 @@ public var pinnedHeaderText: String?
 /// of the picker view and does not scroll away.
 public var pinnedFooterText: String?
 
-/// indicates how the cells should look like when they are selected by the user
-public var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
-
 /// the methodology to use when filtering countries
 public var searchMethodology: SearchMethodology = .orSearch
 
-/// provide a font to match the theme of your app. Otherwise it uses the default OS font
-public var themeFont: UIFont?
-
-/// provide a custom view to appear at the navigation bar's title view.
-public var navigationBarTitleView: UIView?
-
 /// controls whether to display both the cancel and done buttons in the UI
-public var navBarButtonOption: NavBarButtonOption = .displayBothButtons
+public var buttonDisplayOption: ToolbarButtonsDisplayOption = .displayBothButtons
 
 /// controls which countries, regions or territories to display in the PickerUI. 
 /// By default, it includes all territories that have an alpha 2 code assigned to it.
-public var includeOption: IncludeOptions = .all
+/// If a country roster is provided, this property is ignored.
+public var countryListOption: CountryListOption = .all
 
 /// you can provide your own custom sorting algorithm for the picker view.
 public var countrySorter: CountrySorter?
+
+/// additional configuration parameters when running the picker view in mac catalyst mode
+public var macConfiguration: MacConfiguration = .default()
+
+/// theme to apply to the picker view
+public var theme: CountryPickerTheme = .default()
 ```
 
 ## Extending CountryKit

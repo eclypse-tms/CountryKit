@@ -42,7 +42,7 @@ class SelectionsViewController: UIViewController {
     @IBOutlet private weak var inclusionButton: UIButton!
     @IBOutlet private weak var sortButton: UIButton!
     
-    private var selectedInclusionOption: IncludeOptions = []
+    private var selectedCountryListOption: CountryListOption = []
     private var selectedSortOption: CountrySorter?
     
     private var dataSource: UICollectionViewDiffableDataSource<SelectedCountriesSection, Country>!
@@ -70,21 +70,21 @@ class SelectionsViewController: UIViewController {
     private func configureInclusionOptions() {
         
         let inclusionMenu = UIMenu(children: [
-            UIAction(title: "Sovereign State", handler: { _ in self.add(includeOptions: .sovereignState) }),
-            UIAction(title: "Commonwealth Member", handler: { _ in self.add(includeOptions: .commonwealthMember) }),
-            UIAction(title: "Dependent Territory", handler: { _ in self.add(includeOptions: .dependentTerritory) }),
-            UIAction(title: "No Population", handler: { _ in self.add(includeOptions: .hasNoPermanentPopulation) }),
-            UIAction(title: "Disputed Territories", handler: { _ in self.add(includeOptions: .disputedTerritories) }),
-            UIAction(title: "All Countries/Territories", handler: { _ in self.add(includeOptions: .all) })
+            UIAction(title: "Sovereign State", handler: { _ in self.add(countryListOption: .sovereignStates) }),
+            UIAction(title: "Commonwealth Member", handler: { _ in self.add(countryListOption: .commonwealthMembers) }),
+            UIAction(title: "Dependent Territory", handler: { _ in self.add(countryListOption: .dependentTerritories) }),
+            UIAction(title: "No Population", handler: { _ in self.add(countryListOption: .noPermanentPopulation) }),
+            UIAction(title: "Disputed Territories", handler: { _ in self.add(countryListOption: .disputedTerritories) }),
+            UIAction(title: "All Countries/Territories", handler: { _ in self.add(countryListOption: .all) })
         ])
         
         inclusionButton.menu = inclusionMenu
         inclusionButton.showsMenuAsPrimaryAction = true
-        selectedInclusionOption = [.sovereignState] //default option
+        selectedCountryListOption = [.sovereignStates] //default option
     }
     
-    private func add(includeOptions: IncludeOptions) {
-        selectedInclusionOption = [includeOptions]
+    private func add(countryListOption: CountryListOption) {
+        selectedCountryListOption = [countryListOption]
     }
     
     private func configureSortOptions() {
@@ -163,9 +163,9 @@ class SelectionsViewController: UIViewController {
         config.allowsSelection = allowSelectionSwitch.isOn
         config.canMultiSelect = canMultiSelectSwitch.isOn
         
-        config.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)!
+        config.theme.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)!
         config.searchMethodology = SearchMethodology(rawValue: searchCriteriaSegment.selectedSegmentIndex)!
-        config.navBarButtonOption = NavBarButtonOption(rawValue: navBarButtonsSegment.selectedSegmentIndex)!
+        config.buttonDisplayOption = ToolbarButtonsDisplayOption(rawValue: navBarButtonsSegment.selectedSegmentIndex)!
         
         if allowWorldwideSwitch.isOn {
             config.shouldShowWorldWide = true
@@ -178,7 +178,7 @@ class SelectionsViewController: UIViewController {
         }
         
         //save the inclusions
-        config.includeOption = selectedInclusionOption
+        config.countryListOption = selectedCountryListOption
         
         if limitedCountrySwitch.isOn {
             limitedCountryStack.isHidden = false
@@ -224,25 +224,36 @@ class SelectionsViewController: UIViewController {
         
         config.countrySorter = self.selectedSortOption
         
+        #if targetEnvironment(macCatalyst)
+        config.macConfiguration.cellSelectionColor = UIColor(named: "AccentColor")
+        config.macConfiguration.bottomToolbarSeparatorColor = .clear
+        #endif
+        
         //initialize country picker ui
         let countryPickerVC = UICountryPickerViewController()
-        
-        //save the configuration on the view controller
-        countryPickerVC.countryPickerConfiguration = config
         
         //get notified when user interacts with the country selection ui
         countryPickerVC.delegate = self
         
-        //let navController = UINavigationController(rootViewController: countryPickerVC)
-        //navController.modalPresentationStyle = .formSheet
-        //present(navController, animated: true)
+        var shouldDisplayPickerViewModally = true
         
-        splitViewController?.setViewController(countryPickerVC, for: .secondary)
-        splitViewController?.show(.secondary)
+        if shouldDisplayPickerViewModally {
+            //save the configuration on the view controller
+            countryPickerVC.countryPickerConfiguration = config
+            let navController = UINavigationController(rootViewController: countryPickerVC)
+            navController.modalPresentationStyle = .formSheet
+            present(navController, animated: true)
+        } else {
+            config.macConfiguration.showSearchBar = false
+            //save the configuration on the view controller
+            countryPickerVC.countryPickerConfiguration = config
+            splitViewController?.setViewController(countryPickerVC, for: .secondary)
+            splitViewController?.show(.secondary)
+        }
     }
     
     private func addBorder(to uiTextView: UITextView) {
-        uiTextView.layer.cornerRadius = 6
+        uiTextView.layer.cornerRadius = UIFloat(6)
         uiTextView.layer.borderColor = UIColor.gray.cgColor
         uiTextView.layer.borderWidth = 0.5
         uiTextView.layer.opacity = 0.5
@@ -304,20 +315,20 @@ enum SelectedCountriesSection: Int, DefinesCompositionalLayout, CaseIterable {
     func layoutInfo(using layoutEnvironment: NSCollectionLayoutEnvironment) -> Composure.CompositionalLayoutOption {
         switch self {
         case .primarySection:
-            return .dynamicWidthFixedHeight(estimatedWidth: 150, fixedHeight: 36)
+            return .dynamicWidthFixedHeight(estimatedWidth: UIFloat(150), fixedHeight: UIFloat(36))
         }
     }
     
     var interItemSpacing: CGFloat {
-        return 8
+        return UIFloat(8)
     }
     
     var interGroupSpacing: CGFloat {
-        return 8
+        return UIFloat(8)
     }
     
     func sectionInsets(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
-        return .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+        return .init(top: 0, leading: UIFloat(8), bottom: 0, trailing: UIFloat(8))
     }
 }
 

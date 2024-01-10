@@ -27,9 +27,15 @@ public protocol CountryProvider: AnyObject {
 }
 
 open class CountryProviderImpl: CountryProvider {
-    open var bundleLoader: BundleLoader
+    open var bundleLoader: CountryKitBundleLoader
     
-    public init(bundleLoader: BundleLoader) {
+    /// default initializer. there is generally no need to initialize the CountryProvider any other way
+    public init() {
+        self.bundleLoader = CountryKitBundleLoaderImpl()
+    }
+    
+    /// only use this initializer if you need specific behaviors from the filemanager or the bundle
+    public init(bundleLoader: CountryKitBundleLoader) {
         self.bundleLoader = bundleLoader
     }
     

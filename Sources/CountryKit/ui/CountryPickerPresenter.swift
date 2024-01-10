@@ -84,10 +84,7 @@ open class CountryPickerPresenter: NSObject {
             let unsortedCountryList: [Country]
             
             if !strongSelf.countryPickerConfig.countryRoster.isEmpty {
-                unsortedCountryList = strongSelf.countryProvider
-                    .allKnownCountries
-                    .compactMap(strongSelf.applyInclusionCriteria(alpha2Code:country:))
-                    .compactMap(strongSelf.applyCountryRoster(country:))
+                unsortedCountryList = Array(strongSelf.countryPickerConfig.countryRoster)
             } else if !strongSelf.countryPickerConfig.excludedCountries.isEmpty {
                 unsortedCountryList = strongSelf.countryProvider
                     .allKnownCountries
@@ -173,20 +170,18 @@ open class CountryPickerPresenter: NSObject {
         }
     }
     
-    private func applyCountryRoster(country: Country) -> Country? {
-        if countryPickerConfig.countryRoster.contains(country) {
-            return country
-        } else {
-            return nil
-        }
-    }
-    
     open func applyInclusionCriteria(alpha2Code: String, country: Country) -> Country? {
-        if countryPickerConfig.includeOption.contains(.all) {
+        if !countryPickerConfig.countryRoster.isEmpty {
+            //there is a specific list of countries that user wants to present.
+            //we cannot apply the inclusion criteria on this
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.sovereignState), 
+        if countryPickerConfig.countryListOption.contains(.all) {
+            return country
+        }
+        
+        if countryPickerConfig.countryListOption.contains(.sovereignStates), 
             country.wiki.alpha2CodeOfItsSovereignState == nil, //cannot have another country as its sovereign
             !country.wiki.isDisputedTerritory, //cannot be a disputed territory
             !country.wiki.noPermanentPopulation //must have a permanent population
@@ -195,22 +190,22 @@ open class CountryPickerPresenter: NSObject {
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.commonwealthMember), country.wiki.isMemberOfCommonwealth {
+        if countryPickerConfig.countryListOption.contains(.commonwealthMembers), country.wiki.isMemberOfCommonwealth {
             //user wanted to include the commonwealth states and this country is a member of commonwealth
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.dependentTerritory), country.wiki.alpha2CodeOfItsSovereignState != nil {
+        if countryPickerConfig.countryListOption.contains(.dependentTerritories), country.wiki.alpha2CodeOfItsSovereignState != nil {
             //user wanted to include the commonwealth states and this country HAS another sovereign state
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.hasNoPermanentPopulation), country.wiki.noPermanentPopulation {
+        if countryPickerConfig.countryListOption.contains(.noPermanentPopulation), country.wiki.noPermanentPopulation {
             //user wanted to include those regions and territories without any permanent population
             return country
         }
         
-        if countryPickerConfig.includeOption.contains(.disputedTerritories), country.wiki.isDisputedTerritory {
+        if countryPickerConfig.countryListOption.contains(.disputedTerritories), country.wiki.isDisputedTerritory {
             //user wanted to include those regions and territories that are internationally disputed
             return country
         }
@@ -310,8 +305,18 @@ open class CountryPickerPresenter: NSObject {
     private func restoreCellSelectionsAfterReload() {
         if formSelectedCountries.count > 0 {
             var numberOfRestoredSelections = 0
+            //only compare the alpha2 codes to determine whether set contains a selected country
+            let setOfSelectedAlpha2Codes = Set<String>(formSelectedCountries.map { $0.alpha2Code })
+            
+            //we need to treat worldwide differently as its data source is not contained in filteredCountryList
+            if setOfSelectedAlpha2Codes.contains(Country.Worldwide.alpha2Code) {
+                let indexPathToRestore = IndexPath(row: 0, section: CountryPickerViewSection.worldwide.rawValue)
+                countrySelectionRelay.send(CellSelectionMeta(country: Country.Worldwide, isSelected: true, indexPath: indexPathToRestore, performCellSelection: true, isInitiatedByUser: false))
+                numberOfRestoredSelections += 1
+            }
+            
             for (index, eachCounty) in filteredCountryList.enumerated() {
-                if formSelectedCountries.contains(eachCounty.country) {
+                if setOfSelectedAlpha2Codes.contains(eachCounty.country.alpha2Code) {
                     let indexPathToRestore = IndexPath(row: index, section: CountryPickerViewSection.allCountries.rawValue)
                     countrySelectionRelay.send(CellSelectionMeta(country: eachCounty.country, isSelected: true, indexPath: indexPathToRestore, performCellSelection: true, isInitiatedByUser: false))
                     numberOfRestoredSelections += 1
@@ -372,6 +377,13 @@ open class CountryPickerPresenter: NSObject {
     }
     
     private func clearPreviousAnd(selectThis: Country, at indexPath: IndexPath) {
+        clearAll()
+        formSelectedCountries.insert(selectThis)
+        countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: true, indexPath: indexPath, performCellSelection: false, isInitiatedByUser: true))
+    }
+    
+    /// removes all selections from the country picker view
+    open func clearAll() {
         formSelectedCountries.forEach { eachSelectedCountry in
             var section: Int = 0
             var row: Int = 0
@@ -406,8 +418,6 @@ open class CountryPickerPresenter: NSObject {
             }
         }
         formSelectedCountries.removeAll()
-        formSelectedCountries.insert(selectThis)
-        countrySelectionRelay.send(CellSelectionMeta(country: selectThis, isSelected: true, indexPath: indexPath, performCellSelection: false, isInitiatedByUser: true))
     }
 }
 
@@ -417,11 +427,19 @@ extension CountryPickerPresenter: UITableViewDelegate {
         let countrySection = CountryPickerViewSection(rawValue: indexPath.section)!
         switch countrySection {
         case .worldwide:
-            return 44
+            #if targetEnvironment(macCatalyst)
+            return UIFloat(countryPickerConfig.macConfiguration.rowHeight)
+            #else
+            return UIFloat(44)
+            #endif
         case .worldwideExplanation:
             return UITableView.automaticDimension
         case .allCountries:
-            return 44
+            #if targetEnvironment(macCatalyst)
+            return UIFloat(countryPickerConfig.macConfiguration.rowHeight)
+            #else
+            return UIFloat(44)
+            #endif
         case .rosterExplanation:
             return UITableView.automaticDimension
         }
