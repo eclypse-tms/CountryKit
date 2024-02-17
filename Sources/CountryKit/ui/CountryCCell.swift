@@ -21,7 +21,7 @@ class CountryCCell: UICollectionViewCell, NibLoader {
     private func resetCell() {
         countryFlag.image = nil
         countryName.attributedText = nil
-        checkMark.image = nil
+        checkMark.isHidden = true
         selectedBackgroundView = nil
     }
     
@@ -97,6 +97,9 @@ class CountryCCell: UICollectionViewCell, NibLoader {
     
     private func provideSelectedBackgroundView(cellSelectionColor: UIColor?) -> UIView {
         let newBackgroundView = UIView()
+        if designedForMac {
+            newBackgroundView.roundCorners(cornerRadius: UIFloat(8))
+        }
         newBackgroundView.backgroundColor = cellSelectionColor ?? UIColor.secondarySystemBackground
         return newBackgroundView
     }

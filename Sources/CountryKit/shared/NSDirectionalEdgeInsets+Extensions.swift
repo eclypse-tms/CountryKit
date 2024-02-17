@@ -2,7 +2,7 @@
 //  NSDirectionalEdgeInsets+Extensions.swift
 //
 //
-//  Created by Nessa Kucuk, Turker on 2/16/24.
+//  Created by eclypseon 2/16/24.
 //
 
 import UIKit

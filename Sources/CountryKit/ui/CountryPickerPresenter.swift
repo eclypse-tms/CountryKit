@@ -445,39 +445,3 @@ extension CountryPickerPresenter: UICollectionViewDelegate {
         rowDeselectionRelay.send(indexPath)
     }
 }
-
-// MARK: UITableViewDelegate
-extension CountryPickerPresenter: UITableViewDelegate {
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let countrySection = CountryPickerViewSection(rawValue: indexPath.section)!
-        switch countrySection {
-        case .worldwide:
-            #if targetEnvironment(macCatalyst)
-            return UIFloat(countryPickerConfig.macConfiguration.rowHeight)
-            #else
-            return UIFloat(44)
-            #endif
-        case .worldwideExplanation:
-            return UITableView.automaticDimension
-        case .allCountries:
-            #if targetEnvironment(macCatalyst)
-            return UIFloat(countryPickerConfig.macConfiguration.rowHeight)
-            #else
-            return UIFloat(44)
-            #endif
-        case .rosterExplanation:
-            return UITableView.automaticDimension
-        }
-    }
-    
-    public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        let countrySection = CountryPickerViewSection(rawValue: indexPath.section)!
-        switch countrySection {
-        case .worldwideExplanation, .rosterExplanation:
-            //explanation cells are not selectable
-            return nil
-        default:
-            return indexPath
-        }
-    }
-}
