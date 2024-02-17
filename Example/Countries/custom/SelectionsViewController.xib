@@ -117,6 +117,7 @@
                                                     </segments>
                                                 </segmentedControl>
                                             </subviews>
+                                            <variation key="userInterfaceIdiom=mac" hidden="YES"/>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Gzh-gh-Ii2">
                                             <rect key="frame" x="0.0" y="165" width="853.5" height="31"/>

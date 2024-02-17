@@ -1,5 +1,5 @@
 //
-//  CountryRowCollectionViewCell.swift
+//  CountryCCell.swift
 //  
 //
 //  Created by eclypse on 2/16/24.
@@ -8,42 +8,49 @@
 import FlagKit
 import UIKit
 
-class CountryRowCollectionViewCell: UICollectionViewCell, NibLoader {
+class CountryCCell: UICollectionViewCell, NibLoader {
     @IBOutlet private weak var countryFlag: UIImageView!
     @IBOutlet private weak var countryName: UILabel!
     @IBOutlet private weak var checkMark: UIImageView!
     @IBOutlet private weak var flagHeight: NSLayoutConstraint!
     @IBOutlet private weak var flagWidth: NSLayoutConstraint!
+    @IBOutlet private weak var cellSeparator: UIView!
     
     private var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
-    private var configuration: CountryPickerConfiguration = .default()
     
-    override func prepareForReuse() {
+    private func resetCell() {
         countryFlag.image = nil
         countryName.attributedText = nil
         checkMark.image = nil
         selectedBackgroundView = nil
     }
     
-    func configure(with viewModel: CountryViewModel, configuration: CountryPickerConfiguration) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resetCell()
+    }
+    
+    func configure(with viewModel: CountryViewModel) {
+        resetCell()
         countryFlag.image = Flag.rectImage(with: viewModel.country)
-        if let validThemeFont = configuration.theme.font {
+        if let validThemeFont = CountryPickerPresenter.universalConfig.theme.font {
             countryName.font = validThemeFont
         }
         
-        self.cellSelectionStyle = configuration.theme.cellSelectionStyle
+        self.cellSelectionStyle = CountryPickerPresenter.universalConfig.theme.cellSelectionStyle
         if let validHighlightedText = viewModel.highlightedSearchText {
             countryName.attributedText = validHighlightedText
         } else {
             countryName.text = viewModel.country.localizedName
         }
         
-        #if targetEnvironment(macCatalyst)
-        flagHeight.constant = configuration.macConfiguration.flagSize.height
-        flagWidth.constant = configuration.macConfiguration.flagSize.width
-        #endif
-        
-        self.configuration = configuration
+        if designedForMac {
+            flagHeight.constant = CountryPickerPresenter.universalConfig.macConfiguration.flagSize.height
+            flagWidth.constant = CountryPickerPresenter.universalConfig.macConfiguration.flagSize.width
+            cellSeparator.backgroundColor = .clear
+        } else {
+            cellSeparator.backgroundColor = .separator
+        }
     }
     
     override var isSelected: Bool {
@@ -51,12 +58,12 @@ class CountryRowCollectionViewCell: UICollectionViewCell, NibLoader {
             if self.isSelected {
                 switch traitCollection.userInterfaceIdiom {
                 case .mac:
-                    if let providedCellSelectionColor = configuration.macConfiguration.cellSelectionColor {
+                    if let providedCellSelectionColor = CountryPickerPresenter.universalConfig.macConfiguration.cellSelectionColor {
                         checkMark.isHidden = true
                         
                         self.selectedBackgroundView = provideSelectedBackgroundView(cellSelectionColor: providedCellSelectionColor)
                         
-                        if configuration.macConfiguration._isRowSelectionColorPerceivedBright {
+                        if CountryPickerPresenter.universalConfig.macConfiguration._isRowSelectionColorPerceivedBright {
                             countryName.textColor = UIColor.label
                         } else {
                             countryName.textColor = UIColor.white
@@ -66,7 +73,7 @@ class CountryRowCollectionViewCell: UICollectionViewCell, NibLoader {
                         self.selectedBackgroundView = nil
                     }
                 default:
-                    switch configuration.theme.cellSelectionStyle {
+                    switch CountryPickerPresenter.universalConfig.theme.cellSelectionStyle {
                     case .checkMark:
                         checkMark.isHidden = false
                         selectedBackgroundView = nil

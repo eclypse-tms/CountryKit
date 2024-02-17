@@ -21,7 +21,7 @@
                 <outlet property="headerDirectionsContainer" destination="EGA-px-cvU" id="KAu-AD-tD4"/>
                 <outlet property="horizontalButtonStack" destination="vyg-YN-9qz" id="Fyk-aY-JqK"/>
                 <outlet property="leadingInset" destination="7ia-t8-2eX" id="0Wx-fE-qj2"/>
-                <outlet property="pickerView" destination="vfn-IK-tGF" id="rgZ-iL-ipg"/>
+                <outlet property="pickerView" destination="I47-hY-BGm" id="A8Z-X8-Hsn"/>
                 <outlet property="pinnedFooterDirections" destination="Dg7-0T-9wJ" id="mYt-74-fpc"/>
                 <outlet property="pinnedHeaderDirections" destination="KwS-jK-QSA" id="X5v-PM-Vtz"/>
                 <outlet property="searchBar" destination="bxp-cU-EnB" id="lft-ph-AB3"/>
@@ -77,10 +77,16 @@
                                                 <outlet property="delegate" destination="-1" id="cpS-he-PN4"/>
                                             </connections>
                                         </searchBar>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfn-IK-tGF">
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="I47-hY-BGm">
                                             <rect key="frame" x="0.0" y="36" width="776" height="437"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        </tableView>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hF8-xL-9Bk">
+                                                <size key="itemSize" width="128" height="128"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                        </collectionView>
                                     </subviews>
                                 </stackView>
                             </subviews>

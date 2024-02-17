@@ -29,15 +29,18 @@ open class CountryPickerPresenter: NSObject {
     /// main configuration object that determines how the picker should work
     private (set) var countryPickerConfig: CountryPickerConfiguration = .default()
     
+    /// static configuration file to be accessed from anywhere
+    private (set) static var universalConfig: CountryPickerConfiguration = .default()
+    
     //MARK: private properties
     private var fullCountryList = [Country]()
     private var filteredCountryList = [CountryViewModel]()
     private var cancellables: Set<AnyCancellable> = []
-    private var dataSource: UITableViewDiffableDataSource<CountryPickerViewSection, AnyHashable>?
+    private var dataSource: UICollectionViewDiffableDataSource<CountryPickerViewSection, AnyHashable>?
     private let reloadDataRelay = PassthroughSubject<Bool, Never>()
     private let viewRestorationRelay = PassthroughSubject<Void, Never>()
-    private let tableSelectionRelay = PassthroughSubject<IndexPath, Never>()
-    private let tableDeselectionRelay = PassthroughSubject<IndexPath, Never>()
+    private let rowSelectionRelay = PassthroughSubject<IndexPath, Never>()
+    private let rowDeselectionRelay = PassthroughSubject<IndexPath, Never>()
 
     //MARK: public properties
     let searchBarRelay = PassthroughSubject<String, Never>()
@@ -53,6 +56,7 @@ open class CountryPickerPresenter: NSObject {
     open func register(config: CountryPickerConfiguration) {
         formSelectedCountries = config.preselectedCountries
         countryPickerConfig = config
+        CountryPickerPresenter.universalConfig = config
         
         /// initializes Worldwide
         let worldWideCountry = Country.Worldwide
@@ -125,7 +129,7 @@ open class CountryPickerPresenter: NSObject {
                 strongSelf.reloadDataRelay.send(true)
             }.store(in: &cancellables)
         
-        tableSelectionRelay.receive(on: presenterQueue)
+        rowSelectionRelay.receive(on: presenterQueue)
             .sink { [weak self] selectedIndexPath in
                 guard let strongSelf = self else { return }
                 let countrySection = CountryPickerViewSection(rawValue: selectedIndexPath.section)!
@@ -140,7 +144,7 @@ open class CountryPickerPresenter: NSObject {
                 }
             }.store(in: &cancellables)
         
-        tableDeselectionRelay.receive(on: presenterQueue)
+        rowDeselectionRelay.receive(on: presenterQueue)
             .sink { [weak self] deselectedIndexPath in
                 guard let strongSelf = self else { return }
                 let countrySection = CountryPickerViewSection(rawValue: deselectedIndexPath.section)!
@@ -215,17 +219,16 @@ open class CountryPickerPresenter: NSObject {
     }
     
     /// configures the data source
-    func configureDataSource(with tableView: UITableView) {
+    func configureDataSource(with collectionView: UICollectionView) {
         if dataSource == nil {
-            dataSource = UITableViewDiffableDataSource<CountryPickerViewSection, AnyHashable>(tableView: tableView) { [weak self] (tableView, indexPath, itemIdentifier) -> UITableViewCell? in
+            dataSource = UICollectionViewDiffableDataSource<CountryPickerViewSection, AnyHashable>(collectionView: collectionView) { [weak self] (collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
                 guard let strongSelf = self else { return nil }
                 let cellIdentifier = strongSelf.reuseIdentifier(for: indexPath)
-                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
                 guard let viewModel = strongSelf.dataSource?.itemIdentifier(for: indexPath) else { return nil }
                 strongSelf.configure(cell: cell, with: viewModel)
                 return cell
             }
-            dataSource?.defaultRowAnimation = .fade
         }
     }
     
@@ -281,19 +284,19 @@ open class CountryPickerPresenter: NSObject {
         let countrySection = CountryPickerViewSection(rawValue: indexPath.section)!
         switch countrySection {
         case .worldwide, .allCountries:
-            return CountryCell.nibName
+            return CountryCCell.nibName
         case .worldwideExplanation, .rosterExplanation:
-            return FooterCell.nibName
+            return FooterCCell.nibName
         }
     }
     
-    private func configure(cell: UITableViewCell, with viewModel: AnyHashable) {
+    private func configure(cell: UICollectionViewCell, with viewModel: AnyHashable) {
         switch cell {
-        case let countryCell as CountryCell:
+        case let countryCell as CountryCCell:
             if let vm = viewModel as? CountryViewModel {
-                countryCell.configure(with: vm, configuration: countryPickerConfig)
+                countryCell.configure(with: vm)
             }
-        case let footerCell as FooterCell:
+        case let footerCell as FooterCCell:
             if let vm = viewModel as? FooterViewModel {
                 footerCell.configure(with: vm)
             }
@@ -421,6 +424,28 @@ open class CountryPickerPresenter: NSObject {
     }
 }
 
+// MARK: UICollectionViewDelegate
+extension CountryPickerPresenter: UICollectionViewDelegate {
+    public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let currentSection = CountryPickerViewSection(rawValue: indexPath.section)!
+        switch currentSection {
+        case .worldwideExplanation, .rosterExplanation:
+            //explanation cells are not selectable
+            return false
+        default:
+            return true
+        }
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        rowSelectionRelay.send(indexPath)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        rowDeselectionRelay.send(indexPath)
+    }
+}
+
 // MARK: UITableViewDelegate
 extension CountryPickerPresenter: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -454,24 +479,5 @@ extension CountryPickerPresenter: UITableViewDelegate {
         default:
             return indexPath
         }
-    }
-    
-    public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        let currentSection = CountryPickerViewSection(rawValue: indexPath.section)!
-        switch currentSection {
-        case .worldwideExplanation, .rosterExplanation:
-            //explanation cells are not selectable
-            return false
-        default:
-            return true
-        }
-    }
-    
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableSelectionRelay.send(indexPath)
-    }
-    
-    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableDeselectionRelay.send(indexPath)
     }
 }

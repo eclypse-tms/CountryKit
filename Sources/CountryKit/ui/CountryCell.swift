@@ -15,7 +15,6 @@ class CountryCell: UITableViewCell, NibLoader {
     @IBOutlet private weak var flagWidth: NSLayoutConstraint!
     
     private var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
-    private var configuration: CountryPickerConfiguration = .default()
     
     override func prepareForReuse() {
         countryFlag.image = nil
@@ -25,13 +24,13 @@ class CountryCell: UITableViewCell, NibLoader {
         accessoryType = .none
     }
     
-    func configure(with viewModel: CountryViewModel, configuration: CountryPickerConfiguration) {
+    func configure(with viewModel: CountryViewModel) {
         countryFlag.image = Flag.rectImage(with: viewModel.country)
-        if let validThemeFont = configuration.theme.font {
+        if let validThemeFont = CountryPickerPresenter.universalConfig.theme.font {
             countryName.font = validThemeFont
         }
         
-        self.cellSelectionStyle = configuration.theme.cellSelectionStyle
+        self.cellSelectionStyle = CountryPickerPresenter.universalConfig.theme.cellSelectionStyle
         if let validHighlightedText = viewModel.highlightedSearchText {
             countryName.attributedText = validHighlightedText
         } else {
@@ -39,11 +38,9 @@ class CountryCell: UITableViewCell, NibLoader {
         }
         
         #if targetEnvironment(macCatalyst)
-        flagHeight.constant = configuration.macConfiguration.flagSize.height
-        flagWidth.constant = configuration.macConfiguration.flagSize.width
+        flagHeight.constant = CountryPickerPresenter.universalConfig.macConfiguration.flagSize.height
+        flagWidth.constant = CountryPickerPresenter.universalConfig.macConfiguration.flagSize.width
         #endif
-        
-        self.configuration = configuration
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -51,7 +48,7 @@ class CountryCell: UITableViewCell, NibLoader {
         if selected {
             switch traitCollection.userInterfaceIdiom {
             case .mac:
-                if let providedCellSelectionColor = configuration.macConfiguration.cellSelectionColor {
+                if let providedCellSelectionColor = CountryPickerPresenter.universalConfig.macConfiguration.cellSelectionColor {
                     selectionStyle = .none
                     
                     if self.selectedBackgroundView == nil {
@@ -60,7 +57,7 @@ class CountryCell: UITableViewCell, NibLoader {
                         self.selectedBackgroundView = newView
                     }
                     
-                    if configuration.macConfiguration._isRowSelectionColorPerceivedBright {
+                    if CountryPickerPresenter.universalConfig.macConfiguration._isRowSelectionColorPerceivedBright {
                         countryName.textColor = UIColor.label
                     } else {
                         countryName.textColor = UIColor.white
@@ -70,7 +67,7 @@ class CountryCell: UITableViewCell, NibLoader {
                     contentView.backgroundColor = nil
                 }
             default:
-                switch configuration.theme.cellSelectionStyle {
+                switch CountryPickerPresenter.universalConfig.theme.cellSelectionStyle {
                 case .checkMark:
                     accessoryType = .checkmark
                     selectionStyle = .none

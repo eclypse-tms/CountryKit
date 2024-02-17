@@ -26,8 +26,8 @@ public struct MacConfiguration {
     /// the height of toolbar in the picker UI. defaults to 40.
     public var bottomToolbarHeight: CGFloat = 40
     
-    /// the height of each row in the picker UI. defaults to 40.
-    public var rowHeight: CGFloat = 40
+    /// the height of each row in the picker UI. defaults to 34 points.
+    public var rowHeight: CGFloat = 34
     
     /// size of the flag in each row. Defaults to 20x20.
     public var flagSize: CGSize = CGSize(width: 20, height: 20)
