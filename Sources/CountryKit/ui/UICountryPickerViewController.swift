@@ -29,6 +29,11 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet public weak var defaultCancelButton: UIButton!
     @IBOutlet public weak var defaultDoneButton: UIButton!
     
+    @IBOutlet public weak var leadingInset: NSLayoutConstraint!
+    @IBOutlet public weak var topInset: NSLayoutConstraint!
+    @IBOutlet public weak var trailingInset: NSLayoutConstraint!
+    @IBOutlet public weak var bottomInset: NSLayoutConstraint!
+    
     public init() {
         super.init(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
     }
@@ -74,6 +79,7 @@ open class UICountryPickerViewController: UIViewController {
         configureBindings()
         configureNotificationListening()
         configureBottomBar()
+        configureInsets()
     }
     
     deinit {
@@ -127,6 +133,21 @@ open class UICountryPickerViewController: UIViewController {
         } else {
             //there is no navigation controller, there is no point in setting navigation bar buttons
         }
+        #endif
+    }
+    
+    /// configures bottom bar - only applicable for mac catalyst
+    open func configureInsets() {
+        #if targetEnvironment(macCatalyst)
+        leadingInset.constant = countryPickerConfiguration.macConfiguration.edgeInsets.leading
+        topInset.constant = countryPickerConfiguration.macConfiguration.edgeInsets.top
+        trailingInset.constant = countryPickerConfiguration.macConfiguration.edgeInsets.trailing
+        bottomInset.constant = countryPickerConfiguration.macConfiguration.edgeInsets.bottom
+        #else
+        leadingInset.constant = 0
+        topInset.constant = 0
+        trailingInset.constant = 0
+        bottomInset.constant = 0
         #endif
     }
     
@@ -186,7 +207,7 @@ open class UICountryPickerViewController: UIViewController {
             bottomToolbarSeparator.backgroundColor = providedSeparatorColor
         }
         
-        bottomToolbarHeight.constant = 44
+        bottomToolbarHeight.constant = countryPickerConfiguration.macConfiguration.bottomToolbarHeight
         bottomToolbar.isHidden = false
         
         #else
@@ -314,6 +335,7 @@ open class UICountryPickerViewController: UIViewController {
     }
     
     open func configureSearchBar() {
+        searchBar.isHidden = !countryPickerConfiguration.showSearchBar
         switch traitCollection.userInterfaceIdiom {
         case .mac:
             //remove the background color on mac idioms

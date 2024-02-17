@@ -25,6 +25,7 @@ class SelectionsViewController: UIViewController {
     @IBOutlet private weak var cellSelectionStyleSegment: UISegmentedControl!
     @IBOutlet private weak var searchCriteriaSegment: UISegmentedControl!
     @IBOutlet private weak var navBarButtonsSegment: UISegmentedControl!
+    @IBOutlet private weak var pickerViewPresentationSegment: UISegmentedControl!
     
     @IBOutlet private weak var allowWorldwideSwitch: UISwitch!
     @IBOutlet private weak var autoDismissSwitch: UISwitch!
@@ -235,7 +236,13 @@ class SelectionsViewController: UIViewController {
         //get notified when user interacts with the country selection ui
         countryPickerVC.delegate = self
         
-        var shouldDisplayPickerViewModally = true
+        let shouldDisplayPickerViewModally: Bool
+        switch pickerViewPresentationSegment.selectedSegmentIndex {
+        case 0:
+            shouldDisplayPickerViewModally = false
+        default:
+            shouldDisplayPickerViewModally = true
+        }
         
         if shouldDisplayPickerViewModally {
             //save the configuration on the view controller
@@ -244,7 +251,7 @@ class SelectionsViewController: UIViewController {
             navController.modalPresentationStyle = .formSheet
             present(navController, animated: true)
         } else {
-            config.macConfiguration.showSearchBar = false
+            config.showSearchBar = false
             //save the configuration on the view controller
             countryPickerVC.countryPickerConfiguration = config
             splitViewController?.setViewController(countryPickerVC, for: .secondary)
