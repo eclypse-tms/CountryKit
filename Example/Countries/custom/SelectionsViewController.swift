@@ -22,6 +22,7 @@ class SelectionsViewController: UIViewController {
     
     @IBOutlet private weak var allowSelectionSwitch: UISwitch!
     @IBOutlet private weak var canMultiSelectSwitch: UISwitch!
+    @IBOutlet private weak var showSearchBarSwitch: UISwitch!
     @IBOutlet private weak var cellSelectionStyleSegment: UISegmentedControl!
     @IBOutlet private weak var searchCriteriaSegment: UISegmentedControl!
     @IBOutlet private weak var navBarButtonsSegment: UISegmentedControl!
@@ -129,6 +130,9 @@ class SelectionsViewController: UIViewController {
         excludedCountryStack.isHidden = true
         worldWideStack.isHidden = true
         colorWell.addTarget(self, action: #selector(didSelectColor(_:)), for: .valueChanged)
+        if traitCollection.userInterfaceIdiom == .mac {
+            cellSelectionStyleSegment.selectedSegmentIndex = 1
+        }
         
         addBorder(to: worldwideDescriptionTranslation)
         addBorder(to: limitedCountryDescriptionTranslation)
@@ -266,7 +270,7 @@ class SelectionsViewController: UIViewController {
             navController.modalPresentationStyle = .formSheet
             present(navController, animated: true)
         } else {
-            config.showSearchBar = false
+            config.showSearchBar = showSearchBarSwitch.isOn
             //save the configuration on the view controller
             countryPickerVC.countryPickerConfiguration = config
             splitViewController?.setViewController(countryPickerVC, for: .secondary)
@@ -288,10 +292,8 @@ class SelectionsViewController: UIViewController {
         case 0:
             //default color:
             colorWell.selectedColor = nil
-            colorWell.isEnabled = false
         default:
             //custom color
-            colorWell.isEnabled = true
             colorWell.selectedColor = selectedCustomTintColor
         }
     }
@@ -299,6 +301,7 @@ class SelectionsViewController: UIViewController {
     @objc
     private func didSelectColor(_ sender: UIColorWell) {
         selectedCustomTintColor = sender.selectedColor
+        checkmarkOrHighlightTintSegment.selectedSegmentIndex = 1
     }
 }
 

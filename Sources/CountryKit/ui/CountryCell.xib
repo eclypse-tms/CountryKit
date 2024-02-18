@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="mac" appearance="light"/>
+    <device id="mac" appearance="light" renderMode="macOS"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.down.doc" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D3I-2N-1fw">
-                        <rect key="frame" x="16" y="10.5" width="25" height="25"/>
+                        <rect key="frame" x="8" y="13.5" width="19" height="19"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="EI5-gz-JgM">
                                 <variation key="userInterfaceIdiom=mac" constant="19"/>
@@ -29,7 +29,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aruba" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4g-8I-xw7">
-                        <rect key="frame" x="49" y="0.0" width="263" height="44"/>
+                        <rect key="frame" x="35" y="0.0" width="277" height="44"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -41,7 +41,9 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="A4g-8I-xw7" secondAttribute="trailing" constant="8" id="9dv-uf-AJK"/>
                     <constraint firstItem="A4g-8I-xw7" firstAttribute="leading" secondItem="D3I-2N-1fw" secondAttribute="trailing" constant="8" id="SVm-yE-0YW"/>
-                    <constraint firstItem="D3I-2N-1fw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="W1x-Vn-wei"/>
+                    <constraint firstItem="D3I-2N-1fw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="W1x-Vn-wei">
+                        <variation key="userInterfaceIdiom=mac" constant="8"/>
+                    </constraint>
                     <constraint firstItem="A4g-8I-xw7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="moW-0C-R8B"/>
                     <constraint firstItem="D3I-2N-1fw" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="n2v-3N-swn"/>
                     <constraint firstAttribute="bottom" secondItem="A4g-8I-xw7" secondAttribute="bottom" id="oXC-JX-SlP"/>

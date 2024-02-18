@@ -16,7 +16,7 @@ public protocol ToolbarActionsResponder: NSObjectProtocol {
 open class UICountryPickerViewController: UIViewController {
     
     @IBOutlet public weak var searchBar: UISearchBar!
-    @IBOutlet public weak var pickerView: UICollectionView!
+    @IBOutlet public weak var pickerView: UITableView!
     @IBOutlet public weak var pinnedHeaderDirections: UILabel!
     @IBOutlet public weak var pinnedFooterDirections: UILabel!
     @IBOutlet public weak var headerDirectionsContainer: UIView!
@@ -288,9 +288,9 @@ open class UICountryPickerViewController: UIViewController {
                 guard let strongSelf = self else { return }
                 if cellSelectionMeta.performCellSelection {
                     if cellSelectionMeta.isSelected {
-                        strongSelf.pickerView.selectItem(at: cellSelectionMeta.indexPath, animated: false, scrollPosition: [])
+                        strongSelf.pickerView.selectRow(at: cellSelectionMeta.indexPath, animated: false, scrollPosition: .none)
                     } else {
-                        strongSelf.pickerView.deselectItem(at: cellSelectionMeta.indexPath, animated: false)
+                        strongSelf.pickerView.deselectRow(at: cellSelectionMeta.indexPath, animated: false)
                     }
                 }
                 
@@ -312,14 +312,12 @@ open class UICountryPickerViewController: UIViewController {
     open func configureMainView() {
         presenter.configureDataSource(with: pickerView)
         pickerView.delegate = presenter
-        pickerView.register(CountryCCell.nib, forCellWithReuseIdentifier: CountryCCell.nibName)
-        pickerView.register(FooterCCell.nib, forCellWithReuseIdentifier: FooterCCell.nibName)
+        pickerView.register(CountryCell.nib, forCellReuseIdentifier: CountryCell.nibName)
+        pickerView.register(FooterCell.nib, forCellReuseIdentifier: FooterCell.nibName)
         
         pickerView.allowsSelection = countryPickerConfiguration.allowsSelection
         pickerView.allowsMultipleSelection = countryPickerConfiguration.canMultiSelect
         pickerView.contentInset = countryPickerConfiguration.pickerViewInsets
-        
-        pickerView.collectionViewLayout = generateCompositionalLayout(with: CountryPickerViewSection.allCases)
     }
     
     open func configureSearchBar() {

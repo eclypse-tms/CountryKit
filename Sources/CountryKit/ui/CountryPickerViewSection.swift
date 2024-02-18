@@ -5,11 +5,11 @@
 //  Created by eclypse on 12/8/23.
 //
 
-import UIKit
-import Composure
+import Foundation
 
 /// sections for the country picker ui
-enum CountryPickerViewSection: Int, CaseIterable, DefinesCompositionalLayout {
+enum CountryPickerViewSection: Int, CaseIterable {
+    
     /// worldwide row - if enabled
     case worldwide
     
@@ -21,17 +21,4 @@ enum CountryPickerViewSection: Int, CaseIterable, DefinesCompositionalLayout {
     
     /// if country list is limited, additional explanation as to why it is limited
     case rosterExplanation
-    
-    func layoutInfo(using layoutEnvironment: NSCollectionLayoutEnvironment) -> Composure.CompositionalLayoutOption {
-        switch self {
-        case .worldwide, .allCountries:
-            if designedForMac {
-                return .fullWidthFixedHeight(fixedHeight: CountryPickerPresenter.universalConfig.macConfiguration.rowHeight)
-            } else {
-                return .fullWidthFixedHeight(fixedHeight: UIFloat(44))
-            }
-        case .worldwideExplanation, .rosterExplanation:
-            return .fullWidthDynamicHeight(estimatedHeight: UIFloat(44))
-        }
-    }
 }

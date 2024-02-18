@@ -46,9 +46,17 @@ public struct CountryPickerTheme {
     
     /// initializes CountryPickerTheme with default parameters
     public static func `default`() -> CountryPickerTheme {
-        return CountryPickerTheme()
+        var standardTheme = CountryPickerTheme()
+        if designedForMac {
+            standardTheme.cellSelectionStyle = .highlight
+        }
+        return standardTheme
     }
     
     /// initializes CountryPickerTheme with default parameters
-    public init() {}
+    public init() {
+        if designedForMac {
+            self.cellSelectionStyle = .highlight
+        }
+    }
 }

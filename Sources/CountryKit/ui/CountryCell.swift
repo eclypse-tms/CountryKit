@@ -16,12 +16,17 @@ class CountryCell: UITableViewCell, NibLoader {
     
     private var cellSelectionStyle: CountryCellSelectionStyle = .checkMark
     
-    override func prepareForReuse() {
+    private func resetCell() {
         countryFlag.image = nil
         countryName.attributedText = nil
-        
-        selectionStyle = .none
+        selectedBackgroundView = nil
+        self.tintColor = nil
         accessoryType = .none
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resetCell()
     }
     
     func configure(with viewModel: CountryViewModel) {
@@ -46,8 +51,34 @@ class CountryCell: UITableViewCell, NibLoader {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
-            if designedForMac {
-                if let providedCellSelectionColor = CountryPickerPresenter.universalConfig.theme.selectionTint {
+            switch CountryPickerPresenter.universalConfig.theme.cellSelectionStyle {
+            case .checkMark:
+                accessoryType = .checkmark
+                if let selectionTintColor = CountryPickerPresenter.universalConfig.theme.selectionTint {
+                    self.tintColor = selectionTintColor
+                }
+            case .highlight:
+                selectedBackgroundView = provideSelectedBackgroundView(cellSelectionColor: CountryPickerPresenter.universalConfig.theme.selectionTint)
+                if CountryPickerPresenter.universalConfig.theme._isRowSelectionColorPerceivedBright {
+                    countryName.textColor = UIColor.label
+                } else {
+                    countryName.textColor = UIColor.white
+                }
+            }
+        } else {
+            self.selectedBackgroundView = nil
+            countryName.textColor = UIColor.label
+            accessoryType = .none
+        }
+    }
+    
+    /*
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        if selected {
+            switch traitCollection.userInterfaceIdiom {
+            case .mac:
+                if let providedCellSelectionColor = configuration.theme.selectionTint {
                     selectionStyle = .none
                     
                     if self.selectedBackgroundView == nil {
@@ -56,7 +87,7 @@ class CountryCell: UITableViewCell, NibLoader {
                         self.selectedBackgroundView = newView
                     }
                     
-                    if CountryPickerPresenter.universalConfig.theme._isRowSelectionColorPerceivedBright {
+                    if configuration.theme._isRowSelectionColorPerceivedBright {
                         countryName.textColor = UIColor.label
                     } else {
                         countryName.textColor = UIColor.white
@@ -65,8 +96,8 @@ class CountryCell: UITableViewCell, NibLoader {
                     selectionStyle = .default
                     contentView.backgroundColor = nil
                 }
-            } else {
-                switch CountryPickerPresenter.universalConfig.theme.cellSelectionStyle {
+            default:
+                switch configuration.theme.cellSelectionStyle {
                 case .checkMark:
                     accessoryType = .checkmark
                     selectionStyle = .none
@@ -76,13 +107,24 @@ class CountryCell: UITableViewCell, NibLoader {
                 }
             }
         } else {
-            if designedForMac {
+            switch traitCollection.userInterfaceIdiom {
+            case .mac:
                 self.selectedBackgroundView = nil
                 countryName.textColor = UIColor.label
-            } else {
+            default:
                 accessoryType = .none
                 selectionStyle = .none
             }
         }
+    }
+    */
+    
+    private func provideSelectedBackgroundView(cellSelectionColor: UIColor?) -> UIView {
+        let newBackgroundView = UIView()
+        if designedForMac {
+            newBackgroundView.roundCorners(cornerRadius: UIFloat(8))
+        }
+        newBackgroundView.backgroundColor = cellSelectionColor ?? CountryPickerColor.defaultHighlight
+        return newBackgroundView
     }
 }
