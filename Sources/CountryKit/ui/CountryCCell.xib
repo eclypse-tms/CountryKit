@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -22,7 +22,7 @@
                         <rect key="frame" x="8" y="0.0" width="405" height="111"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.down.doc" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ygY-GD-j2t">
-                                <rect key="frame" x="0.0" y="44" width="24" height="23.666666666666671"/>
+                                <rect key="frame" x="0.0" y="43.5" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="MIL-5T-k3Q">
                                         <variation key="userInterfaceIdiom=mac" constant="18"/>
@@ -33,7 +33,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aruba" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxD-8Z-woW">
-                                <rect key="frame" x="32" y="45.333333333333336" width="341" height="20.333333333333336"/>
+                                <rect key="frame" x="32" y="45.5" width="325" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -41,25 +41,38 @@
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 </variation>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="k7o-iY-abw">
-                                <rect key="frame" x="381" y="46" width="24" height="20"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PhL-FI-xNh">
+                                <rect key="frame" x="365" y="46.5" width="40" height="18"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="k7o-iY-abw">
+                                        <rect key="frame" x="0.0" y="2" width="18" height="14.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="fQN-Z4-hj3">
+                                                <variation key="userInterfaceIdiom=mac" constant="14"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="18" id="g7M-F9-cuU">
+                                                <variation key="userInterfaceIdiom=mac" constant="14"/>
+                                            </constraint>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="fQN-Z4-hj3">
-                                        <variation key="userInterfaceIdiom=mac" constant="18"/>
+                                    <constraint firstAttribute="width" constant="40" id="538-6n-8Jv">
+                                        <variation key="userInterfaceIdiom=mac" constant="31"/>
                                     </constraint>
-                                    <constraint firstAttribute="width" constant="24" id="g7M-F9-cuU">
-                                        <variation key="userInterfaceIdiom=mac" constant="18"/>
-                                    </constraint>
+                                    <constraint firstItem="k7o-iY-abw" firstAttribute="leading" secondItem="PhL-FI-xNh" secondAttribute="leading" id="649-z1-oqJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="k7o-iY-abw" secondAttribute="bottom" id="BpC-hH-SAx"/>
+                                    <constraint firstItem="k7o-iY-abw" firstAttribute="top" secondItem="PhL-FI-xNh" secondAttribute="top" id="ekB-A1-n22"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                         </subviews>
                         <variation key="userInterfaceIdiom=mac" spacing="6"/>
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N9f-MK-Hpk">
-                        <rect key="frame" x="0.0" y="110" width="421" height="1"/>
+                        <rect key="frame" x="16" y="110.5" width="405" height="0.5"/>
                         <color key="backgroundColor" systemColor="separatorColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="Z47-uE-d7R"/>
+                            <constraint firstAttribute="height" constant="0.5" id="Z47-uE-d7R"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -68,13 +81,14 @@
                     <constraint firstAttribute="bottom" secondItem="N9f-MK-Hpk" secondAttribute="bottom" id="3fm-GE-bW2"/>
                     <constraint firstItem="lUl-Pn-v6r" firstAttribute="leading" secondItem="xe3-Uz-Ka9" secondAttribute="leading" constant="8" id="FZy-9h-Bk6"/>
                     <constraint firstAttribute="bottom" secondItem="lUl-Pn-v6r" secondAttribute="bottom" id="K1J-k8-Gw7"/>
-                    <constraint firstItem="N9f-MK-Hpk" firstAttribute="leading" secondItem="xe3-Uz-Ka9" secondAttribute="leading" id="Q4C-i0-nmO"/>
+                    <constraint firstItem="N9f-MK-Hpk" firstAttribute="leading" secondItem="xe3-Uz-Ka9" secondAttribute="leading" constant="16" id="Q4C-i0-nmO"/>
                     <constraint firstAttribute="trailing" secondItem="N9f-MK-Hpk" secondAttribute="trailing" id="h4n-xu-Lt5"/>
                     <constraint firstItem="lUl-Pn-v6r" firstAttribute="top" secondItem="xe3-Uz-Ka9" secondAttribute="top" id="hyj-EZ-K0a"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="421" height="111"/>
             <connections>
+                <outlet property="cellAccessoryContainer" destination="PhL-FI-xNh" id="VyX-P8-Qsd"/>
                 <outlet property="cellSeparator" destination="N9f-MK-Hpk" id="6L7-81-pVS"/>
                 <outlet property="checkMark" destination="k7o-iY-abw" id="Ufx-YZ-4ew"/>
                 <outlet property="countryFlag" destination="ygY-GD-j2t" id="CqV-ks-gNf"/>
@@ -86,7 +100,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="arrow.down.doc" catalog="system" width="32" height="32"/>
+        <image name="arrow.down.doc" catalog="system" width="115" height="128"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <systemColor name="separatorColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

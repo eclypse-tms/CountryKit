@@ -46,9 +46,8 @@ class CountryCell: UITableViewCell, NibLoader {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
-            switch traitCollection.userInterfaceIdiom {
-            case .mac:
-                if let providedCellSelectionColor = CountryPickerPresenter.universalConfig.macConfiguration.cellSelectionColor {
+            if designedForMac {
+                if let providedCellSelectionColor = CountryPickerPresenter.universalConfig.theme.selectionTint {
                     selectionStyle = .none
                     
                     if self.selectedBackgroundView == nil {
@@ -57,7 +56,7 @@ class CountryCell: UITableViewCell, NibLoader {
                         self.selectedBackgroundView = newView
                     }
                     
-                    if CountryPickerPresenter.universalConfig.macConfiguration._isRowSelectionColorPerceivedBright {
+                    if CountryPickerPresenter.universalConfig.theme._isRowSelectionColorPerceivedBright {
                         countryName.textColor = UIColor.label
                     } else {
                         countryName.textColor = UIColor.white
@@ -66,7 +65,7 @@ class CountryCell: UITableViewCell, NibLoader {
                     selectionStyle = .default
                     contentView.backgroundColor = nil
                 }
-            default:
+            } else {
                 switch CountryPickerPresenter.universalConfig.theme.cellSelectionStyle {
                 case .checkMark:
                     accessoryType = .checkmark
@@ -77,11 +76,10 @@ class CountryCell: UITableViewCell, NibLoader {
                 }
             }
         } else {
-            switch traitCollection.userInterfaceIdiom {
-            case .mac:
+            if designedForMac {
                 self.selectedBackgroundView = nil
                 countryName.textColor = UIColor.label
-            default:
+            } else {
                 accessoryType = .none
                 selectionStyle = .none
             }

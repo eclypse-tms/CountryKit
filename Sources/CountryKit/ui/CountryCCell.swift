@@ -12,6 +12,7 @@ class CountryCCell: UICollectionViewCell, NibLoader {
     @IBOutlet private weak var countryFlag: UIImageView!
     @IBOutlet private weak var countryName: UILabel!
     @IBOutlet private weak var checkMark: UIImageView!
+    @IBOutlet private weak var cellAccessoryContainer: UIView!
     @IBOutlet private weak var flagHeight: NSLayoutConstraint!
     @IBOutlet private weak var flagWidth: NSLayoutConstraint!
     @IBOutlet private weak var cellSeparator: UIView!
@@ -21,7 +22,7 @@ class CountryCCell: UICollectionViewCell, NibLoader {
     private func resetCell() {
         countryFlag.image = nil
         countryName.attributedText = nil
-        checkMark.isHidden = true
+        cellAccessoryContainer.isHidden = true
         selectedBackgroundView = nil
     }
     
@@ -58,28 +59,31 @@ class CountryCCell: UICollectionViewCell, NibLoader {
             if self.isSelected {
                 switch traitCollection.userInterfaceIdiom {
                 case .mac:
-                    if let providedCellSelectionColor = CountryPickerPresenter.universalConfig.macConfiguration.cellSelectionColor {
-                        checkMark.isHidden = true
+                    if let providedCellSelectionColor = CountryPickerPresenter.universalConfig.theme.selectionTint {
+                        cellAccessoryContainer.isHidden = true
                         
                         self.selectedBackgroundView = provideSelectedBackgroundView(cellSelectionColor: providedCellSelectionColor)
                         
-                        if CountryPickerPresenter.universalConfig.macConfiguration._isRowSelectionColorPerceivedBright {
+                        if CountryPickerPresenter.universalConfig.theme._isRowSelectionColorPerceivedBright {
                             countryName.textColor = UIColor.label
                         } else {
                             countryName.textColor = UIColor.white
                         }
                     } else {
-                        checkMark.isHidden = false
+                        cellAccessoryContainer.isHidden = false
                         self.selectedBackgroundView = nil
                     }
                 default:
                     switch CountryPickerPresenter.universalConfig.theme.cellSelectionStyle {
                     case .checkMark:
-                        checkMark.isHidden = false
+                        if let checkmarkTint = CountryPickerPresenter.universalConfig.theme.selectionTint {
+                            checkMark.tintColor = checkmarkTint
+                        }
+                        cellAccessoryContainer.isHidden = false
                         selectedBackgroundView = nil
                     case .highlight:
-                        checkMark.isHidden = true
-                        selectedBackgroundView = provideSelectedBackgroundView(cellSelectionColor: nil)
+                        cellAccessoryContainer.isHidden = true
+                        selectedBackgroundView = provideSelectedBackgroundView(cellSelectionColor: CountryPickerPresenter.universalConfig.theme.selectionTint)
                     }
                 }
             } else {
@@ -89,7 +93,7 @@ class CountryCCell: UICollectionViewCell, NibLoader {
                     countryName.textColor = UIColor.label
                 default:
                     self.selectedBackgroundView = nil
-                    self.checkMark.isHidden = true
+                    self.cellAccessoryContainer.isHidden = true
                 }
             }
         }
@@ -100,7 +104,7 @@ class CountryCCell: UICollectionViewCell, NibLoader {
         if designedForMac {
             newBackgroundView.roundCorners(cornerRadius: UIFloat(8))
         }
-        newBackgroundView.backgroundColor = cellSelectionColor ?? UIColor.secondarySystemBackground
+        newBackgroundView.backgroundColor = cellSelectionColor ?? CountryPickerColor.defaultHighlight
         return newBackgroundView
     }
 }

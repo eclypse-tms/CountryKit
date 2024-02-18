@@ -32,12 +32,9 @@ public struct MacConfiguration {
     /// size of the flag in each row. Defaults to 20x20.
     public var flagSize: CGSize = CGSize(width: 20, height: 20)
     
+    @available(*, obsoleted: 1.2.1, message: "Use the CountryPickerTheme.selectionTint instead")
     /// the color to apply when the cell is selected
-    public var cellSelectionColor: UIColor? {
-        didSet {
-            _isRowSelectionColorPerceivedBright = cellSelectionColor?.isPerceivedBright ?? false
-        }
-    }
+    public var cellSelectionColor: UIColor?
     
     /// provide a custom button to replace the default cancel button provided by the picker view.
     public var customCancelButton: UIButton?
@@ -47,9 +44,6 @@ public struct MacConfiguration {
     
     /// insets to apply to the picker view when running in macOS
     public var edgeInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 0, trailing: 8)
-    
-    /// used to eliminate subsequent calls to isPerceivedBright
-    var _isRowSelectionColorPerceivedBright: Bool = false
     
     /// initializes MacConfiguration with default parameters
     static public func `default`() -> MacConfiguration {

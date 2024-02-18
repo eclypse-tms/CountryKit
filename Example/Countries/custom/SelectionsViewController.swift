@@ -26,6 +26,7 @@ class SelectionsViewController: UIViewController {
     @IBOutlet private weak var searchCriteriaSegment: UISegmentedControl!
     @IBOutlet private weak var navBarButtonsSegment: UISegmentedControl!
     @IBOutlet private weak var pickerViewPresentationSegment: UISegmentedControl!
+    @IBOutlet private weak var checkmarkOrHighlightTintSegment: UISegmentedControl!
     
     @IBOutlet private weak var allowWorldwideSwitch: UISwitch!
     @IBOutlet private weak var autoDismissSwitch: UISwitch!
@@ -42,9 +43,11 @@ class SelectionsViewController: UIViewController {
     
     @IBOutlet private weak var inclusionButton: UIButton!
     @IBOutlet private weak var sortButton: UIButton!
+    @IBOutlet private weak var colorWell: UIColorWell!
     
     private var selectedCountryListOption: CountryListOption = []
     private var selectedSortOption: CountrySorter?
+    private var selectedCustomTintColor: UIColor?
     
     private var dataSource: UICollectionViewDiffableDataSource<SelectedCountriesSection, Country>!
 
@@ -125,6 +128,7 @@ class SelectionsViewController: UIViewController {
         limitedCountryStack.isHidden = true
         excludedCountryStack.isHidden = true
         worldWideStack.isHidden = true
+        colorWell.addTarget(self, action: #selector(didSelectColor(_:)), for: .valueChanged)
         
         addBorder(to: worldwideDescriptionTranslation)
         addBorder(to: limitedCountryDescriptionTranslation)
@@ -164,7 +168,18 @@ class SelectionsViewController: UIViewController {
         config.allowsSelection = allowSelectionSwitch.isOn
         config.canMultiSelect = canMultiSelectSwitch.isOn
         
+        // theme
         config.theme.cellSelectionStyle = CountryCellSelectionStyle(rawValue: cellSelectionStyleSegment.selectedSegmentIndex)!
+        switch checkmarkOrHighlightTintSegment.selectedSegmentIndex {
+        case 0:
+            //use defaults
+            config.theme.selectionTint = nil
+        default:
+            //use custom tint
+            config.theme.selectionTint = colorWell.selectedColor
+        }
+        
+        
         config.searchMethodology = SearchMethodology(rawValue: searchCriteriaSegment.selectedSegmentIndex)!
         config.buttonDisplayOption = ToolbarButtonsDisplayOption(rawValue: navBarButtonsSegment.selectedSegmentIndex)!
         
@@ -266,6 +281,24 @@ class SelectionsViewController: UIViewController {
         uiTextView.layer.opacity = 0.5
         uiTextView.isOpaque = true
         uiTextView.backgroundColor = UIColor(named: "textview_background_color")
+    }
+    
+    @IBAction private func didChangeValue(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            //default color:
+            colorWell.selectedColor = nil
+            colorWell.isEnabled = false
+        default:
+            //custom color
+            colorWell.isEnabled = true
+            colorWell.selectedColor = selectedCustomTintColor
+        }
+    }
+    
+    @objc
+    private func didSelectColor(_ sender: UIColorWell) {
+        selectedCustomTintColor = sender.selectedColor
     }
 }
 
