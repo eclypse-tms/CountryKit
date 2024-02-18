@@ -32,9 +32,14 @@ public struct MacConfiguration {
     /// size of the flag in each row. Defaults to 20x20.
     public var flagSize: CGSize = CGSize(width: 20, height: 20)
     
-    @available(*, obsoleted: 1.2.1, message: "Use the CountryPickerTheme.selectionTint instead")
+    @available(*, obsoleted: 1.2.2, message: "Use the CountryPickerTheme.selectionTint instead")
     /// the color to apply when the cell is selected
     public var cellSelectionColor: UIColor?
+    
+    @available(*, obsoleted: 1.2.2, message: "Use the CountryPickerConfiguration.showSearchBar instead")
+    /// if you are presenting the picker view in a window that already includes a search bar,
+    /// turn this flag to false to hide the embedded search bar.
+    public var showSearchBar: Bool = true
     
     /// provide a custom button to replace the default cancel button provided by the picker view.
     public var customCancelButton: UIButton?
