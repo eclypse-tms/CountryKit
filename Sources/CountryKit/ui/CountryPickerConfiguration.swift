@@ -85,6 +85,14 @@ public struct CountryPickerConfiguration {
     /// you can provide your own custom sorting algorithm for the picker view.
     public var countrySorter: CountrySorter?
     
+    /// if you are presenting the picker view in a window that already includes a search bar,
+    /// turn this flag to false to hide the embedded search bar.
+    public var showSearchBar: Bool = true
+    
+    /// content insets to apply to the picker view.
+    /// by default bottom has 150 pts of inset - which allows the picker view to overscroll
+    public var pickerViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: UIFloat(150), right: 0)
+    
     /// additional configuration parameters when running the picker view in mac catalyst mode
     public var macConfiguration: MacConfiguration = .default()
     

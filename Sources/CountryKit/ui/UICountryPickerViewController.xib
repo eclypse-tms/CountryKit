@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UICountryPickerViewController" customModule="CountryKit" customModuleProvider="target">
             <connections>
+                <outlet property="bottomInset" destination="mDm-6t-8VY" id="Sn8-xt-GUt"/>
                 <outlet property="bottomToolbar" destination="B5j-9W-R3M" id="Vmw-h2-4cs"/>
                 <outlet property="bottomToolbarHeight" destination="ZrL-IK-SZf" id="v03-9Z-WDr"/>
                 <outlet property="bottomToolbarSeparator" destination="GM2-LN-0dg" id="tJv-Oz-bN8"/>
@@ -19,10 +20,13 @@
                 <outlet property="footerDirectionsContainer" destination="Uny-Mn-ayd" id="L2I-3d-CCN"/>
                 <outlet property="headerDirectionsContainer" destination="EGA-px-cvU" id="KAu-AD-tD4"/>
                 <outlet property="horizontalButtonStack" destination="vyg-YN-9qz" id="Fyk-aY-JqK"/>
-                <outlet property="pickerView" destination="vfn-IK-tGF" id="rgZ-iL-ipg"/>
+                <outlet property="leadingInset" destination="7ia-t8-2eX" id="0Wx-fE-qj2"/>
+                <outlet property="pickerView" destination="I47-hY-BGm" id="A8Z-X8-Hsn"/>
                 <outlet property="pinnedFooterDirections" destination="Dg7-0T-9wJ" id="mYt-74-fpc"/>
                 <outlet property="pinnedHeaderDirections" destination="KwS-jK-QSA" id="X5v-PM-Vtz"/>
                 <outlet property="searchBar" destination="bxp-cU-EnB" id="lft-ph-AB3"/>
+                <outlet property="topInset" destination="L2u-mC-0IK" id="sMb-vn-kle"/>
+                <outlet property="trailingInset" destination="eiI-rn-GrE" id="kHQ-d2-QVL"/>
                 <outlet property="view" destination="iN0-l3-epB" id="CUZ-iA-ULw"/>
             </connections>
         </placeholder>
@@ -35,10 +39,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EGA-px-cvU" userLabel="Header Instructions">
-                            <rect key="frame" x="0.0" y="0.0" width="800" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="800" height="31"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-jK-QSA">
-                                    <rect key="frame" x="16" y="8" width="768" height="34"/>
+                                    <rect key="frame" x="12" y="6" width="776" height="19"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <color key="textColor" systemColor="systemGrayColor"/>
                                     <nil key="highlightedColor"/>
@@ -46,28 +50,67 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="KwS-jK-QSA" secondAttribute="trailing" constant="16" id="CGE-Mw-son"/>
-                                <constraint firstItem="KwS-jK-QSA" firstAttribute="leading" secondItem="EGA-px-cvU" secondAttribute="leading" constant="16" id="XUK-WB-gAf"/>
-                                <constraint firstItem="KwS-jK-QSA" firstAttribute="top" secondItem="EGA-px-cvU" secondAttribute="top" constant="8" id="ehe-31-PCm"/>
-                                <constraint firstAttribute="bottom" secondItem="KwS-jK-QSA" secondAttribute="bottom" constant="8" id="vy7-jx-99y"/>
+                                <constraint firstAttribute="trailing" secondItem="KwS-jK-QSA" secondAttribute="trailing" constant="16" id="CGE-Mw-son">
+                                    <variation key="userInterfaceIdiom=mac" constant="12"/>
+                                </constraint>
+                                <constraint firstItem="KwS-jK-QSA" firstAttribute="leading" secondItem="EGA-px-cvU" secondAttribute="leading" constant="16" id="XUK-WB-gAf">
+                                    <variation key="userInterfaceIdiom=mac" constant="12"/>
+                                </constraint>
+                                <constraint firstItem="KwS-jK-QSA" firstAttribute="top" secondItem="EGA-px-cvU" secondAttribute="top" constant="8" id="ehe-31-PCm">
+                                    <variation key="userInterfaceIdiom=mac" constant="6"/>
+                                </constraint>
+                                <constraint firstAttribute="bottom" secondItem="KwS-jK-QSA" secondAttribute="bottom" constant="8" id="vy7-jx-99y">
+                                    <variation key="userInterfaceIdiom=mac" constant="6"/>
+                                </constraint>
                             </constraints>
                         </view>
-                        <searchBar contentMode="redraw" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bxp-cU-EnB">
-                            <rect key="frame" x="0.0" y="50" width="800" height="36"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="cpS-he-PN4"/>
-                            </connections>
-                        </searchBar>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vfn-IK-tGF">
-                            <rect key="frame" x="0.0" y="86" width="800" height="420"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ywZ-b5-g4L">
+                            <rect key="frame" x="0.0" y="31" width="800" height="497"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0Mq-gE-ntY">
+                                    <rect key="frame" x="12" y="12" width="776" height="473"/>
+                                    <subviews>
+                                        <searchBar contentMode="redraw" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bxp-cU-EnB">
+                                            <rect key="frame" x="0.0" y="0.0" width="776" height="36"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="cpS-he-PN4"/>
+                                            </connections>
+                                        </searchBar>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="I47-hY-BGm">
+                                            <rect key="frame" x="0.0" y="36" width="776" height="437"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hF8-xL-9Bk">
+                                                <size key="itemSize" width="128" height="128"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                        </collectionView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        </tableView>
+                            <constraints>
+                                <constraint firstItem="0Mq-gE-ntY" firstAttribute="leading" secondItem="ywZ-b5-g4L" secondAttribute="leading" id="7ia-t8-2eX">
+                                    <variation key="userInterfaceIdiom=mac" constant="12"/>
+                                </constraint>
+                                <constraint firstItem="0Mq-gE-ntY" firstAttribute="top" secondItem="ywZ-b5-g4L" secondAttribute="top" id="L2u-mC-0IK">
+                                    <variation key="userInterfaceIdiom=mac" constant="12"/>
+                                </constraint>
+                                <constraint firstAttribute="trailing" secondItem="0Mq-gE-ntY" secondAttribute="trailing" id="eiI-rn-GrE">
+                                    <variation key="userInterfaceIdiom=mac" constant="12"/>
+                                </constraint>
+                                <constraint firstAttribute="bottom" secondItem="0Mq-gE-ntY" secondAttribute="bottom" id="mDm-6t-8VY">
+                                    <variation key="userInterfaceIdiom=mac" constant="12"/>
+                                </constraint>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uny-Mn-ayd" userLabel="Footer Instructions">
-                            <rect key="frame" x="0.0" y="506" width="800" height="50"/>
+                            <rect key="frame" x="0.0" y="528" width="800" height="28"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Additional instructions on how to select countries." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-0T-9wJ">
-                                    <rect key="frame" x="16" y="8" width="768" height="34"/>
+                                    <rect key="frame" x="12" y="6" width="776" height="16"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                     <color key="textColor" systemColor="systemGrayColor"/>
                                     <nil key="highlightedColor"/>
@@ -75,10 +118,18 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="Dg7-0T-9wJ" secondAttribute="trailing" constant="16" id="2Vv-fs-0vw"/>
-                                <constraint firstItem="Dg7-0T-9wJ" firstAttribute="leading" secondItem="Uny-Mn-ayd" secondAttribute="leading" constant="16" id="8pl-AD-91x"/>
-                                <constraint firstItem="Dg7-0T-9wJ" firstAttribute="top" secondItem="Uny-Mn-ayd" secondAttribute="top" constant="8" id="Uln-iY-c4C"/>
-                                <constraint firstAttribute="bottom" secondItem="Dg7-0T-9wJ" secondAttribute="bottom" constant="8" id="aOW-m1-21W"/>
+                                <constraint firstAttribute="trailing" secondItem="Dg7-0T-9wJ" secondAttribute="trailing" constant="16" id="2Vv-fs-0vw">
+                                    <variation key="userInterfaceIdiom=mac" constant="12"/>
+                                </constraint>
+                                <constraint firstItem="Dg7-0T-9wJ" firstAttribute="leading" secondItem="Uny-Mn-ayd" secondAttribute="leading" constant="16" id="8pl-AD-91x">
+                                    <variation key="userInterfaceIdiom=mac" constant="12"/>
+                                </constraint>
+                                <constraint firstItem="Dg7-0T-9wJ" firstAttribute="top" secondItem="Uny-Mn-ayd" secondAttribute="top" constant="8" id="Uln-iY-c4C">
+                                    <variation key="userInterfaceIdiom=mac" constant="6"/>
+                                </constraint>
+                                <constraint firstAttribute="bottom" secondItem="Dg7-0T-9wJ" secondAttribute="bottom" constant="8" id="aOW-m1-21W">
+                                    <variation key="userInterfaceIdiom=mac" constant="6"/>
+                                </constraint>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5j-9W-R3M" userLabel="Bottom Toolbar">
@@ -134,10 +185,10 @@
     </objects>
     <resources>
         <systemColor name="systemBackgroundColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

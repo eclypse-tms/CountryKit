@@ -167,6 +167,10 @@ public var countryListOption: CountryListOption = .all
 /// you can provide your own custom sorting algorithm for the picker view.
 public var countrySorter: CountrySorter?
 
+/// if you are presenting the picker view in a window that already includes a search bar,
+/// turn this flag to false to hide the embedded search bar.
+public var showSearchBar: Bool = true
+
 /// additional configuration parameters when running the picker view in mac catalyst mode
 public var macConfiguration: MacConfiguration = .default()
 

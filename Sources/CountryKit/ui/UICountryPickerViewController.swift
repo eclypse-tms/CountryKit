@@ -16,7 +16,7 @@ public protocol ToolbarActionsResponder: NSObjectProtocol {
 open class UICountryPickerViewController: UIViewController {
     
     @IBOutlet public weak var searchBar: UISearchBar!
-    @IBOutlet public weak var pickerView: UITableView!
+    @IBOutlet public weak var pickerView: UICollectionView!
     @IBOutlet public weak var pinnedHeaderDirections: UILabel!
     @IBOutlet public weak var pinnedFooterDirections: UILabel!
     @IBOutlet public weak var headerDirectionsContainer: UIView!
@@ -28,6 +28,11 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet public weak var horizontalButtonStack: UIStackView!
     @IBOutlet public weak var defaultCancelButton: UIButton!
     @IBOutlet public weak var defaultDoneButton: UIButton!
+    
+    @IBOutlet public weak var leadingInset: NSLayoutConstraint!
+    @IBOutlet public weak var topInset: NSLayoutConstraint!
+    @IBOutlet public weak var trailingInset: NSLayoutConstraint!
+    @IBOutlet public weak var bottomInset: NSLayoutConstraint!
     
     public init() {
         super.init(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
@@ -74,6 +79,7 @@ open class UICountryPickerViewController: UIViewController {
         configureBindings()
         configureNotificationListening()
         configureBottomBar()
+        configureInsets()
     }
     
     deinit {
@@ -127,6 +133,21 @@ open class UICountryPickerViewController: UIViewController {
         } else {
             //there is no navigation controller, there is no point in setting navigation bar buttons
         }
+        #endif
+    }
+    
+    /// configures bottom bar - only applicable for mac catalyst
+    open func configureInsets() {
+        #if targetEnvironment(macCatalyst)
+        leadingInset.constant = countryPickerConfiguration.macConfiguration.edgeInsets.leading
+        topInset.constant = countryPickerConfiguration.macConfiguration.edgeInsets.top
+        trailingInset.constant = countryPickerConfiguration.macConfiguration.edgeInsets.trailing
+        bottomInset.constant = countryPickerConfiguration.macConfiguration.edgeInsets.bottom
+        #else
+        leadingInset.constant = 0
+        topInset.constant = 0
+        trailingInset.constant = 0
+        bottomInset.constant = 0
         #endif
     }
     
@@ -186,7 +207,7 @@ open class UICountryPickerViewController: UIViewController {
             bottomToolbarSeparator.backgroundColor = providedSeparatorColor
         }
         
-        bottomToolbarHeight.constant = 44
+        bottomToolbarHeight.constant = countryPickerConfiguration.macConfiguration.bottomToolbarHeight
         bottomToolbar.isHidden = false
         
         #else
@@ -267,9 +288,9 @@ open class UICountryPickerViewController: UIViewController {
                 guard let strongSelf = self else { return }
                 if cellSelectionMeta.performCellSelection {
                     if cellSelectionMeta.isSelected {
-                        strongSelf.pickerView.selectRow(at: cellSelectionMeta.indexPath, animated: false, scrollPosition: .none)
+                        strongSelf.pickerView.selectItem(at: cellSelectionMeta.indexPath, animated: false, scrollPosition: [])
                     } else {
-                        strongSelf.pickerView.deselectRow(at: cellSelectionMeta.indexPath, animated: false)
+                        strongSelf.pickerView.deselectItem(at: cellSelectionMeta.indexPath, animated: false)
                     }
                 }
                 
@@ -291,29 +312,18 @@ open class UICountryPickerViewController: UIViewController {
     open func configureMainView() {
         presenter.configureDataSource(with: pickerView)
         pickerView.delegate = presenter
-        pickerView.register(CountryCell.nib, forCellReuseIdentifier: CountryCell.nibName)
-        pickerView.register(FooterCell.nib, forCellReuseIdentifier: FooterCell.nibName)
+        pickerView.register(CountryCCell.nib, forCellWithReuseIdentifier: CountryCCell.nibName)
+        pickerView.register(FooterCCell.nib, forCellWithReuseIdentifier: FooterCCell.nibName)
         
         pickerView.allowsSelection = countryPickerConfiguration.allowsSelection
         pickerView.allowsMultipleSelection = countryPickerConfiguration.canMultiSelect
-        pickerView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: UIFloat(150), right: 0)
-        pickerView.tableFooterView = UIView()
+        pickerView.contentInset = countryPickerConfiguration.pickerViewInsets
         
-        switch traitCollection.userInterfaceIdiom {
-        case .mac:
-            pickerView.separatorStyle = .none //make it more mac-like
-        case .pad:
-            pickerView.separatorStyle = .singleLine
-        default:
-            pickerView.separatorStyle = .singleLine
-        }
-        
-        pickerView.estimatedRowHeight = UIFloat(44)
-        pickerView.rowHeight = UITableView.automaticDimension
-        
+        pickerView.collectionViewLayout = generateCompositionalLayout(with: CountryPickerViewSection.allCases)
     }
     
     open func configureSearchBar() {
+        searchBar.isHidden = !countryPickerConfiguration.showSearchBar
         switch traitCollection.userInterfaceIdiom {
         case .mac:
             //remove the background color on mac idioms
