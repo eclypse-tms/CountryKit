@@ -265,14 +265,14 @@ class SelectionsViewController: UIViewController {
         
         if shouldDisplayPickerViewModally {
             //save the configuration on the view controller
-            countryPickerVC.countryPickerConfiguration = config
+            countryPickerVC.pickerConfiguration = config
             let navController = UINavigationController(rootViewController: countryPickerVC)
             navController.modalPresentationStyle = .formSheet
             present(navController, animated: true)
         } else {
             config.showSearchBar = showSearchBarSwitch.isOn
             //save the configuration on the view controller
-            countryPickerVC.countryPickerConfiguration = config
+            countryPickerVC.pickerConfiguration = config
             splitViewController?.setViewController(countryPickerVC, for: .secondary)
             splitViewController?.show(.secondary)
         }

@@ -64,8 +64,16 @@ open class CountryPicker: UIViewController {
     /// get notified everytime user makes a selection or deselection
     public var delegate: CountryPickerDelegate?
     
+    @available(*, deprecated, renamed: "pickerConfiguration", message: "Please use shortened name pickerConfiguration instead")
     ///register a config file to change the behavior of this country selection interface
-    open var countryPickerConfiguration: CountryPickerConfiguration = .default()
+    open var countryPickerConfiguration: CountryPickerConfiguration = .default() {
+        didSet {
+            self.pickerConfiguration = countryPickerConfiguration
+        }
+    }
+    
+    ///register a config file to change the behavior of this country selection interface
+    open var pickerConfiguration: CountryPickerConfiguration = .default()
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,12 +105,12 @@ open class CountryPicker: UIViewController {
         #else
         //check to see if the picker UI is presented in a navigation controller
         if let validNavController = self.navigationController {
-            if let validLeftBarButtonItem = countryPickerConfiguration.leftBarButton {
+            if let validLeftBarButtonItem = pickerConfiguration.leftBarButton {
                 //use the provided left bar button
                 navigationItem.leftBarButtonItem = validLeftBarButtonItem
                 navigationItem.leftItemsSupplementBackButton = false
             } else {
-                switch countryPickerConfiguration.buttonDisplayOption {
+                switch pickerConfiguration.buttonDisplayOption {
                 case .displayCancelButtonOnly, .displayBothButtons:
                     //there is no left bar button.
                     if self == validNavController.viewControllers.first {
@@ -121,10 +129,10 @@ open class CountryPicker: UIViewController {
                 }
             }
             
-            if let validRightBarButtonItem = countryPickerConfiguration.rightBarButton {
+            if let validRightBarButtonItem = pickerConfiguration.rightBarButton {
                 navigationItem.rightBarButtonItem = validRightBarButtonItem
             } else {
-                switch countryPickerConfiguration.buttonDisplayOption {
+                switch pickerConfiguration.buttonDisplayOption {
                 case .displayDoneButtonOnly, .displayBothButtons:
                     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didSelectDone(_:)))
                 default:
@@ -221,8 +229,8 @@ open class CountryPicker: UIViewController {
     
     /// performs configuration of non-scrolling header and footer views
     open func configureHeaderFooterViews() {
-        if let validHeaderText = countryPickerConfiguration.pinnedHeaderText {
-            if let validFont = countryPickerConfiguration.theme.font {
+        if let validHeaderText = pickerConfiguration.pinnedHeaderText {
+            if let validFont = pickerConfiguration.theme.font {
                 pinnedHeaderDirections.font = validFont
             }
             pinnedHeaderDirections.text = validHeaderText
@@ -231,8 +239,8 @@ open class CountryPicker: UIViewController {
             headerDirectionsContainer.isHidden = true
         }
         
-        if let validFooterText = countryPickerConfiguration.pinnedFooterText {
-            if let validFont = countryPickerConfiguration.theme.font {
+        if let validFooterText = pickerConfiguration.pinnedFooterText {
+            if let validFont = pickerConfiguration.theme.font {
                 pinnedFooterDirections.font = validFont
             }
             pinnedFooterDirections.text = validFooterText
@@ -255,21 +263,21 @@ open class CountryPicker: UIViewController {
     }
     
     open func configureTheme() {
-        if let validThemeFont = countryPickerConfiguration.theme.font {
+        if let validThemeFont = pickerConfiguration.theme.font {
             searchBar.searchTextField.font = validThemeFont
-            pinnedHeaderDirections.font = countryPickerConfiguration.theme.font
-            pinnedFooterDirections.font = countryPickerConfiguration.theme.font
+            pinnedHeaderDirections.font = pickerConfiguration.theme.font
+            pinnedFooterDirections.font = pickerConfiguration.theme.font
         }
         
-        if let validNavBarTitleView = countryPickerConfiguration.theme.navigationBarTitleView {
+        if let validNavBarTitleView = pickerConfiguration.theme.navigationBarTitleView {
             navigationItem.titleView = validNavBarTitleView
         }
         
-        if let validHeaderBackgroundColor = countryPickerConfiguration.theme.headerBackgroundColor {
+        if let validHeaderBackgroundColor = pickerConfiguration.theme.headerBackgroundColor {
             self.headerDirectionsContainer.backgroundColor = validHeaderBackgroundColor
         }
         
-        if let validFooterBackgroundColor = countryPickerConfiguration.theme.footerBackgroundColor {
+        if let validFooterBackgroundColor = pickerConfiguration.theme.footerBackgroundColor {
             self.footerDirectionsContainer.backgroundColor = validFooterBackgroundColor
         }
     }
@@ -306,7 +314,7 @@ open class CountryPicker: UIViewController {
                 }
             }).store(in: &cancellables)
         
-        presenter.register(config: self.countryPickerConfiguration)
+        presenter.register(config: self.pickerConfiguration)
         presenter.configureBindings()
     }
     
@@ -316,13 +324,13 @@ open class CountryPicker: UIViewController {
         pickerView.register(CountryCell.nib, forCellReuseIdentifier: CountryCell.nibName)
         pickerView.register(FooterCell.nib, forCellReuseIdentifier: FooterCell.nibName)
         
-        pickerView.allowsSelection = countryPickerConfiguration.allowsSelection
-        pickerView.allowsMultipleSelection = countryPickerConfiguration.canMultiSelect
-        pickerView.contentInset = countryPickerConfiguration.pickerViewInsets
+        pickerView.allowsSelection = pickerConfiguration.allowsSelection
+        pickerView.allowsMultipleSelection = pickerConfiguration.canMultiSelect
+        pickerView.contentInset = pickerConfiguration.pickerViewInsets
     }
     
     open func configureSearchBar() {
-        searchBar.isHidden = !countryPickerConfiguration.showSearchBar
+        searchBar.isHidden = !pickerConfiguration.showSearchBar
         switch traitCollection.userInterfaceIdiom {
         case .mac:
             //remove the background color on mac idioms
