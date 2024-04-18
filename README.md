@@ -27,7 +27,7 @@ Add CountryKit to your project via Swift Package Manager.
 //in a view controller
 import CountryKit
 ...
-let countryPickerVC = UICountryPickerViewController()
+let countryPickerVC = CountryPicker()
 countryPickerVC.delegate = self //to receive callbacks when a country is selected
 
 //present the view controller according to your UX
@@ -85,8 +85,8 @@ var config = CountryPickerConfiguration.default()
 //customize it according to your needs
 config.canMultiSelect = false
 
-let countryPickerVC = UICountryPickerViewController()
-countryPickerVC.countryPickerConfiguration = config
+let countryPickerVC = CountryPicker()
+countryPickerVC.pickerConfiguration = config
 ```
 
 ### Full list of all customizable options

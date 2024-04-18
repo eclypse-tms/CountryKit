@@ -250,7 +250,7 @@ class SelectionsViewController: UIViewController {
         #endif
         
         //initialize country picker ui
-        let countryPickerVC = UICountryPickerViewController()
+        let countryPickerVC = CountryPicker()
         
         //get notified when user interacts with the country selection ui
         countryPickerVC.delegate = self
@@ -265,14 +265,14 @@ class SelectionsViewController: UIViewController {
         
         if shouldDisplayPickerViewModally {
             //save the configuration on the view controller
-            countryPickerVC.countryPickerConfiguration = config
+            countryPickerVC.pickerConfiguration = config
             let navController = UINavigationController(rootViewController: countryPickerVC)
             navController.modalPresentationStyle = .formSheet
             present(navController, animated: true)
         } else {
             config.showSearchBar = showSearchBarSwitch.isOn
             //save the configuration on the view controller
-            countryPickerVC.countryPickerConfiguration = config
+            countryPickerVC.pickerConfiguration = config
             splitViewController?.setViewController(countryPickerVC, for: .secondary)
             splitViewController?.show(.secondary)
         }
@@ -305,7 +305,7 @@ class SelectionsViewController: UIViewController {
     }
 }
 
-extension SelectionsViewController: UICountryPickerDelegate {
+extension SelectionsViewController: CountryPickerDelegate {
     func didSelect(country: Country) {
         print("selected \(country.localizedName)")
         var currentSnapshot = dataSource.snapshot()
