@@ -7,13 +7,15 @@
 
 import Foundation
 
+@available(*, deprecated, renamed: "CountryPickerDelegate", message: "Please use CountryPickerDelegate instead")
+public typealias UICountryPickerDelegate = CountryPickerDelegate
 
 /// This protocol triggers events when user makes a selection or a deselection in the PickerView UI.
 /// All methods in this protocol are optional.
 /// If you need immediate callback as soon as user makes a selection, then override didSelect(country:) and didDeselect(country:) methods.
 /// If you want to wait for the user to finish making their selections and get notified of all the selections when the pickerview is dismissed, then
 /// override didFinishSelecting(countries:) method.
-public protocol UICountryPickerDelegate: AnyObject {
+public protocol CountryPickerDelegate: AnyObject {
     /// This event fires when user selects a country. Optional.
     /// - Parameter country: The country object that was selected
     func didSelect(country: Country)
@@ -31,7 +33,7 @@ public protocol UICountryPickerDelegate: AnyObject {
     func didCancel()
 }
 
-public extension UICountryPickerDelegate {
+public extension CountryPickerDelegate {
     func didSelect(country: Country) {}
     func didDeselect(country: Country) {}
     func didFinishSelecting(countries: [Country]) {}

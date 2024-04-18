@@ -1,5 +1,5 @@
 //
-//  UICountryPickerViewController.swift
+//  CountryPicker.swift
 //  CountryKit
 //
 //  Created by eclypse on 11/30/23.
@@ -13,7 +13,10 @@ public protocol ToolbarActionsResponder: NSObjectProtocol {
     @objc optional func clearSelections(_ sender: Any?)
 }
 
-open class UICountryPickerViewController: UIViewController {
+@available(*, deprecated, renamed: "CountryPicker", message: "Please use CountryPicker")
+public typealias UICountryPickerViewController = CountryPicker
+
+open class CountryPicker: UIViewController {
     
     @IBOutlet public weak var searchBar: UISearchBar!
     @IBOutlet public weak var pickerView: UITableView!
@@ -35,7 +38,7 @@ open class UICountryPickerViewController: UIViewController {
     @IBOutlet public weak var bottomInset: NSLayoutConstraint!
     
     public init() {
-        super.init(nibName: String(describing: UICountryPickerViewController.self), bundle: CountryKit.assetBundle)
+        super.init(nibName: String(describing: CountryPicker.self), bundle: CountryKit.assetBundle)
     }
     
     public required init?(coder: NSCoder) {
@@ -59,12 +62,10 @@ open class UICountryPickerViewController: UIViewController {
     public var countrySelectionWasCanceled = PassthroughSubject<Void, Never>()
     
     /// get notified everytime user makes a selection or deselection
-    public var delegate: UICountryPickerDelegate?
+    public var delegate: CountryPickerDelegate?
     
     ///register a config file to change the behavior of this country selection interface
     open var countryPickerConfiguration: CountryPickerConfiguration = .default()
-    
-    
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -393,7 +394,7 @@ open class UICountryPickerViewController: UIViewController {
     }
 }
 
-extension UICountryPickerViewController: UISearchBarDelegate {
+extension CountryPicker: UISearchBarDelegate {
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter.searchBarRelay.send(searchText)
     }
@@ -412,7 +413,7 @@ extension UICountryPickerViewController: UISearchBarDelegate {
     }
 }
 
-extension UICountryPickerViewController: ToolbarActionsResponder {
+extension CountryPicker: ToolbarActionsResponder {
     public func clearSelections(_ sender: Any?) {
         presenter.clearAll()
     }

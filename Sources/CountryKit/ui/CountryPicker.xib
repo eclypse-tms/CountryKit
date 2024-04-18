@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UICountryPickerViewController" customModule="CountryKit" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CountryPicker" customModule="CountryKit">
             <connections>
                 <outlet property="bottomInset" destination="mDm-6t-8VY" id="Sn8-xt-GUt"/>
                 <outlet property="bottomToolbar" destination="B5j-9W-R3M" id="Vmw-h2-4cs"/>

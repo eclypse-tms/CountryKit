@@ -250,7 +250,7 @@ class SelectionsViewController: UIViewController {
         #endif
         
         //initialize country picker ui
-        let countryPickerVC = UICountryPickerViewController()
+        let countryPickerVC = CountryPicker()
         
         //get notified when user interacts with the country selection ui
         countryPickerVC.delegate = self
@@ -305,7 +305,7 @@ class SelectionsViewController: UIViewController {
     }
 }
 
-extension SelectionsViewController: UICountryPickerDelegate {
+extension SelectionsViewController: CountryPickerDelegate {
     func didSelect(country: Country) {
         print("selected \(country.localizedName)")
         var currentSnapshot = dataSource.snapshot()

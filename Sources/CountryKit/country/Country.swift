@@ -354,6 +354,6 @@ public class Country: Hashable, Identifiable, Codable, Comparable {
     public static let Zimbabwe = Country(alpha3Code: "ZWE", englishName: "Zimbabwe", alpha2Code: "ZW", addressLabels: AddressLabel.cityOnly)
     
 
-    public static var Worldwide = Country(alpha3Code: "WWC", englishName: "Worldwide", alpha2Code: "WW", localizedNameOverride: nil)
+    public static var Worldwide = Country(alpha3Code: "_WW", englishName: "Worldwide", alpha2Code: "_W", localizedNameOverride: nil)
     public static var Unknown = Country(alpha3Code: "_UK", englishName: "Unknown Country", alpha2Code: "_U", localizedNameOverride: nil)
 }
