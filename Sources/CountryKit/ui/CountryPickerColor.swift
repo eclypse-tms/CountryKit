@@ -14,7 +14,7 @@ public struct CountryPickerColor {
     public static let defaultHighlight: UIColor = UIColor(dynamicProvider: { traitInfo in
         switch traitInfo.userInterfaceStyle {
         case .dark:
-            return UIColor.systemGray6
+            return UIColor.systemGray4
         case .light:
             return UIColor.systemGray4
         default:

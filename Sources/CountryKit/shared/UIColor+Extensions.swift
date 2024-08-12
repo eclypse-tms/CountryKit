@@ -7,9 +7,13 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     /// indicates whether this color is perceived as a bright color to human eyes
-        var isPerceivedBright: Bool {
+    ///
+    /// Uses color contrast by YIG Method.
+    ///
+    /// - SeeAlso: https://24ways.org/2010/calculating-color-contrast
+    var isPerceivedBright: Bool {
         var redComponent: CGFloat = .zero
         var greenComponent: CGFloat = .zero
         var blueComponent: CGFloat = .zero
